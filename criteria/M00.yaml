@@ -1,0 +1,8 @@
+module: M00
+frozen: 2026-11-16
+tasks:
+  M00-T1: {note: "user must equal the login name; home and repo are compared as folders (symbolic links allowed)"}
+  M00-T2: {size_abs_tol_kb: 1.0, note: "counts and column names exact; max_ml within 1e-6; size from os.stat (bytes / 1024 or disk blocks)"}
+  M00-T3: {mem_abs_tol_gb: 0.01, mem_rel_tol: 0.01, note: "thread and CPU counts exact; cpus_allowed is the number of CPUs the kernel may run on (the size of its CPU affinity set), not the thread cap"}
+  M00-T4: {note: "git remotes and core.hooksPath of the student's copy; skipped in automatic solution runs"}
+  M00-T5: {min_words: 40, note: "dated M00 entry with the five fields filled; commit contains the log and is pushed to origin; skipped in automatic solution runs"}

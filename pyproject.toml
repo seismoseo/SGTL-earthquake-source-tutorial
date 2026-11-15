@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sgtl-tutorial"
+version = "0.1.0"
+description = "Helper package for the SGTL earthquake source tutorial (checks, data access, plotting style, explorers)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Minseong Seo"}]
+dependencies = ["numpy", "pandas", "pyyaml", "matplotlib", "threadpoolctl"]
+
+[project.scripts]
+sgtl = "sgtl_tutorial.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["sgtl_tutorial*"]
+
+[tool.setuptools.package-data]
+sgtl_tutorial = ["py.typed"]

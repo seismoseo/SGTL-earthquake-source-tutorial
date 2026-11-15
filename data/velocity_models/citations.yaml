@@ -1,0 +1,4 @@
+# Citations for the 1-D velocity models in this folder: {model name: citation}.
+# Full entries (with links) are in references/references.yaml under the same keys.
+kim1983: "Kim & Kim (1983). A study on the crustal structure of South Korea by using seismic waves. Journal of the Korean Institute of Mining Geology, 16(1), 51-61 (in Korean)."
+kim2011: "Kim, S., Rhie, J., & Kim, G. (2011). Forward waveform modelling procedure for 1-D crustal velocity structure and its application to the southern Korean Peninsula. Geophysical Journal International, 185(1), 453-468. https://doi.org/10.1111/j.1365-246X.2011.04949.x"

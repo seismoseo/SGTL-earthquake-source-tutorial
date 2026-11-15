@@ -1,0 +1,220 @@
+key,english,korean,definition,modules,review_flag
+shell,shell,셸,A program that reads the commands you type and runs them; on the lab server it is bash.,M00,0
+terminal,terminal,터미널,The window on your laptop where you type commands to a shell.,M00,0
+ssh,SSH (secure shell),보안 셸,A secure way to log in to another computer over the network and run commands there.,M00,0
+ssh_tunnel,SSH tunnel,SSH 터널,A forwarded port that lets the browser on your laptop reach a program on the server (here JupyterLab) through your SSH connection.,M00,0
+server,server,서버,A shared computer that many people log in to and run programs on at the same time.,M00,0
+two_factor_authentication,two-factor authentication (2FA),2단계 인증,"Logging in with your password plus a one-time code from your phone, so a stolen password alone is not enough.",M00,0
+repository,repository,저장소,A folder whose full history of changes is tracked by git.,M00,0
+git,git,깃,A version-control program that records snapshots of your files so you can compare and undo changes.,M00,0
+commit,commit,커밋,"One saved snapshot of changes in a git repository, with a short message that says what changed and why.",M00,0
+branch,branch,브랜치,A named line of commits that lets you work on a change without disturbing the main line.,M00,0
+pull_request,pull request,풀 리퀘스트,"A GitHub page that proposes merging one branch into another, so someone can review the change first.",M00,0
+upstream,upstream,"업스트림, 원본 저장소",The original repository your copy came from; you pull tutorial updates from it.,M00,0
+private_copy,private copy,비공개 사본 저장소,Your own private GitHub repository that keeps the tutorial's history and holds your work.,M00,1
+kernel,kernel,커널,"The program behind a Jupyter notebook that runs your code cells; in this tutorial it is ""SGTL (Python 3.12)"".",M00,0
+environment,environment,가상 환경,"A self-contained set of Python and packages with fixed versions, so results do not change when other software changes.",M00,0
+conda,conda,콘다,A package manager that installs Python and scientific libraries into separate environments.,M00,0
+jupyterlab,JupyterLab,주피터랩,A program that runs in your web browser and lets you write and run notebooks.,M00,0
+notebook,notebook,주피터 노트북,"A file (.ipynb) that mixes code, results, figures and text in cells.",M00,0
+thread,thread,스레드,One stream of work inside a running program; more threads use more CPU cores at the same time.,M00,0
+cpu_core,CPU core,CPU 코어,One processing unit of a computer; all users of a shared server share a fixed number of them.,M00,0
+memory,memory (RAM),메모리,"The fast working storage that a running program uses; when the server runs out, programs are killed.",M00,0
+dry_run,dry run,"드라이 런, 시험 실행","Running a script so that it only prints what it would do, without changing anything.",M00,0
+prediction,prediction,예측,"A short written guess of a result, made before you run the code, so you can learn from the difference.",M00 M01,0
+check,check,"점검, 체크",A test that runs your function on cases with known answers and prints PASS or FAIL without showing the solution.,M00,0
+working_directory,working directory,작업 디렉터리,"The folder your shell is in right now; pwd prints it, and relative paths start from it.",M00,0
+home_directory,home directory,홈 디렉터리,"Your own top folder on the server, written ~ in the shell; your files and the course software live under it.",M00,0
+path,path,경로,"The address of a file or folder; an absolute path starts at the top folder /, a relative path starts from the working directory.",M00,0
+port,port,포트,"A number that picks out one program listening for network connections on a computer; JupyterLab listens on one port, and the SSH tunnel forwards it to your laptop.",M00,0
+remote,remote,원격 저장소,"A named link from your repository to another copy of it, usually on GitHub, that git can push to and pull from; origin and upstream are the two remotes in this course.",M00,0
+push,push,푸시,"Sending the commits you made on your computer to a remote, for example your private copy on GitHub.",M00,0
+pull,pull,풀,Fetching new commits from a remote and merging them into the copy on your computer.,M00,0
+csv,CSV file,CSV 파일,A plain-text table with one row per line and commas between the columns; the earthquake catalogs in this course are CSV files.,M00,0
+pipe,pipe,파이프,"The | sign in the shell, which feeds the output of one command into the next command.",M00,0
+blas,BLAS,기본 선형대수 서브프로그램,Basic Linear Algebra Subprograms: the fast library behind NumPy's matrix and vector arithmetic; it can start many threads unless it is told to use one.,M00,1
+thread_pool,thread pool,스레드 풀,A set of threads that a library starts once and reuses for parallel work; on the shared server each pool is capped at one thread.,M00,0
+commit_hash,commit hash,커밋 해시,The code of 40 letters and digits (often shortened to the first 7) that names one commit exactly.,M00,0
+markdown,Markdown,마크다운,"A way to format plain text with a few marks, such as # for a heading and **bold** for bold text; notebook text cells and these docs use it.",M00,0
+ai_log,AI log,AI 사용 기록,"Your record of AI help, one Markdown file per module in work/ai_log/ (for example work/ai_log/M01.md), with an entry every time AI help shaped your work.",M00,0
+nice,nice,우선순위 낮추기 명령,"A command that runs a program at a lower priority, so that it gives way to other people's work on the shared server.",M00,1
+dataframe,DataFrame,데이터프레임,"A pandas table with named columns, like a spreadsheet inside Python.",M01 M02,0
+function,function,함수,A named block of code that takes inputs (arguments) and returns an output.,M00 M01 M02,0
+vectorization,vectorization,벡터화,Doing a calculation on a whole array at once instead of looping over the items one by one.,M01 M02,0
+random_seed,random seed,난수 시드,"A number that fixes a random-number generator, so the same ""random"" values come out every time.",M01 M05,0
+great_circle_distance,great-circle distance,대원 거리,The shortest distance between two points measured along the surface of the Earth.,M01 M02 M04,0
+traceback,traceback,트레이스백,"The error report Python prints when a line fails; the last line names the error, and the lines above show where it happened.",M01,0
+time_zone,time zone,시간대,"A region that keeps one clock time, given as an offset from UTC (KST is UTC + 9 h); Python's zoneinfo module finds named zones such as 'Asia/Seoul' in a time-zone database.",M01,0
+daylight_saving_time,daylight saving time,"일광 절약 시간제, 서머타임","Setting clocks one hour ahead for the summer months, so that in those months the clock's offset from UTC is one hour larger.",M01,0
+byte_order_mark,byte-order mark (BOM),바이트 순서 표식,An invisible marker that some programs write at the very start of a UTF-8 text file; a program that does not expect it reads it as part of the first value.,M01,1
+nan,NaN (not a number),"숫자가 아닌 값, 결측값 표시",A special floating-point value meaning 'not a number'; pandas uses it to mark a missing value.,M01,1
+boolean_array,boolean array,불리언 배열,"An array of True and False values, one per element or row, that says where a condition holds.",M01,0
+broadcasting,broadcasting,브로드캐스팅,"NumPy's rule for combining arrays of different shapes, for example one number with a whole array, without writing a loop.",M01,0
+docstring,docstring,독스트링,"The text in triple quotes just below a def line that says what a function does, what it takes and what it returns; help() prints it.",M01,0
+f_string,f-string,f-문자열,"A Python string written with f before the opening quote, in which names in curly braces are replaced by their values.",M01,0
+naive_datetime,naive datetime,"나이브 시각, 시간대 정보가 없는 시각","A date and time with no time zone attached, so Python cannot tell which instant on Earth it means.",M01,1
+aware_datetime,aware datetime,"인식 시각, 시간대 정보가 있는 시각","A date and time with its time zone attached, so it names one exact instant.",M01,1
+radian,radian,라디안,"The angle unit that NumPy's trigonometric functions use; a full circle is 2π radians, so 180° is π radians.",M01,0
+central_angle,central angle,중심각,The angle at the Earth's center between the lines to two points on its surface.,M01,0
+pandas_series,pandas Series,판다스 시리즈,One column of a pandas table: a list of values with a label (index) for each.,M01,0
+pandas_index,pandas index,판다스 인덱스,The row labels of a pandas DataFrame or Series; they stay attached to the rows when you select or sort them.,M01,0
+map_projection,map projection,지도 투영법,A rule that flattens the curved surface of the Earth onto a flat map.,M02,0
+figure_axes,figure and axes,그림과 축 영역,"In Matplotlib the figure is the whole image, and an axes is one plotting panel inside it with its own x and y axes.",M02,1
+histogram,histogram,히스토그램,"A bar chart of how many values fall into each bin (interval), for example how many earthquakes have magnitudes in each 0.1-wide bin.",M02,0
+scatter_plot,scatter plot,산점도,"A plot with one marker per item at its x and y position, for example one dot per earthquake.",M02,0
+sentence_case,sentence case,첫 단어만 대문자로 쓰는 표기,"Writing labels and titles like a sentence: only the first word and proper names start with a capital letter, as in 'Depth (km)'.",M02,1
+scale_bar,scale bar,축척 막대,"A bar on a map that shows how long a given distance, such as 50 km, is on the map.",M02,0
+map_region,map region,지도 범위,"The longitude and latitude limits (west, east, south, north) of the area a map shows.",M02,0
+decimal_degrees,decimal degrees,십진 도 표기,"Latitude and longitude written as one decimal number, such as 35.85°, instead of degrees, minutes and seconds.",M02,1
+time_magnitude_plot,time-magnitude plot,시간-규모 그림,"A plot of each earthquake's magnitude against its origin time, one marker per event.",M02,1
+earthquake_catalog,earthquake catalog,"지진 목록, 지진 카탈로그","A table of earthquakes with origin time, location, depth and magnitude, made by a seismological agency.",M00 M01 M02 M04,0
+seismicity,seismicity,지진활동,The earthquakes that occur in a region over a period of time.,M02 M04 M05,0
+hypocenter,hypocenter,진원,The point inside the Earth where an earthquake rupture starts.,M01 M04 M31,0
+epicenter,epicenter,진앙,The point on the Earth's surface directly above the hypocenter.,M01 M02 M04 M31,0
+origin_time,origin time,"진원시, 발생 시각",The time when the earthquake rupture starts at the hypocenter.,M00 M01 M02 M04 M31,0
+focal_depth,focal depth,진원 깊이,"The depth of the hypocenter below the surface, in kilometers.",M01 M04 M31,0
+magnitude,magnitude,규모,A number on a logarithmic scale that measures the size of an earthquake; one unit means about ten times larger amplitudes.,M02 M04,0
+local_magnitude,local magnitude (ML),국지 규모,"A magnitude from the largest amplitudes on nearby seismometers, corrected for distance; the KMA catalog reports ML.",M00 M01 M02 M04 M10,0
+moment_magnitude,moment magnitude (Mw),모멘트 규모,A magnitude computed from the seismic moment; unlike ML it does not saturate for large earthquakes.,M52 M53,0
+seismic_moment,seismic moment (M0),지진 모멘트,"Shear modulus times fault area times average slip, in newton-meters; the physical size of an earthquake.",M52 M53 M54,0
+utc,UTC,협정 세계시,"Coordinated Universal Time, the reference clock used for all times in this tutorial.",M00 M01 M02 M04,0
+kst,KST,한국 표준시,"Korea Standard Time, UTC plus 9 hours; the KMA catalog gives its times in KST.",M00 M01 M02 M04,0
+fdsn,FDSN,국제 디지털 지진관측망 연맹,"The International Federation of Digital Seismograph Networks, which also defines standard web services for seismic data.",M03 M04,0
+comcat,ComCat,USGS 통합 지진 목록,"The U.S. Geological Survey's Comprehensive Catalog of earthquakes, which also lists larger Korean events.",M04,0
+isc,ISC,국제지진센터,"The International Seismological Centre, which combines reports from many agencies into one global bulletin.",M04,0
+kogl,KOGL Type 1,공공누리 제1유형: 출처표시,The Korea Open Government License that lets anyone reuse public data if they name the source.,M01 M02 M04,0
+frequency_magnitude_distribution,frequency-magnitude distribution,규모-빈도 분포,"The number of earthquakes in each magnitude bin, or at or above each magnitude.",M04 M05,0
+magnitude_of_completeness,magnitude of completeness (Mc),완전성 규모,The smallest magnitude above which a catalog records (almost) every earthquake in a region and period.,M04 M05,1
+magnitude_binning,magnitude bin width (Δm),규모 구간 폭,"The rounding step of the magnitudes in a catalog, 0.1 for KMA ML; estimators must take it into account.",M04 M05,1
+gutenberg_richter_law,Gutenberg-Richter law,구텐베르크-리히터 법칙,The rule that the number of earthquakes at or above magnitude M falls by about ten times per magnitude unit: log10 N = a - bM.,M05,0
+b_value,b-value,b값,The slope of the Gutenberg-Richter law; it is close to 1 in most regions.,M05,0
+a_value,a-value,a값,The productivity term of the Gutenberg-Richter law: log10 of the number of events at or above magnitude 0.,M05,0
+maximum_likelihood,maximum likelihood estimation,"최대가능도 추정, 최대우도 추정",Choosing the model parameters that make the observed data most probable.,M05 M53,0
+poisson_process,Poisson process,푸아송 과정,"Events that happen at random times with a constant average rate, independently of each other.",M05,0
+mainshock,mainshock,본진,The largest earthquake of a sequence.,M01 M02 M05,0
+foreshock,foreshock,전진,An earthquake that comes before a larger earthquake nearby.,M05,0
+aftershock,aftershock,여진,An earthquake that follows a larger earthquake nearby and belongs to its sequence.,M02 M04 M05,0
+earthquake_sequence,earthquake sequence,지진 시퀀스,A group of earthquakes that are close in space and time and are thought to be related.,M02 M04 M05,1
+earthquake_swarm,earthquake swarm,군발지진,"A sequence without one clearly largest event, often lasting days to months.",M05,0
+omori_utsu_law,Omori-Utsu law,오모리-우츠 법칙,The rule that the aftershock rate decays with time t after the mainshock as K/(t + c)^p.,M05,0
+declustering,declustering,"디클러스터링, 종속 지진 제거",Removing aftershocks and other dependent events so that the remaining events behave like independent background earthquakes.,M05,1
+background_seismicity,background seismicity,배경 지진활동,Earthquakes that were not triggered by earlier earthquakes.,M05,0
+nearest_neighbor_distance,nearest-neighbor distance,최근접 이웃 거리,"A distance in space, time and magnitude to the most likely parent event (Zaliapin and Ben-Zion), used to separate clusters from background.",M05,0
+etas,ETAS model,ETAS 모형,"The Epidemic-Type Aftershock Sequence model, in which every earthquake can trigger others and the rates add up.",M05,1
+seismogram,seismogram,"지진 기록, 지진파형",A record of ground motion against time at one station.,M01 M10,0
+seismometer,seismometer,지진계,An instrument that measures ground motion.,M10,0
+station,station,관측소,"A site with a seismometer, named by a network code and a station code.",M02 M03 M10,0
+network_code,network code,관측망 코드,"A two-letter code for the network a station belongs to, for example KS (KMA) or KG (KIGAM).",M02 M03,0
+channel,channel,채널,"One recorded component of a station, named with three letters such as HHZ (band, instrument type, orientation).",M03 M10,0
+component,component,성분,"The direction of motion a channel records: vertical (Z), north (N) or east (E).",M10,0
+sampling_rate,sampling rate,"표본화율, 샘플링 레이트","The number of samples recorded per second, in hertz.",M10,1
+nyquist_frequency,Nyquist frequency,나이퀴스트 주파수,Half the sampling rate: the highest frequency a sampled signal can represent.,M10,0
+counts,counts,"카운트, 디지털 값","The raw integer numbers that a digitizer records, before the instrument response is removed.",M10,0
+instrument_response,instrument response,계기 응답,"How the instrument turns ground motion into recorded counts, as a function of frequency.",M03 M10,0
+poles_and_zeros,poles and zeros,극점과 영점,A compact way to write an instrument response as a ratio of two polynomials.,M10,0
+stationxml,StationXML,관측소 메타데이터 XML 형식,"An XML file format for station locations, channels and instrument responses.",M03 M10,0
+miniseed,miniSEED,지진파형 파일 형식,A standard binary file format for waveform data.,M03,0
+stp,STP,파형 전송 프로그램,Seismogram Transfer Program: a client that fetches waveforms from a data center with your personal account.,M03,1
+continuous_waveform,continuous waveform,연속 파형,"Waveform data recorded all the time, as opposed to short windows cut around known events.",M03 M22,0
+ground_motion,ground motion,지반 운동,"The displacement, velocity or acceleration of the ground at a station.",M10,0
+bandpass_filter,band-pass filter,대역 통과 필터,A filter that keeps the frequencies between two corner frequencies and removes the rest.,M10 M20,0
+spectrum,spectrum,스펙트럼,The amplitude of a signal at each frequency.,M10,0
+azimuth,azimuth,방위각,"The direction from the earthquake to a station, measured clockwise from north.",M31 M50,0
+back_azimuth,back azimuth,역방위각,"The direction from a station back toward the earthquake, measured clockwise from north.",M10 M52,0
+radial_transverse,"radial and transverse components (R, T)",방사 방향·접선 방향 성분,Horizontal components rotated to point along (R) and across (T) the direction from the source to the station.,M10 M52,1
+body_wave,body wave,실체파,A seismic wave that travels through the inside of the Earth: P or S.,M10 M30,0
+surface_wave,surface wave,표면파,A seismic wave that travels along the Earth's surface; it is slower than body waves and often largest at long distances.,M10 M53,0
+p_wave,P wave,P파,The compressional body wave; it is the fastest wave and arrives first.,M20 M30,0
+s_wave,S wave,S파,The shear body wave; it is slower than P and usually larger on the horizontal components.,M20 M30,0
+arrival_time,arrival time,도달 시각,The time a seismic phase reaches a station.,M20 M30,0
+phase_pick,phase pick,"위상 피킹, 도달 시각 읽기","A measured arrival time of a seismic phase (P or S) at one station, made by a person or a program.",M20 M21,1
+signal_to_noise_ratio,signal-to-noise ratio (SNR),신호 대 잡음비,How much larger the signal is than the background noise.,M20,0
+sta_lta,STA/LTA,단기/장기 평균비,The ratio of a short-term average to a long-term average of signal amplitude; a sudden rise marks a new arrival.,M20,0
+trigger,trigger,트리거,"The moment a detector declares that a signal has started, for example when STA/LTA rises above a threshold.",M20 M22,0
+polarity,first-motion polarity,초동 극성,Whether the first P-wave motion is up (compression) or down (dilatation).,M20 M51,0
+deep_learning_picker,deep-learning picker,딥러닝 위상 검출기,"A neural network trained on labeled seismograms to find P and S arrivals, such as PhaseNet.",M21,1
+phase_association,phase association,위상 연관,"Grouping picks from many stations into events, so that each pick belongs to one earthquake.",M21 M22,1
+detection,earthquake detection,지진 검출,Finding earthquakes in continuous data.,M22,0
+template_matching,template matching,템플릿 매칭,"Scanning continuous data with the waveforms of a known earthquake to find similar, often smaller, events.",M22,0
+cross_correlation,cross-correlation,"상호상관, 교차상관",A measure of how similar two signals are at each relative time shift.,M22 M41,0
+travel_time,travel time,주시,The time a seismic wave takes to travel from the source to a station.,M30,0
+velocity_model,velocity model,속도 구조 모델,Seismic wave speeds as a function of depth; this tutorial uses layered one-dimensional models.,M30 M31,0
+ray_parameter,ray parameter,파선 변수,"p = sin(i)/v, which stays constant along a ray in a layered Earth.",M30,1
+takeoff_angle,takeoff angle,이탈각,The angle between a ray leaving the source and the downward vertical.,M30 M51,1
+crust_mantle_boundary,Moho (crust-mantle boundary),"모호면, 모호로비치치 불연속면","The boundary between the crust and the mantle, about 30-35 km deep under South Korea.",M30,0
+head_wave,head wave,선두파,"A wave that travels along a layer boundary, such as Pn along the Moho; in this tutorial only a travel-time idea, never used for location.",M02 M30,0
+wadati_diagram,Wadati diagram,와다티 도표,"A plot of S-P time against P arrival time; its slope is Vp/Vs minus 1, and the line reaches zero S-P time at the origin time.",M30 M31,0
+vp_vs_ratio,Vp/Vs ratio,Vp/Vs 비,The ratio of P-wave speed to S-wave speed; about 1.73 in many crustal rocks.,M30,0
+s_minus_p_time,S-P time,S-P 시간,The delay between the S and P arrivals at a station; it grows with distance from the source.,M30 M31,0
+absolute_location,absolute location,절대 진원 결정,Locating each earthquake on its own from its arrival times and a velocity model.,M31 M32,0
+residual,residual,잔차,"An observed value minus the value the model predicts, for example an arrival time.",M31 M41,0
+misfit_function,misfit function,"목적 함수, 불일치 함수",A single number that measures how badly a model fits the data; location searches for its minimum.,M31,1
+grid_search,grid search,격자 탐색,Trying every point on a grid of candidate answers and keeping the best one.,M31 M51,0
+geiger_method,Geiger's method,가이거 방법,"Iterative linearized location: start from a guess, fit the time residuals with small changes, and repeat.",M31,0
+jacobian,Jacobian matrix,야코비 행렬,The matrix of partial derivatives of the predicted times with respect to the hypocenter coordinates and origin time.,M31 M41,0
+least_squares,least squares,최소제곱법,Choosing the model that makes the sum of squared residuals smallest.,M31 M53,0
+covariance_matrix,covariance matrix,공분산 행렬,A matrix that describes the uncertainty of estimated parameters and how their errors trade off.,M31,0
+error_ellipse,error ellipse,오차 타원,"The region where the true epicenter probably lies, drawn from the covariance matrix.",M31,0
+azimuthal_gap,azimuthal gap,방위각 공백,The largest angle between neighboring stations as seen from the epicenter; a large gap means a poorly constrained location.,M31 M32,1
+rms_residual,RMS residual,RMS 잔차,The root mean square of the travel-time residuals of one event.,M31 M32,0
+hypoinverse,HYPOINVERSE,진원 결정 프로그램,A standard USGS program that locates earthquakes in layered velocity models.,M32,0
+pocketquake,PocketQuake,지진 분석 도구 모음,"The SGTL processing toolchain that runs picking, location, relocation and focal mechanisms in sequence.",M32 M60,0
+relative_relocation,relative relocation,상대 진원 재결정,Improving the locations of nearby events relative to each other by using differences of travel times.,M41,1
+differential_time,differential time,도달 시간 차,The difference between the arrival times of the same phase from two events at one station.,M41,1
+double_difference,double difference,이중차분,The observed minus the predicted differential time of an event pair at one station.,M41,0
+hypodd,HypoDD,이중차분 진원 재결정 프로그램,The standard double-difference relocation program (Waldhauser 2001).,M41,0
+cycle_skipping,cycle skipping,"주기 건너뜀, 사이클 스키핑","Cross-correlation choosing a lag one full period off, because two neighboring peaks look alike.",M41,1
+damping,damping,"감쇠 정규화, 댐핑",Adding a penalty that keeps model changes small so an inversion stays stable.,M41 M53,1
+condition_number,condition number,조건수,The ratio of the largest to the smallest singular value of a matrix; a large number means an unstable inversion.,M41,0
+bootstrap,bootstrap,부트스트랩,Estimating uncertainty by repeating an analysis many times on resampled data.,M41,0
+fault,fault,단층,A fracture in rock along which the two sides have slipped past each other.,M50,0
+slip,slip,"미끄러짐, 단층 변위",The relative movement of the two sides of a fault during an earthquake.,M52 M54,1
+strike,strike,주향,"The compass direction of a horizontal line on the fault plane, chosen so that the fault dips to the right.",M50,0
+dip,dip,경사,"The angle of the fault plane below the horizontal, from 0 to 90 degrees.",M50,0
+rake,rake,"미끄럼각, 레이크","The direction of slip within the fault plane, measured from the strike direction.",M50,1
+strike_slip_fault,strike-slip fault,주향이동단층,A fault on which the two sides slide horizontally past each other (rake near 0 or 180 degrees).,M50,0
+normal_fault,normal fault,정단층,A fault on which the upper side moves down; the crust is extended (rake near -90 degrees).,M50,0
+reverse_fault,reverse fault,역단층,A fault on which the upper side moves up; the crust is shortened (rake near +90 degrees).,M50,0
+focal_mechanism,focal mechanism,"단층면해, 진원 메커니즘","The orientation of the fault and the direction of slip, estimated from seismic waves.",M50 M51,0
+focal_sphere,focal sphere,진원구,An imaginary small sphere around the hypocenter on which the directions of rays leaving the source are plotted.,M50,0
+lower_hemisphere_projection,lower-hemisphere projection,하반구 투영,"Drawing the rays that leave the source downward, as seen from above, on a flat circle.",M50,0
+stereonet,stereonet,"스테레오넷, 평사투영망",A printed net for projecting directions on a sphere onto a flat circle by hand.,M50,0
+nodal_plane,nodal plane,절면,One of the two planes on which P-wave amplitude is zero; one of them is the fault plane.,M50 M51,0
+auxiliary_plane,auxiliary plane,보조면,The nodal plane that is not the fault plane.,M50,0
+p_t_axes,P and T axes,P축과 T축,"The pressure (P) and tension (T) axes, which lie halfway between the two nodal planes.",M50,0
+beachball,beachball,"비치볼, 단층면해 그림","The map-view drawing of a focal mechanism, with the compressional quadrants shaded.",M50 M51,0
+radiation_pattern,radiation pattern,방사 패턴,How P-wave and S-wave amplitudes vary with direction from the source.,M50 M52,0
+sp_amplitude_ratio,S/P amplitude ratio,S/P 진폭비,"The ratio of S-wave to P-wave amplitude, which adds information to polarities when estimating mechanisms.",M51,0
+skhash,SKHASH,단층면해 결정 프로그램,"A Python program, successor of HASH, that finds focal mechanisms and their uncertainty from polarities and S/P ratios.",M51,0
+kagan_angle,Kagan angle,카간 각,The smallest rotation that turns one double-couple mechanism into another; 0 degrees means identical.,M51 M53,0
+moment_tensor,moment tensor,모멘트 텐서,A symmetric 3-by-3 matrix that describes the forces of an earthquake treated as a point source.,M52 M53,0
+double_couple,double couple,"이중 우력, 더블 커플",The moment tensor of slip on a flat fault: two opposite pairs of forces with no net force or torque.,M52 M53,1
+clvd,CLVD,보상 선형 벡터 쌍극자,Compensated linear vector dipole: a non-double-couple part of a moment tensor with no volume change.,M53,1
+isotropic_component,isotropic component,등방 성분,"The volume-change part of a moment tensor, as in an explosion or implosion.",M53,0
+lune,lune,룬 도표,"A part of a sphere (Tape and Tape 2012) on which every moment-tensor source type has a place, from explosion to double couple.",M53,1
+point_source,point source,점 진원,"Treating an earthquake as happening at one point, which is fine when the wavelengths are much longer than the rupture.",M52,0
+source_time_function,source time function,진원 시간 함수,The time history of moment release at the source.,M52,0
+far_field,far field,원거리장,The part of the wavefield that decays as 1/r and dominates far from the source.,M52,0
+geometric_spreading,geometric spreading,기하학적 확산,The decrease of amplitude with distance because the wave energy spreads over a larger area.,M52 M53,0
+greens_function,Green's function,그린 함수,The seismogram that a unit impulse source would produce at a station; synthetics are sums of Green's functions weighted by moment-tensor elements.,M52 M53,0
+synthetic_seismogram,synthetic seismogram,"합성 지진 기록, 합성 파형",A seismogram computed from a source and an Earth model instead of recorded.,M52 M53,0
+frequency_wavenumber,frequency-wavenumber (FK) method,주파수-파수 방법,A method that computes synthetic seismograms in a layered Earth by summing over wavenumbers; PyFK uses it.,M52,0
+waveform_inversion,waveform inversion,파형 역산,Finding source parameters by fitting synthetic seismograms to recorded ones.,M53,0
+variance_reduction,variance reduction,분산 감소량,"How much of the recorded signal the synthetics explain, in percent.",M53,0
+time_shift,time shift,시간 이동,A small shift allowed between data and synthetics to absorb errors of the velocity model.,M53,0
+l1_l2_norm,L1 and L2 norms,L1·L2 노름,"Two ways to add up residuals: absolute values (L1, less sensitive to outliers) or squares (L2).",M53,0
+coulomb_failure_stress_change,Coulomb failure stress change (ΔCFS),쿨롱 파괴 응력 변화,The change in shear stress in the slip direction plus effective friction times the change in normal stress (unclamping positive); a positive value brings a fault closer to failure.,M54,0
+stress_tensor,stress tensor,응력 텐서,A symmetric 3-by-3 matrix that gives the force per area on any plane through a point.,M54,0
+shear_stress,shear stress,전단 응력,"The stress parallel to a plane, which tends to make the plane slip.",M54,0
+normal_stress,normal stress,수직 응력,The stress perpendicular to a plane; in Coulomb calculations tension (unclamping) is positive.,M54,0
+effective_friction,effective friction coefficient,유효 마찰 계수,"The friction coefficient reduced to include pore-pressure changes, often written μ' = μ(1 - B).",M54,0
+skempton_coefficient,Skempton coefficient (B),스켐프턴 계수,The fraction of a change in mean stress that appears as a change in pore-fluid pressure.,M54,0
+pore_pressure,pore pressure,공극압,The pressure of the fluid in the pores and cracks of rock.,M54,0
+source_fault,source fault,원인 단층,The fault whose slip causes the stress change.,M54,1
+receiver_fault,receiver fault,수용 단층,The fault on which the stress change is calculated.,M54,1
+okada_solution,Okada solution,오카다 해,Formulas for the displacement and strain caused by slip on a rectangular fault in an elastic half-space (Okada 1992).,M54,0
+elastic_half_space,elastic half-space,반무한 탄성체,A uniform elastic body that fills everything below a flat free surface.,M54,0
+shear_modulus,shear modulus,"전단 탄성 계수, 강성률","A rock's resistance to shearing, about 30 GPa in the crust.",M52 M54,0
+poisson_ratio,Poisson's ratio,푸아송 비,The ratio of sideways contraction to lengthwise extension when a material is stretched.,M54,0
+tidal_stress,tidal stress,조석 응력,Small daily stress changes caused by the tides of the solid Earth and the oceans.,M54,0
+null_hypothesis_test,null hypothesis test,귀무가설 검정,"Checking whether a pattern could arise by chance, for example by randomly rotating the stress field or the aftershocks.",M05 M54,0

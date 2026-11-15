@@ -1,0 +1,254 @@
+#!/usr/bin/env bash
+# sgtl-install: install the software for the SGTL earthquake source tutorial into ~/sgtl/.
+#
+# Dry run by default: every action is printed with a "[dry-run]" prefix and nothing changes.
+# Add --apply to act. No administrator (root) rights are needed. Everything goes under ~/sgtl/
+# (set SGTL_HOME to use another folder). Each component is a file install/components/<name>.sh.
+#
+# Copyright (c) 2026 Minseong Seo (SGTL, Seoul National University). MIT License.
+
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: bin/sgtl-install [options] [component ...]
+
+Installs the tutorial software into ~/sgtl/ (or $SGTL_HOME). Without --apply this is a dry run:
+every action is printed with a "[dry-run]" prefix and nothing changes. No root rights needed.
+
+Components (default: env):
+  env        the course environment "sgtl" (Python 3.12, ObsPy, PyGMT, JupyterLab, ...), the
+             tutorial's helper package, and the Jupyter kernel "SGTL (Python 3.12)". Installs
+             Miniforge (the conda package manager) first if no conda or mamba is found.
+  tools      HYPOINVERSE, HypoDD, PocketQuake, EQNet + PhaseNet+ weights, SKHASH  (from release v0.2)
+  pyfk       the PyFK synthetic-seismogram environment "sgtl-pyfk"               (from release v0.2)
+  mt         MTUQ moment-tensor inversion                                       (from release v0.2)
+  coulomb    Elastic_stresses_py Coulomb stress                                 (from release v0.2)
+  metadata   KS/KG station metadata (StationMetadata)                          (from release v0.2)
+
+Options:
+  --apply          do it (without this, nothing changes)
+  --rebuild        env: delete the course environment and create it again
+  --own-miniforge  env: install the tutorial's pinned Miniforge even if conda or mamba exists
+  --list           list the components and exit
+  -h, --help       show this help and exit
+
+Environment variables:
+  SGTL_HOME        install folder (default: ~/sgtl)
+  SGTL_CONDA       the conda or mamba program to use (default: found automatically)
+  SGTL_ENV_FILE    environment file to use instead of environment.yml (for the mentor)
+
+Examples:
+  bin/sgtl-install                    # dry run: see what would happen
+  bin/sgtl-install --apply            # install the course environment
+  bin/sgtl-install env --apply --rebuild
+EOF
+}
+
+# ---------------------------------------------------------------------------------------------
+# Helpers, also used by install/components/*.sh
+# ---------------------------------------------------------------------------------------------
+say() { printf '%s\n' "$*"; }
+step() { printf '\n== %s\n' "$*"; }
+warn() { printf 'WARNING: %s\n' "$*" >&2; }
+die() {
+  printf 'ERROR: %s\n' "$*" >&2
+  exit 1
+}
+have() { command -v "$1" >/dev/null 2>&1; }
+
+quote_cmd() {
+  local out="" arg
+  for arg in "$@"; do out+="$(printf '%q' "$arg") "; done
+  printf '%s' "${out% }"
+}
+
+# run CMD [ARG...]: print the command, and run it only with --apply.
+run() {
+  if [[ $APPLY -eq 1 ]]; then
+    printf '+ %s\n' "$(quote_cmd "$@")"
+    "$@"
+  else
+    printf '[dry-run] %s\n' "$(quote_cmd "$@")"
+  fi
+}
+
+# action TEXT: print an action that is not one command; the caller performs it only when APPLY=1.
+action() {
+  if [[ $APPLY -eq 1 ]]; then printf '+ %s\n' "$*"; else printf '[dry-run] %s\n' "$*"; fi
+}
+
+sha256_of() {
+  if have sha256sum; then
+    sha256sum <"$1" | awk '{print $1}'
+  elif have shasum; then
+    shasum -a 256 <"$1" | awk '{print $1}'
+  else
+    die "Neither sha256sum nor shasum was found."
+  fi
+}
+
+# Entries of install/checksums.txt: "<file name> <sha256 or TO-VERIFY> <url>".
+checksum_names() {
+  awk '!/^[[:space:]]*#/ && NF >= 3 { print $1 }' "$CHECKSUMS"
+}
+
+checksum_entry() {
+  awk -v n="$1" '!/^[[:space:]]*#/ && NF >= 3 && $1 == n { print $2, $3; found = 1; exit }
+                 END { if (!found) exit 1 }' "$CHECKSUMS"
+}
+
+# fetch_verified NAME DIR: download the file NAME listed in install/checksums.txt into DIR and
+# check its SHA-256. Sets FETCHED to the local path. With --apply it refuses unverified entries.
+FETCHED=""
+fetch_verified() {
+  local name="$1" dir="$2" entry sha url dest got
+  entry="$(checksum_entry "$name")" || die "install/checksums.txt has no entry for $name."
+  read -r sha url <<<"$entry"
+  if [[ ! "$sha" =~ ^[0-9a-f]{64}$ ]]; then
+    if [[ $APPLY -eq 1 ]]; then
+      die "The checksum of $name in install/checksums.txt is '$sha', not a verified SHA-256 value. Refusing to download and run an unverified file. Please tell the mentor (friction issue)."
+    fi
+    warn "The checksum of $name is '$sha' (not verified yet): --apply will refuse to use this file."
+  fi
+  dest="$dir/$name"
+  if [[ -f "$dest" ]] && [[ "$(sha256_of "$dest")" == "$sha" ]]; then
+    say "Already downloaded and verified: $dest"
+    FETCHED="$dest"
+    return 0
+  fi
+  run mkdir -p "$dir"
+  if have curl; then
+    run curl -fL --proto =https --tlsv1.2 --retry 3 --connect-timeout 30 -o "$dest.part" "$url"
+  elif have wget; then
+    run wget --https-only -O "$dest.part" "$url"
+  else
+    die "Neither curl nor wget was found, so nothing can be downloaded. Ask the server administrator."
+  fi
+  if [[ $APPLY -eq 1 ]]; then
+    got="$(sha256_of "$dest.part")"
+    if [[ "$got" != "$sha" ]]; then
+      rm -f -- "$dest.part"
+      die "The download of $name does not match its checksum (expected $sha, got $got). The file was deleted. Try again later; if it happens again, tell the mentor."
+    fi
+    say "Checksum OK: $name"
+  else
+    action "check that the SHA-256 of $dest.part is $sha"
+  fi
+  run mv -f -- "$dest.part" "$dest"
+  # shellcheck disable=SC2034  # FETCHED is read by install/components/*.sh
+  FETCHED="$dest"
+}
+
+# placeholder_component NAME RELEASE: message for a component that a later release provides.
+PLACEHOLDERS=()
+placeholder_component() {
+  say "The '$1' component is not in this release of the tutorial yet: available from release $2."
+  say "Nothing was installed for '$1'. When release $2 is out, run bin/update-from-upstream --apply"
+  say "and then bin/sgtl-install $1 --apply"
+  PLACEHOLDERS+=("$1")
+}
+
+# ---------------------------------------------------------------------------------------------
+KNOWN_COMPONENTS=(env tools pyfk mt coulomb metadata)
+
+component_file() { printf '%s/%s.sh' "$COMPONENT_DIR" "$1"; }
+
+list_components() {
+  local name
+  say "Components (bin/sgtl-install [--apply] <component> ...):"
+  for name in "${KNOWN_COMPONENTS[@]}"; do
+    [[ -f "$(component_file "$name")" ]] || continue
+    # shellcheck source=/dev/null
+    (source "$(component_file "$name")" && printf '  %-9s %s\n' "$name" "$("component_${name}_summary")")
+  done
+}
+
+acquire_lock() {
+  [[ $APPLY -eq 1 ]] || return 0
+  run mkdir -p "$SGTL_HOME"
+  have flock || return 0
+  exec 9>"$SGTL_HOME/.sgtl-install.lock"
+  flock -n 9 || die "Another bin/sgtl-install is already running for $SGTL_HOME. Wait for it to finish."
+}
+
+main() {
+  APPLY=0
+  REBUILD=0
+  OWN_MINIFORGE=0
+  local list_only=0 components=() name
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --apply) APPLY=1 ;;
+      --rebuild) REBUILD=1 ;;
+      --own-miniforge) OWN_MINIFORGE=1 ;;
+      --list) list_only=1 ;;
+      -h | --help)
+        usage
+        exit 0
+        ;;
+      -*)
+        printf 'sgtl-install: unknown option %s (see --help)\n' "$1" >&2
+        exit 2
+        ;;
+      *) components+=("$1") ;;
+    esac
+    shift
+  done
+
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+  REPO="$(cd "$SCRIPT_DIR/.." && pwd -P)"
+  COMPONENT_DIR="$REPO/install/components"
+  CHECKSUMS="$REPO/install/checksums.txt"
+  SGTL_HOME="${SGTL_HOME:-${HOME:?HOME is not set}/sgtl}"
+  SGTL_HOME="${SGTL_HOME%/}"
+  [[ "$SGTL_HOME" == /* ]] || die "SGTL_HOME must be an absolute path (it is '$SGTL_HOME')."
+  export SGTL_HOME
+  # shellcheck disable=SC2034  # REBUILD and OWN_MINIFORGE are read by install/components/env.sh
+  readonly APPLY REBUILD OWN_MINIFORGE SCRIPT_DIR REPO COMPONENT_DIR CHECKSUMS
+
+  if [[ $list_only -eq 1 ]]; then
+    list_components
+    exit 0
+  fi
+  if [[ ${EUID:-$(id -u)} -eq 0 ]]; then
+    die "Do not run this as root or with sudo. Run it as yourself; everything goes into your own $SGTL_HOME."
+  fi
+  [[ -f "$CHECKSUMS" ]] || die "$CHECKSUMS is missing; is this a complete copy of the tutorial?"
+  [[ ${#components[@]} -gt 0 ]] || components=(env)
+  for name in "${components[@]}"; do
+    if [[ ! "$name" =~ ^[a-z][a-z0-9_]*$ || ! -f "$(component_file "$name")" ]]; then
+      printf 'sgtl-install: unknown component "%s".\n' "$name" >&2
+      list_components >&2
+      exit 2
+    fi
+  done
+
+  if [[ $APPLY -eq 1 ]]; then
+    say "SGTL tutorial installer (--apply: changes will be made)"
+  else
+    say "SGTL tutorial installer: DRY RUN (nothing will change; add --apply to act)"
+  fi
+  say "  tutorial folder: $REPO"
+  say "  install folder:  $SGTL_HOME"
+  say "  components:      ${components[*]}"
+
+  acquire_lock
+  for name in "${components[@]}"; do
+    # shellcheck source=/dev/null
+    source "$(component_file "$name")"
+    "component_${name}_run"
+  done
+
+  say ""
+  if [[ ${#PLACEHOLDERS[@]} -gt 0 ]]; then
+    say "Not available yet (nothing installed): ${PLACEHOLDERS[*]}  (from release v0.2)"
+  fi
+  if [[ $APPLY -eq 1 ]]; then
+    say "Finished: ${components[*]}."
+  else
+    say "Dry run finished. Nothing was changed. To do it:  bin/sgtl-install ${components[*]} --apply"
+  fi
+}
+
+main "$@"

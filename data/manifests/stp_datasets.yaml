@@ -1,0 +1,38 @@
+# Waveform datasets for Phase 2, to be requested from STP with your own account.
+# PLACEHOLDER: the request tool is not written yet, so fields may still change.
+# No waveforms are stored in this repository.
+#
+# Every event value below is copied from data/catalogs/kma_catalog.csv (times in UTC).
+#   networks:          network codes to request (KS = KMA, KG = KIGAM)
+#   station_radius_km: request stations whose epicentral distance is at most this value
+#   window_s:          [start, end] of each record in seconds relative to the event's origin time
+schema_version: 1
+status: placeholder
+catalog: data/catalogs/kma_catalog.csv
+datasets:
+  sangju2019:
+    title: Six Sangju earthquakes, 2018-2022
+    sequence: sangju2019
+    networks: [KS, KG]
+    station_radius_km: 100
+    window_s: [-30, 470]
+    events:
+      - {event_id: "2018000078", origin_utc: "2018-02-24T21:16:37Z", latitude: 36.51, longitude: 128.11, depth_km: 12.0, ml: 1.4}
+      - {event_id: "2019009762", origin_utc: "2019-07-21T02:04:18Z", latitude: 36.5, longitude: 128.1, depth_km: 14.0, ml: 3.9}
+      - {event_id: "2019009764", origin_utc: "2019-07-21T02:10:52Z", latitude: 36.5, longitude: 128.1, depth_km: 14.0, ml: 1.5}
+      - {event_id: "2019009783", origin_utc: "2019-07-22T02:01:33Z", latitude: 36.5, longitude: 128.1, depth_km: 15.0, ml: 1.9}
+      - {event_id: "2019009930", origin_utc: "2019-07-24T10:39:29Z", latitude: 36.5, longitude: 128.1, depth_km: 14.0, ml: 1.1}
+      - {event_id: "2022003632", origin_utc: "2022-07-06T19:42:38Z", latitude: 36.5, longitude: 128.09, depth_km: 15.0, ml: 1.4}
+  suncheon2019:
+    title: Six earthquakes of the October 2019 Suncheon swarm
+    sequence: suncheon
+    networks: [KS, KG]
+    station_radius_km: 100
+    window_s: [-30, 470]
+    events:
+      - {event_id: "2019013284", origin_utc: "2019-10-06T00:01:57Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.5}
+      - {event_id: "2019013285", origin_utc: "2019-10-06T01:01:01Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.7}
+      - {event_id: "2019013294", origin_utc: "2019-10-06T04:04:08Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.6}
+      - {event_id: "2019013295", origin_utc: "2019-10-06T06:01:29Z", latitude: 34.93, longitude: 127.45, depth_km: 23.0, ml: 1.7}
+      - {event_id: "2019013297", origin_utc: "2019-10-06T07:19:35Z", latitude: 34.92, longitude: 127.44, depth_km: 22.0, ml: 1.6}
+      - {event_id: "2019013300", origin_utc: "2019-10-06T18:08:36Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.4}

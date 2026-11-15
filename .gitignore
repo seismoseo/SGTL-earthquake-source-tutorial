@@ -1,0 +1,7 @@
+# Files git should not track in your copy of the tutorial: caches and editor or system leftovers.
+# Your work in work/, including the check log work/.sgtl/progress.jsonl, IS tracked: commit it (docs/git_workflow.md).
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.egg-info/
+.DS_Store

@@ -1,0 +1,256 @@
+#!/usr/bin/env bash
+# update-from-upstream: bring a new release of the tutorial into your private copy.
+#
+# It checks that your folder is clean and on main, downloads the new version (git fetch upstream),
+# shows what is new (CHANGELOG.md), checks that the tutorial's own files are unchanged
+# (.sgtl/MANIFEST.sha256), merges the new version, makes the original notebooks read-only again and
+# pushes the result to your private repository. Your files in work/ and project/ are never touched.
+#
+# Dry run by default: every action is printed with a "[dry-run]" prefix and nothing changes.
+# Add --apply to act. Even the dry run downloads the new version with "git fetch" (this changes none
+# of your files) so that it can show you what is new; --no-fetch skips that.
+#
+# Copyright (c) 2026 Minseong Seo (SGTL, Seoul National University). MIT License.
+
+set -euo pipefail
+
+readonly DEFAULT_UPSTREAM_SLUG="seismoseo/SGTL-earthquake-source-tutorial"
+readonly MANIFEST=".sgtl/MANIFEST.sha256"
+
+usage() {
+  cat <<'EOF'
+Usage: bin/update-from-upstream [--apply] [--restore-upstream-owned] [--no-fetch]
+
+Brings the newest release of the tutorial into your private copy. Your own files (work/, project/)
+are never changed.
+
+Steps: check that you are on main with no uncommitted changes; git fetch upstream; show the new
+entries of CHANGELOG.md; check the tutorial's own files against .sgtl/MANIFEST.sha256;
+git merge --no-edit upstream/main; chmod a-w modules/*/*.ipynb; git push origin main.
+
+Options:
+  --apply                   do it (without this, nothing changes except the download, see below)
+  --restore-upstream-owned  if you changed tutorial files (outside work/ and project/), put back the
+                            released versions first (your versions stay in the git history)
+  --no-fetch                do not download; use what the last git fetch brought
+  -h, --help                show this help and exit
+
+Even the dry run runs "git fetch upstream": it downloads the new version into git's own storage
+(no file of yours changes) so that the dry run can show what is new.
+EOF
+}
+
+say() { printf '%s\n' "$*"; }
+warn() { printf 'WARNING: %s\n' "$*" >&2; }
+die() {
+  printf 'ERROR: %s\n' "$*" >&2
+  exit 1
+}
+have() { command -v "$1" >/dev/null 2>&1; }
+quote_cmd() {
+  local out="" arg
+  for arg in "$@"; do out+="$(printf '%q' "$arg") "; done
+  printf '%s' "${out% }"
+}
+run() {
+  if [[ $APPLY -eq 1 ]]; then
+    printf '+ %s\n' "$(quote_cmd "$@")"
+    "$@"
+  else
+    printf '[dry-run] %s\n' "$(quote_cmd "$@")"
+  fi
+}
+
+is_upstream_url() {
+  local url="${1,,}" slug="${UPSTREAM_SLUG,,}" re
+  re="github\\.com[:/]+${slug}(\\.git)?/?\$"
+  [[ "$url" =~ $re ]]
+}
+
+sha256_of() {
+  if have sha256sum; then
+    sha256sum <"$1" | awk '{ print $1 }'
+  else
+    shasum -a 256 <"$1" | awk '{ print $1 }'
+  fi
+}
+
+# version REF: the "version" field of .sgtl/release.json at REF (empty if unknown).
+version_at() {
+  git show "$1:.sgtl/release.json" 2>/dev/null |
+    sed -nE 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/p' | head -n 1 || true
+}
+
+# Sets CHANGED to the tutorial files that differ from .sgtl/MANIFEST.sha256 (changed or missing).
+CHANGED=()
+check_manifest() {
+  local line sum path
+  CHANGED=()
+  if [[ ! -f "$MANIFEST" ]]; then
+    warn "$MANIFEST is missing, so the tutorial's own files cannot be checked."
+    return 0
+  fi
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    line="${line%$'\r'}"
+    [[ -z "$line" || "$line" == \#* ]] && continue
+    sum="${line:0:64}"
+    path="${line:66}"
+    path="${path#./}"
+    [[ -n "$path" ]] || continue
+    if [[ ! -f "$path" ]] || [[ "$(sha256_of "$path")" != "${sum,,}" ]]; then
+      CHANGED+=("$path")
+    fi
+  done <"$MANIFEST"
+}
+
+lock_notebooks() {
+  local nbs=()
+  shopt -s nullglob
+  nbs=(modules/*/*.ipynb)
+  shopt -u nullglob
+  if [[ ${#nbs[@]} -gt 0 ]]; then
+    run chmod a-w "${nbs[@]}"
+  fi
+}
+
+main() {
+  APPLY=0
+  local restore=0 fetch=1
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --apply) APPLY=1 ;;
+      --restore-upstream-owned) restore=1 ;;
+      --no-fetch) fetch=0 ;;
+      -h | --help)
+        usage
+        exit 0
+        ;;
+      *)
+        printf 'update-from-upstream: unknown argument %s (see --help)\n' "$1" >&2
+        exit 2
+        ;;
+    esac
+    shift
+  done
+  readonly APPLY
+
+  local script_dir repo top branch dirty remote push=1 target cur="" new base old_head added path stat
+  local env_changed=0
+  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+  repo="$(cd "$script_dir/.." && pwd -P)"
+  UPSTREAM_SLUG="${SGTL_UPSTREAM_SLUG:-$DEFAULT_UPSTREAM_SLUG}"
+  cd "$repo"
+  have git || die "git is not installed."
+  top="$(git rev-parse --show-toplevel 2>/dev/null)" || die "$repo is not a git clone."
+  [[ "$(cd "$top" && pwd -P)" == "$repo" ]] || die "Run this from your clone of the tutorial ($top)."
+
+  if [[ $APPLY -eq 1 ]]; then
+    say "update-from-upstream (--apply: changes will be made)"
+  else
+    say "update-from-upstream: DRY RUN (nothing changes; add --apply to do it)"
+  fi
+
+  # 1. Clean folder, on main.
+  if git rev-parse -q --verify MERGE_HEAD >/dev/null; then
+    die "A merge is still in progress. Finish it (git commit) or cancel it (git merge --abort) first."
+  fi
+  branch="$(git symbolic-ref --short -q HEAD || true)"
+  [[ "$branch" == main ]] || die "You are on '${branch:-a detached commit}', not on main. Switch with: git switch main"
+  dirty="$(git status --porcelain --untracked-files=no)"
+  if [[ -n "$dirty" ]]; then
+    printf '%s\n' "$dirty" | head -n 20 >&2
+    die "You have changes that are not committed (listed above). Commit your work in work/ first (git add work/ && git commit -m \"...\"), or undo changes to tutorial files (git restore <file>)."
+  fi
+
+  # 2. Which remote has the tutorial?
+  if git remote get-url upstream >/dev/null 2>&1; then
+    remote="upstream"
+    is_upstream_url "$(git remote get-url upstream)" ||
+      warn "The remote 'upstream' does not point to github.com/$UPSTREAM_SLUG."
+  elif is_upstream_url "$(git remote get-url origin 2>/dev/null || true)"; then
+    remote="origin"
+    push=0
+    say "Note: this is a plain clone of the public tutorial (no private copy yet: bin/make-private-copy)."
+    say "      It is updated, but nothing is pushed."
+  else
+    die "There is no remote 'upstream' pointing to the tutorial. Did you run bin/make-private-copy --apply?"
+  fi
+  target="$remote/main"
+
+  # 3. Download (read-only for your files).
+  if [[ $fetch -eq 1 ]]; then
+    say "+ git fetch $remote   (downloads the new version; changes none of your files)"
+    git fetch "$remote" || die "git fetch $remote failed. Check your internet connection and try again."
+  fi
+  git rev-parse -q --verify "refs/remotes/$target" >/dev/null || die "$target was not found. Run without --no-fetch."
+  if git merge-base --is-ancestor "$target" HEAD; then
+    say "Already up to date (version $(version_at HEAD)). Nothing to do."
+    exit 0
+  fi
+  cur="$(version_at HEAD)"
+  new="$(version_at "$target")"
+  say "Your version: ${cur:-unknown}.  New version: ${new:-unknown}."
+
+  # 4. What is new.
+  added="$(git diff --no-color HEAD "$target" -- CHANGELOG.md | sed -n '/^+++/d; s/^+//p' | head -n 80)"
+  if [[ -n "$added" ]]; then
+    say ""
+    say "New in CHANGELOG.md:"
+    printf '%s\n' "$added" | sed 's/^/  | /'
+  else
+    say "CHANGELOG.md has no new entries."
+  fi
+  stat="$(git diff --shortstat HEAD "$target" | sed 's/^ *//')"
+  if [[ -n "$stat" ]]; then say "Tutorial files: $stat."; fi
+  if ! git diff --quiet HEAD "$target" -- environment.yml envs install; then env_changed=1; fi
+
+  # 5. The tutorial's own files must be as released.
+  check_manifest
+  if [[ ${#CHANGED[@]} -gt 0 ]]; then
+    say ""
+    say "These tutorial files differ from the released version (outside work/ and project/):"
+    for path in "${CHANGED[@]}"; do
+      if [[ -f "$path" ]]; then say "  changed: $path"; else say "  missing: $path"; fi
+    done
+    if [[ $restore -eq 0 ]]; then
+      die "Stopped, because merging would fail or mix your edits with the new version. If you want to keep your edits, copy those files into work/ and commit them. Then run:  bin/update-from-upstream --restore-upstream-owned --apply"
+    fi
+    base="$(git merge-base HEAD "$target")"
+    old_head="$(git rev-parse --short HEAD)"
+    for path in "${CHANGED[@]}"; do
+      if git cat-file -e "$base:$path" 2>/dev/null; then
+        run git checkout "$base" -- "$path"
+      else
+        warn "$path is not in the released version $base; left as it is."
+      fi
+    done
+    run env SGTL_ALLOW_UPSTREAM_EDIT=1 git commit -q -m "Restore tutorial files to the released version"
+    say "Your versions stay in the history; to see one:  git show $old_head:<path>"
+  fi
+
+  # 6. Merge, lock the original notebooks, push.
+  if ! run git merge --no-edit "$target"; then
+    if git rev-parse -q --verify MERGE_HEAD >/dev/null; then
+      say "These files conflict:" >&2
+      git diff --name-only --diff-filter=U | sed 's/^/  /' >&2
+    fi
+    die "The merge did not finish (see git's message above). To go back to how it was before: git merge --abort. Then tell the mentor."
+  fi
+  lock_notebooks
+  if [[ $push -eq 1 ]]; then
+    run git push origin main || die "git push origin main failed (see above). Your copy is updated; push again later with: git push origin main"
+  fi
+
+  if [[ $env_changed -eq 1 ]]; then
+    say ""
+    say "The software list changed in this release. Update your installation: bin/sgtl-install (dry run), then bin/sgtl-install --apply"
+  fi
+  say ""
+  if [[ $APPLY -eq 1 ]]; then
+    say "Updated to version ${new:-unknown}."
+  else
+    say "Dry run finished. Nothing was merged. To do it:  bin/update-from-upstream --apply"
+  fi
+}
+
+main "$@"

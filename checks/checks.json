@@ -1,0 +1,382 @@
+{
+ "modules": [
+  "M00",
+  "M01",
+  "M02"
+ ],
+ "schema": "sgtl-checks/1",
+ "tasks": {
+  "M00-T1": {
+   "categories": {
+    "forbidden-import": "This task is about reading values off the terminal, so the rule is: do not use {rules} here. Type what the terminal printed.",
+    "home": "'home' is not your home folder on the server. Run echo $HOME in a terminal on the server and copy the whole path.",
+    "keys": "The dict needs exactly three keys, spelled 'user', 'home' and 'repo'.",
+    "not-output": "A value is a command or a shell shortcut (such as whoami, ~ or $HOME), not what the shell printed. Run the command and copy the line it prints.",
+    "repo": "'repo' is not the top folder of the copy this notebook belongs to. cd into that folder (the one with README.md, bin/ and modules/) and run pwd there.",
+    "subfolder": "'repo' is a folder inside your copy, not its top folder. The top folder holds README.md, bin/ and modules/: go up with cd .. and run pwd again.",
+    "type": "Return a dict, and make each of its three values a string (text in quotes).",
+    "user": "'user' is not the login name of the account that runs this notebook. Run whoami in a terminal on the server, not on your laptop."
+   },
+   "forbidden": [
+    "getpass",
+    "pwd",
+    "os",
+    "pathlib",
+    "socket",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: shell, terminal, server. Every program has a current folder (its working directory): pwd prints it and cd changes it. Read The Unix Shell (swc_shell), episode 2, 'Navigating Files and Directories'.",
+    "2": "Open a terminal on the server (JupyterLab: File, New, Terminal). Run whoami, then echo $HOME. Then make sure you are in the top folder of your copy of the tutorial (ls shows README.md, bin and modules there) and run pwd. Copy each printed line into the dict as text in quotes.",
+    "3": "me = {'user': <the line whoami printed>, 'home': <the line echo $HOME printed>, 'repo': <the line pwd printed in the top folder>}"
+   },
+   "kind": "oracle",
+   "module": "M00",
+   "target": "func",
+   "tier": "core",
+   "title": "Who am I here?"
+  },
+  "M00-T2": {
+   "categories": {
+    "anywhere": "Your count of 2016 events is too high.",
+    "columns": "Your columns list does not match the header line of the file.",
+    "event-id": "Your count of 2016 events is off.",
+    "forbidden-import": "This task is a shell exercise, so the rule is: do not use {rules} inside the function.",
+    "header": "Your n_lines is one less than the number of lines in the file.",
+    "keys": "Your dict does not have exactly the six keys of the Contract (n_lines, columns, n_events_2016, max_ml, n_ml_ge_5, size_kb).",
+    "kst": "Your count of 2016 events is off by the events near the start or the end of the year.",
+    "lines": "Your n_lines does not match the number of lines in the file.",
+    "max-ml": "Your max_ml is not the largest value in the ml column.",
+    "ml-count": "Your count of events with ml 5.0 or more is off.",
+    "size": "Your size_kb does not match the size of the file (tolerance 1 kB).",
+    "size-units": "Your size_kb looks like the size of the file in another unit (bytes, megabytes, or kilobytes of 1000 bytes).",
+    "threshold": "Your count of events with ml 5.0 or more is too low.",
+    "type": "Your answer is not a dict, or one of its values does not have the type that the Contract table gives.",
+    "year-count": "Your count of 2016 events is off."
+   },
+   "forbidden": [
+    "pandas",
+    "numpy",
+    "csv",
+    "polars",
+    "os",
+    "sgtl_tutorial.data.kma_catalog",
+    "sgtl_tutorial.data.sequence"
+   ],
+   "hints": {
+    "1": "Glossary: shell, earthquake catalog, local magnitude, UTC. A pipe (|) sends what one command prints into the next command. Read The Unix Shell (swc_shell), episode 4, 'Pipes and Filters'. Tools: wc, head, cut, grep, sort, tail, ls -l, du.",
+    "2": "Work in the top folder of your copy. Lines: count every line of the file, the header line too. Columns: copy every name of the first line, in the order of the file, without extra spaces. 2016: match the date column only. Cut out the origin_utc column first and count the values that start with 2016, because the text 2016 also appears in other fields; count rows by their origin time in UTC, not ids (an event id is a label, not a time) and not Korean time. Magnitudes: cut out the ml column, sort it as numbers (sort -n) and look at the end of the list; the header word is sorted too, so check what you got. 'ML 5.0 or more' means at least 5.0, so events of exactly 5.0 count. Size: ls -l gives bytes; divide by 1024 (kilobytes of 1024 bytes, not 1000).",
+    "3": "wc -l <file>  |  head -n 1 <file>  |  cut -d, -f<column number> <file> | grep -c '^<text at the start>'  |  cut -d, -f<column number> <file> | sort -n | tail -n <how many>  |  ls -l <file>, then <bytes> / 1024"
+   },
+   "kind": "oracle",
+   "module": "M00",
+   "target": "func",
+   "tier": "core",
+   "title": "Shell scavenger hunt"
+  },
+  "M00-T3": {
+   "categories": {
+    "cpus": "Your cpus_allowed does not match the number of CPU cores this kernel may run on.",
+    "keys": "The dict needs exactly these keys: blas_threads, cpus_allowed, mem_cap_gb.",
+    "mem-cap": "mem_cap_gb does not match the soft memory cap of this kernel (the rlimit_data_gb entry; None means no cap). The memory that is free on the server is a different number.",
+    "thread-cap": "Your cpus_allowed has the same value as the thread cap that CORES sets in the parameters cell. In this kernel, the number of CPU cores it may run on is a different number.",
+    "threads": "blas_threads does not match this kernel. In threadpools, find the entry whose user_api is 'blas' and read its num_threads.",
+    "type": "blas_threads and cpus_allowed must be whole numbers without quotes; mem_cap_gb is a number, or None when there is no cap.",
+    "units": "mem_cap_gb looks like bytes, megabytes or gigabytes of 1000**3 bytes. The rlimit_data_gb entry is in GB of 1024**3 bytes."
+   },
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: thread, CPU core, memory. Run st.server_rules() in a code cell and read what it prints; docs/server_manners.md explains the rules.",
+    "2": "threadpools is a list with one entry per thread pool: find the entry whose user_api is 'blas' and read its num_threads. cpus_allowed and rlimit_data_gb are entries at the top level. cpus_allowed is decided by the operating system, not by you: CORES in the parameters cell sets a thread cap, which is a different setting. rlimit_data_gb is already in GB, and None means no cap. Type the numbers without quotes.",
+    "3": "my_reading = {'blas_threads': <num_threads of the blas pool>, 'cpus_allowed': <a whole number>, 'mem_cap_gb': <a number of GB, or None>}"
+   },
+   "kind": "oracle",
+   "module": "M00",
+   "target": "func",
+   "tier": "core",
+   "title": "Reading the server rules"
+  },
+  "M00-T4": {
+   "categories": {
+    "hooks": "The tutorial's pre-commit check is not turned on (git config core.hooksPath should say .githooks). bin/make-private-copy --apply turns it on.",
+    "keys": "The dict needs exactly two keys: 'origin' and 'upstream'.",
+    "mismatch": "Your dict does not match what git remote -v prints. Copy the two addresses from the lines that end in (fetch).",
+    "no-origin": "Your copy has no remote called origin. Run bin/make-private-copy --apply again: it continues where it stopped.",
+    "no-upstream": "Your copy has no remote called upstream yet. Run bin/make-private-copy (a dry run), read what it will do, then run it again with --apply.",
+    "not-a-repo": "git does not see a repository in the top folder of this copy. Open this notebook from the copy you cloned (bin/sgtl new M00 puts it in work/).",
+    "origin-is-public": "origin still points to the public tutorial. origin must be your own private repository: run bin/make-private-copy --apply.",
+    "type": "Return a dict whose two values are addresses written as strings.",
+    "upstream-push": "Pushing to upstream is still switched on. bin/make-private-copy --apply switches it off.",
+    "upstream-url": "upstream does not point to the public tutorial, github.com/seismoseo/SGTL-earthquake-source-tutorial."
+   },
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: repository, upstream, private copy. A remote is a short name for the address of another copy of the repository. Read docs/git_workflow.md, section 'Make your private copy', and Version Control with Git (swc_git), episode 'Remotes in GitHub'.",
+    "2": "In a terminal in the top folder of your copy: log in to GitHub with gh auth login (once), run bin/make-private-copy without options and read what it will do, then run it with --apply. Afterwards git remote -v lists origin and upstream; copy the two addresses from the lines that end in (fetch).",
+    "3": "remotes = {'origin': <the (fetch) address of origin>, 'upstream': <the (fetch) address of upstream>}"
+   },
+   "kind": "artifact",
+   "module": "M00",
+   "target": "func",
+   "tier": "core",
+   "title": "Your private copy"
+  },
+  "M00-T5": {
+   "categories": {
+    "log-entry": "The log has no dated entry for an M00 task yet. Replace the example heading with a real one: '## YYYY-MM-DD · M00-T<n> · <tool>'.",
+    "log-not-in-commit": "That commit does not contain work/ai_log/M00.md. Add the file with git add, commit, and give the hash of that commit.",
+    "log-sections": "Some of the five fields of your entry are still empty (What I asked, What the AI answered, What I used, Did the help touch, What I learned).",
+    "log-unfilled": "Your entry is too short: write at least 40 words of your own across the five fields.",
+    "no-log": "work/ai_log/M00.md does not exist. bin/sgtl new M00 makes it from the template; you can also copy docs/templates/ai_log_template.md there.",
+    "no-tracking": "Your branch does not track a branch on origin yet. Push once with git push -u origin and the name of your branch.",
+    "not-a-repo": "git does not see a repository in the top folder of this copy. Open this notebook from the copy you cloned (bin/sgtl new M00 puts it in work/).",
+    "not-pushed": "Your branch has commits that are not on origin yet. Run git push.",
+    "type": "Return the commit hash as a string: 7 to 40 characters from 0-9 and a-f, as in the first column of git log --oneline.",
+    "uncommitted": "work/ai_log/M00.md has changes that are not committed yet. Commit them (git add, then git commit) and push.",
+    "unknown-commit": "That hash is not a commit in the history of your current branch. Copy it from git log --oneline."
+   },
+   "forbidden": [],
+   "hints": {
+    "1": "Read docs/ai_policy.md, section 'The AI log', and the template docs/templates/ai_log_template.md. Glossary: commit, private copy.",
+    "2": "Open work/ai_log/M00.md in JupyterLab's text editor. Replace the example heading with today's date, the task id and the tool you used, fill the five fields in your own words and save. In a terminal: git add the file, git commit with a message that says what you did, git push. Then git log --oneline shows your commit; the first column is its short hash.",
+    "3": "git add <the log file>  ->  git commit -m '<what you did>'  ->  git push  ->  git log --oneline  ->  commit_hash = '<the first column of that line>'"
+   },
+   "kind": "artifact",
+   "module": "M00",
+   "target": "func",
+   "tier": "core",
+   "title": "First commit and AI log"
+  },
+  "M01-T1": {
+   "categories": {
+    "precision": "Your distances are right for points far apart but wrong for points only meters apart. The arccos form (spherical law of cosines) loses precision there; the haversine form keeps it.",
+    "radians": "Your numbers look like sin and cos were given degrees. NumPy's sin and cos read their input as radians, so convert every angle first (np.radians).",
+    "radius": "Your distances are off by a constant factor close to 1. Use the sphere radius from the Contract, R = 6371.0 km, not another Earth radius.",
+    "shape": "Your function must take numpy arrays (or plain numbers) and give back one distance per pair, in an array of the same shape. Use numpy functions (np.sin, not math.sin) and no Python loop.",
+    "units": "Your distances look like meters, degrees or radians, not kilometers. The central angle is in radians; multiply it by the radius in kilometers.",
+    "wrong-values": "Some distances are outside the tolerance. Test by hand first: one degree along the equator is about 111.195 km, and the same point twice gives 0."
+   },
+   "forbidden": [
+    "pyproj",
+    "geopy",
+    "obspy.geodetics",
+    "haversine",
+    "sklearn",
+    "geographiclib",
+    "cartopy",
+    "sgtl_tutorial.data"
+   ],
+   "hints": {
+    "1": "Glossary: great_circle_distance, vectorization. The Given formula turns two latitudes and two longitudes into a central angle (the angle between the two points seen from the Earth's center); distance = radius x angle. NumPy's trigonometric functions work in radians: see the angle demo in Part 2, and Harris et al. (2020) on NumPy arrays.",
+    "2": "In words: convert all four angles from degrees to radians with numpy; take half of the latitude difference and half of the longitude difference; build a from the Given formula; keep a inside [0, 1] (rounding can push it a hair above 1); turn a into the central angle with arcsin and sqrt; multiply by 6371.0. Use numpy functions only, so arrays work without a loop.",
+    "3": "<phi_1>, <phi_2>  :=  <the two latitudes, in radians>\n<half_dphi>       :=  (<phi_2> minus <phi_1>) / 2\n<half_dlambda>    :=  <(lon2 minus lon1), in radians> / 2\n<a>               :=  sin^2(<half_dphi>) + cos(<phi_1>) cos(<phi_2>) sin^2(<half_dlambda>)\ngive back         :   <R> times 2 arcsin(sqrt(<a kept inside [0, 1]>))"
+   },
+   "kind": "oracle",
+   "module": "M01",
+   "target": "func",
+   "tier": "core",
+   "title": "Great-circle distance"
+  },
+  "M01-T2": {
+   "categories": {
+    "dst": "Your times are one hour off on a few dates only. Did you use the 'Asia/Seoul' time zone? Use a fixed 9-hour offset instead (UTC = KST - 9 h); Part 5 comes back to this.",
+    "format": "Return text (a str) of exactly 14 digits, YYYYMMDDHHMMSS, with zero padding and no spaces, dashes or colons, for example '20160912113254'.",
+    "no-shift": "Your IDs are the KST time itself. The ID must be the UTC time: UTC = KST - 9 h.",
+    "rollover": "Your IDs are right when the date stays the same but wrong when going back 9 hours crosses midnight (or the start of a month or a year). Let a datetime object do the calendar arithmetic instead of changing the hour by hand.",
+    "sign": "Your times are 18 hours late: you added 9 hours. KST is ahead of UTC, so UTC = KST - 9 h.",
+    "wrong-values": "Some IDs are wrong in a way that is not a simple 9-hour or 1-hour shift. Try kst_to_utc_id(2016, 9, 12, 20, 32, 54) by hand: it should give '20160912113254'."
+   },
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: kst, utc. KST is always UTC + 9 h, so UTC = KST - 9 h. A datetime.datetime object does calendar arithmetic for you (days, months, leap years) when you subtract a datetime.timedelta. See the tools demo in Part 3.",
+    "2": "In words: build one datetime from the six KST numbers; subtract a timedelta of nine hours (a fixed offset, never the 'Asia/Seoul' time zone); write the result as text with strftime, using four digits for the year and two digits for every other field, with no separators.",
+    "3": "<utc moment>  :=  <datetime made from the six numbers>  minus  <a timedelta of nine hours>\ngive back     :   <utc moment> written with the codes %Y %m %d %H %M %S, nothing between them"
+   },
+   "kind": "synthetic",
+   "module": "M01",
+   "target": "func",
+   "tier": "core",
+   "title": "KST clock reading to a UTC event ID"
+  },
+  "M01-T3": {
+   "categories": {
+    "bom": "Your function stops on files that start with a byte order mark (BOM): an invisible character that some programs (Excel, for example) write at the very start of a UTF-8 file, so the first column name reads '\\ufeffYear' instead of 'Year'. See the BOM demo in Part 4.",
+    "columns": "Return a pandas DataFrame with exactly the columns origin_utc, latitude, longitude, depth_km, ml, in this order, each taken from the file's columns by name (some files list Magnitude before Depth).",
+    "depth-nan": "A blank depth means 'not known': it must become NaN (not 0 and not an empty text), and depth_km must be a float column.",
+    "dst": "Your times are one hour off for a few events only. Did you use the 'Asia/Seoul' time zone? Use a fixed 9-hour offset for KST instead (UTC = KST - 9 h); Part 5 comes back to this.",
+    "rows": "Your table does not have one row per data line of the file. Keep every event, also the ones with a blank depth.",
+    "types": "latitude, longitude, depth_km and ml must be float columns (numbers, not text).",
+    "tz": "Your origin_utc column is not right in UTC. It must be time-zone aware, in UTC, and times from KST files must move back 9 hours (UTC = KST - 9 h).",
+    "wrong-values": "Some values differ from the file. Compare the first few rows of your table with the file, value by value."
+   },
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: dataframe, kst, utc, focal_depth. pandas.read_csv reads the file and turns blank fields into NaN; pandas.to_datetime can build times from a table whose columns are the six time parts (year, month, day, hour, minute, second); Series.dt.tz_localize says which zone naive times are in. Look at the Part 4 demos (blank fields, BOM, time zones); McKinney (2010) introduces pandas.",
+    "2": "In words: read the file with pandas; pick the six time columns by name and turn them into times; if tz is 'KST', go back nine hours (a fixed offset); declare the times to be UTC; build a new table from the file's columns chosen by name, renamed to origin_utc, latitude, longitude, depth_km, ml, in that order; keep every row.",
+    "3": "<raw>          :=  <the file read by pandas>\n<clock times>  :=  <times built from the six named time columns>\n<utc times>    :=  (<clock times> minus <9 hours if tz is KST, else no shift>), declared as UTC\ngive back      :   <a new DataFrame: origin_utc from <utc times>, the other four from the named columns>"
+   },
+   "kind": "synthetic",
+   "module": "M01",
+   "target": "func",
+   "tier": "core",
+   "title": "Load a colleague's catalog file"
+  },
+  "M01-T4": {
+   "categories": {
+    "changed-input": "Your function changed the table you passed in (for example it sorted it in place or added a column). Leave df as it is: work on a copy or build a new table.",
+    "inclusive": "Your result keeps the wrong events. Return exactly the events whose great-circle distance from (lat0, lon0) is at most r_km (distance <= r_km), and no others.",
+    "return-type": "Return a pandas DataFrame: the selected rows of df with all of df's columns (not a mask, a list or an index).",
+    "sorting": "You found the right events, but they are not sorted by origin_utc from earliest to latest.",
+    "units": "Your selection looks like distances in meters, degrees or radians were compared with r_km, which is in kilometers."
+   },
+   "forbidden": [
+    "pyproj",
+    "geopy",
+    "obspy.geodetics",
+    "haversine",
+    "sklearn",
+    "geographiclib",
+    "cartopy",
+    "sgtl_tutorial.data"
+   ],
+   "hints": {
+    "1": "Glossary: great_circle_distance, epicenter, vectorization. Your haversine_km from task 1 takes whole arrays, so one call gives the distance to every event. A boolean array (one True or False per row) selects rows with df[mask] or df.loc[mask], and sort_values orders rows by a column (Part 4 demos).",
+    "2": "In words: compute the distance in kilometers from (lat0, lon0) to every event in one call; keep the rows where that distance is at most r_km; sort the kept rows by origin_utc, earliest first; give them back without changing df.",
+    "3": "<dist>      :=  <your distance function>(<lat0>, <lon0>, <all latitudes of df>, <all longitudes of df>)\n<near>      :=  <rows of df where <dist> is at most r_km>\ngive back   :   <near sorted by origin_utc, earliest first>"
+   },
+   "kind": "oracle",
+   "module": "M01",
+   "target": "func",
+   "tier": "core",
+   "title": "Events within a radius, earliest first"
+  },
+  "M01-T5": {
+   "categories": {
+    "changed-input": "Your function changed the table you passed in (for example it added a column). Leave df as it is: work with separate Series or on a copy.",
+    "count": "Your count is not the number of rows whose two KST clock readings differ. Count exactly the rows where the fixed-offset reading and the 'Asia/Seoul' reading are not the same: not every event of a year, a season or a month.",
+    "format": "Return a dict with exactly two keys: 'n_wrong' (an int) and 'months' (a list of texts 'YYYY-MM', each month once, sorted; an empty list when no row differs).",
+    "months": "Your count is right but the month list is not. Take each differing row's month from its fixed-offset KST reading (UTC + 9 h), written 'YYYY-MM'. Near the start or the end of a month, the UTC time or the 'Asia/Seoul' time can fall in another month.",
+    "same-instant": "Your count is zero, but some rows differ. Two time stamps on different clocks can be the same moment, and == compares moments, so it finds no difference. Compare what the two clocks show (the clock readings) instead."
+   },
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: kst, utc, time_zone. One moment can be shown on different clocks. Here you turn the same UTC moments into KST in two ways, with a fixed 9-hour offset and with the 'Asia/Seoul' time zone, and look for the rows where the two clocks show different readings. Remember Part 3: an aware time stamp is a moment; a clock reading is what a clock shows at that moment.",
+    "2": "In words: convert origin_utc twice with .dt.tz_convert, once to a fixed zone of nine hours (datetime.timezone with a timedelta) and once to ZoneInfo('Asia/Seoul'); write both conversions as text with .dt.strftime and the format '%Y-%m-%d %H:%M:%S', which keeps only the clock reading; mark the rows where the two texts differ and count them; for the months, write the fixed-offset times of the marked rows with the format '%Y-%m', keep each month once and sort. Compare texts, not time stamps, and never take the month from the UTC time.",
+    "3": "Why the two clocks disagree: 'Asia/Seoul' follows the time-zone database, which stores every clock\nchange Korea ever made. Korea used daylight saving time (summer time) in 1987 and 1988, from the\nsecond Sunday of May to the second Sunday of October; in those weeks the zone gives UTC + 10 h,\none hour more than KST. Rows outside those weeks agree. The shape of the work (not code):\n<fixed text>   :=  <origin_utc on the +9 h clock, written as a clock reading>\n<zone text>    :=  <origin_utc on the 'Asia/Seoul' clock, written the same way>\n<marked>       :=  <rows where <fixed text> and <zone text> are not equal>\ngive back      :   {'n_wrong': <how many marked rows>, 'months': <sorted distinct 'YYYY-MM' of the fixed-clock times of <marked>>}"
+   },
+   "kind": "synthetic",
+   "module": "M01",
+   "target": "func",
+   "tier": "core",
+   "title": "A one-hour mystery in old records"
+  },
+  "M02-T1": {
+   "categories": {
+    "algebra": "Your magnitudes do not lead back to the diameters they came from. Put one of your magnitudes into the house rule 0.025 * sqrt(5 * e^(2M)) and compare with the diameter you started from, then go through your algebra one step at a time. Common slips: a constant left out or rounded, the square root forgotten, or a sign flipped.",
+    "forbidden-import": "This task asks you to work out the inverse yourself, so the rule is: do not use {rules} inside your function.",
+    "log-base": "Your magnitudes are all off by the same factor, as if your logarithm had the wrong base. The house rule raises e (Euler's number) to a power, so only the natural logarithm, np.log, undoes it; np.log10 and np.log2 undo 10 and 2 to a power instead.",
+    "vectorize": "Your function does not handle every kind of input in the Contract: one number must give back one number, and a list, a NumPy array or a pandas Series must give back one magnitude per diameter, all at once. Turn the input into a NumPy array of floats first and use NumPy functions, not the math module, an if/else on a single number, or a loop that builds a list."
+   },
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Concept: an inverse undoes a calculation, the way division undoes multiplication. The natural logarithm np.log undoes e to a power: np.log(np.exp(y)) gives y back. Re-read the small logarithm example above the task, then solve the house rule for M on paper before you write code. Reading: the NumPy documentation of numpy.log, and Harris et al. (2020) for NumPy arrays.",
+    "2": "Plan in words: on paper, start from the house rule and undo the operations around M from the outside in: first the constant in front, then the square root, then the factor 5, then e to a power (with the natural logarithm), and last the factor 2 in front of M. Test your formula by hand: M = 0 must give a diameter of about 0.056 cm. In code, turn the input into a NumPy array of floats, write the formula once with NumPy functions, and give back a plain float when a single number came in.",
+    "3": "Shape with blanks (not runnable): sizes <- <size_cm as a NumPy float array> ; inner <- ( sizes <divided by the constant in front> ) <squared> <divided by 5> ; magnitudes <- <one half of> <the natural logarithm of> inner ; when <sizes holds a single number> hand back <magnitudes as a float>, otherwise hand back magnitudes."
+   },
+   "kind": "synthetic",
+   "module": "M02",
+   "target": "func",
+   "tier": "core",
+   "title": "Magnitude from marker size"
+  },
+  "M02-T2": {
+   "categories": {
+    "counts": "Some yearly counts are wrong. Count every event once, in the UTC year of its origin_utc.",
+    "index-type": "Return a pandas Series whose index holds the years themselves as integers, once each and in increasing order (not strings, dates, or 0, 1, 2, ...).",
+    "missing-zero-years": "Years without any event are missing (or have no number). Every year from start_year to end_year must appear, with a count of 0 when nothing happened that year.",
+    "off-by-one": "Your years do not run exactly from start_year to end_year with both ends included. Check the first and the last year, and leave out events that fall outside the range.",
+    "time-zone": "Your counts match calendar years in Korea Standard Time. The Contract asks for UTC years, so take the year from origin_utc."
+   },
+   "forbidden": [],
+   "hints": {
+    "1": "Concept: a pandas Series is one column of values with labels, called its index; here the labels are years. Datetime columns have a .dt accessor that gives parts of each time (look up \"pandas dt accessor\"). Reading: McKinney (2010).",
+    "2": "Plan in words: take the UTC year of every event; count how many events each year has; then put those counts onto the complete list of years from start_year to end_year, filling the years that have no events with 0; years outside the range drop out on the way. A Series can be re-labelled onto a new list of labels with a fill value.",
+    "3": "Shape with blanks (not runnable): years <- <year part of the UTC origin times> ; tally <- <how often each year occurs> ; every_year <- <the integers start_year .. end_year, both included> ; hand back <tally put onto every_year, missing years -> 0, as integers>."
+   },
+   "kind": "synthetic",
+   "module": "M02",
+   "target": "func",
+   "tier": "core",
+   "title": "Events per year, zeros included"
+  },
+  "M02-T3": {
+   "categories": {
+    "data": "Not every event appears at its magnitude. Draw one marker (or stem) per event with y equal to its ml.",
+    "date-axis": "The x axis does not hold dates. Pass the origin_utc column itself as x, not event numbers or decimal years.",
+    "frame": "Keep all four frame lines of the axes (the house style draws them); do not hide the top or right line.",
+    "labels": "Both axes need labels: the x label says what the axis shows and in which time zone, and the y label names the magnitude with a capital M (st.plot.ML_LABEL gives the house symbol).",
+    "not-a-figure": "Return the matplotlib Figure object (the fig of fig, ax = plt.subplots()), not the axes, a tuple or None.",
+    "sentence-case": "A label, title or legend entry is not in sentence case. Capitalize only the first word (and names); never write a whole label in capitals or Capitalize Every Word.",
+    "spelling": "A text in your figure uses British spelling (such as colour, centre, grey or metre). Figures in this lab use American English: color, center, gray, meter.",
+    "title": "Show the title you are given, and keep every title at most 40 characters long."
+   },
+   "forbidden": [],
+   "hints": {
+    "1": "Concept: one Figure holds one or more Axes, and you draw on an Axes (section 1 of this notebook). Matplotlib understands datetime columns, so origin_utc can go straight in as x. Reading: Hunter (2007) and the Software Carpentry episode on plotting.",
+    "2": "Plan in words: make one figure with one axes; draw a marker (and, if you like, a thin stem) for every event at its origin time and magnitude; label the x axis with the time and its time zone and the y axis with the house magnitude symbol, both in sentence case; use the title you were given; hand the figure back without calling plt.show().",
+    "3": "Shape with blanks (not runnable): fig and ax <- <one figure with one axes> ; <draw markers at (origin times, magnitudes)> ; <x label: what and which time zone> ; <y label: the magnitude symbol> ; <title: the one you were given> ; hand back fig."
+   },
+   "kind": "property",
+   "module": "M02",
+   "target": "func",
+   "tier": "core",
+   "title": "Time-magnitude figure"
+  },
+  "M02-T4": {
+   "categories": {
+    "house-style": "Draw the map inside \"with st.plot.gmt_style():\" (or set FORMAT_GEO_MAP=\"ddd.xx\" and MAP_FRAME_TYPE=\"plain\" yourself with pygmt.config).",
+    "marker-size": "The check could not find every event drawn as a circle whose size grows with its magnitude. Draw the events with fig.plot(x=..., y=..., size=..., style=\"cc\"), where size holds one diameter in cm per event from the house rule, st.plot.mag_size_cm.",
+    "not-a-figure": "Return the pygmt.Figure you drew on (not None; and do not return what fig.show() gives).",
+    "region": "The map must use exactly the region you are given, and that region must contain every event. Pass region to fig.basemap; for the Sangju map also check MAP_REGION in the parameters cell.",
+    "scale-bar": "Every lab map has a scale bar of the length you are given. Pass map_scale to fig.basemap or fig.coast; st.plot.scale_bar_spec builds that text from the region and the bar length in km.",
+    "stations": "Draw every station you are given as a symbol (fig.plot with x= and y=) and write its station code beside it with fig.text(text=...)."
+   },
+   "forbidden": [],
+   "hints": {
+    "1": "Concept: a PyGMT map is built layer by layer on one pygmt.Figure (basemap, coast, plot, text), and a later layer covers an earlier one. Re-read the toy map above and the PyGMT tutorial \"Plotting data points\". Reading: Wessel et al. (2019).",
+    "2": "Plan in words: inside the house-style block, make a new figure; draw the frame for the given region with a short title; add the coastline; draw the events as circles whose diameters come from the house rule (st.plot.mag_size_cm); draw the stations as triangles and write their codes a little to the side; draw the scale bar of the given length after the land so it stays visible; hand the figure back.",
+    "3": "Shape with blanks (not runnable): with <house style> -> fig <- <new figure> ; <frame for region, short title> ; <coast> ; <circles at event lon/lat, size <- house-rule diameters, style circle-in-cm> ; <triangles at station lon/lat> ; <station codes, shifted sideways> ; <scale bar of scale_km km> ; hand back fig."
+   },
+   "kind": "property",
+   "module": "M02",
+   "target": "func",
+   "tier": "core",
+   "title": "Map of the Sangju sequence"
+  },
+  "M02-T5": {
+   "categories": {
+    "distance": "Some yearly counts are wrong, so some events are on the wrong side of the radius. Check that the distances are in kilometers (not degrees or meters), that degrees are turned into radians before sin and cos, that latitude and longitude are not swapped, and that you keep distance <= radius_km.",
+    "forbidden-import": "This task asks you to write this step yourself, so the rule is: do not use {rules} inside your function.",
+    "index-type": "Return a pandas Series whose index holds the years themselves as integers, once each and in increasing order.",
+    "year-range": "Your years do not run exactly from start_year to end_year with a count (0 when empty) for every year."
+   },
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Concept: great-circle distance (st.glossary.term(\"great_circle_distance\")), which you met in M01. On a sphere of radius 6371 km the haversine formula is accurate enough here. Then reuse your yearly-count function.",
+    "2": "Plan in words: compute the distance in km from the given point to every epicenter at once with NumPy (degrees to radians first); keep the rows whose distance is at most radius_km (that is events_near); count the kept rows per year with your yearly-count function (that is counts_near).",
+    "3": "Shape with blanks (not runnable): distances <- <great-circle km from (lat0, lon0) to every row> ; kept <- <rows where distances <= radius_km> ; hand back <yearly counts of kept from start_year to end_year>."
+   },
+   "kind": "synthetic",
+   "module": "M02",
+   "target": "func",
+   "tier": "stretch",
+   "title": "Yearly counts near the mainshock"
+  }
+ }
+}

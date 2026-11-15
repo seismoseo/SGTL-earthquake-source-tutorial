@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# sgtl: the tutorial's command-line helper. Runs "python -m sgtl_tutorial.cli" with the course
+# environment's Python (~/sgtl/envs/sgtl/bin/python, or $SGTL_HOME/envs/sgtl) if it is installed,
+# otherwise with python3 from your PATH (enough for "bin/sgtl doctor" before installing).
+#
+#   bin/sgtl --help       list the commands (doctor, new, status, diff, setup-ai, ...)
+#   bin/sgtl doctor       check the installation
+#   bin/sgtl new M01      make your own copy of a module notebook in work/
+#
+# The commands that change files are dry runs unless you add --apply (each command's --help says so).
+# This wrapper only chooses the Python and passes every argument through unchanged.
+#
+# Copyright (c) 2026 Minseong Seo (SGTL, Seoul National University). MIT License.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+REPO="$(cd "$SCRIPT_DIR/.." && pwd -P)"
+SGTL_HOME="${SGTL_HOME:-${HOME:?HOME is not set}/sgtl}"
+SGTL_HOME="${SGTL_HOME%/}"
+ENV_PREFIX="$SGTL_HOME/envs/sgtl"
+
+python_ok() { "$1" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)' >/dev/null 2>&1; }
+
+PY="${SGTL_PYTHON:-}"
+if [[ -z "$PY" && -x "$ENV_PREFIX/bin/python" ]]; then
+  PY="$ENV_PREFIX/bin/python"
+  # Programs (GMT for PyGMT) and libraries come from the course environment.
+  unset LD_LIBRARY_PATH
+  export PATH="$ENV_PREFIX/bin:$PATH" GMT_LIBRARY_PATH="$ENV_PREFIX/lib"
+fi
+if [[ -z "$PY" ]]; then
+  for candidate in python3 python; do
+    if command -v "$candidate" >/dev/null 2>&1 && python_ok "$candidate"; then
+      PY="$candidate"
+      break
+    fi
+  done
+  if [[ -z "$PY" ]]; then
+    echo "sgtl: the course environment ($ENV_PREFIX) is not installed, and no Python 3.10 or newer" >&2
+    echo "      is on your PATH. Install the environment first:  bin/sgtl-install --apply" >&2
+    exit 1
+  fi
+  echo "sgtl: note: the course environment ($ENV_PREFIX) is not installed; using $(command -v "$PY")." >&2
+  export PYTHONPATH="$REPO/src${PYTHONPATH:+:$PYTHONPATH}"
+fi
+
+export SGTL_REPO="${SGTL_REPO:-$REPO}"
+export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}" OPENBLAS_NUM_THREADS="${OPENBLAS_NUM_THREADS:-1}"
+export MKL_NUM_THREADS="${MKL_NUM_THREADS:-1}" NUMEXPR_MAX_THREADS="${NUMEXPR_MAX_THREADS:-1}"
+export NUMPY_MADVISE_HUGEPAGE="${NUMPY_MADVISE_HUGEPAGE:-0}"
+exec "$PY" -m sgtl_tutorial.cli "$@"

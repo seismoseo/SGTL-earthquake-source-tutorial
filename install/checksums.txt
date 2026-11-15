@@ -1,0 +1,12 @@
+# SGTL earthquake source tutorial — pinned downloads and their SHA-256 checksums.
+#
+# Format: one file per line, three columns separated by spaces:
+#   <file name>  <sha256: 64 lowercase hex characters, or TO-VERIFY>  <download URL>
+# Lines starting with "#" are comments. bin/sgtl-install looks files up by name, downloads them,
+# and with --apply refuses to use a file whose checksum is TO-VERIFY or does not match.
+# A checksum (SHA-256) is a fingerprint of a file: if even one byte differs, the fingerprint differs.
+#
+# Miniforge (the conda package manager from conda-forge), Linux x86_64, release 26.9.4-0 (2026-10-22).
+# (The later rebuilds 26.9.4-1 and 26.9.4-2 list only Windows and CI changes in their release notes.)
+# Checksum source: GitHub release asset digest (GitHub REST API), checked 2026-11-15.
+Miniforge3-26.9.4-0-Linux-x86_64.sh  621428f40496a90702753b09237794518a081d9979d9f845a525de761b6056f7  https://github.com/conda-forge/miniforge/releases/download/26.9.4-0/Miniforge3-26.9.4-0-Linux-x86_64.sh
