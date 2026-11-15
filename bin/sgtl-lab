@@ -1,0 +1,289 @@
+#!/usr/bin/env bash
+# sgtl-lab: run JupyterLab for the SGTL earthquake source tutorial on this server, inside a tmux
+# session named "sgtl-lab" (it keeps running after you log out), and show how to open it from your
+# own computer through an SSH tunnel.
+#
+# "start" and "stop" are dry runs unless you add --apply. "status" and "url" only look.
+#
+# Copyright (c) 2026 Minseong Seo (SGTL, Seoul National University). MIT License.
+
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: bin/sgtl-lab [start|stop|status|url] [--apply] [--port N]
+
+  start    start JupyterLab in the tmux session "sgtl-lab" (dry run unless --apply)
+  stop     stop it (dry run unless --apply)
+  status   say whether it runs, and how to open it (the default)
+  url      print the address to open in your browser, and how to get the token
+
+JupyterLab listens only on this server (address 127.0.0.1) on your own port number
+20000 + (your user ID % 10000), so it does not clash with other users. You reach it through an
+SSH tunnel; the instructions are printed by "start" and "status". It keeps its password (the
+"token"), stops kernels that have been idle for 2 hours, and runs at low priority (nice).
+
+Options:
+  --apply     do it (for start and stop)
+  --port N    use port N instead of your own default port
+  -h, --help  show this help and exit
+
+Environment variables: SGTL_HOME (default ~/sgtl), SGTL_LAB_PORT (instead of --port).
+EOF
+}
+
+say() { printf '%s\n' "$*"; }
+warn() { printf 'WARNING: %s\n' "$*" >&2; }
+die() {
+  printf 'ERROR: %s\n' "$*" >&2
+  exit 1
+}
+have() { command -v "$1" >/dev/null 2>&1; }
+quote_cmd() {
+  local out="" arg
+  for arg in "$@"; do out+="$(printf '%q' "$arg") "; done
+  printf '%s' "${out% }"
+}
+run() {
+  if [[ $APPLY -eq 1 ]]; then
+    printf '+ %s\n' "$(quote_cmd "$@")"
+    "$@"
+  else
+    printf '[dry-run] %s\n' "$(quote_cmd "$@")"
+  fi
+}
+action() {
+  if [[ $APPLY -eq 1 ]]; then printf '+ %s\n' "$*"; else printf '[dry-run] %s\n' "$*"; fi
+}
+
+readonly SESSION="sgtl-lab"
+
+port_listening() {
+  (exec 3<>"/dev/tcp/127.0.0.1/$PORT") 2>/dev/null
+}
+
+session_running() {
+  have tmux && tmux has-session -t "=$SESSION" 2>/dev/null
+}
+
+# The last lines of the log, with the token hidden.
+show_log_tail() {
+  [[ -f "$LOG" ]] || return 0
+  say "Last lines of $LOG:"
+  tail -n 25 "$LOG" | sed -E 's/(token=)[A-Za-z0-9_.-]+/\1<hidden>/g; s/^/  | /'
+}
+
+print_access() {
+  cat <<EOF
+
+How to open JupyterLab from your own computer
+---------------------------------------------
+JupyterLab listens only on this server (127.0.0.1, port $PORT). An SSH tunnel carries that port to
+your computer. Use the same user name, server name and SSH port as when you log in (if you log in
+with another server name than "$HOST", use that name).
+
+1) Open the tunnel and keep it open while you work. Pick your program:
+   OpenSSH (macOS or Linux terminal, Windows PowerShell):
+       ssh -N -L $PORT:127.0.0.1:$PORT $USER_NAME@$HOST
+     Add "-p <port>" if you log in with an SSH port other than 22. The command prints nothing
+     and keeps running: that is normal. Stop it with Ctrl-C when you are done.
+   Xshell: open the properties of your session, then Connection > SSH > Tunneling > Add:
+       Type (Direction): Local (Outgoing); Source host: localhost; Listen port: $PORT;
+       Destination host: 127.0.0.1; Destination port: $PORT. Click OK, then connect.
+   PuTTY: Connection > SSH > Tunnels: Source port: $PORT; Destination: 127.0.0.1:$PORT;
+       choose Local; click Add. Then Session > Save, and Open.
+   If your computer says the port is already in use, choose another local number, for example
+       ssh -N -L 28888:127.0.0.1:$PORT $USER_NAME@$HOST    and open http://127.0.0.1:28888/lab
+2) In your web browser, open:   http://127.0.0.1:$PORT/lab
+3) The page asks for a token (the password of your JupyterLab). To see it, run on this server:
+       $JUPYTER server list
+   and copy the text after "token=" (up to the next "::" or space). The token gives full access to
+   your account: never paste it into issues, chats or AI tools.
+
+Choose the kernel "SGTL (Python 3.12)" for the tutorial notebooks. Kernels idle for 2 hours stop by
+themselves (your files are kept). To watch JupyterLab's messages: tmux attach -t $SESSION
+(leave again with Ctrl-b, then d). To stop it: bin/sgtl-lab stop --apply
+EOF
+}
+
+write_launcher() {
+  local q_env q_repo q_log
+  q_env="$(printf '%q' "$ENV_PREFIX")"
+  q_repo="$(printf '%q' "$REPO")"
+  q_log="$(printf '%q' "$LOG")"
+  cat >"$LAUNCHER" <<EOF
+#!/usr/bin/env bash
+# Written by bin/sgtl-lab on every start; you may delete it.
+set -uo pipefail
+umask 077
+unset LD_LIBRARY_PATH PYTHONPATH PYTHONHOME
+export PATH=$q_env/bin:"\$PATH" GMT_LIBRARY_PATH=$q_env/lib
+export SGTL_REPO=$q_repo SGTL_HOME=$(printf '%q' "$SGTL_HOME")
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_MAX_THREADS=1
+export NUMPY_MADVISE_HUGEPAGE=0 PYTHONNOUSERSITE=1
+cd $q_repo || exit 1
+echo "=== bin/sgtl-lab: JupyterLab starting \$(date '+%Y-%m-%d %H:%M:%S') on 127.0.0.1:$PORT ===" >>$q_log
+nice -n 10 $(quote_cmd "${JUPYTER_ARGS[@]}") 2>&1 | tee -a $q_log
+EOF
+  chmod 700 "$LAUNCHER"
+}
+
+cmd_start() {
+  if [[ ! -x "$JUPYTER" ]]; then
+    [[ $APPLY -eq 0 ]] || die "The course environment is not installed ($JUPYTER is missing). Run: bin/sgtl-install --apply"
+    warn "The course environment is not installed yet ($JUPYTER is missing): bin/sgtl-install --apply"
+  fi
+  have tmux || die "tmux is not installed on this server. Ask the server administrator to install it."
+  if session_running; then
+    if port_listening; then
+      say "JupyterLab is already running (tmux session \"$SESSION\", port $PORT)."
+      print_access
+      return 0
+    fi
+    say "A tmux session \"$SESSION\" is left over, but nothing answers on port $PORT: removing it."
+    run tmux kill-session -t "=$SESSION"
+  fi
+  if port_listening; then
+    die "Port $PORT is already in use on this server (another program, or a JupyterLab you started yourself; see: $JUPYTER server list). Stop that program, or choose another port with --port N."
+  fi
+  if [[ -n "${LD_LIBRARY_PATH:-}" ]]; then
+    say "Note: LD_LIBRARY_PATH is set in your shell. JupyterLab is started without it, so that GMT and"
+    say "      other libraries come from the course environment."
+  fi
+  run mkdir -p "$SGTL_HOME/run" "$SGTL_HOME/logs"
+  run chmod 700 "$SGTL_HOME/run" "$SGTL_HOME/logs"
+  action "write the start script $LAUNCHER, which runs (inside $REPO):"
+  say "    nice -n 10 $(quote_cmd "${JUPYTER_ARGS[@]}")"
+  if [[ $APPLY -eq 1 ]]; then write_launcher; fi
+  run tmux new-session -d -s "$SESSION" -c "$REPO" "bash $(printf '%q' "$LAUNCHER")"
+  if [[ $APPLY -eq 1 ]]; then
+    local i
+    printf 'Waiting for JupyterLab to start '
+    for ((i = 0; i < 90; i++)); do
+      if port_listening || ! session_running; then break; fi
+      printf '.'
+      sleep 1
+    done
+    printf '\n'
+    if ! port_listening; then
+      show_log_tail
+      die "JupyterLab did not start (see the lines above). Fix the cause, then: bin/sgtl-lab start --apply"
+    fi
+    say "JupyterLab is running in the tmux session \"$SESSION\" on 127.0.0.1:$PORT (log: $LOG)."
+  fi
+  print_access
+}
+
+cmd_stop() {
+  if ! session_running && ! port_listening; then
+    say "JupyterLab (tmux session \"$SESSION\", port $PORT) is not running. Nothing to stop."
+    return 0
+  fi
+  if port_listening && [[ -x "$JUPYTER" ]]; then
+    run "$JUPYTER" server stop "$PORT" || warn "jupyter server stop did not succeed; the tmux session is closed instead."
+  fi
+  if [[ $APPLY -eq 1 ]]; then
+    local i
+    for ((i = 0; i < 15; i++)); do
+      if ! port_listening && ! session_running; then break; fi
+      sleep 1
+    done
+  fi
+  if [[ $APPLY -eq 0 ]] || session_running; then
+    run tmux kill-session -t "=$SESSION"
+  fi
+  if [[ $APPLY -eq 1 ]]; then
+    if port_listening; then
+      warn "Something still answers on port $PORT (not started by bin/sgtl-lab?). See: $JUPYTER server list"
+    else
+      say "JupyterLab is stopped. Your notebooks and files are kept."
+    fi
+  fi
+}
+
+cmd_status() {
+  local s="not running" p="free (nothing answers)"
+  if session_running; then s="running"; fi
+  if port_listening; then p="in use (something answers)"; fi
+  say "JupyterLab for the SGTL tutorial"
+  say "  tmux session \"$SESSION\": $s"
+  say "  port $PORT on 127.0.0.1:  $p"
+  say "  log file:               $LOG"
+  if [[ "$s" == running ]] && port_listening; then
+    print_access
+  elif [[ "$s" == running ]]; then
+    say "The session exists but JupyterLab does not answer (still starting, or it stopped)."
+    show_log_tail
+  else
+    say "Start it with:  bin/sgtl-lab start --apply"
+  fi
+}
+
+cmd_url() {
+  if ! port_listening; then
+    say "Nothing answers on port $PORT. Start JupyterLab with:  bin/sgtl-lab start --apply"
+    exit 1
+  fi
+  say "http://127.0.0.1:$PORT/lab"
+  say "(Through the SSH tunnel: bin/sgtl-lab status shows how. The token: $JUPYTER server list)"
+}
+
+main() {
+  APPLY=0
+  local cmd="" port="${SGTL_LAB_PORT:-}"
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      start | stop | status | url)
+        [[ -z "$cmd" ]] || die "Give only one of start, stop, status, url."
+        cmd="$1"
+        ;;
+      --apply) APPLY=1 ;;
+      --port)
+        [[ $# -ge 2 ]] || die "--port needs a number."
+        port="$2"
+        shift
+        ;;
+      --port=*) port="${1#--port=}" ;;
+      -h | --help)
+        usage
+        exit 0
+        ;;
+      *)
+        printf 'sgtl-lab: unknown argument %s (see --help)\n' "$1" >&2
+        exit 2
+        ;;
+    esac
+    shift
+  done
+  cmd="${cmd:-status}"
+  readonly APPLY
+
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+  REPO="$(cd "$SCRIPT_DIR/.." && pwd -P)"
+  SGTL_HOME="${SGTL_HOME:-${HOME:?HOME is not set}/sgtl}"
+  SGTL_HOME="${SGTL_HOME%/}"
+  [[ "$SGTL_HOME" == /* ]] || die "SGTL_HOME must be an absolute path (it is '$SGTL_HOME')."
+  ENV_PREFIX="$SGTL_HOME/envs/sgtl"
+  JUPYTER="$ENV_PREFIX/bin/jupyter"
+  LAUNCHER="$SGTL_HOME/run/sgtl-lab.sh"
+  LOG="$SGTL_HOME/logs/sgtl-lab.log"
+  PORT="${port:-$((20000 + $(id -u) % 10000))}"
+  if [[ ! "$PORT" =~ ^[0-9]+$ ]] || ((PORT < 1024 || PORT > 65535)); then
+    die "The port must be a number from 1024 to 65535 (it is '$PORT')."
+  fi
+  HOST="$(hostname -f 2>/dev/null || hostname)"
+  USER_NAME="$(id -un)"
+  JUPYTER_ARGS=("$JUPYTER" lab --no-browser --ip=127.0.0.1 "--port=$PORT" --ServerApp.port_retries=0
+    "--ServerApp.root_dir=$REPO" --MappingKernelManager.cull_idle_timeout=7200
+    --MappingKernelManager.cull_interval=600)
+  if [[ ${EUID:-$(id -u)} -eq 0 ]]; then
+    die "Do not run JupyterLab as root. Log in as yourself."
+  fi
+
+  if [[ $APPLY -eq 0 && ("$cmd" == start || "$cmd" == stop) ]]; then
+    say "sgtl-lab $cmd: DRY RUN (nothing changes; add --apply to do it)"
+  fi
+  "cmd_$cmd"
+}
+
+main "$@"

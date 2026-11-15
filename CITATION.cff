@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: If you use this tutorial, please cite it using these metadata.
+type: software
+title: SGTL earthquake source tutorial
+abstract: A hands-on Jupyter tutorial that takes a newcomer from earthquake catalogs and seismograms to
+  research-level earthquake source characterization (picking, location, double-difference relocation,
+  focal mechanisms, moment tensors, Coulomb stress, detection), built around the PocketQuake toolchain.
+  Learners write the core methods themselves and check them against independent references.
+authors:
+- given-names: Minseong
+  family-names: Seo
+  affiliation: SGTL (Seismology, Geophysics, Tectonophysics Laboratory), Seoul National University
+version: 0.1.0
+date-released: 2026-11-15
+license:
+- MIT
+- CC-BY-4.0
+repository-code: https://github.com/seismoseo/SGTL-earthquake-source-tutorial
+keywords:
+- seismology
+- earthquake source
+- tutorial
+- Jupyter
+- earthquake location
+- focal mechanism
+- moment tensor
+- Korea

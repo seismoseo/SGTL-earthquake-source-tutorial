@@ -1,0 +1,14 @@
+module: M01
+frozen: 2026-11-16
+tasks:
+  # 1000 pairs: Korea, the whole globe, pairs 0.5 m to 2 km apart, and six fixed pairs; oracle ObsPy
+  M01-T1: {trials: 1000, rel_tol: 1.0e-6, abs_tol_km: 1.0e-6}
+  # 200 KST clock readings from 1978 to 2030, with midnight, month, year and leap-day changes; exact text
+  M01-T2: {trials: 200}
+  # 5 fresh CSV files (KST/UTC, both Depth/Magnitude orders, BOM or not, blank depths); exact values
+  M01-T3: {trials: 5}
+  # 6 synthetic catalogs (one with no event inside); events this close to the circle are left out
+  M01-T4: {trials: 6, boundary_skip_km: 0.01}
+  # 6 made-up catalogs built with known answers (one where no row differs, one with rows at month edges),
+  # then the shipped KMA catalog (answer recomputed by the check, never printed); exact match
+  M01-T5: {trials: 6}

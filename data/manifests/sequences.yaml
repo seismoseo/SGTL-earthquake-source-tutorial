@@ -1,0 +1,43 @@
+# Named earthquake sequences: st.data.sequence(name) applies one of these space-time boxes to
+# data/catalogs/kma_catalog.csv. Every top-level key is a sequence name.
+#
+# Selection rule (the same for every entry):
+#   distance: geodesic distance on the WGS84 ellipsoid from (center_lat, center_lon) to the
+#             epicenter; an event is kept when distance_km <= radius_km.
+#   time:     start_utc <= origin_utc <= end_utc (both ends included; times are UTC).
+#   No magnitude cut and no depth cut.
+# largest_event: the event with the largest ML inside the box (the earliest one if tied), copied
+# from kma_catalog.csv. Generated file: maintainers regenerate it, please do not edit it by hand.
+gyeongju2016:
+  description: 2016 Gyeongju sequence
+  center_lat: 35.76
+  center_lon: 129.19
+  radius_km: 15
+  start_utc: "2016-09-01T00:00:00Z"
+  end_utc: "2017-09-30T23:59:59Z"
+  largest_event: {event_id: "2016000291", origin_utc: "2016-09-12T11:32:54Z", ml: 5.8}
+pohang2017:
+  description: 2017 Pohang sequence
+  center_lat: 36.11
+  center_lon: 129.37
+  center_source: "epicenter of the ML 5.4 mainshock (event_id 2017000407, 2017-11-15T05:29:31Z) in kma_catalog.csv"
+  radius_km: 10
+  start_utc: "2017-11-01T00:00:00Z"
+  end_utc: "2018-11-30T23:59:59Z"
+  largest_event: {event_id: "2017000407", origin_utc: "2017-11-15T05:29:31Z", ml: 5.4}
+sangju2019:
+  description: Sangju earthquakes, 2018-2022
+  center_lat: 36.50
+  center_lon: 128.10
+  radius_km: 10
+  start_utc: "2018-01-01T00:00:00Z"
+  end_utc: "2022-12-31T23:59:59Z"
+  largest_event: {event_id: "2019009762", origin_utc: "2019-07-21T02:04:18Z", ml: 3.9}
+suncheon:
+  description: Suncheon earthquakes, 2002-2026
+  center_lat: 34.92
+  center_lon: 127.44
+  radius_km: 10
+  start_utc: "2002-01-01T00:00:00Z"
+  end_utc: "2026-11-06T23:59:59Z"
+  largest_event: {event_id: "2002000011", origin_utc: "2002-03-12T11:04:37Z", ml: 2.4}

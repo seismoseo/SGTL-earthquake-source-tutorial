@@ -1,0 +1,239 @@
+#!/usr/bin/env bash
+# make-private-copy: turn your clone of the public tutorial into your own PRIVATE GitHub repository.
+#
+# After it: "origin" is your private repository (you push your work there), "upstream" is the public
+# tutorial (you only fetch updates from it; pushing to it is switched off), the mentor is invited as
+# a collaborator, and the tutorial's pre-commit check is turned on (git config core.hooksPath .githooks).
+#
+# Dry run by default: every action is printed with a "[dry-run]" prefix and nothing changes.
+# Add --apply to act. The checks (GitHub login, clean folder, where origin points) always run.
+#
+# Copyright (c) 2026 Minseong Seo (SGTL, Seoul National University). MIT License.
+
+set -euo pipefail
+
+readonly DEFAULT_UPSTREAM_SLUG="seismoseo/SGTL-earthquake-source-tutorial"
+readonly MENTOR_LOGIN="seismoseo"
+
+usage() {
+  cat <<'EOF'
+Usage: bin/make-private-copy [--name NAME] [--owner LOGIN] [--apply]
+
+Makes your own private GitHub repository from this clone of the tutorial, so that your work in
+work/ and project/ is saved on GitHub and only you and the mentor can see it.
+
+Before you start:
+  1. Log in to GitHub with the GitHub command-line tool (it comes with the course environment):
+       gh auth login        (choose GitHub.com, HTTPS, and "Login with a web browser")
+  2. This folder must be a fresh clone of github.com/seismoseo/SGTL-earthquake-source-tutorial
+     with no changed files.
+
+What it does (with --apply):
+  git remote rename origin upstream                 the public tutorial becomes "upstream"
+  git remote set-url --push upstream DISABLED       you can never push to the public tutorial by mistake
+  gh repo create LOGIN/NAME --private --source=. --remote=origin --push
+                                                    your private repository becomes "origin"
+  gh api -X PUT repos/LOGIN/NAME/collaborators/seismoseo -f permission=push
+                                                    invites the mentor (seismoseo)
+  git config core.hooksPath .githooks               turns on the tutorial's pre-commit check
+  chmod a-w modules/*/*.ipynb                       makes the original notebooks read-only
+
+Options:
+  --name NAME     name of the new repository (default: sgtl-tutorial-<your GitHub login>)
+  --owner LOGIN   GitHub account or organization that owns it (default: your GitHub login)
+  --apply         do it (without this, nothing changes)
+  -h, --help      show this help and exit
+
+Environment variables: SGTL_GH (the gh program to use), SGTL_HOME (default ~/sgtl).
+EOF
+}
+
+say() { printf '%s\n' "$*"; }
+warn() { printf 'WARNING: %s\n' "$*" >&2; }
+die() {
+  printf 'ERROR: %s\n' "$*" >&2
+  exit 1
+}
+have() { command -v "$1" >/dev/null 2>&1; }
+quote_cmd() {
+  local out="" arg
+  for arg in "$@"; do out+="$(printf '%q' "$arg") "; done
+  printf '%s' "${out% }"
+}
+run() {
+  if [[ $APPLY -eq 1 ]]; then
+    printf '+ %s\n' "$(quote_cmd "$@")"
+    "$@"
+  else
+    printf '[dry-run] %s\n' "$(quote_cmd "$@")"
+  fi
+}
+
+# is_upstream_url URL: does URL point to github.com/<upstream owner>/<upstream repo>?
+is_upstream_url() {
+  local url="${1,,}" slug="${UPSTREAM_SLUG,,}" re
+  re="github\\.com[:/]+${slug}(\\.git)?/?\$"
+  [[ "$url" =~ $re ]]
+}
+
+find_gh() {
+  if [[ -n "${SGTL_GH:-}" ]]; then
+    GH="$SGTL_GH"
+  elif have gh; then
+    GH="gh"
+  elif [[ -x "$SGTL_HOME/envs/sgtl/bin/gh" ]]; then
+    GH="$SGTL_HOME/envs/sgtl/bin/gh"
+  else
+    die "The GitHub command-line tool (gh) was not found. It comes with the course environment (bin/sgtl-install --apply); see also https://cli.github.com"
+  fi
+}
+
+lock_notebooks() {
+  local nbs=()
+  shopt -s nullglob
+  nbs=(modules/*/*.ipynb)
+  shopt -u nullglob
+  if [[ ${#nbs[@]} -gt 0 ]]; then
+    run chmod a-w "${nbs[@]}"
+  fi
+}
+
+finish_local_setup() {
+  run git config core.hooksPath .githooks
+  if [[ -f .githooks/pre-commit && ! -x .githooks/pre-commit ]]; then
+    warn ".githooks/pre-commit is not executable, so git will not run it. Please tell the mentor."
+  fi
+  lock_notebooks
+}
+
+main() {
+  APPLY=0
+  local name="" owner=""
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --apply) APPLY=1 ;;
+      --name | --owner)
+        [[ $# -ge 2 && -n "$2" ]] || die "$1 needs a value."
+        if [[ "$1" == --name ]]; then name="$2"; else owner="$2"; fi
+        shift
+        ;;
+      --name=*) name="${1#--name=}" ;;
+      --owner=*) owner="${1#--owner=}" ;;
+      -h | --help)
+        usage
+        exit 0
+        ;;
+      *)
+        printf 'make-private-copy: unknown argument %s (see --help)\n' "$1" >&2
+        exit 2
+        ;;
+    esac
+    shift
+  done
+  readonly APPLY
+
+  local script_dir repo top origin_url upstream_url state login branch dirty protocol
+  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+  repo="$(cd "$script_dir/.." && pwd -P)"
+  SGTL_HOME="${SGTL_HOME:-${HOME:?HOME is not set}/sgtl}"
+  UPSTREAM_SLUG="${SGTL_UPSTREAM_SLUG:-$DEFAULT_UPSTREAM_SLUG}"
+  cd "$repo"
+  have git || die "git is not installed."
+  top="$(git rev-parse --show-toplevel 2>/dev/null)" || die "$repo is not a git clone. Clone the tutorial with git first."
+  [[ "$(cd "$top" && pwd -P)" == "$repo" ]] || die "Run this from your clone of the tutorial ($top)."
+
+  if [[ $APPLY -eq 1 ]]; then
+    say "make-private-copy (--apply: changes will be made)"
+  else
+    say "make-private-copy: DRY RUN (nothing changes; add --apply to do it)"
+  fi
+
+  # Where do the remotes point? fresh clone / interrupted run / already done.
+  origin_url="$(git remote get-url origin 2>/dev/null || true)"
+  upstream_url="$(git remote get-url upstream 2>/dev/null || true)"
+  if [[ -n "$upstream_url" ]] && is_upstream_url "$upstream_url"; then
+    if [[ -n "$origin_url" ]] && ! is_upstream_url "$origin_url"; then
+      state="done"
+    elif [[ -z "$origin_url" ]]; then
+      state="resume"
+    else
+      die "Both origin and upstream point to the public tutorial. Remove one: git remote remove origin"
+    fi
+  elif [[ -n "$origin_url" ]] && is_upstream_url "$origin_url"; then
+    [[ -z "$upstream_url" ]] || die "A remote named upstream already exists ($upstream_url). Remove it first: git remote remove upstream"
+    state="fresh"
+  else
+    die "origin does not point to github.com/$UPSTREAM_SLUG (it is '${origin_url:-not set}'). Clone the tutorial from there first."
+  fi
+
+  if [[ "$state" == "done" ]]; then
+    say "This is already your private copy:"
+    say "  origin   = $origin_url"
+    say "  upstream = $upstream_url (fetch only)"
+    finish_local_setup
+    if ! git rev-parse -q --verify refs/remotes/origin/main >/dev/null; then
+      say "Your private repository has no main branch yet: pushing it."
+      run git push -u origin main
+    fi
+    exit 0
+  fi
+
+  # Checks (they only look; they run in the dry run too).
+  branch="$(git symbolic-ref --short -q HEAD || true)"
+  [[ "$branch" == main ]] || die "You are on '${branch:-a detached commit}', not on main. Switch with: git switch main"
+  dirty="$(git status --porcelain --untracked-files=no)"
+  if [[ -n "$dirty" ]]; then
+    printf '%s\n' "$dirty" | head -n 20 >&2
+    die "Some tutorial files were changed (listed above). Undo the changes (git restore <file>), or copy them into work/ first."
+  fi
+  find_gh
+  "$GH" auth status --hostname github.com >/dev/null 2>&1 ||
+    die "You are not logged in to GitHub with gh. Run:  gh auth login   (choose GitHub.com, HTTPS, and \"Login with a web browser\"), then run this again."
+  login="$("$GH" api user --jq .login 2>/dev/null || true)"
+  [[ "$login" =~ ^[A-Za-z0-9-]+$ ]] || die "Could not read your GitHub login with 'gh api user'. Check your internet connection and gh auth status."
+  owner="${owner:-$login}"
+  name="${name:-sgtl-tutorial-$login}"
+  [[ "$owner" =~ ^[A-Za-z0-9-]+$ ]] || die "--owner '$owner' is not a valid GitHub account name."
+  [[ "$name" =~ ^[A-Za-z0-9._-]+$ ]] || die "--name '$name' is not a valid repository name (letters, digits, '.', '_', '-')."
+  if "$GH" repo view "$owner/$name" --json name >/dev/null 2>&1; then
+    die "github.com/$owner/$name already exists. If you made it in an earlier, interrupted run: git remote add origin https://github.com/$owner/$name.git, then run this again. Otherwise choose another name with --name."
+  fi
+  say "GitHub login: $login"
+  say "New private repository: github.com/$owner/$name"
+  if [[ -z "$(git config user.name || true)" || -z "$(git config user.email || true)" ]]; then
+    say "Note: git does not know your name and e-mail yet; set them before your first commit:"
+    say "  git config --global user.name \"Your Name\""
+    say "  git config --global user.email \"<the e-mail of your GitHub account, or its private noreply address>\""
+  fi
+
+  # Actions.
+  if [[ "$state" == fresh ]]; then
+    run git remote rename origin upstream
+  else
+    say "Continuing an earlier run: upstream exists, origin does not."
+  fi
+  run git remote set-url --push upstream DISABLED
+  protocol="$("$GH" config get git_protocol -h github.com 2>/dev/null || true)"
+  if [[ "$protocol" != ssh ]]; then
+    run "$GH" auth setup-git --hostname github.com
+  fi
+  run "$GH" repo create "$owner/$name" --private --source=. --remote=origin --push \
+    --description "Private copy of the SGTL earthquake source tutorial" ||
+    die "Creating or pushing the repository failed (see above). Fix the cause and run this again; it continues where it stopped."
+  if [[ "${owner,,}" != "${MENTOR_LOGIN,,}" ]]; then
+    run "$GH" api -X PUT "repos/$owner/$name/collaborators/$MENTOR_LOGIN" -f permission=push --silent ||
+      warn "Inviting the mentor failed. Invite $MENTOR_LOGIN by hand: GitHub > your repository > Settings > Collaborators."
+  fi
+  finish_local_setup
+
+  say ""
+  if [[ $APPLY -eq 1 ]]; then
+    say "Done. Your private repository: https://github.com/$owner/$name"
+    say "The mentor ($MENTOR_LOGIN) gets an invitation e-mail and must accept it before seeing your work."
+    say "Next: bin/sgtl new M00, work in work/, then git add work/ && git commit -m \"...\" && git push"
+  else
+    say "Dry run finished. Nothing was changed. To do it:  bin/make-private-copy --apply"
+  fi
+}
+
+main "$@"

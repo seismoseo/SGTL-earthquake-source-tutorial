@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+# SGTL earthquake source tutorial: pre-commit check for your private copy.
+#
+# It stops a commit (nothing is committed) when the commit would
+#   1. add, change or delete files outside work/ and project/ (those files belong to the tutorial,
+#      "upstream"; changing them makes future updates fail), or
+#   2. add a file larger than 2 MB, or
+#   3. add a seismic waveform file (.sac, .mseed, .miniseed, .ms, .msd, .seed; any upper/lower case).
+#
+# Turned on by bin/make-private-copy (git config core.hooksPath .githooks).
+# If the mentor asks you to change a tutorial file:  SGTL_ALLOW_UPSTREAM_EDIT=1 git commit ...
+# (rules 2 and 3 still apply). Merges from upstream (bin/update-from-upstream) are allowed.
+#
+# Copyright (c) 2026 Minseong Seo (SGTL, Seoul National University). MIT License.
+
+set -euo pipefail
+
+readonly MAX_BYTES=$((2 * 1024 * 1024))
+
+is_waveform_file() {
+  case "$1" in
+    *.[sS][aA][cC] | *.[mM][sS][eE][eE][dD] | *.[mM][iI][nN][iI][sS][eE][eE][dD] | \
+    *.[mM][sS] | *.[mM][sS][dD] | *.[sS][eE][eE][dD]) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+human_size() {
+  awk -v b="$1" 'BEGIN { printf "%.1f MB", b / 1048576 }'
+}
+
+main() {
+  local allow_upstream=0 in_merge=0
+  if [[ "${SGTL_ALLOW_UPSTREAM_EDIT:-0}" == "1" ]]; then allow_upstream=1; fi
+  if git rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1; then in_merge=1; fi
+
+  local outside=() big=() waves=()
+  local status path size
+  # --no-renames: a rename shows as a delete plus an add, so both old and new paths are checked.
+  while IFS= read -r -d '' status && IFS= read -r -d '' path; do
+    case "$path" in
+      work/* | project/*) ;;
+      *)
+        if [[ $allow_upstream -eq 0 && $in_merge -eq 0 ]]; then
+          outside+=("$status  $path")
+        fi
+        ;;
+    esac
+    [[ "$status" == D* ]] && continue
+    if is_waveform_file "$path"; then
+      waves+=("$path")
+    fi
+    size="$(git cat-file -s ":$path" 2>/dev/null || echo 0)"
+    if [[ "$size" =~ ^[0-9]+$ ]] && ((size > MAX_BYTES)); then
+      big+=("$path ($(human_size "$size"))")
+    fi
+  done < <(git diff --cached --name-status --no-renames -z)
+
+  if [[ ${#outside[@]} -eq 0 && ${#big[@]} -eq 0 && ${#waves[@]} -eq 0 ]]; then
+    return 0
+  fi
+
+  local n=0 item
+  {
+    echo
+    echo "SGTL check: this commit was stopped. Nothing was committed."
+    if [[ ${#outside[@]} -gt 0 ]]; then
+      n=$((n + 1))
+      echo
+      echo "$n) These paths are outside work/ and project/ (A = added, M = changed, D = deleted):"
+      for item in "${outside[@]}"; do echo "     $item"; done
+      echo "   Files outside work/ and project/ belong to the tutorial. Changing them in your copy"
+      echo "   makes future tutorial updates fail."
+      echo "   What to do:"
+      echo "   - To work on a notebook, make your own copy first:   bin/sgtl new M01   (use your module id)"
+      echo "   - To take a file out of this commit:                 git restore --staged <path>"
+      echo "     and to undo your edits to it:                      git restore <path>"
+      echo "   - Only if the mentor asked you to change it:          SGTL_ALLOW_UPSTREAM_EDIT=1 git commit ..."
+    fi
+    if [[ ${#big[@]} -gt 0 ]]; then
+      n=$((n + 1))
+      echo
+      echo "$n) These files are larger than 2 MB:"
+      for item in "${big[@]}"; do echo "     $item"; done
+      echo "   Large files do not belong in git. Keep data and results under ~/sgtl/ (outside the repository)."
+      echo "   To take a file out of this commit:   git restore --staged <path>"
+    fi
+    if [[ ${#waves[@]} -gt 0 ]]; then
+      n=$((n + 1))
+      echo
+      echo "$n) These look like seismic waveform files (.sac, .mseed, .miniseed, .ms, .msd, .seed):"
+      for item in "${waves[@]}"; do echo "     $item"; done
+      echo "   Waveforms must never be committed: the data license does not allow sharing them."
+      echo "   Keep them under ~/sgtl/data/ (outside the repository)."
+      echo "   To take a file out of this commit:   git restore --staged <path>"
+    fi
+    echo
+  } >&2
+  return 1
+}
+
+main "$@"
