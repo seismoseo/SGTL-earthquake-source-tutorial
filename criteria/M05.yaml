@@ -1,0 +1,55 @@
+module: M05
+frozen: 2026-11-16
+tasks:
+  # 6 parameter sets (b 0.6-1.5; dm 0.1, 0.2, 0.05, 0.01), n = 200,000 each, against P(k) = (1 - q) q^k:
+  # |z| of the mean bin index <= 5 and chi-square p-value >= 1e-6 (a correct function fails about once in
+  # 100,000 checks); then the same seed must give the same values and another seed other values. The rng given
+  # to the function notes whole-number draws (geometric, integers, choice, ...): those fail as 'whole-bins'
+  M05-T1: {trials: 6, n: 200000, z_max: 5.0, chi2_p_min: 1.0e-6}
+  # 40 catalogs (30-2500 events at or above mc, most with events below mc, half with one-ulp float noise),
+  # oracle SeismoStats UtsuBValueEstimator; then 20 Shi-Bolt cases (20-120 events), oracle shi_bolt_confidence.
+  # sigma_rel_tol 0.002 also accepts the rounded 2.30 of Shi and Bolt (1982) for ln 10
+  M05-T2: {trials: 40, rel_tol: 1.0e-6, sigma_trials: 20, sigma_rel_tol: 0.002}
+  # 30 catalogs with gradual detection (and three with a tie for the largest bin), oracle estimate_mc_maxc
+  M05-T3: {trials: 30, abs_tol: 1.0e-6}
+  # 30 time-ordered catalogs with transient incompleteness, dmc default/1/2/3 bins, oracle
+  # BPositiveBValueEstimator
+  M05-T4: {trials: 30, rel_tol: 1.0e-6}
+  # 30 negative log-likelihood cases (6 with p = 1 exactly) against quadrature (rel_tol 1e-6 also accepts a
+  # student's own scipy quad); then 4 synthetic sequences (800-3000 events; one with p = 1; half with
+  # t_start > 0): the fit must be within nll_slack of the true parameters' likelihood or better, and
+  # |p - p_true| <= p_tol. p_tol is 1.6 x the largest |p - p_true| (0.094) in 2,400 Monte-Carlo fits with the
+  # reference solution (2026-11-15; 99.9 % quantile 0.071)
+  M05-T5: {trials: 30, rel_tol: 1.0e-6, abs_tol: 1.0e-6, fit_trials: 4, nll_slack: 0.05, p_tol: 0.15}
+  # One made-up sequence (known b, c, p; aftershocks complete above ML 1.0) with mc 1.5, dmc 0.2, window
+  # 0.01-365 days, then the gyeongju2016 sequence with the student's parameters (mc, dmc, t_start and t_end
+  # must be given to st.check: the check has no defaults). Consistency with SeismoStats on the student's own events: b within 1 %
+  # (Utsu or Tinti-Mulargia), sigma within 2 %, b-positive within 1 %, rate integral within 5 % of the
+  # number of fitted events (equal at the best fit; a unit error is off by orders of magnitude). Made-up
+  # sequence: |p - p_true| <= p_tol (largest |p - p_true| was 0.071 in 2,400 Monte-Carlo fits; 99.9 %
+  # quantile 0.053). Real data: only broad ranges, never printed. GJ_MC: a whole number of bins with at least
+  # mc_min_events aftershocks at or above it, where SeismoStats' Kolmogorov-Smirnov test of a Gutenberg-Richter law
+  # (ks_test_gr, ks_sims simulated catalogs, the student's own b) gives p >= ks_p_min (Clauset et al. 2009; Mizrahi
+  # et al. 2021); no accepted value or range is stored anywhere. Rate panel: the points
+  # of panel (b) must equal counts per bin of the fitted events / bin width (bins evenly spaced in log time,
+  # inferred from the plotted centers, geometric or arithmetic) within rate_slack_events per bin (event-on-an-edge
+  # rounding), cover at least rate_coverage of the fitted events, and a line must equal K/(t + c)^p within
+  # fit_rel_tol.
+  M05-T6:
+    p_tol: 0.12
+    count_rel_tol: 0.05
+    mc_min_events: 50
+    ks_p_min: 0.1
+    ks_sims: 2000
+    rate_slack_events: 1.0
+    rate_coverage: 0.9
+    fit_rel_tol: 1.0e-3
+    b_range: [0.5, 1.6]
+    p_range: [0.5, 2.0]
+  # One made-up catalog with planted clusters, then the shipped KMA catalog for 2018-2026 (UTC years):
+  # flags must agree with SeismoStats' Gardner-Knopoff windows on the student's events (99.5 %), and both
+  # b-values within 1 % of SeismoStats (Utsu or Tinti-Mulargia) at mc
+  M05-T7:
+    years: [2018, 2026]
+    flag_agreement: 0.995
+    defaults: {mc: 2.1}

@@ -63,8 +63,8 @@ folder are **dry runs** unless you add `--apply`, so you can look before you act
 
 - An account on the lab server (your mentor gives you one; you change the password on first login).
 - A GitHub account with two-factor authentication turned on (M00 shows you how to make your private copy).
-- Later (module M03): a personal STP account for waveform data, arranged by the lab. Waveforms never go into
-  this repository.
+- Later (module M03): a personal STP account for waveform data and the STP program, both from the lab.
+  Waveforms never go into this repository.
 
 ## Course map
 
@@ -75,10 +75,10 @@ About 35-40 hours per week. Times are estimates; the plan is adjusted after week
 | 1 | M00 Start here | The shared server, terminal, SSH tunnel, git and your private copy, installing the software |
 | 1 | M01 Python for earthquake catalogs | pandas tables, functions, arrays and distances on a real catalog |
 | 1 | M02 Figures and maps | Clear Matplotlib figures and PyGMT maps in the house style |
-| 1 | M04 Earthquake catalogs | Read the KMA catalog, KST to UTC, cleaning, selecting a sequence, magnitude-frequency plots, KMA vs ISC/ComCat |
-| 2 | M05 Statistical seismology | b-value and its uncertainty, completeness, Omori-Utsu aftershock decay, declustering; checked against SeismoStats |
-| 2 | M03 Getting waveforms | Fetching waveforms with your own STP account; instrument responses |
-| 2 | M10 Seismograms | Counts versus ground motion, removing the response, filters, rotation |
+| 1 | M04 Earthquake catalogs | Who makes catalogs and what they hold; the KMA list's precision and quirks; magnitude-frequency counts, sequences in UTC, pairing two catalogs, completeness by network epoch |
+| 2 | M05 Statistical seismology | b-value and its uncertainty, completeness, b-positive, Omori-Utsu aftershock decay, declustering; checked against SeismoStats |
+| 2 | M03 Getting seismic data | Network, station and channel codes; time windows in UTC; fetching waveforms with your own STP account (`bin/sgtl data`); response epochs, sensitivity and removing the response |
+| 2 | M10 Seismograms | SAC headers and time, filters and spectra, removing the response checked on two instruments, rotation, S-P distances and record sections, thread limits |
 | 3 | M20 Picking and triggers | Picking P and S by hand; writing an STA/LTA trigger |
 | 3 | M21 Deep-learning pickers | Running PhaseNet-type pickers and comparing them with your picks |
 | 3 | M22 Detection (stretch) | Finding small earthquakes in continuous data |
@@ -123,6 +123,6 @@ fairly: [docs/server_manners.md](docs/server_manners.md). Data rules: [docs/data
 ## How to cite
 
 Use [CITATION.cff](CITATION.cff); on GitHub, the "Cite this repository" button gives APA and BibTeX. For example:
-Seo, M. (2026). *SGTL earthquake source tutorial* (version 0.1.0). Seismology, Geophysics, Tectonophysics
+Seo, M. (2026). *SGTL earthquake source tutorial* (version 0.2.0). Seismology, Geophysics, Tectonophysics
 Laboratory, Seoul National University. <https://github.com/seismoseo/SGTL-earthquake-source-tutorial>.
 People who helped are listed in [AUTHORS.md](AUTHORS.md).

@@ -18,12 +18,12 @@ from __future__ import annotations
 import importlib
 from typing import Any
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from .checks import CheckContext, CheckResult, Outcome, check, hint, predict, progress, reroll  # noqa: E402
 from .session import Session, init, server_rules  # noqa: E402
 
-_LAZY = {"data", "plot", "synth", "glossary", "astguard", "checkers", "widgets", "cli"}
+_LAZY = {"data", "plot", "synth", "glossary", "astguard", "checkers", "widgets", "cli", "datafetch", "pq"}
 
 __all__ = [
     "__version__",

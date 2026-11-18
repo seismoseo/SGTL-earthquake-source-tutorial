@@ -2,21 +2,16 @@
  "modules": [
   "M00",
   "M01",
-  "M02"
+  "M02",
+  "M03",
+  "M04",
+  "M05",
+  "M10"
  ],
  "schema": "sgtl-checks/1",
  "tasks": {
   "M00-T1": {
-   "categories": {
-    "forbidden-import": "This task is about reading values off the terminal, so the rule is: do not use {rules} here. Type what the terminal printed.",
-    "home": "'home' is not your home folder on the server. Run echo $HOME in a terminal on the server and copy the whole path.",
-    "keys": "The dict needs exactly three keys, spelled 'user', 'home' and 'repo'.",
-    "not-output": "A value is a command or a shell shortcut (such as whoami, ~ or $HOME), not what the shell printed. Run the command and copy the line it prints.",
-    "repo": "'repo' is not the top folder of the copy this notebook belongs to. cd into that folder (the one with README.md, bin/ and modules/) and run pwd there.",
-    "subfolder": "'repo' is a folder inside your copy, not its top folder. The top folder holds README.md, bin/ and modules/: go up with cd .. and run pwd again.",
-    "type": "Return a dict, and make each of its three values a string (text in quotes).",
-    "user": "'user' is not the login name of the account that runs this notebook. Run whoami in a terminal on the server, not on your laptop."
-   },
+   "categories": "zb64:eNp9k8tu4zAMRX+FMAZwArjuPrsCE2A2xQBBf0C2mFiILWr0aBoUnW8fkko69aabPAjq6vDy6r05Uhyctegf3BIo5mYHzcvkEmSTzsDfZqCSIaKxzp/g1cwFE9DxCHlCyBgX583cQSItxDIjn9qBJfCUoSSEdymmD5gwYg8v14BwmUxeCUCIzme0fdNBM9GCwtHKj1YgROpKJYJU4EizxQjkVSJhfMXYw6F4wHEi+PHr9/MenAfzX37VC8ZbGClctXaZiJmDyZNefsZrqiYgWDdm8Ig2Ab6ZMc9yIiKCNPHMAecZLbQ8ZWw7uPGKehsxUKuCzP7AFoai3j5VC9VZZlgW6SZGgjSxGn/yEkZ2fJPKOIFJwmcW18FfadPZtp0a8mliPXl3UI2Q8l19Ne3sPF+ea3dSQEFVu5X5brduh8Kn2cebpurUHhyIzjDgTP7EgaEeRsu+Z4kCo91ObuQc8a0Xlyc47J9+Pu/7xXYwOP+ocAtZScjjVv9Fxg8XK9dxXgQwlaFqrSnN/Qbnk7NYAyKA1R6X05cBOHjrgXjrvNbvcHZwIiihcvNkfb/iMyfjvPJljrSgHTCXKLGT3HRVy5wR0PAm2UAl0vzcnhEvPUd5VpuMb1ki+6ewrWmrspIqnVjj9XUvM5241xt+C7e9mHGk4nM1ngnTekk1FDVJ372M6hyX1MvZBDasbz7+AQ24aos=",
    "forbidden": [
     "getpass",
     "pwd",
@@ -27,8 +22,8 @@
    ],
    "hints": {
     "1": "Glossary: shell, terminal, server. Every program has a current folder (its working directory): pwd prints it and cd changes it. Read The Unix Shell (swc_shell), episode 2, 'Navigating Files and Directories'.",
-    "2": "Open a terminal on the server (JupyterLab: File, New, Terminal). Run whoami, then echo $HOME. Then make sure you are in the top folder of your copy of the tutorial (ls shows README.md, bin and modules there) and run pwd. Copy each printed line into the dict as text in quotes.",
-    "3": "me = {'user': <the line whoami printed>, 'home': <the line echo $HOME printed>, 'repo': <the line pwd printed in the top folder>}"
+    "2": "zb64:eNotjs1uAjEMhF9lDhxAWu0D9FZRUFW1RUK8gNkYJWoSp/lhu2+Ps+Vk2eOZb06JIwiVc3CRPCSiWkbhfOeM7UdLi2qfdH3B0Xke8M3zgMvzfTfi3CJmKxTc0J0RPFnB5v30dRhx6YdAPxrYMmORBtLp/iFVEm7ijYLk1sWMSdLSl1VuVbLTTltfUKzMBefD65vmBjPgqiEUDYKY5rl0R+bdespaKc1mxL6nMU0WKbtY2cC72PFVVoJxUwWpl/9qL/XbpHIZH2bmX6E=",
+    "3": "zb64:eNrLTVWwVahWLy1OLVK3UrApyUhVyMnMS1Uoz8hPzM1UKCjKzCtJTbHTUVDPyM9NRVGSmpyRr6Di4e/riqysKLUgH0VZQXkKTF4hM08BJF6SX6CQlp+TklpkVwsAzVorZA=="
    },
    "kind": "oracle",
    "module": "M00",
@@ -37,23 +32,7 @@
    "title": "Who am I here?"
   },
   "M00-T2": {
-   "categories": {
-    "anywhere": "Your count of 2016 events is too high.",
-    "columns": "Your columns list does not match the header line of the file.",
-    "event-id": "Your count of 2016 events is off.",
-    "forbidden-import": "This task is a shell exercise, so the rule is: do not use {rules} inside the function.",
-    "header": "Your n_lines is one less than the number of lines in the file.",
-    "keys": "Your dict does not have exactly the six keys of the Contract (n_lines, columns, n_events_2016, max_ml, n_ml_ge_5, size_kb).",
-    "kst": "Your count of 2016 events is off by the events near the start or the end of the year.",
-    "lines": "Your n_lines does not match the number of lines in the file.",
-    "max-ml": "Your max_ml is not the largest value in the ml column.",
-    "ml-count": "Your count of events with ml 5.0 or more is off.",
-    "size": "Your size_kb does not match the size of the file (tolerance 1 kB).",
-    "size-units": "Your size_kb looks like the size of the file in another unit (bytes, megabytes, or kilobytes of 1000 bytes).",
-    "threshold": "Your count of events with ml 5.0 or more is too low.",
-    "type": "Your answer is not a dict, or one of its values does not have the type that the Contract table gives.",
-    "year-count": "Your count of 2016 events is off."
-   },
+   "categories": "zb64:eNqVVEFu2zAQ/MpCJweQArlAesix/UIvPQmUtBIJUdyApGyrQf7eXVJ2nNpF2ptI7szODJd6LZRbjxo9Fs9Q/KTFQ0eLi0ADfKn3XwEP6GIAEyASgTajfixKKDqyy+zCFSitwZoQoScM4CjCrGKnIWoEjapHz8cOhVq2BmMxcaUWlek/VUDDkAAD+db0PbrKzC/kowB/aJGowiSFCoJGawFP6DsTsIRAqadfLHLBM0tMApeA8Cqb4Q2MC6bHLG1xXTTkUrcs/SLONWIi62EzDOW+WrkEdMvcsk2WvhW5j1YnXN8z6013lZVWB2TBqot2TaBgTiD157y+k4uej2G3SSjPqZcsKqfUSGIl535qZivbs21GbJ44APMLm6l9yDJC/Jewoc1Ktk2HymdlUXmG5AW6/qxw5YLEn+TdJHZnLD7Li41Us70wZV+iTmik0io/Io/cQdkFz3AuyclkDlslj7eON19HE7Vgnh5rMTWTx+tpk+Qu2C3Ge17k6Hq2YRfJoleuQ9jD9O3hwlYtzsRww2mJJnlBE97nY3eKW/JjBSGAXbtGmYIZR7V9svzJWEorwe7ruoa0yt2j9hg02f5/w5DHb+mYSdaX90CUC0cWtF2JSkOddFB+6Ww0X074Y9TFljDJ44kfBzyqlu2O5oAhNZS5+tsd3vtFvP0GQdaivA==",
    "forbidden": [
     "pandas",
     "numpy",
@@ -65,8 +44,8 @@
    ],
    "hints": {
     "1": "Glossary: shell, earthquake catalog, local magnitude, UTC. A pipe (|) sends what one command prints into the next command. Read The Unix Shell (swc_shell), episode 4, 'Pipes and Filters'. Tools: wc, head, cut, grep, sort, tail, ls -l, du.",
-    "2": "Work in the top folder of your copy. Lines: count every line of the file, the header line too. Columns: copy every name of the first line, in the order of the file, without extra spaces. 2016: match the date column only. Cut out the origin_utc column first and count the values that start with 2016, because the text 2016 also appears in other fields; count rows by their origin time in UTC, not ids (an event id is a label, not a time) and not Korean time. Magnitudes: cut out the ml column, sort it as numbers (sort -n) and look at the end of the list; the header word is sorted too, so check what you got. 'ML 5.0 or more' means at least 5.0, so events of exactly 5.0 count. Size: ls -l gives bytes; divide by 1024 (kilobytes of 1024 bytes, not 1000).",
-    "3": "wc -l <file>  |  head -n 1 <file>  |  cut -d, -f<column number> <file> | grep -c '^<text at the start>'  |  cut -d, -f<column number> <file> | sort -n | tail -n <how many>  |  ls -l <file>, then <bytes> / 1024"
+    "2": "zb64:eNpNUstu20AM/JW5JQEcQQ7aHpyjj01ObdFjQUu0vfBqKexSdtSvL7lSUJ+0fMxwONRvyReEBD0zVEYcJfacIUfMMmV0Ms4N3kLisrNgSgq+cp4RLeVdjjuGyJv6OjM5uhZVpMFe4jSkih3nFZpouIPmorV/86lC8irgP/Ut6FkmG/2hmVBG6rg0eGm333YYSLtz7e1J2eb4QEiKpntvGMcttOEU0p9Ju8+eZTalfl3Mu64UJy72JEVRylpn11EbHLijqfDilWmpaVAsAhpHplx8B7FyNnKOfXldqbPcCg6zI0NepUCD+WDfXz/3GyRRhL7gkZLblDxCKCBEOnBcGqhinqpmj79LZlqIGrzTKQWd+nqpu8WHuC68QRFbKBhPQZqGA5vgx5p7TgtpFLmAFhxbvF4hhqKv9we+2ZFcnYO591M7Obozdxfc3Dz7e3ASbfDw/oavTWtLYzC5DxhMcvEhkcn8t1rF1qWLT+QP6jTOFVXta/Aj/OUdYsFzxClc2c1UNnv7cA09u7Xb9uULHi8hSi05UU3VaLFv27btU/MPAOwCHQ==",
+    "3": "zb64:eNqNjssKgzAURH9ldm4MraXLkE8pxHhthDxKcoMK+fgapLTL7oZhmHNWA+Eg58WRAipgSU8QAcNvaQpDTD3ELE10xQeE4kdK6jOqeCZ6QRh0D8m0MTSDLSGzTqy6f19yTNzoFawX15K0cYXXYT9NXP769o1wLMadKStcMFxv9zeOH0DO"
    },
    "kind": "oracle",
    "module": "M00",
@@ -75,20 +54,12 @@
    "title": "Shell scavenger hunt"
   },
   "M00-T3": {
-   "categories": {
-    "cpus": "Your cpus_allowed does not match the number of CPU cores this kernel may run on.",
-    "keys": "The dict needs exactly these keys: blas_threads, cpus_allowed, mem_cap_gb.",
-    "mem-cap": "mem_cap_gb does not match the soft memory cap of this kernel (the rlimit_data_gb entry; None means no cap). The memory that is free on the server is a different number.",
-    "thread-cap": "Your cpus_allowed has the same value as the thread cap that CORES sets in the parameters cell. In this kernel, the number of CPU cores it may run on is a different number.",
-    "threads": "blas_threads does not match this kernel. In threadpools, find the entry whose user_api is 'blas' and read its num_threads.",
-    "type": "blas_threads and cpus_allowed must be whole numbers without quotes; mem_cap_gb is a number, or None when there is no cap.",
-    "units": "mem_cap_gb looks like bytes, megabytes or gigabytes of 1000**3 bytes. The rlimit_data_gb entry is in GB of 1024**3 bytes."
-   },
+   "categories": "zb64:eNqFUktv1EAM/itWLoUqrJbHqb1RIcQFEI8Dp8hJnM1oJzNhxtMlQvx37JndNu0WcYsz/l62f1fdnGJ1BdUPnwJo0aC1/kA99J4iOM8wIXcj8Ejg0tRSAD/Azefv0PkgHTyaCHsKjqx0LhCSA+82VQ3VnpbM/U2gvekYHFEfgX5hx3ZRxkigTVfQWowNj4Gwj/UDHzVMNDUdzs2uzaxSvpBSie9fnnIb/cAK9mEB6VLba7PPtCdYMxluemRUFnIclmv46B0JEp1SKvb5BjTEkYxHZBCiIRBJ1iJG4VZGI39Rsg4DBeE6DizbLuFOzs/HPWIsRDgR3KJNBMc/BZkjZOWbT1/efRVBjmCK+IxBUEwhQkfWbuCDW0et/7k8w6ud/dd8XuZ6U+dTv9M8etC22XsrSx2M67ORPGQ4jF62n2RuDc5GtS+U+gJQ2nJgIwHFw0msGFlmOnOhiAeznFJkaEk17Cl4hIPh0SeGn8kzxevVXZXkpa8GH8oBHEbK4w2k7+UQsonkxNqj+7Pe7yNYsydoF6HXs91h/lTCnbkrBni53W4vL1+XxnJZT92hqsqC378tmFdv7jHVn7+LPEyT",
    "forbidden": [],
    "hints": {
     "1": "Glossary: thread, CPU core, memory. Run st.server_rules() in a code cell and read what it prints; docs/server_manners.md explains the rules.",
-    "2": "threadpools is a list with one entry per thread pool: find the entry whose user_api is 'blas' and read its num_threads. cpus_allowed and rlimit_data_gb are entries at the top level. cpus_allowed is decided by the operating system, not by you: CORES in the parameters cell sets a thread cap, which is a different setting. rlimit_data_gb is already in GB, and None means no cap. Type the numbers without quotes.",
-    "3": "my_reading = {'blas_threads': <num_threads of the blas pool>, 'cpus_allowed': <a whole number>, 'mem_cap_gb': <a number of GB, or None>}"
+    "2": "zb64:eNpdkMFOxDAMRH/Ft71U/YA9ghA3kIB75TberaU0DrFD1b8nTuGytyh+nhmPrYUwZJGowAoIkdVgZ1tBEgElKwdkKmAdBCevcOMU2s//fF9FCapSmTCz61zmiHoBbFhfY1NIdZtOFR1hyVUnjFF2CicWeWObAhpO9xmwnOJMLZR1L5MMkX4oPmw3u0ALh/acj05KC4zG6Q56qNE2QBLz4SH1Cs/vHy+fwKmjGQtuZFQUFooRlMxb+Lt2wTy063hZz3IC325UWi7n3GB8zO1Y9N3DHV6fhn7cm3e5EabWgrjqCF9Hpp6g1TK7vXcu1eC7ipGOv/X3k48=",
+    "3": "zb64:eNo1jDEOwjAQBL+ynZu8AEEKGjq+cDonR4x09ll2oggh/g6niHJ3Zje/qAnPz7LggneIyp3W5FUPJ5zLlv8R9sCaBK6gmuk4IEx168SqtsvsPmNPpoLfLkpzI0umiSst8eAH8bPbdYA13K3I+PkC27su1Q=="
    },
    "kind": "oracle",
    "module": "M00",
@@ -97,23 +68,12 @@
    "title": "Reading the server rules"
   },
   "M00-T4": {
-   "categories": {
-    "hooks": "The tutorial's pre-commit check is not turned on (git config core.hooksPath should say .githooks). bin/make-private-copy --apply turns it on.",
-    "keys": "The dict needs exactly two keys: 'origin' and 'upstream'.",
-    "mismatch": "Your dict does not match what git remote -v prints. Copy the two addresses from the lines that end in (fetch).",
-    "no-origin": "Your copy has no remote called origin. Run bin/make-private-copy --apply again: it continues where it stopped.",
-    "no-upstream": "Your copy has no remote called upstream yet. Run bin/make-private-copy (a dry run), read what it will do, then run it again with --apply.",
-    "not-a-repo": "git does not see a repository in the top folder of this copy. Open this notebook from the copy you cloned (bin/sgtl new M00 puts it in work/).",
-    "origin-is-public": "origin still points to the public tutorial. origin must be your own private repository: run bin/make-private-copy --apply.",
-    "type": "Return a dict whose two values are addresses written as strings.",
-    "upstream-push": "Pushing to upstream is still switched on. bin/make-private-copy --apply switches it off.",
-    "upstream-url": "upstream does not point to the public tutorial, github.com/seismoseo/SGTL-earthquake-source-tutorial."
-   },
+   "categories": "zb64:eNqNVLGO2zAM/RXCS3JA7NyctUOXFj1cb+mo2LQtRBZViYprFP33knLia4fedTIs0XyP7z36ZzUSXVJ1guplRODMFK1xuwQhYt3SNFmGdsT2AjaBJ5aS6LED8rAf9I58bwd5RGxKqyfDI6SRsusgmQUaqSoXDw2crT9O5oJ1iPZqWAHCAnVtQnBL6ZxAepJvqgNUF1w2Yp1tGTxilwB/mJa1fCbQkhPshPNg/Q6M72CXQ+KIZtqVJpNNk+F21EbfKMe1U0e4TlPuYB4Ng04TcSJGqK8yvvWcGvigDFmlETjTdRFTkm/7SFM5dtbLK2sDFHQrsvQoPR8Kuqd65bbBl4lHo+h3tNY4p4qWwgaes39HKDMY60+wqs/WZ2EwjxhRjxJTCNjd4e9q/AeBeyksyG/R2Bvo4gIx+4eDtDDdqp9gz9Y50fagyngt0MPCVq4kFrcBbty4NnXEQEpNxd9MSYhgQK+SlTwuqmqxgAL05DqMQL2cSCKVUANfAvr1XT7Hs6Tt1aBCeaEMrSMN7l6HSgM7idMMnx8fIWQusVOWFC/H1brVjtqmOuSzs62yXM9EYp0zkCZESBWYtWhboOZmJ0w5MZxRGQjr2cNNyj/GOxWl3rS8MOIloLJ4Rt0UUahEeR4prem8GqdJMJKD16DO0TKLOmK4uGv9kEqvu9cyXCq78SRPudVxthzYdBs1iXvyE9Ctf2+Jb6XrHvf932A5OsXaADbHi5b/kPKgmznmcyN/o2NC2WcZmI5fP758qtFEHr9nZZNE4BbrzYDq12+z67Ya",
    "forbidden": [],
    "hints": {
     "1": "Glossary: repository, upstream, private copy. A remote is a short name for the address of another copy of the repository. Read docs/git_workflow.md, section 'Make your private copy', and Version Control with Git (swc_git), episode 'Remotes in GitHub'.",
-    "2": "In a terminal in the top folder of your copy: log in to GitHub with gh auth login (once), run bin/make-private-copy without options and read what it will do, then run it with --apply. Afterwards git remote -v lists origin and upstream; copy the two addresses from the lines that end in (fetch).",
-    "3": "remotes = {'origin': <the (fetch) address of origin>, 'upstream': <the (fetch) address of upstream>}"
+    "2": "zb64:eNolT7tuwzAM/JUbGyBO93TK1PYzGIu2icqiQFEx/PeVlIkg78G73wSCs+2SKEISfGO4ZiwaAxt0wanVMGs+74i6Do7iW/ynPnGIb1g3UG2zoQ380DTz5QqrCU9Jnzv98ZRNXuQ8dZsh0urQ7KKpgFKAMQUcGznEGyFGBL32MGkYjWN7MU2UczxveCwt9EEWCtYGGu/qjOmFKMUL1KRn6c41F2/u+9fo8O53KCgE41K4YDHdxzlKaqv3ENyEvcvCPm+X2z8rT2ih",
+    "3": "zb64:eNorSs3NL0ktVrBVqFbPL8pMz8xTt1KwKclIVdBISy1JztBUSExJKUotLlbIT1OAKLDTUVAvLSguKUpNzMWjGKbErhYAvzQipQ=="
    },
    "kind": "artifact",
    "module": "M00",
@@ -122,24 +82,12 @@
    "title": "Your private copy"
   },
   "M00-T5": {
-   "categories": {
-    "log-entry": "The log has no dated entry for an M00 task yet. Replace the example heading with a real one: '## YYYY-MM-DD · M00-T<n> · <tool>'.",
-    "log-not-in-commit": "That commit does not contain work/ai_log/M00.md. Add the file with git add, commit, and give the hash of that commit.",
-    "log-sections": "Some of the five fields of your entry are still empty (What I asked, What the AI answered, What I used, Did the help touch, What I learned).",
-    "log-unfilled": "Your entry is too short: write at least 40 words of your own across the five fields.",
-    "no-log": "work/ai_log/M00.md does not exist. bin/sgtl new M00 makes it from the template; you can also copy docs/templates/ai_log_template.md there.",
-    "no-tracking": "Your branch does not track a branch on origin yet. Push once with git push -u origin and the name of your branch.",
-    "not-a-repo": "git does not see a repository in the top folder of this copy. Open this notebook from the copy you cloned (bin/sgtl new M00 puts it in work/).",
-    "not-pushed": "Your branch has commits that are not on origin yet. Run git push.",
-    "type": "Return the commit hash as a string: 7 to 40 characters from 0-9 and a-f, as in the first column of git log --oneline.",
-    "uncommitted": "work/ai_log/M00.md has changes that are not committed yet. Commit them (git add, then git commit) and push.",
-    "unknown-commit": "That hash is not a commit in the history of your current branch. Copy it from git log --oneline."
-   },
+   "categories": "zb64:eNptVMFu2zAM/RUiPbQF4iSHAcOyokCxXnooNnQFhp4K1WZsITJpSHLTYNh37b4vGynZTpA2B8NiRPK9x0f/njmuC6To97M1zB4bBAlAYwIQQ2UiVpD+hQ17MAT3qxVEE7awx7iAB+ycKRGi5OGbaTuH0KCpLNWws7EBAx6NAyZcw/nZGTzJr7i/L25v4d9fLVY8XtG1vl9FZnd9vpjNIWEijoWlouS2tTFjMxHyESpGBahnisYS7Nhvl8Y+S+ZSqi7aagE3VZWAbaygSmhqSTVVNR/KzIVQJcHXTEBIN8AbeZ8aTWgCltEyBQXyk1vM97T2qz7QVUFDe+79oJfxCCFa5wDbLu7h4peWvQPRDgVBOmmFGwlR2KGfonfQBz3c2oy/QddB5L5spgsOjSesLid8PQlLh5XiezqAsEESGULDPq5h521EkAKSHiJ8WqlsR8B5R2BKzyGcckt9iAtppR3eq32YCL7ZIM54sbQMdXRAuEumac1WbsgANp7bVD+KME4c9lW7QynmMi6wKN/tpVwZluOFMPR6HgPaUCp4HHFFb8qtmG6i/+INlc0BVbogbhziTMDe1mKcZOMfvU6eyiObdBoq+vGaGkUxk8mz3x+aDBhiYQqPHSuE+tiiATGtQcfBRtahUKbPnSyVq9BnM8mslPoCvndI+Szp+MK8PWiWxElyOdmpCi7e6dz1Mck8LsXlhE8pHTlkkEJXPZs9ZOercRX3iUYPPU3CpJJx36EWe8DYexrQpe1MiyRljSyAl6ms4bOwVb+VjZFBRPQhU1oVX5K0ptjMNWOQZmN90BV0fUsqjvbVz1JRCGlnKc+9p9wvZlIfmDJxawzVeMJtSszcvmXc0rqFi+kjIcdMOd++TEgn+j1tSRbm9AOVuOfRCf9BkIGWjDQZYPRP2Xsvezr6SGDIcMcN+YDzn/+VT/B0",
    "forbidden": [],
    "hints": {
     "1": "Read docs/ai_policy.md, section 'The AI log', and the template docs/templates/ai_log_template.md. Glossary: commit, private copy.",
-    "2": "Open work/ai_log/M00.md in JupyterLab's text editor. Replace the example heading with today's date, the task id and the tool you used, fill the five fields in your own words and save. In a terminal: git add the file, git commit with a message that says what you did, git push. Then git log --oneline shows your commit; the first column is its short hash.",
-    "3": "git add <the log file>  ->  git commit -m '<what you did>'  ->  git push  ->  git log --oneline  ->  commit_hash = '<the first column of that line>'"
+    "2": "zb64:eNotkM1Ow0AMhF9lblzalDM8AQiEhLgjU7tZq/sTrZ2meXt2k17Wa2s888lfk2QspV5PpL+xjKfP5+chMTTjfZ5Wl/pBf08Gl7tDWL3UAd8yRToLPAjkTmmKgiDEmkcs6gFemNa2xeRy2GROdoUyKPPelxKxlhmzCR9w0Ri3+UVv/ZHI1hmaoqIsG2Kb9G2jmwx4y6AGVZNmii8Y1UHMD4vYQvvkXFJqZUMiJDGjsVOTN5fVsPRfh2DlfWOaLQz4Ce0ovW0HwfFYskTNAgtlsR1pd3595FXrWXFOGdqw3bq0OgI1t3+ayn1O",
+    "3": "zb64:eNpFjUsOgCAMRK8yO1bcQLmKIfJrAtQoxHh727hwMWk6nb7JNOBDwDJKROWMRDU6wIqy3HZuTYZtMMtd/MDDE4GCM3/mmFf5N4VYyz1W6vGzP8hWvORWAWlXovNSfJ2tgxOGwvXFmRdzES8M"
    },
    "kind": "artifact",
    "module": "M00",
@@ -148,14 +96,7 @@
    "title": "First commit and AI log"
   },
   "M01-T1": {
-   "categories": {
-    "precision": "Your distances are right for points far apart but wrong for points only meters apart. The arccos form (spherical law of cosines) loses precision there; the haversine form keeps it.",
-    "radians": "Your numbers look like sin and cos were given degrees. NumPy's sin and cos read their input as radians, so convert every angle first (np.radians).",
-    "radius": "Your distances are off by a constant factor close to 1. Use the sphere radius from the Contract, R = 6371.0 km, not another Earth radius.",
-    "shape": "Your function must take numpy arrays (or plain numbers) and give back one distance per pair, in an array of the same shape. Use numpy functions (np.sin, not math.sin) and no Python loop.",
-    "units": "Your distances look like meters, degrees or radians, not kilometers. The central angle is in radians; multiply it by the radius in kilometers.",
-    "wrong-values": "Some distances are outside the tolerance. Test by hand first: one degree along the equator is about 111.195 km, and the same point twice gives 0."
-   },
+   "categories": "zb64:eNp1U02P0zAQ/StPudBKIdoIAWJXnBBXtOLjwHGaTBqrjm1sZ6sK8d+ZsbthWcHFbeyZN+/D/tmEyINJxrvmFs13v0aMJmVyAydQZERznDMmHxG8cTlhoggKFDMOa8Y5end8euydvWDhzDHVsg5fZxaoYfBJCxfsUpg5moEsLJ3hJ8iRcZz2sD7J3I0TshTynf5gpgfBlLIKcmIOCSZ3TYsm0mjIpU2CW5eDErDen2DNiSGNIDfqJJwFE0fzwA4jHyNz6vBpXe4vL9JfdZFp1NEmwrggYkn26qQWyUuNE0oZLOtFuo5WuJmYMnYudNfK/UZwTf+x2E8TDgKggLovdtOQxdJB7UD26Dt8039iQ/GOUQExRb+U7Q/e5ShdLT7jPd68ett3NzgtLZwX3rJIFz5KHPO1tdBKMwXeWE2rG7K6vqyiIZPYJkYGYRYjXRJ2mrIlcejq775YpU7iQMNJsudNGoIMDGRii2JpBdGwiwpaZNHpVVmd80ggFQMlikp/oTzrVx3nPO4veRaakm4oMlZn8r/M/RN/vZDtY94QJVuSOuJkrK819boOrHbaa6gmqYZrw53YY7MJcs1N1txUzzUOqXqCpNTK+3j5QHblwvCLHD6Pf83JjDXd7C1HPRIanAr8rKLLtbqtBhcJIKsPT3v4x0p6W4QlHQQMfd93/bvXJX5t3gwvTxT5bIZ6/xNuuubXbw/daJ0=",
    "forbidden": [
     "pyproj",
     "geopy",
@@ -168,8 +109,8 @@
    ],
    "hints": {
     "1": "Glossary: great_circle_distance, vectorization. The Given formula turns two latitudes and two longitudes into a central angle (the angle between the two points seen from the Earth's center); distance = radius x angle. NumPy's trigonometric functions work in radians: see the angle demo in Part 2, and Harris et al. (2020) on NumPy arrays.",
-    "2": "In words: convert all four angles from degrees to radians with numpy; take half of the latitude difference and half of the longitude difference; build a from the Given formula; keep a inside [0, 1] (rounding can push it a hair above 1); turn a into the central angle with arcsin and sqrt; multiply by 6371.0. Use numpy functions only, so arrays work without a loop.",
-    "3": "<phi_1>, <phi_2>  :=  <the two latitudes, in radians>\n<half_dphi>       :=  (<phi_2> minus <phi_1>) / 2\n<half_dlambda>    :=  <(lon2 minus lon1), in radians> / 2\n<a>               :=  sin^2(<half_dphi>) + cos(<phi_1>) cos(<phi_2>) sin^2(<half_dlambda>)\ngive back         :   <R> times 2 arcsin(sqrt(<a kept inside [0, 1]>))"
+    "2": "zb64:eNpdkMFOw0AMRH9ljiBVVSskkMgHID6AE+KwzXoTK1s79e62yt/jJCc4Wh7PzPOn4KEWyzt6lTtZRcgZSZshyJCpIJleEWkw8qEqLEQOUvDgOkLadV461DARxpATNKGOhBwq1xYJkVMiI+nJ/eJfjcrwX9Th0jhHhD12lX3wncQb2bXl0GEimn3NUtgvv08HnH/wZNoksgzog2BuZQQ7icexc1z0Tjg/e81mst06xmrdk1QLeSfdgYL1hWXrWm5WO3hq5TkvuCx4fXk7H09HfBXayZGa9JXV36GSlwOKuoOFpaxfnTZLbWuTrDoffwEgjoFI",
+    "3": "zb64:eNpVjs0OgjAQhO8+xRzbSKL0aGofwqtRs9AqG6Egrfr6FgF/NtlkJ9lvZnRX8Sk3GfRwKANstoCOlUN8tqgpcrxbFzKwR0+WyQez0BXV55NNSALeM1Bi9mjY38PomBuJFdRM1NQUlsxMaFG3Xk3/6czlX85I0pyBn6zA/qjETw+JJco2iE/qR6gk/t6nEnJx4YdDQeX1a51W7wwiNy5AgfoyoSLc+ig04eq6mAoGtg77dYb8YKR8Ael5Xi0="
    },
    "kind": "oracle",
    "module": "M01",
@@ -178,19 +119,12 @@
    "title": "Great-circle distance"
   },
   "M01-T2": {
-   "categories": {
-    "dst": "Your times are one hour off on a few dates only. Did you use the 'Asia/Seoul' time zone? Use a fixed 9-hour offset instead (UTC = KST - 9 h); Part 5 comes back to this.",
-    "format": "Return text (a str) of exactly 14 digits, YYYYMMDDHHMMSS, with zero padding and no spaces, dashes or colons, for example '20160912113254'.",
-    "no-shift": "Your IDs are the KST time itself. The ID must be the UTC time: UTC = KST - 9 h.",
-    "rollover": "Your IDs are right when the date stays the same but wrong when going back 9 hours crosses midnight (or the start of a month or a year). Let a datetime object do the calendar arithmetic instead of changing the hour by hand.",
-    "sign": "Your times are 18 hours late: you added 9 hours. KST is ahead of UTC, so UTC = KST - 9 h.",
-    "wrong-values": "Some IDs are wrong in a way that is not a simple 9-hour or 1-hour shift. Try kst_to_utc_id(2016, 9, 12, 20, 32, 54) by hand: it should give '20160912113254'."
-   },
+   "categories": "zb64:eNptU8Fu2zAM/ZWHXJoATlanybBkGIZhObTYAgxLeuipYCzZ1mqLhSQncYf++yil6YCtvtiiyEe+x+ffA+XDYInBHXcOwbTag5wGW406hrgs5QBCqQ9QFOSebdNPsDIKPXfovEaoNS6+eEPvNpq75iIB4UlAPuNW7qXaHLXCYnzG9DrAWB80KQxvt1/xCd82W4yxQD36iB/kAuYoOM6zo+IBgaWL8ZNBhkHJrqU09U8dOmcR9DFgSPDBjQQd+khFaHrkMyhTmeAz3MmzXq9W19fr9WaT4WBCjSftGI+klLEVyCpYhn+kQkuBIl9Hsk6maNhKRNpG5PaxEbbTy/z95SKf5vnVdD67SHNZHvvalH/1vFmd1Iz6RHpJFhlHN+UEWwnerNB2PmB3yolCxJwl/pEkwTtuGt5r9x+8M1UdcKi1TShxSyIF9T4dPUnTXScJjoVmSqs4Mk7CLtKePQrH3gvh1iib8IZCN9WHuAxRldCyFdUkTug1udEE32WPlDombrz7pYsAxamyoEZbRZLuRO1WUorXpQteUZOt4hwxNxlj10NiKrH1prJvGDP/8DJvIz2XyYGyv+itU3ySRDOSXL+0ESkzeH5T0iTJeE9Np31sthHDvcp60stE8x+olykpRGDLkbI3yQdnRzvkp69kAFmu6/Hgw33g+y4U90YNo2EyLDLk0wzTywxX8p7PRmfSSzGGVMvvo1CZ/VsWe/4D7Wwv/Q==",
    "forbidden": [],
    "hints": {
     "1": "Glossary: kst, utc. KST is always UTC + 9 h, so UTC = KST - 9 h. A datetime.datetime object does calendar arithmetic for you (days, months, leap years) when you subtract a datetime.timedelta. See the tools demo in Part 3.",
-    "2": "In words: build one datetime from the six KST numbers; subtract a timedelta of nine hours (a fixed offset, never the 'Asia/Seoul' time zone); write the result as text with strftime, using four digits for the year and two digits for every other field, with no separators.",
-    "3": "<utc moment>  :=  <datetime made from the six numbers>  minus  <a timedelta of nine hours>\ngive back     :   <utc moment> written with the codes %Y %m %d %H %M %S, nothing between them"
+    "2": "zb64:eNpNjrFuwzAMRH/ltrSA0e7J1LHomPwAHVExAVkMSCp2+vWVnaUbgXv3jt8Vi1ryI8YmJUErI1FwyMzIpjNiYris+DlfUNs8svkJ3sYwugYIG5m4BEEzqvT+pM0cb4QsK3dlzs4xoPKDbdcdvlzo88zaymHv47fvvp+wmATviLG30vWO4DWwSEzwsLzRA5pLvSH3HSS5SXi/X+onk4FqQiz6P9u2n9COWH+LSxpezqpwvpNRqPnHHxFwYRw=",
+    "3": "zb64:eNpNzbEOwjAQA9Cdr/CSjS+oCjMLExNj2pjmBHeRmgvl80mZsOTtWR6bz9CiND8DwwkYU3S6KKExEY+1KDwTVT6wphPX2qWKtdpxxE4TXx5RHjAxIpfWzWGRNzHF+Yk9Q+/4f7at4k7DJp5/B3NJrAh3BEVICBeEK8LtCCuexRZM9I190bF+ATCZPJo="
    },
    "kind": "synthetic",
    "module": "M01",
@@ -199,21 +133,12 @@
    "title": "KST clock reading to a UTC event ID"
   },
   "M01-T3": {
-   "categories": {
-    "bom": "Your function stops on files that start with a byte order mark (BOM): an invisible character that some programs (Excel, for example) write at the very start of a UTF-8 file, so the first column name reads '\\ufeffYear' instead of 'Year'. See the BOM demo in Part 4.",
-    "columns": "Return a pandas DataFrame with exactly the columns origin_utc, latitude, longitude, depth_km, ml, in this order, each taken from the file's columns by name (some files list Magnitude before Depth).",
-    "depth-nan": "A blank depth means 'not known': it must become NaN (not 0 and not an empty text), and depth_km must be a float column.",
-    "dst": "Your times are one hour off for a few events only. Did you use the 'Asia/Seoul' time zone? Use a fixed 9-hour offset for KST instead (UTC = KST - 9 h); Part 5 comes back to this.",
-    "rows": "Your table does not have one row per data line of the file. Keep every event, also the ones with a blank depth.",
-    "types": "latitude, longitude, depth_km and ml must be float columns (numbers, not text).",
-    "tz": "Your origin_utc column is not right in UTC. It must be time-zone aware, in UTC, and times from KST files must move back 9 hours (UTC = KST - 9 h).",
-    "wrong-values": "Some values differ from the file. Compare the first few rows of your table with the file, value by value."
-   },
+   "categories": "zb64:eNp9VF1r20AQ/CuLX2SD7PahhSallDRpoISkpU4eAoGwklbW4fsQdyfbSul/z96eP1oKfTuv9mZ2Z+b8a1I5MzmHyaMbPLSDraNyFkJ0fQA+tEpTgNhh5Br6CFsVO0CoxkjgfEMeDPo1TL98v52dA1pQdqOCqjRB3aHHOnJLvu8MQe/dyqMJMP26q0mX0DoPtEPTa5rB1iuG5d7YEWzIj3tS1zLlw/31/IMMVDKWtLTKhwi104OxYJHxPWEToHh6Glpq20dCX/BEIXI5oRRSWcCSSAB4amjIOO6BH4np3WJSwiQjhqTLT4qDt0zfo20wwBVGvPaJSpTg0euoRwHb32JZ1ErZ5yHWJWiMKg4Nj6ydXe2PDfWxe16bEgwrwNSxUyGrWQJh3UHENbH43pn9npqKcCSoxrzsVCTNFmnFStziygoHVMTCElwlppnsJKRzizZtdQGVRrvOk4AhZNTCughr67a2OAcVwQyMWFGdOO7wDqbp+1u2uIF0YqvJ9JFXp12clVI/LHa4y7K12uHBojxHiMe8RWV4dORBnSXoUsm1rWSCb9IWaEM2piDqcQFXqoHRDTCEbF5xERS+WZIbdCFQ8MIwn+EhCLHaUQNn8wNqoCjAN8v7YyKmD/eX8ElKcziDbvYxp+A9pK1ZaKzXEJ34I8N7tw2n6TGlvHHcmATpcJP34CboOfUNR4V94Qon72DjAm6I+rQYp1vWY+n0Ps98Oxxf2MkgoY5jT8L930iJDUYfDfhTfn50djAV+VDKwGJcxn45LnUK7+Fdqbwe17uYwsqaLeDbMR+i/DwpD7hlK8t9T05EdliCnFTOWZWbxrFcIvCZOB/+dUNm23recr5BPeT1lymP+Sc0qm1Z6L/eyQIunelTpk7/EClKybpkxHiyTpQ+3CszaHpcclhMfr8Cbla9sA==",
    "forbidden": [],
    "hints": {
     "1": "Glossary: dataframe, kst, utc, focal_depth. pandas.read_csv reads the file and turns blank fields into NaN; pandas.to_datetime can build times from a table whose columns are the six time parts (year, month, day, hour, minute, second); Series.dt.tz_localize says which zone naive times are in. Look at the Part 4 demos (blank fields, BOM, time zones); McKinney (2010) introduces pandas.",
-    "2": "In words: read the file with pandas; pick the six time columns by name and turn them into times; if tz is 'KST', go back nine hours (a fixed offset); declare the times to be UTC; build a new table from the file's columns chosen by name, renamed to origin_utc, latitude, longitude, depth_km, ml, in that order; keep every row.",
-    "3": "<raw>          :=  <the file read by pandas>\n<clock times>  :=  <times built from the six named time columns>\n<utc times>    :=  (<clock times> minus <9 hours if tz is KST, else no shift>), declared as UTC\ngive back      :   <a new DataFrame: origin_utc from <utc times>, the other four from the named columns>"
+    "2": "zb64:eNo9j8FOxDAMRH9lbgWp4gPokRPiyHJeJY3bWk2cKnHoLl+PW8GebMvjN+N3wZ5LqK8o5AJ0IUwcCTvrgs1JcHXAxuN6rirfoJwIY44tSYW/Q5zNJoS2IocqgUXzqbNbnqA/4Iru4/PS9ZgzvDOcsBCW3ErFkzPPGwXkaaqkzwMCjdEVOj1PDgzoCV+XtwG+cQxwENqhzlvYqeT0iN7VR7pxyZXkP2RvLx41HLBceGa5Nh17RKesLZggZpn/2kCbLtc19Uixt4+M79TOApUBK9EG+qZyR8n7yy8q+XHO",
+    "3": "zb64:eNpVj81OAzEMhO99ijmCtC9AFfbSigtHyhl5s07XIj9VnFDg6ZvdVUuxZEuWxuNvTKZzj1ttnwFTJoYTz8hMI4YfnCiOpP3GWJ/sJ4oE1v4qnhcMVXyByylgvlb5RqTA46KFTb6GOBvUYm/nq8HDf9MgsSrME6ZUs0Icyi9E8fp26MBeGTFBJ3Glf+wwsvWU2xtSvB92m6N8MQZqdmua1oYQ+Yw9FXrJDWmLlOUo8WNGWYDvoLqFPrWR4RrAX6I1zTXIBWAfZK4="
    },
    "kind": "synthetic",
    "module": "M01",
@@ -222,13 +147,7 @@
    "title": "Load a colleague's catalog file"
   },
   "M01-T4": {
-   "categories": {
-    "changed-input": "Your function changed the table you passed in (for example it sorted it in place or added a column). Leave df as it is: work on a copy or build a new table.",
-    "inclusive": "Your result keeps the wrong events. Return exactly the events whose great-circle distance from (lat0, lon0) is at most r_km (distance <= r_km), and no others.",
-    "return-type": "Return a pandas DataFrame: the selected rows of df with all of df's columns (not a mask, a list or an index).",
-    "sorting": "You found the right events, but they are not sorted by origin_utc from earliest to latest.",
-    "units": "Your selection looks like distances in meters, degrees or radians were compared with r_km, which is in kilometers."
-   },
+   "categories": "zb64:eNpFkjGP2zAMhf8K4aUJ4AQ3B+1WdOrUrdOBkWhbsEwaEhVfcLj/Xko20s0mKb3H7+mzcxPySP4SeC3a3aD7KyXBUNhpEIajDToRKN4jwVMKrJizFQPDaZAE9IHLaq2gkCVp7WhtrhEdgQ2g91ZEcBLLwucr/CZ8EPgBMLfZfINN0gymWKfWZz11LyHWU0zbrn3teugCu1hyeNDLbKJcosJMtOZmdEvCI9CDWPMV/pCWxNWk0/hsA3sLtkkywZgI9eJCcraCD1mRzfWQZIFTRH3rIQq/nc0koMIiWSG9z9Z8zX7/0SrnHpA9sICYSMrNbmrqF32uzfBhBg0he1v+Jyr+SrjQrRnLFMlVgEm2DDJURFvQCTDG/fdbPihmOLGo3bRgnk0ZotlpsNnYe/o4N/0aSODxgAWDFN7TTGGc9CDRG2ut1SdgIqj3HkHeaxJhDPxe1O1QCFMMZFoqYHzsqwkVDppfmeyL1BcUReZs5ub/cHN9HAupMerBkwVgJXOe0Ae0xTYyE06W1cz4ff/Kt7fAgptqEHZ+DlH2O67d1z8YUPjm",
    "forbidden": [
     "pyproj",
     "geopy",
@@ -241,8 +160,8 @@
    ],
    "hints": {
     "1": "Glossary: great_circle_distance, epicenter, vectorization. Your haversine_km from task 1 takes whole arrays, so one call gives the distance to every event. A boolean array (one True or False per row) selects rows with df[mask] or df.loc[mask], and sort_values orders rows by a column (Part 4 demos).",
-    "2": "In words: compute the distance in kilometers from (lat0, lon0) to every event in one call; keep the rows where that distance is at most r_km; sort the kept rows by origin_utc, earliest first; give them back without changing df.",
-    "3": "<dist>      :=  <your distance function>(<lat0>, <lon0>, <all latitudes of df>, <all longitudes of df>)\n<near>      :=  <rows of df where <dist> is at most r_km>\ngive back   :   <near sorted by origin_utc, earliest first>"
+    "2": "zb64:eNpNjksKg0AQRK9SywQkuI4nyClkHFunmU9LT6t4+6jZZFNQUO9Rn4JddKxveMnLagQLhJGrueIJXBA5SSYjrZhUMh7JWdsgSWmfMAFtpMeVxa65FIJ3KXWIRMttU9kr9kB6yZ392SvOmqUatI+5QxW1G4m02I8bDojyzKVfzTcgp4npBCbWah1m3u7LGYPzETtbkNXggysnM2OcXl8wilGu",
+    "3": "zb64:eNpVjsEKwjAQRO9+xRwVevAsMb9S0mRbl6ZZSDaW/r1pFdGFZeENM7MmcFGLY253wGxSM3bokieMNXllSfZsotOr7WCipOO6GNEYaw1UICPC+MWSpj9+OZlELv/2ZFk/KtYHZYJ5f8IFTrFIUeR+Xuxp4idhcH7enW2PJBTJSgHDBsk8ceqr+g5NiUzNOnJuYS9b+Ue7"
    },
    "kind": "oracle",
    "module": "M01",
@@ -251,20 +170,14 @@
    "title": "Events within a radius, earliest first"
   },
   "M01-T5": {
-   "categories": {
-    "changed-input": "Your function changed the table you passed in (for example it added a column). Leave df as it is: work with separate Series or on a copy.",
-    "count": "Your count is not the number of rows whose two KST clock readings differ. Count exactly the rows where the fixed-offset reading and the 'Asia/Seoul' reading are not the same: not every event of a year, a season or a month.",
-    "format": "Return a dict with exactly two keys: 'n_wrong' (an int) and 'months' (a list of texts 'YYYY-MM', each month once, sorted; an empty list when no row differs).",
-    "months": "Your count is right but the month list is not. Take each differing row's month from its fixed-offset KST reading (UTC + 9 h), written 'YYYY-MM'. Near the start or the end of a month, the UTC time or the 'Asia/Seoul' time can fall in another month.",
-    "same-instant": "Your count is zero, but some rows differ. Two time stamps on different clocks can be the same moment, and == compares moments, so it finds no difference. Compare what the two clocks show (the clock readings) instead."
-   },
+   "categories": "zb64:eNptU7GO2zAM/RXCixPU585NcUNxY3sdmnS4qWBkKhZiSYYon+MW/fdSkpNr0GZwQFHkI997+lWpHt2JugfjxilWO6he/BRAT05F4x2saYg9QcTjQLD4CUZklkPjYKN9ALqgHSVlImDXSQJB+WGybtvCF8JXgk4Dcsob3sHswxlmE3tgGjFgJNhTMMQgvQQzVY9LWzVQKT+5t6lyJC3A+ZgncpM9ktRoCH5mmHvPMubs4fP+AGrw6gyBsDPuxNAZrSm08JSbyMgqDkvustZSoBxqcxE+vNZM8VoO6AoH9Sc2+H5Pfhrqt6RUXkditLTLEb1SWNJX4GRChIUwNPLPhCxryrII1rvY51WFSIt5128Up5Bo6IyKhajbuLLbmRYhsXY/5uDdqYYNOlEibvOMdW7I6RQGwxk50iUy1C/ye3h+rhsgVH1BFroVNcA+ROo+SgcgO8allAolTjZJ/Kzs8TaPWjD+lSWYUx/hOBUmCkDuVCRr4YBnKuilXyJPute8XtbBW3EJ32uQxLxSvfl+eIJ38AH6bQNzMDHKjLfVWvgqHBcdIoaYOE4BCTNZggzT5LPUKBpL1zt3yuaEEjo0DkPyOcr84pC/9EpCy6sRnP859CcF32Qq2NvVYlcHHkTEDCC1duRk+ZJKTsmu5Yx9pJujBNdKtskaPz4KjpWXQ7yec5IwPS9tXJe4vjVUlByfL4ueWJRJLlpxuBdxN+nw/rlsIa0mQVv9/gPP5m6Z",
    "forbidden": [
     "sgtl_tutorial"
    ],
    "hints": {
     "1": "Glossary: kst, utc, time_zone. One moment can be shown on different clocks. Here you turn the same UTC moments into KST in two ways, with a fixed 9-hour offset and with the 'Asia/Seoul' time zone, and look for the rows where the two clocks show different readings. Remember Part 3: an aware time stamp is a moment; a clock reading is what a clock shows at that moment.",
-    "2": "In words: convert origin_utc twice with .dt.tz_convert, once to a fixed zone of nine hours (datetime.timezone with a timedelta) and once to ZoneInfo('Asia/Seoul'); write both conversions as text with .dt.strftime and the format '%Y-%m-%d %H:%M:%S', which keeps only the clock reading; mark the rows where the two texts differ and count them; for the months, write the fixed-offset times of the marked rows with the format '%Y-%m', keep each month once and sort. Compare texts, not time stamps, and never take the month from the UTC time.",
-    "3": "Why the two clocks disagree: 'Asia/Seoul' follows the time-zone database, which stores every clock\nchange Korea ever made. Korea used daylight saving time (summer time) in 1987 and 1988, from the\nsecond Sunday of May to the second Sunday of October; in those weeks the zone gives UTC + 10 h,\none hour more than KST. Rows outside those weeks agree. The shape of the work (not code):\n<fixed text>   :=  <origin_utc on the +9 h clock, written as a clock reading>\n<zone text>    :=  <origin_utc on the 'Asia/Seoul' clock, written the same way>\n<marked>       :=  <rows where <fixed text> and <zone text> are not equal>\ngive back      :   {'n_wrong': <how many marked rows>, 'months': <sorted distinct 'YYYY-MM' of the fixed-clock times of <marked>>}"
+    "2": "zb64:eNplUDFuwzAM/MothhPAcfdkKrI0Q6e0Q7sEqkXFgi0xkOg6zesryUEzdJFA8nh3vIPHzEHHLTr23xQEHOzZ+tMkHWS2HWG20qPV0srtdAc1YJ8mwlAw9koaN/YENvA2/T1PIWKllZBYR21+CqBQKeRa0yhqDeX1H9dnghy84VX9HK16OhJPY73eYQ5WCF+cdhf9aNlHqAihqzz8RQkmUxdS6QmGg1OCuvrYVG5TaVQv2+p1Wx3rBnNvux4D0SUmA+NPWehG7gYEUtr68w5OhaH0A88xbVCgUsrMRTpCW2MoFMGOJy957HZZuAAde+ljc7+gWMppbdiYSFJyiDm1gk1iKchFKp/074LkOvsFqeS8UC/RZfXIQVrs2V1UNpnNNfC8aCCKcpfUyEhPKUGIGuhhESawK+X7276stL9FKb1M",
+    "3": "zb64:eNp1kkFv00AQhe/+Fe/mVk0CPdGmaSTEsYqQSBDiVE3siXcVewd213EN4r8zu24kAsKSZXtm/M2bt/PFjIiGEQdB1Up1DKhtoMYzL1G+D5bebFn6tsRB2laGMFXbjuc/xDFqirSnwDMMxlYGIYrnAD6xHydgURlyDeNJE5QT6KjmxWugD1wrZWxtYyICnaxrMh9Xoe86rU4f17AOt/d370CuTi93Mxy8dElNEbgSjW57pxzIARt9RMlK/8l9rKLs2T8kYDQSGAPzcRorT9TYkw7wefcBN7h9CzMrUtRIr7pVsRaSw9N2t8CnZIf0MdiaL1jZvgV2qb+hb5z6Jv4g/ogrJxGV1Hy9LFYH+6LjR36JawDLR2Al3jbWPfexgrj82809zOSluuxtjOxA2mWKQV2s1bR1scr6z7D/0S4O9S9qdozU+4FG5XXkj1xn2Jnn08yDYTXiQnw6lj/7kxakQfl7T+26SKZiT6p2Qun9s3TPgxfXlEusjAy6FW7E1BKpzXqGshMXTUgVQXxMm2JDtK6KKL/qNd9syrO5Wc18siStTEiJ8wjrX78BnIX7lA=="
    },
    "kind": "synthetic",
    "module": "M01",
@@ -273,19 +186,14 @@
    "title": "A one-hour mystery in old records"
   },
   "M02-T1": {
-   "categories": {
-    "algebra": "Your magnitudes do not lead back to the diameters they came from. Put one of your magnitudes into the house rule 0.025 * sqrt(5 * e^(2M)) and compare with the diameter you started from, then go through your algebra one step at a time. Common slips: a constant left out or rounded, the square root forgotten, or a sign flipped.",
-    "forbidden-import": "This task asks you to work out the inverse yourself, so the rule is: do not use {rules} inside your function.",
-    "log-base": "Your magnitudes are all off by the same factor, as if your logarithm had the wrong base. The house rule raises e (Euler's number) to a power, so only the natural logarithm, np.log, undoes it; np.log10 and np.log2 undo 10 and 2 to a power instead.",
-    "vectorize": "Your function does not handle every kind of input in the Contract: one number must give back one number, and a list, a NumPy array or a pandas Series must give back one magnitude per diameter, all at once. Turn the input into a NumPy array of floats first and use NumPy functions, not the math module, an if/else on a single number, or a loop that builds a list."
-   },
+   "categories": "zb64:eNptU01v1DAQ/StPe2GL0lBW4lKOFUdQJXrhguTEk8Ra2xNsp6ul6n9nxklZinpYaf315n3laWf8SF0yu1vsfvCSEMwYXVksZVhG5AJPxqIz/RGFUSaCdSZQoZR1dUYvKwyJQ4v7pYAjgQec/wNzcXs98ZIJafGEm/bm8AnvkX+lstc/9HN/+Hp1BRMteg6zSYSTK9OrsQqNXEwqZOvcRo8jRsVPvIzTOnxTVgnlQjNMgUFxgVrccQgckb2b863s9hwFMarYQSSojATBipZshReOi7JJLI4MnEYuhWKj1wyyGyMGwZrJtrsGO7nQOWspXrswcyrq7sPkxDCTj5BfriLEkROnY52nM1x8FFep0s/khwZ59ay65YTpFok6+KSb+VkeZWfXNxiW2BfHsZLwPF53JtNb0aoU470ENaA7rwJrjKYvnBqhCLdlKDAmSQYBk/RAb54SxxEK3eLhdaLJuCzwhP0XWaZ3GXEJHaUr1Wow84lSVcXRr2OjKUsy/jKmQZxbWTUQ91mbUz5vWx9vajPWxaGeY9s7/DNALSlS2urCI6ki9/tiw4tJqOhq5yQIQp7E/TOOTuCkwC7OEouLleUdx5LEm9vaplUTwpILRvdI69dxOWkqJQPvcpH/+LaE+7N4nsx5Lcws52Lxd0pOKLyB8zcqzDLopflNzczoN9ar90uKW29WqtWCV8MGqSWbkjG4JEOUlma13nkxIjfVBUUKRj62wFbCUxFSgg/k5YG4pTWPo79orEo88ywvhVO3OG/zprrdPf8BQtmG3A==",
    "forbidden": [
     "sgtl_tutorial"
    ],
    "hints": {
     "1": "Concept: an inverse undoes a calculation, the way division undoes multiplication. The natural logarithm np.log undoes e to a power: np.log(np.exp(y)) gives y back. Re-read the small logarithm example above the task, then solve the house rule for M on paper before you write code. Reading: the NumPy documentation of numpy.log, and Harris et al. (2020) for NumPy arrays.",
-    "2": "Plan in words: on paper, start from the house rule and undo the operations around M from the outside in: first the constant in front, then the square root, then the factor 5, then e to a power (with the natural logarithm), and last the factor 2 in front of M. Test your formula by hand: M = 0 must give a diameter of about 0.056 cm. In code, turn the input into a NumPy array of floats, write the formula once with NumPy functions, and give back a plain float when a single number came in.",
-    "3": "Shape with blanks (not runnable): sizes <- <size_cm as a NumPy float array> ; inner <- ( sizes <divided by the constant in front> ) <squared> <divided by 5> ; magnitudes <- <one half of> <the natural logarithm of> inner ; when <sizes holds a single number> hand back <magnitudes as a float>, otherwise hand back magnitudes."
+    "2": "zb64:eNpNkcFOxDAMRH9ljiBVqxXScliJD+CwiAM/4LbpNiKxi5NQ9e9x0gq4TsaeN857IIZnrKJjukIYCy1OO6RMmjGpROTZYZaSHLQEB+IRhUdpupiZshdOIBWTcfsbkpKTH53tv2LymnJTBzNn4lxjzcq5qzK3t/RVSC1H5L860ZBFcTkkhywgLLI6xcPq89xcTLkoBQS5k5oYH7vGGugIPtY8/QZDJtxO+HBm2KQoJtFYAqHfMNvo1cq84IxYzHD339Ydo6fosgXbLPXWEOfT+fKMIZ7wylZudIZZdCf3vJRatAG/lfi+2ZmUtjo9BaGcOqwG63bAI154cGi99pGp8NBuvBdqJD0Nn/UIgWqbugprPQ4heb7bN3GJvWEOhmsApx/AhasY",
+    "3": "zb64:eNpVj01OwzAQha/ylq0E7NjQyEdASBwATeJJbNUew9gmCqevnRZRdiPN9/7eHX0yVl8cxkByzjhIKtAqQmPg4wuy/+GM4RFDvz6mCMogvNb4tmEOiQpIlTaDE7wIa2cPvzLrv71li3FDcYwpSS4kpZGYNUkxODbjr0rK1vzDn7thpEV8qfbWIAnDUZiR5gZ3Q6FSlQJCWkjbiri/rj1OWB3LtXeGS8H24tnLEpqwxpHVNDtpcTSdMdyF7RP3ceYBqQXp6jPfwX/s0wUPE2/d"
    },
    "kind": "synthetic",
    "module": "M02",
@@ -294,18 +202,12 @@
    "title": "Magnitude from marker size"
   },
   "M02-T2": {
-   "categories": {
-    "counts": "Some yearly counts are wrong. Count every event once, in the UTC year of its origin_utc.",
-    "index-type": "Return a pandas Series whose index holds the years themselves as integers, once each and in increasing order (not strings, dates, or 0, 1, 2, ...).",
-    "missing-zero-years": "Years without any event are missing (or have no number). Every year from start_year to end_year must appear, with a count of 0 when nothing happened that year.",
-    "off-by-one": "Your years do not run exactly from start_year to end_year with both ends included. Check the first and the last year, and leave out events that fall outside the range.",
-    "time-zone": "Your counts match calendar years in Korea Standard Time. The Contract asks for UTC years, so take the year from origin_utc."
-   },
+   "categories": "zb64:eNp9UrFu20AM/RXCUwJIQtqxq9GpW+0OmYKzjrIOlkiDR9lRiv57SdouMnURKIKP7917/L3peSGtm2+w2fGMsGKSaYVbF5IgXIXp2MHWO4AXlNW/VjP12EAh0BHh134bWOABiiFZyrHQ26J9t2lgUyjje6vrGZ3pJ+oiBAnOiXKqsEMpWOE6ckWIURh5yjU2+9ao5orTxcYMUEjxiFKbEAGY+hFslYsp1AumWuhoGjIKPBErVBXr2HxOig4TeGngSwNfG+i67jlEzqU6rv1A4TZoXexr8F+LjryosTye797cEfBk+8Z0QSAGWuYDynMH38OrMGUQnk1DEn2Lf2VAyrd6XqotO5+tboLGfAn73coXMwXJ1uroPKPPEWazI2msDuE8DO1hbZnC3Vde5O5aZoeCLAT4nnq1ZP8nJdgPxuUtd7mflozZwh+xP0UaQxGXSzn+plRvMppoTegeuE1hUb3JHNI0ebOWjIGSREcM4VpmbD8+674f3pzUIu3TZELS4zWW7g+2cGGnfjeSYW/4Dva2c8ukYi+06zhVGCyPx0Va2pVB0wn/ndPNhM8n+ucvZUQQUA==",
    "forbidden": [],
    "hints": {
     "1": "Concept: a pandas Series is one column of values with labels, called its index; here the labels are years. Datetime columns have a .dt accessor that gives parts of each time (look up \"pandas dt accessor\"). Reading: McKinney (2010).",
-    "2": "Plan in words: take the UTC year of every event; count how many events each year has; then put those counts onto the complete list of years from start_year to end_year, filling the years that have no events with 0; years outside the range drop out on the way. A Series can be re-labelled onto a new list of labels with a fill value.",
-    "3": "Shape with blanks (not runnable): years <- <year part of the UTC origin times> ; tally <- <how often each year occurs> ; every_year <- <the integers start_year .. end_year, both included> ; hand back <tally put onto every_year, missing years -> 0, as integers>."
+    "2": "zb64:eNo9kEtuwzAMRK8yB2iDrutV0AsEaLsuGIuOhMqkIdE2fPvq43QjEKOZ4ZNukQRBsGty+R1GvwzzjO+vDxxMCTqBN05HPcUGjLqKweuOmeRUM5hG3/2e8lAbBMtqZdDMPZOhYtrKR52XyMaIIVvdUJMZU9IZ2SjZT6sqbhbX5hdMIcYgj5bvdvNUQGhjiD459mAeb8Pp0NVycP1BieTBcEmXKheWpu50XHDFJ6fAGWP5i3ux8mukO8fIrjMThPd/2HZ3rqLGhY3iypc/rdd20Q==",
+    "3": "zb64:eNpNj0EOwjAMBL+yR5DaijOgXngCcEZuapqowakSF9TfkwaEuK3s0ax9tjQxXk4tOk8yJmwkKOIsQp3n7R4LU0w41jiuCRNFRbhDLeN6OSFENziBugenFgcoeb8U3IZXBpUFTMYWD4IxcywcPzkutzJc4VXnRHngXJY0l3x2TQOWvuQKXchnOjF+7rlfJZakR0dmzILSO835ONHwp6/wcCk5Gb6f1C12FSj96trmDSHYWkI="
    },
    "kind": "synthetic",
    "module": "M02",
@@ -314,21 +216,12 @@
    "title": "Events per year, zeros included"
   },
   "M02-T3": {
-   "categories": {
-    "data": "Not every event appears at its magnitude. Draw one marker (or stem) per event with y equal to its ml.",
-    "date-axis": "The x axis does not hold dates. Pass the origin_utc column itself as x, not event numbers or decimal years.",
-    "frame": "Keep all four frame lines of the axes (the house style draws them); do not hide the top or right line.",
-    "labels": "Both axes need labels: the x label says what the axis shows and in which time zone, and the y label names the magnitude with a capital M (st.plot.ML_LABEL gives the house symbol).",
-    "not-a-figure": "Return the matplotlib Figure object (the fig of fig, ax = plt.subplots()), not the axes, a tuple or None.",
-    "sentence-case": "A label, title or legend entry is not in sentence case. Capitalize only the first word (and names); never write a whole label in capitals or Capitalize Every Word.",
-    "spelling": "A text in your figure uses British spelling (such as colour, centre, grey or metre). Figures in this lab use American English: color, center, gray, meter.",
-    "title": "Show the title you are given, and keep every title at most 40 characters long."
-   },
+   "categories": "zb64:eNpNVEFu2zAQ/MrAJxuwhR56StFD0qaXJkHRFugxoKW1xIYiVZKKrRT9e2dJpejFNqXdmdnZoX9vOpPN5gqbh5AhzxIX/fQZZprExASTYXPCaHpv89xJg4/RnBG88Fl8kohtiEhZxh0mnmr32eYBhPo1G4ccKoRrNnsooRzMxSZl/T4ILtATuiAJniqG4DpoVWrwxaSEzKIQbW/945xbtMHNo1dIcSeYhMu+9FVmP49HoW6K6qS1I/kXHaRwn6IZRXk/i0wwzuEU5ojyGM56Kginwmcu/L3VX0OYk3DAxQk6jl70jLt3FFzl2k5KSw6TslLokAtYoXTmKK7MehPoScH1Ih3qi6vSeqknJLMknAd6XjXQljQEUhrfwXq+su2AbKn2hRvYl+dauqwAnoNUw/4trO7CoDWTzXTjHtuUm8mF3NzfPd5d39zeobfPa9s67TIeg9uVATjjwRxOtp9jse6r5Dn6lSMrjrNHfCrvEY4/pc3VOLaom/yizgveY3K5SfNRW9J2t6tbezWbNcjz5HTVeAire4krFd/KoTWpsF/XQfc0IddaJ73QBRYyu7ZGiFa9dkI7G3yo09sX9ni3oAqMiVENscNWjSzmcbFe7wHO0WZKo+eBRNVe4q42loD9B3pbrs4PYlXdkzhGoK+Ss1yKpqWErTpFmxNuyGHTgNdyrmbmgplphpzFe7Q6FxfdR1mUchQed83qd1LUPHBq6lNIXI8SbWs8bn3vCH1VkFYgiQpklr3CSCxKi48q8xuDVnNcnKVWGOrUaPgatCe9NPU/otYwp2OghW/foB1MNG3Wm+eC75vNn79cDYEC",
    "forbidden": [],
    "hints": {
     "1": "Concept: one Figure holds one or more Axes, and you draw on an Axes (section 1 of this notebook). Matplotlib understands datetime columns, so origin_utc can go straight in as x. Reading: Hunter (2007) and the Software Carpentry episode on plotting.",
-    "2": "Plan in words: make one figure with one axes; draw a marker (and, if you like, a thin stem) for every event at its origin time and magnitude; label the x axis with the time and its time zone and the y axis with the house magnitude symbol, both in sentence case; use the title you were given; hand the figure back without calling plt.show().",
-    "3": "Shape with blanks (not runnable): fig and ax <- <one figure with one axes> ; <draw markers at (origin times, magnitudes)> ; <x label: what and which time zone> ; <y label: the magnitude symbol> ; <title: the one you were given> ; hand back fig."
+    "2": "zb64:eNpdkFFuwyAQRK8yn4lk5QD1JXoFbNawMoYKlhLn9F1Im0j9QRp29GZ2P4OJ4IiWsi0fOMxOSJGwsauZ0Fj80OZOZYbNpsGoK++UcTHRTuANZ6oIvNOkM/FKK0LHFVvKoG/KZ3+jwAhYClJmpx7hQ7HRKs1FlmppRjALBUUQ7prI5Znf9cvdCUM8Ri396ePzn92nWuhNRjmPJYUJS1JDL6h9KK6E1RTN7eZnigQa6zTS7R1r7xn+L+X3KItZ9xGVqiggBI4OX0Fuxad2ud5+APx5eOk=",
+    "3": "zb64:eNpFjlESgjAMRK+ynzijHgAZL+EJUog0Q0mdtljw9Lao42eyL5t3s/RgZEkWxpFOEY36hLCoknF8aHGXEaQDaEV3QueV62oJ36s608rxigu6IVDGTGHiEEEJjQ8yiiLJzPFYklElLQPHw46vcGTYtci2wPVJttLbHcerNO/U9qOS5X8F4jYb73YiSXL8yavO5hdkLoKjPFkrYWu3oX6q6uc3FMRTag=="
    },
    "kind": "property",
    "module": "M02",
@@ -337,19 +230,12 @@
    "title": "Time-magnitude figure"
   },
   "M02-T4": {
-   "categories": {
-    "house-style": "Draw the map inside \"with st.plot.gmt_style():\" (or set FORMAT_GEO_MAP=\"ddd.xx\" and MAP_FRAME_TYPE=\"plain\" yourself with pygmt.config).",
-    "marker-size": "The check could not find every event drawn as a circle whose size grows with its magnitude. Draw the events with fig.plot(x=..., y=..., size=..., style=\"cc\"), where size holds one diameter in cm per event from the house rule, st.plot.mag_size_cm.",
-    "not-a-figure": "Return the pygmt.Figure you drew on (not None; and do not return what fig.show() gives).",
-    "region": "The map must use exactly the region you are given, and that region must contain every event. Pass region to fig.basemap; for the Sangju map also check MAP_REGION in the parameters cell.",
-    "scale-bar": "Every lab map has a scale bar of the length you are given. Pass map_scale to fig.basemap or fig.coast; st.plot.scale_bar_spec builds that text from the region and the bar length in km.",
-    "stations": "Draw every station you are given as a symbol (fig.plot with x= and y=) and write its station code beside it with fig.text(text=...)."
-   },
+   "categories": "zb64:eNpVU81u2zAMfhXCJwdI/AAtciiwtNihTZH1MiCAociMrUWWAlGu4w1791GUkzUXy7ao74/Un6LzA+GK4mSxeIDiW1AjxA6hV2cwjkyDsC9GEzugWJ2tj1Xbx1rqy8XDvoDSByCM8LzdvT591C+bbf369L7eF03TVJcLVyjXAP+qn3dPr5v64+f7hnfPVhnHm5MfAqE9gnCcJ0avtHdH0y6qYglFr8IJw4rMb9H3wdJ0h/oE2g+2AecjHA0T4CeGKT1dhIZNOFAECrQJ2iKMnSeEBAJt8CNlNhOJfbbOxKHBCm7eBWWuYSFiu7ysq6pawpSXBDW/pSjYkNb7YrFkJgwzU+dtQ+AdQmNUjxEDJwq6hzO/ZaXH4HuhlDZAGCwub0GztDoB1bqXKNjrSq1Y0BAkix3GITg5nnN7lq0UKUeAI1NDmQJ6Yw2P0obGS2Ihnxw7FcUgdX4sF9CaT6Qce8DWeHdNPA1DP1CEJBIvSkc7CW8uE0bFzAnALYUpJux5W45yUyO3/GujKnhXRNeq6EXLQREy3yMcebASxw/l2l+DaFCW/Nz+NFC7zcv37VsKVTJQIadMoNFasUFaWVwdVEhONsJs1UGwOpkPKQAuAH8UFIuu5bbfOZp18qk6199LBRaaPrVXFB9v7ZPSmqFrOqOGw2DSOEguES9fej/7z6llMbMKdnbKvaeoIhfR7Y7mGOff93Lz5NPUH7yF8jrAeZwva+GZ1gtZx2Aiyj24ImnPN/6AcvFN/H8HkuQyPdLU84z8/QcETnXj",
    "forbidden": [],
    "hints": {
     "1": "Concept: a PyGMT map is built layer by layer on one pygmt.Figure (basemap, coast, plot, text), and a later layer covers an earlier one. Re-read the toy map above and the PyGMT tutorial \"Plotting data points\". Reading: Wessel et al. (2019).",
-    "2": "Plan in words: inside the house-style block, make a new figure; draw the frame for the given region with a short title; add the coastline; draw the events as circles whose diameters come from the house rule (st.plot.mag_size_cm); draw the stations as triangles and write their codes a little to the side; draw the scale bar of the given length after the land so it stays visible; hand the figure back.",
-    "3": "Shape with blanks (not runnable): with <house style> -> fig <- <new figure> ; <frame for region, short title> ; <coast> ; <circles at event lon/lat, size <- house-rule diameters, style circle-in-cm> ; <triangles at station lon/lat> ; <station codes, shifted sideways> ; <scale bar of scale_km km> ; hand back fig."
+    "2": "zb64:eNpNkEFuxDAIRa/CspXaHKC9RG8wYmxiozimAjLR9PTF7qLZWDbmPz7/q2EH7nCKZvuIm3Em8EpQ5TB6N382gnuTtL3BjhsBQqcTVi6H0idkxXO2r4p7nKLzVfhBHZQKS7DZa8isijo4ewsd5jwbk6B5435FUWjdAA0Sa2pkcFYxgswxwkmjLmOWyv7vFPQIoy/my3cTX3YsN+MfuqX99YI2Rw9LE+7K2MvAY89wKvtcnDXweVShsYdZcPnTRjJXVMKRDCrIetm5US9j3TWMznIbdBNgH9OfBg82vo8M6viZ2c0wg5W25ReBIpBe",
+    "3": "zb64:eNo1j0FuwzAMBL+yxxaI2ntj5BN9QEFLtCVYpgqKjpG+PrLV3Ejucpb8jvTL2JNFjJlkqXiTYtBNhMbM719dG2LZKqPaI/MN7oYpzRgcBuH9qDdt4yuGSWllTEWhPKciF9RY1GDJcnf4QtV6ldRnriAD31kMuchnJms76Y8P+hnqdMuMkBrYWOulH4G+7ZI4v54400Qy/wOrkbX4F/I0vGa+BD4wMU3GoYUF3ulRu8dTY4+kKBPO5mdZsZwJkSQ0yS/Hwx9P/+ZrmA=="
    },
    "kind": "property",
    "module": "M02",
@@ -358,25 +244,384 @@
    "title": "Map of the Sangju sequence"
   },
   "M02-T5": {
-   "categories": {
-    "distance": "Some yearly counts are wrong, so some events are on the wrong side of the radius. Check that the distances are in kilometers (not degrees or meters), that degrees are turned into radians before sin and cos, that latitude and longitude are not swapped, and that you keep distance <= radius_km.",
-    "forbidden-import": "This task asks you to write this step yourself, so the rule is: do not use {rules} inside your function.",
-    "index-type": "Return a pandas Series whose index holds the years themselves as integers, once each and in increasing order.",
-    "year-range": "Your years do not run exactly from start_year to end_year with a count (0 when empty) for every year."
-   },
+   "categories": "zb64:eNo9UsFupTAM/BWLU5/Ee9pz1Z72D9peeqpSYiACEmQ7pajqv+8k8FYCCcYez3iSn8YHNRc7bh6peU0L085O5p26lKMpOWHaJMWhJU140MBffK+kSDaeDaTBA+krIs6HrDf6O3I3AXFW4bvYwQ6RpjBjpLEoPcRk5HkQRjkJHfClPdj3QuFZlsgedEtVyEWlT+4TSoqZLnq415M4OwuW4azAM3yef2gugrq5dWXf1nIl7CnTxLz+N0tPz+c+H9Nya1pqIPUZvOd4DcuaxEp2b2NQMqcT4dU6BfY2CQbDpaaGmYBFee5rmjWoPCMIfSSfqp+sTD8F1F8sWCMtHOpz7CykWPVD9Px9tX2tp/bCJRBytGIHp/TKEpDUNiYtGaOVxjR7rXrldOvXAhtfJVAtQfKArFucJ9Zl1401DmQZYifskOqAI/EsVb7MuIqLQ5V/L/aOsecOkiPxt+sM16iXtGB1J/ZRekomHP3xvQWD0HHT6OEPHDOIy2r7hRBxuWiy19G35vcfI8rzNw==",
    "forbidden": [
     "sgtl_tutorial"
    ],
    "hints": {
     "1": "Concept: great-circle distance (st.glossary.term(\"great_circle_distance\")), which you met in M01. On a sphere of radius 6371 km the haversine formula is accurate enough here. Then reuse your yearly-count function.",
-    "2": "Plan in words: compute the distance in km from the given point to every epicenter at once with NumPy (degrees to radians first); keep the rows whose distance is at most radius_km (that is events_near); count the kept rows per year with your yearly-count function (that is counts_near).",
-    "3": "Shape with blanks (not runnable): distances <- <great-circle km from (lat0, lon0) to every row> ; kept <- <rows where distances <= radius_km> ; hand back <yearly counts of kept from start_year to end_year>."
+    "2": "zb64:eNpNjs0NwjAMhVfxEQ4wAOyA2KCKUpdabezIdqiyPUmLBEe/n8/vuQYGYthER7tBlJSLI/iMMJJ54IjdXhJMKmnXX/RGhizEDi6Ab9QKmCkiOyoEB+mtjXyGR0nPCqcRX4poPa5hpMAGE6n5+Q4LYt6xKpvBNov9f7aOS2K+94oNbcjJ5yY2q31mt4ExaANFKX1QIy2Y/cDltqc2+xhTpRznWi9HeiocnYR/zF3/Mq8fyp9n4w==",
+    "3": "zb64:eNpNjUEOgkAQBL/SR0jEeFbkEz6ADMvgkl1myewg4fcCXrx1J9XVL08zYx3No4skIaOQZNBFhLrI5R39mI3EcUZdoX4rk1VuVBcZYcKgaUIRyW4XxCS3EpbAH9YNmtYGDwSe7ZzuPWP1rPzvfEKpH5fchumgPUmPjlxAvTFp3ODSIpaRhp/pPNzXau0BnHfSn7m5fgG8c0e8"
    },
    "kind": "synthetic",
    "module": "M02",
    "target": "func",
    "tier": "stretch",
    "title": "Yearly counts near the mainshock"
+  },
+  "M03-T1": {
+   "categories": "zb64:eNptU19v00AM/ypWnpiWRmlBsIUnNISE9oDEitB4qS6N05yWnKs7h6wgvju2E3UT7PF8598/+35nLcXBcVZB9hV5jAEc8HjsEagFnggSRx8OCXyAz3df4OptuQbtybXybXsDk+cOuEP4RQFhip4ZBYWthqGp4AdQhMuyrMoSXkkv4KMblGJTrq9X5bvVZr0tN1X5unpzNT+7KOADbP2AieVlLpqE6aNj1FoOjI9svDSy3BmxwJ7L4AIJexQPbUIGn0AKIobGQ1dkOWQPySzf0xilIzQ02SMvQAIak3YW8MnHJD40FYr+4MNu5L34ZgKlHGjAwEsOlQYn6mYBl+W1uRVVDm7vtk9mVGgjTvTtBQyjENQIewo/MTI2uSmN2Lsaez260DxHfuZYBLs+omtOym+2jhH3PnkKL5gTA52YIYPxOueEQttALZBKKlc6ssH3vZ+vCrhFPFq1jW7PAqzJPLXqjnS4hGNSpVKjzBh3aZbeMsZdeg8Nzc5olKqq6Eg2YMZJJj75w3+6jyRpJyOZIoUDTO5UyE66aFM9Uy04S+FfUbKFltas5fzYzuA5h0QL5l5GmqDVuZsmI13NYl7IdNZkYYowoXXnZVuGlDrfsi6wuoPUe1sAS0G+VQHfKT5IX9TNnH/M8jeWaG8osEYP9Qk68VJkf/4CqDpFTQ==",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: utc, kst, naive_datetime, aware_datetime, time_window. pandas.to_datetime with utc=True turns text, a Timestamp or a datetime into one UTC moment: it converts times that carry a zone and declares zone-less times UTC. str() of an ObsPy UTCDateTime is ISO text ending in Z. Timestamp.isoformat() keeps the zone. M04 task 2 handled time zeros the same way.",
+    "2": "zb64:eNptjzFOxEAMRa/yS5DQHoCU0Gy1SCz1ykmcxAqZicY/BDg9nt0CCgo39rP9/jFhz6X3R9gATopcbLQEc0jCqfWXL7ydn56FerZFH8CtxJSwxAzqJzFYcTZYZI7tpBXHkhdNRN6i/t5t4FvLIh3R6pCLXhyuXU69I+6NyivslMIQ6CF91EAt/4MayN0aoPih+vX6TgFD5RffjROG+tNy8vsGezEq2hztm2dkdRxfT7c8nISYVVe/vviumarKaB9aOwta6ea6IljFyuEHG9tzag==",
+    "3": "zb64:eNp9j70OgjAUhXee4oyS+ASkdtHFyUGcSYEL3mhb017Q+PRScMDFu53kOz9X+cA9Ow2g2AFqkdUgDUyEdwTrLTkBO1zKfeKm25gkDkaoZEsFRjZgiRB6CToOUfJMRTFBZsMqWcOyGyJUTZ0PVEVEarxro84Uufab/2N43BNvOqGwxnseCbVpbhOeJi19afXxfFqWPFmu86739IjeIjX8AfIPKhtWqg=="
+   },
+   "kind": "synthetic",
+   "module": "M03",
+   "target": "func",
+   "tier": "core",
+   "title": "Time windows in UTC"
+  },
+  "M03-T2": {
+   "categories": "zb64:eNp9VE2P20YM/SuEgaJeYFdIUCAB3OSQJs2p7aHZHnpa0BJlDXY0o87HOkKR/55HyvLaQZCTrRnO4+MjH//ftAOHg3R3Lky1bHa0+TfWRH0NbXEx0OmacmH9zg9dT9s+JpLPPE5eyBXirkNEGYQ6h7jQCrXR1zFQiXqP6BxTQQw+XKDJcys3Df0h/CT2zpITZwvIOzrG9EjIzgCaZgWoWXCf3SE0m1varImU8D0AkjsM5UzylvaAy3F8ZvTwONIT+yqZOAnFvqf9TGNMSoADvWhe0U8N/ZMXQockXO5al1p/URW4A2Yv5SgSLK6VUCQRh46E22FlQNs/X7y8MabQamQT9m8pNWlNE8JR6wcu/DExSB5dGYi9XyBNugyKV6JPvuararZgLeNUIE84QZQh5meA4wCSIZ45/VfZu95JXoi5wGjxk5x77gFOQ/RdPidWbQodBSqFWCjVEFw4aGdieOi4yM7OZzHttcW32iz2kK+bSQIGo6F7AfA+gqA+scrkSdJMKR5PVFpUd+Ly6Sq3wSqmqMSfQdnPF/mtmaPDYIRDQ78tOeYMDWoou+X1Evjm7frm1tq1AuAc0PbfuOikAuxHg6UlnwYaM3TZkz7FkYKAFCrG8PdIP+D/glyc93cnDa8q1eZFNUCwMr8tzDSdtUVt7ARk4jRJt/ij8N7LNwBLYcsYNPRuhXnG3v7F9zfWqPPdybCjcND2g+nabSCEGffjxMllJLVRAwKcSh/ZZwiaIxUtWRfDinhyGx5MNU0YTBOhBlfyeeRW7bKS0eFP3Lm6WBRmQzthLnuys+vvjSg0JtSeXScXEKYZtomyAbz2RH2SG3qPSmqR633FPoKyHv2uLfsZ+DX1fPb81o5Xeq9+ef0Spzc2SIsytghNmSUG0/ArdYI9shQ3CvYEDBxtenS/mRzHhLx38IFp8kk3ln6YAHan+ZmOPC92gOT6Xh0PFynfmmFryt5NWtsg7SPi82jbxGYDI4oFB2MCWD/ws7t0suHCNIsttAQXLoRsNl++AmxfKig=",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: station_epoch, epicentral_distance, great_circle_distance. pandas compares dates with <= and >= once on_date is a Timestamp (pandas.Timestamp turns the text into one); Series.isna() finds missing end dates; 'end_date' in df.columns tells whether the column exists. Your M01 distance function works on whole columns at once; DataFrame.assign adds a column to a copy.",
+    "2": "zb64:eNpVUDtuwzAMvcobWyDoAZoTdOmUPWAsuhIckYZEx/DtS8mwi04G/f76EqxaQv2ELUWgcg9kjCSmINxS5mqU56sfRVdEqnjwz+KqyIJkFY4Xw66qbgAtThm1MCxSQ7ZD7bioQV9cDn13FAVL2D3e/Bj0uWS5NKdvur23b0s6OWcOjeZWfzGD5nmxFswIyZvJwNAR7IlbrzAWzR0eWJo2CaZ8xcQ899/OqbthpBfvWy8gH3M2J6/xTIw1WXR5V1FIS/WZIfzLrvB1x3GfctdW9fd6bI2YP34BeHKHfQ==",
+    "3": "zb64:eNplj8GOwjAMRO98xRx3pe4PrEK+Yu/IbdwStYmR44L696QUukhEysWeeZ5xgRaP7f0eASf5FMgYVED4i4mLUbr4g2t5mLP/F9a52qaVDFG03Isy3Eqs+iwGubL6pz4LOIfN0Mk0pxVWbXD7OMVSYh4+5hufemPd8WN6xd7wgzLZTxe1mxgh1nS5q84eXDMsULmhV0n4msgaTJK//WGIV0ZL3bhC6ndVVXCLdsazboO3HpQDHnfdEUohzuU0pgaXaS6w86vVfvyxLKLGAe2CaP4O0RJ1lw=="
+   },
+   "kind": "synthetic",
+   "module": "M03",
+   "target": "func",
+   "tier": "core",
+   "title": "Stations running on a given day"
+  },
+  "M03-T3": {
+   "categories": "zb64:eNp1VU1v4zYQ/SsDX2IDsrC9OqcgzXaBLdyiDlB0b7Q0tthIpEBS8QpF/3vfDCXZbtqDAcqczzfzHv9aVY1xZ663KTCvdrT6ww+BToOrkvWOpltKDdPJtzUHsokuJtLZvrOjtXwFn7igzr/D0AequeWEY/Qdp8a686akX1w7UmCTI0muclXQirs+jZL1BcFSFO+jcXWki02NHxLVJhkygamzMSIUnYLvqPIDrAsxj42/0N7sybqYJL4/0aeSEC+MxBJ1qTuSoeAvBZk2ejKONDt5x49iCXvJPZufkKOG1XhpGPnVu/Lt0LlHnG4tU2OS3M8loqocWSCKqEY6PdmW49b5tI3JCLRxATt3Q633b9TaNyY3dEcOUVpRt4LgJ1+za0lP81mRQglAFIG6Ht1IsAYTyn9qBDoCyymPd1UG/+RDZ5KU8RunITi0lYa+ZVrP+J5NHzeSOF08/YhRfA6m47ibQ025+Q5oABX1T+tq/k4ClHzdILZYZDwjrS+Nb5e+N4U6SfJrhtlUMxVz90UOK78Jfe1MXKWvqUzMJthzAzeBQePiL2Ba0u/BJpYVkM2gHtO8T6Chj7kHTFlglbXWQDIU07aCz0tBezX9VlxLNscoqIAMSXq2CNb2jTlyspWBW5DlWT/sHwp6ePn2MLXtvJaC4ejCdb2QaS5Hu3OMcYQ3afAVc5mX4po4YkhLA5WvZRRU29MJi4yCJn/Artv29afy+ctBc389yHFDF9l4BQ80NrIyrGS7AK3EbmEnktkwx7tdSsBrAfx0o7Hv6kn+DGngsKP9y2t5eH3Kjfmt8F0bm0kHOA6QoD8HOjw9q3BIM6PwRrVh4uDIGOZnTlVGQK4iYyNtiInWv5qQ6IfNo951pubt0GssbGIrqjRSb2LkWsvwUtlWefNREGPyfS865xSRCaTiKnaLHOh6aNWBKwxbF+CWBjt8OpVOQ42tawArSeVzliwXLdC68yrpWXKiAChqJjfYE8EeoSax00RlNBUta9taQGJRRoLPv8vQngFC+z9PgCIjO/ARvUwoYQmA6EdhglDpVhzxlw5rGmIeIHTd1goQ8lbYI58pyPkNka5k7WAHeR/aepcloOHqbTESh0XwsgtymWXPJr7WSlGVQhlSLmbShRxcPMYrb6R2NVKdmEzOBqjxd6MAauRbfVjKKOlnEXHhbp6MHCbJm7dWEdAQH5ex9gpKY94z37IIaG/XGcOK83YhdAupkDi9EZHJ+hB9SFjEiUZZ+pY3xeYx4s3Wl0oX6gCH/1DsWXIB6/wgKJFna8iUXipQx3FWTlw5XYHpeCtdmnabo0l9B9HSaRryyueydEMvZryjksxbXiIkHuIA/Yyt7eOVDfeP0LQLnQ5fEEd9zfxUyLyQrVz9/Q/NtiX7",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: completeness_check, station, network_code, component. pathlib.Path.iterdir() lists a folder, .is_dir() and .is_file() tell folders from files, and str.split('.') cuts a file name into its parts. A dict of sets (station -> set of last letters) collects the components; pandas.DataFrame(0, index=..., columns=...) starts a table of zeros.",
+    "2": "zb64:eNpVkbFuwzAMRH+FYwsI+YB66pChS5Zm6kbbNCxEJg2RSZB+fUk5bdJNkO6O76gPhqvUUd+gZDWwmYAuxAaTlJGqwotKNRpfO8gMhMMMwpQ2dTaFHnn8E8e50kJLTzVy6m17Z1zoEfBkSXAiWtvYKRdSuM6i1PQK5DL37BSHlqxrybZFhMDfTBrDlC8EK1bTDgYphQZLsG4IXiW8MTMBgpKBTFDQ8YcZmalAIbOgn+QX+rA/7j6P7x0seCJ3GfaFwvdNVRwy2/xYlddWqHLd6mMpbVi7dZjzwppC7Iuu2YK6WfncluSZamhZWOPcyv2n7rwee+otPQHePfd1RamswGKwT3Bo1i9vOzpOkD2AsdfIvjdO21r9g3c/dEy2zw==",
+    "3": "zb64:eNpVUbtuwzAM3P0VN9qAkQ8wVANFEaBTlmTqpth0ItSWApF5oF9fSo7dhgsB6Xh3PA4hgmx3hqEbecEQxp5ii5JDFOqrpoDWsKKO1vcryHk4abBWpImmI8UnzNuJ2mL5/OMY3Egg3zt/ShQbtt3CVeBfGRYbpa1hdttDavvDe2ofn7nxdRjcowWaN8XKmbIg+DI6gRWklz4Ity+ktu9hRsuCkUTUaxiQCCEhTzBJekqSm6SXfZdzOkk1bdZWhenC1Sv3U/2HYuAaGcV4YE4Pawyso8ruYfw1J6QSLwo5mTLP13msUifkC3Oyl6Ty1AmeEMMdF6VY0JqSuOCXsfs58LzG5JiJ1YumonrbGrsaX01e0x45nXvOILmbHRcndyMl6r6R7loua+ri2Uj1C38trE0="
+   },
+   "kind": "property",
+   "module": "M03",
+   "target": "func",
+   "tier": "core",
+   "title": "What arrived?"
+  },
+  "M03-T4": {
+   "categories": "zb64:eNqVVV9v2zYQ/yoHA0OdQnaAPDrrQ5/2srRFO2DYk8GIJ4kIxRPIY1x32HffHSmpdtIO2EMC+Xi8u98fkn9vOoqj4c0BNp+RcwxggPPkEbbPxmdsoI+Ugz3m4DjdHKBEJWmi5Ng9I4Q8PmIEE+xVKjB+5XugCB8oIJwGDBAIcKJ2AOqAB8PQDiYE9NDSM0bZMiCwG3G/aWATaDciG2vY6HRf2LCj8DCHwCUpx+BCYuM9WvmCM+UIZbUjbzHu4XMO8OjCberZ7+ZcWMoCEyTU2WQUx3Ci7C1YanSQ/9q325lp8uf7MvBoLO7yJP2fMTBFhwmMj2jsGSaTEtoCZyJvouOzYvlL56xEKgzsjTK5h/frN0jHHqE3gmpEEyo3C10RW4q2xirnMJKyA3lKzqJgOIU6XcJQdJLO2quE3DesCiBMkWxuuXktaBlaUPjdokCZusuhLZ0KtATy9TMSHjMXiSTlhXgH0Uccw+DRJE1A0E4rPq1Y6dmeHA/CwR38clNkgWou2a4/irWs6zoxYBdprFJ+fEyfztC5YNMefid60lbFb6nO8SbJqscDeGpLQAxoMTXVnal4GeVPZsVUiEgDRW4zv+ZBha60CmyxoTpZzXJJ/FYdFPMo1Bwv4sK6TySbRcJ+EC1cYEUmuaqPkdppopDwRqNttXmPfFziGjZC8SDwK+h1RbLb7I3MtIc/KT5dcEqiSyGr2EcclhY3rLuL+2bk+rmbffID8xJfGmmptJZVKio7WnFt5PqBK9t7eMienRyn73nH4nvJRSHzPJ+FbfXSnNe5WJ3TFLV0zUDK400ZuphEh/1jRS2z1q5qy6uLqqLYw29qfq3twiQ5s9G6i3bzIK+O3QEebr80+u/t2zvx6ULKWsKASIGxFigTniKFfjcbfqZV+NcbGO2rk6slZp3nLYdyavR0rCsB+SRKN4vLm+/2pnhx1Vq9aUSWToUsxl9QOgGUBac8CO1QidXw1SkRZ8nViIDjxOcLKEXM/wPk4iVYDDHP2BRfz7pdPxwvHorm+n0ptwGJceF9eLFBkmuOkBP5qCcbfn1X44pzK+e9RsUOpaJeMboqWcuamOuffwHcAY5d",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: instrument_response, response_stage, stage_gain, overall_sensitivity, station_epoch, polarity_reversal. An Inventory holds networks, a network holds stations, a station holds channels, and a for loop walks each level; every level has .code, and a channel also has .location_code, .start_date, .end_date and .response.response_stages. Inventory.select(...) with network, station, location, channel and time is allowed too.",
+    "2": "zb64:eNo9j1FOxDAMRK8ynyBVHIA9AT9cYZVN3NZqNq5il7KcHidh+bPjeTOTj4JTatJ36J7ZoETpygnBYCshiSm4mKCQuXCboBaMpUzIEvuEUBLiGkqhjCiJ9IIz5K0bcPkix+sDL1LdPVM0nGxrv85y1IF0k/ZkfKdXeGBbnq60S1x1cPQdouVHuys98zaivRNSCOcqfvGe1cDavuLRN5ql0n9EzxtC8slld1blsjTtIMJsVMF2Ac+Nc9plxRMmLPxFuIW44dP3C6TdT3a3+5GN99GvdVjougQukBkhZ7fT8aoTLGyjkPIPNUGb9yrpiDb1gpWCdyv7YdejNPRPNHNVGz5vv+mEofg=",
+    "3": "zb64:eNpNkEFuAyEMRfdzir9MpJ4gIhyhV6goeAarUxhhk0g5fc1komYBlv2/nw2ukPoPONEwwlrjCDEHD1yuMIEofXGCbCsrgkIzIVUVPznaasxmxOEdkrWWQivurHl4hTDX3hBrIsE9VyvYsKZwVyj/EkJJOJFdLPishVDbUzCDlc9+4nlnNxqWUiE9ZjyHX4CFb4TvEH/27sndwtrpbSvhhzHnffGt1dSjvlJbZCEsgYuM0vEgP/0jjWHndEDta7hsXdELq7woMzfRg/VGOf8B9jNwqw=="
+   },
+   "kind": "oracle",
+   "module": "M03",
+   "target": "func",
+   "tier": "core",
+   "title": "Counts per meter per second"
+  },
+  "M03-T5": {
+   "categories": "zb64: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",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: kst, utc, naive_datetime, envelope, signal_to_noise_ratio. Part 3 showed the catalog rows next to the UTC folder names. Which zone does ObsPy's UTCDateTime assume for a time written without one? datetime.timezone(datetime.timedelta(hours=9)) is a fixed +09:00 zone; Timestamp.tz_localize attaches a zone to a naive time. For the evidence: Trace.slice, Trace.times(reftime=...), obspy.signal.filter.envelope and obspy.geodetics.gps2dist_azimuth.",
+    "2": "zb64:eNpVkTGP2zAMhf8Kt7ZAEBQd6+nQqXO7BzyJjomTSYOiE6S//igpDtBNop4+PvL9Frir5foTkppRcsqXO0vWO7zvXHIFXwhS0fQBRphZrqBzL1povmZ0OsGiu51gZdnbDSVDpaQSv+/sS1OzwWyYnFW+nSBTKmhUgf2lgH8qdLBHw/aKtfcFlQFesGHjxRUe0RZ2T0/HZyC5UdGNLnTjTJLCzKwGdCN7BCZGzG3QXTwIFSquW2kuZDTVUgivO31pvhtxik+r3qg/r4TS/GEIt8drC53arTl+UOceNqauEOUa9fqEZB6YdjuEED2sV2a26vDjO9Qpzg0axY0wliE1ZhozPxNqTVs/55UAZ38y3PYgGl9ZJriS92Lm6hgbiRh0PfKLQWnjRNK/ai+HrKV0LOXP2y9YIgCyCaqaw/vjxTrD34UEEpbSEtGGH3Eabpfgn4bd4WXs6P89nz8BOyHllA==",
+    "3": "zb64:eNptkjFv3DAMhff7FW9rgqpA0PHgauqQpVOnToZOos/C2aQhyWfk30eS5SLX1Itg6pEfH0UrIZBN5PrNs5PtDHR2EntDIOM8XzVw/pGDf8gEhV/CaVT4ad4UXmUtEc9rIo1lWiO632SFHWI9oj7h83f1d8LFZALWZBv26REKR3YygRyE4VOEbIyq0AoXGiRQHxXMkCj08flEfKdJFurp7h2xJYWsARk7osv+JDh9rs103G9Bqq1mLJp5mSgjBqSRsKszJG1EjCruJfirZ3z7y4bJLh/uvh7d7Ka7cZ0m3SxXztFjAT0ZWFne/mHOeZSx2p3J8HMrxOIj6Q+FZnLecMltELlTqHUGH2LC9xccTSxkbg9N5KFeKWta5uHy//4+OVM1XBpMfqY93FQ7z/mYTB6/Pni3GUOQeXcp25cIWrwlLolJajhnJF+emevvmDeAgj59WJPOIJnLVCfX1AoHqr/NCu1RFVJfLJfdqGco4nydd7e4rvPR7/Yo96w="
+   },
+   "kind": "artifact",
+   "module": "M03",
+   "target": "answer",
+   "tier": "core",
+   "title": "A window without an earthquake"
+  },
+  "M04-T1": {
+   "categories": "zb64:eNqVVU2P2zYQ/SsDX2oDWsFOuwG6QA9F0msObXoogiCgpbFEgCJVkrLqFv3vfTOk7fXeuljI1nA4896bD/+zOVr/FI0fePNCmz/CEqljnzkm6gP5kCkunk4xTJRHJnhTOOnXNBnnOGWazOBtXnqmHN46ORMH8YElZZ6T2PuppV/OHC/qiP8j55XZ07TA88hyMXJDxqVAPM35QsFzom0XFp9pv8OR74FN7x/5EvAmyfIKf9+ndtOQ8lptn8cbr8hpcYCSKNphzHQKEVjoJ9q3BzoumdYY/KDmIBA0vIZA7n27f27g+W7X0u+J5SILh1Wwvty0AsJeZABg6rmz0IhmZzomRF2jzazZrK9SnRbfZRu8Qu6WaXEm2zM/9TayHgh6/80Hj8Mb9Ebh+m9iU1HSvUKFBGSAyKYb6WzcwiL7g7t4Ar98Bck8mqxsRVd8KDMakaqo0BAqofe/7L8KClU7ZJAzVXtNAxjoCZysJval9vHeHuktSes7J/bCUdA5NmdECWDHAh65v8Pr6ivYB07aLqUn/h8d2uIc9TDHcOZrxyKPCyscuB9498iY/1zQjOrpl+kIJ+j5htfJBZOfEMhbPwij38LEr5wgh++5184QDDkESdjSz5VOyiHi3CQ6tM8/6h9suJS0JQ/t+1J2XE6FIk4jhPrLdNldCAYDTVy2s+MyZ7T1cwtgITbSclvQQqTRItUQzaRUk1xExqZkaNt2RzPS2HzvUhxL2qr+fd6P7NBs6Tr3nk3UhfAAoqgT4mSyyPIr5yWiNJSX6pLHyMjx9JFMjOYig142UEPXzm9KLXa33WOgrWM/5LFRRYuE87VdV5tHWRCfzCdNPxp3ktrcdoFU4LrnEqgGr6YiyFb0hqyTAAT3Zyr6P0MRbDHTCwy8YxV8Ls0DESPXgFrjmwZ1471UHd9rGqzUOrEaHfJJ9LLWLHq4BJJBg10JeB7KzNwb6jWXkv++1uYAUnB/3X+PG+4asK5WnRDd6Nc56oyn0bwJgXqvWMBt6SbFa1K+zLyFYUcdUtTh/5tjQB1GKw0TZKhvGeuqqE1TICXbsxLV16ficpuiurSEY3GX2abVXMocQCdZvtIHtT+WhIGl5OyMlfE5XsqCqBWtPh+CzxGjQ0fsBjB5odPUb78c2r2Mgj4O8vj+644Gqwyue/gd7PgxwLP8Eunu+qGp9kO7+fc/ohp9rQ==",
+   "forbidden": [
+    "seismostats",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: frequency_magnitude_distribution, magnitude_binning, floating_point_number, cumulative_count. Part 3 explains why the bins are centered on multiples of dm and shows what floating-point noise looks like. Mignan & Woessner (2012) draw both kinds of FMD.",
+    "2": "zb64:eNpVUMtOxDAM/JU5grSqxIEDcOTEnR9IG7e1NrFRHq3273FCV0tziDL2xDPjL8Guyed3eN7YE2ijdEN0i3CphscbfIQTj6TV7qIoK0HIJcoF+6rBUI0jpQ/ruHMJnDt9ZLk8hrAseBItmGopDeg8P5vmlTK4gGOsQk1JlDMh8JXwMry+9TPg02YUrLrbv0ICctN6VtVpqilfMGs6Ap3ac9LYbeXoQmgxjlTBpcWgWQ25VdTUeyZpU/7GDvg25kRSKGXYFg7efwULzdHC+Hiwa6zBFd7s2c3rDNeWct9PrrHV2rMT8t2jaTda/XlYNLsqNPwCoq6dwg==",
+    "3": "zb64:eNplkNsKgzAMhu/3FP/lBoPdi/Ndoo22rAdoU2Vvv1bdQVYINBC+/0va3nj47HqOqQPQ3IGWZ45POJq8kawYNyh3RQzZK1aQANEMzxQ5CRYdLO+I7tQOZUpW1PpW3hgimAZ9mMUYg1tJyZG1FbWTLcWptl+1BjosRcj/WCVomhlGamh22ZKYmbv/0IJptpzsEEZ8FHcB2pL2cPaqO02FhJ6Gx3uLUudWdEh82KFAxLiiUu/z5tbf1+fyAoHPdrM="
+   },
+   "kind": "oracle",
+   "module": "M04",
+   "target": "func",
+   "tier": "core",
+   "title": "Counting events per magnitude bin"
+  },
+  "M04-T2": {
+   "categories": "zb64:eNpNU02T0zAM/SuaXujONp1e6cCFXfbECZYDXHZUW2k861gZW2kIDP8dyQndnuJYit6HXv5sXIfpTL4JaRhlc4TNDx4ztGNyEjjBWgbpCARPkWDmEQYsRS9Dgm3LGegX9oOWgkDhLFYRKw4RHYE2oPd6ieA4jn2628MXwguBbwFL7S37zQ42Ibk4lnChhpIvRubzhZIUA3ASZ1BCRsSqwG09TyF5ngAzQR9KCem8h08s3dJ0osjpDMI3vUeQAzTgcS4vJ1L+BB8+KstwDullFGdv2nG/dGArlCu7TDLm1Mg8kFH7Wl9V1IDJq4xHFHzK2BuMwhteoUjO7Mg8VcImOPmrHN++K6snBbaJRaf1WF53+oyhSLUOvlEOVO4qB7NXJa57gpbHtOxG2XcCVO3awWkUu52rLTZ3XctpvtXZZu6BMEcdL+ZRRNFTBZLQU/ObE10jsRodTEhrkzq9VSzlOFvdsVfFwsOgQGzG2AywGXt4CtkgzDA5VPCQFFBrcEVqcKpb5F5FWHy+Pz8c/4+pnv40sPvD++PhYDwcpwuZrt1tF49mow20Hk8u6lRvw/bw3JFGmvvhDagso99sqfKnrLFpbG1X/csy7Z/oOGq0asvquLFFmHBW19HiDMsyr9qgdKFd97nG1AK6h4eO3Ovy1W0gM6HrSPOLWrXIvGVRl57VKA/bk8Vcka22021ipVcAY+SJvCbm7z+KNloF",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: utc, kst, time_zero. pandas.to_datetime turns text, a Timestamp or a datetime into a time; with utc=True it declares zone-less times UTC and converts the others. pandas.Timedelta(days=...) is a length of time. M01 Part 3 shows aware and naive times.",
+    "2": "zb64:eNpdjr1uwzAMhF/lxhb9gdfGY6fu7RzQEh0LicSCpCMkTx/ZDoq2G4939+E+CqpotB0yHRmeMuPKKpDCoErKyJK5OFLB1+c7HghP3duu67ZsMgQpZ1bn+AzCtfVeTmy2AiKHU0PEpfnYw+bBlYIj0sX2A4/S8MuNdsEnhjmpg0oExbjFaHTWvykusceR+XtVKtVQJzGGaDqksp89LMPI2wNb/x98de4DfogmzW4qY7j8QvVQ9lnLZtXkk8yOMFFpgQPi+HoDHRZzEQ==",
+    "3": "zb64:eNpNjkEOgkAMRfee4h+AhWszzsYr6JoUKDgRZkxbJHh6ByRKkyZt+v7/dW+W5LHW6Qw4O5aj1SBFigyaSBhDGjgaQsTtevEHp0Zi/q/5egwhjgrX0KxlxW3KwmXOPMdmi9jzz/6HU2ssG92FF6Oi+rHQuZ2kSTEFu2PNhTsjSehCXB/NW7YvoEmMG1Tz7liASfrAamiDqPkPhDNM8Q=="
+   },
+   "kind": "synthetic",
+   "module": "M04",
+   "target": "func",
+   "tier": "core",
+   "title": "Events around a chosen moment"
+  },
+  "M04-T3": {
+   "categories": "zb64:eNp9VcGu3DYM/BViT2vA6w/YoqcUPRUokAQIelpwLdoWVpYMSX7ONum/l6S09kuA9mIYljjkDIf0t1M/oR/JXKxf1ny6wumvsEYYVt9nGzzUY+gx3xBC1Jc7nAd+pa84L44ghZj5is1gPSwOe5KLaAx/ROiDW2ffdPAH4RvBPeQJMEGe6AkYqTu1cOpdSJTyZbAxaRGfwkxAb+Rzgo0iwYI2MtxmOZpDYYvBj1yMN9Zgpg6+TOQBfQmCiTMkfo3ojkup1VCBOoDSjM5RhGw5o7HDwNk8M/guNC/ArL/zZc+x28QYb3J1kpspo9xj8B9PYtiYvqGozEy+JDv6XVhJnoQ3RDtOuYX7msHkW9KSD2YS1JWDX2Ev5QqeRsyWddyEbyF7Z4pcvIqnSbk5M6qOHymvkXXhvN5wgt8w4+9Rbu8ClP4ksOaGrTzvbckrzITm7THDWZSdl/yE4I/YdERrOZ57a7l4Tt7zaaPFzOiflxwuHCgV/elrYwGXhZDFYNPMgQXJbDWFF406+My1KZAg2iQnFebK76p8BbKKgfCgJWtwy5UA10JFb4Z5wsrF2iKPtPpytHrvzU8WSDCG2o0fxWZvJrjTIEVXKh18CPOCyoI9Zf/mERiqUV547XtPtUXEGb/eROxW1R4p1ylK1AdvUlU6ZHS3+uncXBW3e10ZLDkj2RA+MwFDLmPRyz0ZLe1YXF4ueTjHFnFJh5ves8YYVm9UqdUzwE/edSE8wNkHqV5JRv01DHVW+yKFESKlC4pzfQ10DgEG5A2xcV/OHC8fHI9Q837WW0F+OWrD9FoByHI71+3S1fa/WAo/ParO5aOHddyyTFz8mQHB0BipVF4+N5VsWWT/NavFBToyPEUujOWsbr/7s/hH5rmYRpg9BacPhq/lsKTmwOA1kdRK6l1fdCp7Q61fztnj93rjWU6vYILIApGcTOO+fWV/K483dCul/984SRKreucqXPNqpI77IVkDBU8ROG9dSiz6buZ38v+yQ9iyzWixPTdd9vC+MqUls5aqQl20wn3rH/UWGXW0xSm8H3TWhbysiTpga1oZPDm7JJ7CifpH7VHd+hBX/ked9b/j7MxGbIHEKdb3buV/VKOekZhjxZSgIKn1B7H/6zip9jRsvjv98y9zDosQ",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: catalog_matching, great_circle_distance. DataFrame.merge with how='cross' pairs every row of one table with every row of another; Series.dt.total_seconds() turns time differences into seconds; epicentral_km works on whole columns at once; a Python set remembers which ids are already taken.",
+    "2": "zb64:eNplUNttxDAMW4WfLXDtAM0EnaKQY6UR4kdgKQ1y01f23UeB/skkRdL6LDhri/qBcEiK4B9uF+aagxQyqQV1AZWOF+vzTPZFOMXWf3CY+uJ+GMMfeENXSoHyXEtU10fYyuBdZl9rlBBFjcrMEzbmfbB/snXkuEOoHpckiylehsi9JJKxvk7Q2qyvZoRrWKjcuZfqs0lmj1kWbuxBN2imlFgNizS1CSelzZWtHt/rw6X3HHUIO0lDLenCuXJBYe/DrXv3KnZWiH9MfKTN+Yvt1j0KMrXtUZue5PS8cC9VD/MzOR4SY2k1D3Tj3Uaivv8CtUeSeQ==",
+    "3": "zb64:eNplUNFuwyAMfM9X3AdkP9BRfiUy4KxeEojAahupHz+nqbZKQwLJ3Pl8ZxfLEkrzeJ7TGXB85bqhlhvKiEg6EL6LZE64iV7wDw6+c5FykkTKu9JT5dA9Wh5GwgdM6QF3xkL3IenQYE1I0pRy5F/A6mFafDeWCqZ4wZ+4h+S3sqGVquYrbO8jerSF5pmbYpTa1J+6PdvEvEIUJc8bZITLbN64QhKkQWnijI3Vf8K+bc5CdUIo5l+SeX1RfPclV0agOB0rs+vIsDCzEQfq9zf02BP2eMXZd2WqZmJVrGS2/A+fOH5k"
+   },
+   "kind": "synthetic",
+   "module": "M04",
+   "target": "func",
+   "tier": "core",
+   "title": "Pairing two catalogs"
+  },
+  "M04-T4": {
+   "categories": "zb64:eNptUstu2zAQ/JWBLrIA2bDTJG4N9FAUAXroI0BzNBDQ1MoiLJKqSFoRgvx7l5Ts9NCTtNwhd+fxmtW6ynbInhpCHYz0yhoEU1GPnFs5dHAeB8JoQw8+ga3hhTthU0KYCspPkE44By0qWoYOUjhy70iIo1AGC89DZEPyhD4YB4GahoRqSKNWvfNl/OcF4nV+mXchIRtQZ2VTrPAYh1ymJ2QTd7BnXtc3wsMJ/c5jlZXITjS6C0Fh3MDICyWBSkmPQXme8CKkb0f4wSJe2SHX8vkwPtNIORb/hUbJoiqeXny6hHzzaftxebNeb/MSOX9jsbmbis19LLZ5ki3WsXlznycm033W4uHx19dvv4sJlBxYTNJfzLmqWuzg/CrpudhnP9a3y6fbfVbOLD+/7rMrgz0rcC1K7KPr8Yw/b0WSyQbvVEVRqS8eLQkX1SecRRsIiq21PUWNDdarDxCDGFH3VmOIskcCfWhpMjPoA47qzBbWdvYlGbjCd2tPcxjSrUsnd5wfQy1vpJh3fO7AmCR3LLTldehMxnNqtDXHdNpRv4wwaUNsTPFSvWzJlTB2WksGHVrheR24P0H05Io5OqKqmMtNou/HLnF/4CSNM2nmctXsn8wYpschWkRuHAXdMe3N6q6YR3IWSvyM0nFfoFXsUfb2F43yH9A=",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: magnitude_of_completeness, maximum_curvature, network_epoch. Part 6 states the rule of thumb (Wiemer & Wyss 2000; Woessner & Wiemer 2005). In each panel the blue circles are the counts per bin and the gray squares the cumulative counts.",
+    "2": "zb64:eNotj0FywyAMRa/yl+1MxtPpsj5BjkFADppgyQVROzl9Zcc7QJ//nq6CVWtqP2ABhZixBKFywcSSYJlwK50QucZCfg+GxtaQ+Z6pGT72yKx+oj8SH3iNiv9i+RxRKSTs8Tncha0n8uHRuiFs3EaElPA1fI9YK9sJkD7fqGLSekRp0ZgHXCfYqqdJQ1F9gH57KOV52FzwUp13/srmaxQbtsLHQ4DQikjF9/LSpbLYUR21785P7Y6bk/tar9JOtKu82f/zmGdp",
+    "3": "zb64:eNrLTY5PqoxPrUxVsFWoVje0NLfQNTIwMFe3UrApSE3MVshPUyjJSCxRKEjMS81R0FYw0DOy01FQB6oBKTQ0BSksyUhVKE7MTVUoKs1JhcgamoFkzXHJgvQamWHK1gIAKdcnzQ=="
+   },
+   "kind": "tool_reference",
+   "module": "M04",
+   "target": "answer",
+   "tier": "core",
+   "title": "Completeness by epoch"
+  },
+  "M04-T5": {
+   "categories": "zb64:eNplVMtuGzEM/BXCpxiwXbsPoDXaQ5D0lCKHJjn0VMgrri1EK2718GZT9N9LUms3SAME8IoiOZwZ6vesOZiwR7t0oS95toXZDyoR2hKa7CjAFIZ8QMhm5xFGKtCblPjQhRV8Q3NEsC2YBC6DS6vZAmZNSZm65c6F9H/NgeJjgpaiVrXYmuIzyF2g4McVPCTUkKcBTLBwcPsDmLgvHYacthIboTEBdgjEH7Emy1U5PZC3XAkXkAcCbtNRRDgaX7Ciaz2ZLOCCC/szvoYKV+c+CJEbZkXYeOSKndkHl4vFBLuSIVANBnJplE4JvHtE2Kw+ftK/FVyT3mqo66Wgdqwz45NpMuCvYrzLo8Aze8PwlYEJJQwuH+Dzly2wKIBHjOM/DEx7JuY6wXq10aTWRU6/EMoCcjv+6JhS13ucL4StcAYiRFUOKHZGBf+OucQAhlUNllW8w+gYggsWn1jk3ahajFw4qfgDcp29O2JY8CUNUrQswnSm2JkUCKXb8XHP/5KtbV3gYTLaM+vRsCcq66VPjsezNATVuMbYUnB7wVaYwxv+IV6YT01OHpmsA5l6bdK5lFjZpWKWTnfUnSaQRlMc2kidjBSnmVfwVamWmzJazejYy2D6nj8WYHyi6VwgUJVHfCP0u1gFVMzmdq5o+khMQR5fj1xXCwaRR6elocJLh9K2nqlnb2i0GkD7SGXvUpaVHFyDK7icaKJW7T65WEGLAy32GKyyU3tUsRa6LZbKzgsTO16jU6qXjdZlloxkOtQxsutw+cy6vl4Y69qWJVZvVyoaT7LBBLc4wA+RHq7k7gsjMbsP91dwQbxqLvwsuWFRBS8Hbu7ut1WbzYftei2F3r6XH5LBg7zbwDU2qObSJ4dViWhsNWrAp3xW8IY33yj8IRI7oq7X2RIvzKdxSTEwGKlktLJAEi8Lu1y8JF5bSN716eVM09x8Se5qc16bg6nEG0id8X56P/WVqtuowJ4x0tK6o0v8Ngqyy1rglb2mTdOnUP2uCsvKidNO3LWO34hxAWt9V9g5MRIv3p+/9toMIA==",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: magnitude_binning, floating_point_number, utc. Series.dt.year gives the UTC year of every event. Working in whole tenths (ML times 10, rounded to the nearest whole number) puts every magnitude in its 0.1 bin, noise or not; numpy.isin tests whether values are in a list.",
+    "2": "zb64:eNpFkEEOwjAMBL+yD0CIMz1yQoJegAekxDSWii0lbgu/x22BnpLIu55RjoJRcyx7WJ8FNFB+43wCiynGpB3BSCyVDYJEWCJ0Os73xG1Cw1JgqhUemkHhnvCmkL0/n167ay82F325WIE+/BUMt+thyTqm/DAImRCeKu2fNSF+9Cm4Tv8GFSIPHGmDkS2hDrUvJVlDiwQX7Co0PXcRARfKTGVpTMGvLy81/xTKaNmdHV7Abs4S6bX9ABKoa5c=",
+    "3": "zb64:eNpFkLFuwzAMRHd/xY0tYKDpGjhaurZZmsyFHF8iobEEiEpS/31F2UY0ieTx8cguM2QnBvq2O6DjnWnC1yeyHyl437RI8RYGDsgR2RGBNlEyHi5eS3QbeybTnGMC7cmhm0rdwAfoR7aNorvwc40P85wRsiCeC89mHA8fVatEIWZLKEMUohNLK3ofBC+aqOVXs3Kdvzgzc1UrdiTUjAZaq52LOtns4+qiWsIbZkSL0rO3+2KCYcnBCzamufg70dvTbz2Sciy+mTyXFYjKlbb4HfhXLtVP8/LrAjENTFBOMP90aHdi"
+   },
+   "kind": "synthetic",
+   "module": "M04",
+   "target": "func",
+   "tier": "core",
+   "title": "Something odd near one magnitude"
+  },
+  "M04-T6": {
+   "categories": "zb64:eNqNVU1z2zYQ/StvdLE8pTiUP5Jabdpp3UwPbd00durpSQOTKxIjEFABULKayX/vLkBJiXvpRSQB7O7b9x5WHydP7nmywOTe9QTako0BRhPcEINuCLEjePp7oBCpAR8ucHldXiE6XL4q57iDsg3m89fljazJywUeSzxyAIyzrY5DQwHKEyy1KuotLbDyrsfsGJXeLspJgUntzNDbIJAeuHRUT4bQD5zsiaAYimrS0u39n1hpftnp2CWUYySc1622yyHWBQzXk/rFCUqBhjaxW677Ar1qE3x+LuN+Q5iqMJKwHCurNYPn9P15gpdiZ4PV8QgxLTFpzq2ZuTXHUCQfClgXsdbG5e8Sfwyc7Ldf0TIF4RCm7Xh+gUZvhfGnPeZVVWH6BRBlpPU9GkdhhDJsjK5VpPBSP7XZkPLonRf9lIWzNUmleGC0xL3a8nlVd5xxZ41TTTpVJD4al8BLHv5igSSHaRLhqfZKt4OnkQGuogMH4N3dz8g7cCso1p8UC3eN9Y/yJdXP8v4ZNip2IwpZH8OSmPxeBt7g5/RbOQdGoW0rHZQb2353DrViytB4tUvrMYNyvldRQHndtFR7tuBSIIfPDNToOuYy9KzqaPap/Jr2AWd12J6l/g8oi8yQnEg4pKvsummk58hW42/ZMfqpfMfPrAzbySav/UcYbjH0yhgGn4Q5nsRFeY0p5+uEEebyuHNe4oewxq3rb5lD7hG9tsfdNxyXalo3a1RULyUZzTOSnxrMzL8fLPZu8Cf5azIGu46yTSzFnfNryE/A9MP92+Xd24fH39//gjd48AOdf8O9h6GuKYTVYE55RLpwspq8+dFXfB25cz/wLRU3H4QLURmanTz1l+AaHcFtsPMOfCXEo4N/YvVT1vDCRKpV7JRsEVk2YsIDvFQw6j4VOo2K7JBOTP7h4RZyIGDndYzMx2HEaI9/nGXxN1xW5X0ZbTvRNYekAXBRzW9m1etZ9QrV5WJ+s7i+LKsrvtPVV1W1qKrskujcbEW7LyedIAjg5UPHaRRk+xRY8a3+bG/0hNGBvSXOiJ0Oh2nNBOmGJTK617EQrUbj8QzPxg2d84kjRo7APaEeImuSN74XjHy9mLj///9wTFXkEX9k4gqpc5klee3r0xoTXk4+/Qu8jC/M",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: fdsn, comcat, quakeml. Part 1 shows Client('USGS').get_events with its arguments and a guarded download with a cached copy. The ObsPy documentation of obspy.clients.fdsn and Krischer et al. (2015) describe the FDSN client.",
+    "2": "zb64:eNpNUstu3DAM/JU5poCb3hvkFKCLXoqim+S60MpcL1NZCkhq5fx9adktetUM50Hqe0YrMupXcIbwOFEUUjvRjbLpAKEwwq6Ep+Mr2pUy2EALqylCdqhKRhGeOJ+qRZxD/O1SVhBaEMLL8xOMZ9IHFJeRxkqDE5RHgsnHF1oivdsAtw1G3erleDgiJvYEaGxXhC5RqnXLGFLCRH8zbpR1Ti3IRqE12eo6dOBSquBcFiSe2SfumldEKnliqyMpMk3B+Eaf+vTMeQ5T7tjD1nBVCVkbyV4OFs6JNu8tx6m/DGjC3oP36FZOUW93nEdaHr+FpLuHUNdlu8fzulWpGZd5RNm8Dh/k6d4q5oRYUp1zn9rRX//uBA+6EwaMEprXdFfnlUzecPqsvi7Pvqy70HDbNnzhqfpxguLnj8OAd/FSHYil5v2ySvb/h7hwIr3/Axc8ybE=",
+    "3": "zb64:eNp9UUFqwzAQvOcVc3MCaR+Qqu6hhZxaCmnOQZY3ylJbCtLaCZT+vWscN4eWCAkJzTAzGiWuPblEWXbUU5A8N866A5WLFTAeQWfOkp9K4E6XSWRrsDwgJvYcdp042Ax7somw/Xi+8Dz3pDRU1n3OcGsYajIt4Tubaqonm+1mvYFrWEOV956u+YRbyuUSpornYWs5cNu1aK0PLF2t2W/7/RmD36i+E1s1NDc25BOlcnHJckosBIkQrWPs559HKhi0tX1bzw0pSZlim+iLfM02BH95nXSrKAfEoJOgRNizEi5Ytj3t2Q/Vvr+tp9tj4iBwsdOw5Sxdf2/PDWVg9Qh8FS73xQrmNy2OVg7qXKhgl2jCVHdEvn8A4UaZAA=="
+   },
+   "kind": "artifact",
+   "module": "M04",
+   "target": "answer",
+   "tier": "stretch",
+   "title": "Ridgecrest and Gyeongju side by side"
+  },
+  "M05-T1": {
+   "categories": "zb64:eNptVU1v3DgM/StELp1gPW6T3gL0sNgCvWdz2aMs0bYQWxroI+6g6H/fR2q+2uYwmLElko+P73F+3A28xG2/2rsnuvs3rkxxpGOsiVYzBV+q40wmMek9Wm1Pf4+FE6VYg/Nh6qjMTHk1y8K5EL7ixo7ezFKZfEYE+ZJ5GZ/IzmxfaZsZ6bSES2bLlItJCAyOZlTAQcvd33UEdMXsx5j2g+D77zdcjq05kikKYUsxTJRM4Y4GvKXR2BIT2SVmphJpCfTwib7QY//50+eeXhDD3w8xcCjeLOR8LskPtfgYKDC7TFIdAUML7RRjqOvh+AGorVm0Qam9sgkdPXyUAMUNyIN3jsPer4eYiqB/meW2ya+ET9ZGgUo4oDHFVRMltCAHm3A0+TcOWhT3lJNW7EqAsCjcdpRji68K6olcpBALVbT+Q17mn6S870KkiQODJ3BznnXcAB8n2lyfUBJ4xhqskKEniY077lfjbuvfa6+zWcb94MNlQqIASAGvaIfhrPaeZpMphgVjGWItJCGKl9FhyVAI5TnWBRIwb9xmI+EaTTZCWxbXcDsdr/UbbbiwJ7d+fBSW8PCXPigjNyJbKxDZiASoi7TbHIWpAClDqtoHuG9jgpwNjJChAajCKZEyi6Z0ObpS0BFoNLgBdlvEZG5vQl65p68y5Ib+RC6YHhDxy+BNmuoKPjqtqEfm/WFJUT0Ph/O0nE/gaDlqK3k2B5ZmnrnUBB7bZFEhwTBIFGj06AAULtEU6AU4b4g9AJqORqHMsDnxkllz14DJBHbvGVIWhWDHFkBGbWxKYHC13Xk0px+P+rPve3puwo7YA3zIAs6tItMi7+Bi/53dmS45ZOuxbPJ9J67LNeH0pAOFp4MVOeYLwLOQT1Joo28Z84U32mEE/cRYgVgDwCuPoo8Jt9qTnaO3LNxLY4t/5XuR6nuuXs0rQ27YLKHGmm852nyZ27jR9sXV642X4RVD1hSzxAlGRswOytKi/yBlwl5rztOVt79dXJeeLRLDMTJIMdJpHYw6mLF5b4MU5PtbLRzAxbR/9naW3b5ArdkcIdwXNfIRtgzuqUEfsBEf2ta/TuXkYxhL7DDAZ2jhqqeTubU8io1RHmL6w9AV37ST1I5XTF//aeSx/XUckpcqRSiHJ3wEDT//Bz/rW6w=",
+   "forbidden": [
+    "seismostats",
+    "sgtl_tutorial",
+    "numpy.random"
+   ],
+   "hints": {
+    "1": "Glossary: exponential_distribution, gutenberg_richter_law, magnitude_binning. Above a threshold, magnitudes are exponential draws with beta = b ln 10 (Part 1); a catalog then rounds them to the nearest bin. Aki (1965) and Utsu (1965) start from the same picture.",
+    "2": "zb64:eNotj0FuwzAMBL+yt6ZA0CTX5gV9Bm3RkQCJMkSq6vNLy7mSM8vlj2DUFvQb1ptgQRKrsMjgv70KiyXKH4rCJFc8bpcFWfC4fz4RGg0IpJeFm2JrtaDJCyNZ9ASyKYEkgEKYmbkOVoO1zij0kmQ98MmqpZzRapeg8AplvWLEtEYkRaS8gbAkb8ge4tvnyYLJkV/KnvguLkztuKLGO+qGULA6ahzOjtPl+W5Zseeupzb/OIRD9FkqrC5//QPvYmaV",
+    "3": "zb64:eNo9j8FOxDAMRO/9ijmCWAlxRSH/4rRuGxHbq8TdIr6e7Aaw5IM19sxzSOwU8aj3DyDBs3BD8J2h5EelgmIb1ey7wFY4a5yC14Mh8e8s7FRWEFJWJC52QuYuvnRFwV9XU1bP3WqpdDas1QRVtwuESfEGu3HFA2UKzfna4j/RIGGq3BznbqVPh6S+74anwQHJerSe+YxXLBIv/WA43lG+udq05Rsj0fx5t+0t88D7TRtfL/IDxVZWaw=="
+   },
+   "kind": "synthetic",
+   "module": "M05",
+   "target": "func",
+   "tier": "core",
+   "title": "Practice magnitudes from the Gutenberg-Richter law"
+  },
+  "M05-T2": {
+   "categories": "zb64:eNp1VGtv00AQ/CurSAhHst04aUUbKUiAEB9QJUTLB0RRdbbP8VHfXbhHS4T478ye82hFqdIm8d7NzszO9vdE/hJNKGpljGwnS5p8tdHRvRii9KRFaHoKvaR0isZT1Fmn4yDIdnStTFAkTEuXeOLWSlBWXZy/mpZ03YtAypOgtbUtSR8U8KzLqY4BoCgF4e8Iv54hU5/GOiebgCZv7lTxJfj4uBuf+KDupaGMP87KU3pBreo66aRpJHfj5z7WPwCyv/H+12YQytDGWb0J03KS00Q3RaeGIN1BchdNE5Q1FL0cYR6cNWvyMgFJdA2+pI9SbkY3hu3oTCoQtEKCqO29JN3kyZIG/YQDkAo9aXq9QoUKavXJnLzFbVyalzPycAWKhaeqvHj6c46iGgZARW6fqCvvlVkXXq21YPqfhPe0ZQ2QIF2A1rA96gnWLoFSNr1s7rKbyeXsrLie3wCKj6zq2wiXc/K9uq3tEFb7D6NRRoToxFAMdn2wqi52+WBxg6FqRisIWcwWhBmze9YSp0EumRc5CQwOTi0D8vEIkvxgNxJhqYGQqicjYM5uYhKEQ9Usk1PCANluE7V0HKORnS1aXexCA7HPU2Q6vVr3y4TQi6HjvNPxGgdnZ2tJn2F1C7JarI0KsQWID8IFHvFhfjkPEDkLjvfiONbMWP46pQ5hS+20FCZxdXGQhe2K0EddH4g+HhlY1DDA/3QhM/9uEAOMmQZA2pjkMXmhN4P0/92rq37c0LcY6ku/36ecHnqF7T7E3W+cFO1+aY7qE3mEouBQPMNb4f64g6Po59uV9I7zl7A7eGadX+6yM2amhu6IabX5PkTMKT0iZ21awsxHze+7k9TKeyV4gP6p31O4mBl+FVRNxyCnbd6lglVcWS2fxsRiEVQrE0qwA2IGjZgC/nNRvUVuTLtMhsIbj7yaTSmcE9vsW1UisLs/1ffpbuEbnMHDZEar8WVWVvmBIw8W1cVikbJUp/rp4nTB3McC2M/Ki7MpSmflvConf/4CdHThEg==",
+   "forbidden": [
+    "seismostats",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: maximum_likelihood, b_value, magnitude_binning, standard_error. The estimator is in Part 2 (Aki 1965; Utsu 1965 for the correction); the uncertainty is Shi and Bolt (1982). Mind the base of the logarithm and the float rounding warned about in the Contract.",
+    "2": "zb64:eNpNjlGOwjAMRK8ynyAVlu4nPQGnQA5xwSKJ2cQp6u1JQd3dP488M29OCU/NvnRw52qlHhHpziCMQclAOdM84M78gN0YE4XKBe2jGeR0YsQLdvDx63uALdFmk4zIlAaU6izTxf6bvEziGUGv/WHDW7i5Rcj2KDc5Ow12/O15t0DHz03XJFY9t62LLjWur/JTKbOH50nIRFPBmDVCrFtxjZKwSW1Fv+3+AJ8ksmqzxhpMHmFezCGhP4CSX4RbCfsXTb1m+w==",
+    "3": "zb64:eNp1jzESgyAQRXtP8UssMomtQ7yKA7oqo4CRxVw/MJqkSbZiPsv7D91GDrFGGjnTyg1Q3wGeCFaNznDsKeBpeAIs0KQ728EaFwMmtQxQ0MYV+M5odoJW3ZzOix+rm6ASuAIC0pJy8APOpksKf9BKlEWYTKv9wslMhnUj1TdZTIZo4XfaQDs5Dhkm7EnI9BLhEdVGaf3odGBj0xeEO7eqjP/n60R1S7bHE+g37JPII8DmPefuU+0Fp2FhxA=="
+   },
+   "kind": "oracle",
+   "module": "M05",
+   "target": "func",
+   "tier": "core",
+   "title": "b-value and its uncertainty"
+  },
+  "M05-T3": {
+   "categories": "zb64:eNqNUz1v3DAM/SuEpwS4M4qOt2bu1HTIyLNpWzhJNCTqnEPR/15SSnKF0wIdLZLvg3z+2Q2cEg3iOB4xzSVQlO4E3QuXBN8GcBmSmxeBiRPIQjDShMUL3OfgXATcHDlRri1/lN4hYVtIvyJrPcEVfSGDXjFnGnv4kalOvrcfQDsBYXKvNMKX/mvfHaDzNMmRxpl2Ahf0kzafXQRhBs/bCW5cIJGUFBXAoG0YbBh4qg8r4aXOPGCGuPaLy8JzwgCzu1J+vKuypkFVUTqoDzcsRloxdUThA87RSRnVkmTyUxUb+Xjfw04wveIg/rZf1od4HMd/LlK4laqevZfKXO/1H3tatO8E5ZNJePibt8d2Eyu1QBhB5RNH2ZieNwYNSdAcGFqGvGBq4F7lU7bQFDsuxrEeSFVcVFCtpjtVD88688RRku4JMF/yR/xyQO8NimNj3xLH+VgTVVV850Dmt72AKeAi2Y1NibCnhHFQkicTUx/pqsY1jSri00nPN92b6jUB2OjtfmH1VH0MHFYlObX8xrwpyFs8AlfLIej93nBb8ldf9n9K3/36Da0NPxc=",
+   "forbidden": [
+    "seismostats",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: magnitude_of_completeness, maximum_curvature, histogram. Wiemer and Wyss (2000) take the peak of the per-bin FMD; Woessner and Wiemer (2005) add 0.2. The listed values are the bin centers.",
+    "2": "zb64:eNpVj0FuwzAMBL+yx/SSBzQv6DNoibaISCRAUTby+9pCizY3YkDM7n4pDvPcPxHDFbyzv9BoU4mRGaJhIBzFKmMRhY62sGN5IcsuWXSbdwNphtvQiW5RpINqNzg327ljrUYBNen88UA6PwPFDtgafOZSKv/9ltLw/kDQkxHlLfuQKJNV8o17/MhuF+qNar2Y6Vl+RQjnM25uk8BC6fm76W/kVZ1yns5k7pxCTO/f4BJmEQ==",
+    "3": "zb64:eNpNj8EOgzAMQ+/7Ct+HtDti/EtpQxsNUilN4fdXKibNp8hK7JdpYYHUfSEtMy6Nb2Ai5xN2F4WtBsILYR+guUqgAMuwRBBySsVwprzRnTE/psNtlcoA37btyuyB10HgYize8NeJNjZPyRWWiKyBdICTgJRP5NVI0GGy97UhPiIfhMX5D34aceevrA2n9+NkS51ycxovyo7TaIx3Ku0d4IlmqpI3zvIFysNYvQ=="
+   },
+   "kind": "oracle",
+   "module": "M05",
+   "target": "func",
+   "tier": "core",
+   "title": "Completeness from the peak of the histogram"
+  },
+  "M05-T4": {
+   "categories": "zb64:eNplU0uP0zAQ/iujnBrRZpPlIVHUvXJAcAEOCHFw7Uli1hlHfrRbEP+dGaeli5pDUtkz33yP6e9KObcxtu8xIGmM1Raqbz5DjmggjQjR/kLwPeABwwmulWtQLvpSQjioZA9cRhgb+IA48093KpfPsAVGJXCoYgIzaVgpAks68AFCH/wkCDKJEqQL9lOqm2oN1d4SWRrOBAP0PkzZKTCekclzB+Okm5kqQvCZDMs5KJeF4FeeJmX4pHQCweXLCxxzlLv3rIfgaNNYmFoqp7NTurjxUW9h1cEdrMwEjqBr65q/fPSC6+V8Qha3keZ64e+DwXBln0kn6wn0qGg4e11KLgwmNZBN2Qjj/Wb20RaPOZgIqPR49mmylOPSzd79zGztHlkMgk2Ftp04K07qUWK5TjlxyEc2CQZRWhimMWAcvTO3LKV5mXIMnobnDi9+ljh9EPHHkZ0rpkX4xKRqyUBa/+GDIgPaT7Pi+YvH8LArPeLY3f12yYzjBs02phwIFMQki9VD23SsjBekbdq3/z1vio5CcbOkLVI++wnP4YNM9DlFa5YdSN5hUKyjgS8o3p2AAzFb2QeJIMIOaG5UCOq0+t417Rq65l5enbxe/aiLGJa9E17r2/3jga10bMp127x8V2oecU7lDwOrh9Ja82DOt+wNN7xuqj9/Af5tMbM=",
+   "forbidden": [
+    "seismostats",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: b_positive, transient_incompleteness, magnitude_binning. van der Elst (2021) uses the positive magnitude differences of consecutive events; the formula in Part 4 is the binned estimator of Tinti and Mulargia (1987) with dmc in the place of Mc.",
+    "2": "zb64:eNpFjk0OAjEIha/ylpr4k7h0DmDceAecoR0yLTUt1etLGhM3hAeP93FXfEpd2hUSsOQZ0vAoygf0xj6YYLQxbHUhIXBlnbmhBChLXJ+likZkiirWF9+IDrNnckWUNyt2icxFFu0NTDUJ1/2Ejfnl3uIcMiSmZuODo9fz5Q8WP2XSCa9uo/sljW/VyuDdBimUmnui0xeeOUtf",
+    "3": "zb64:eNpNjksOgzAMBfec4i1BRWrZVil3CWASi3xQHNrrNymLsrAsW+PxU9kmEhvdMgLPF7D4uUdMpeNjKdQZLPAswsE0SjLtgmMv+I9XTmdK8NoEzsdChQyHgHRyfN33WIs1EBs7xSRjj432fP7AWEWXJKfDardCY+LQGH4TJj1vqG9LudAOuNWUd7TKkw6IK/7hTsPF2XUoKNpykdmTFAOGR/cFw6FTIA=="
+   },
+   "kind": "oracle",
+   "module": "M05",
+   "target": "func",
+   "tier": "core",
+   "title": "b from magnitude differences"
+  },
+  "M05-T5": {
+   "categories": "zb64:eNpdVF1v2zAM/CtEnhLMdpMOfQnQvfSxGzBg3cOwDYVqM7YQW/L0US8d9t93lOxkLRAgsi2Sx7sj/6wOOqz2tPpmo6ORtKeDcqFjRwdnB8KJgouhw0mZ9Ij3L4yj7dkpUzOpvreTL/AfOhvbLt3q9ZF73VnbUG/tEWm14YruOq6PkiukW5M2jZ3oZCONynuyRhDIF2s4vZ7YMbX6mU21KkjQljaGMSbQeHq0g3WahugDOQ7RCUjHLPV0YDJxeGLnaX1fUF3QuEFNdHNPH2hLyjRUyynl1iZw61R/poN/j1wHbuYkZA/EABK8gJycNS1ZR4P2Xpu2ogfANtyqALRoui3/42DuaikhqeTZqcAz0Y8+gHjQiiMD19rYkD9tN6hhYs7g47AESwlJ4BP65UnQC5LAbsi94gv6BYIZ6X6JfoUCikDg1J/c7Q1iSjiiN+tA76jeFIkuXHCn+VptTXD6KQJCup9wzEXK2VefRdaTsIkX6M7uyYeqFhusf6w+bW/Kh5sfiDtEU98mLR/BIcCBvEJibs8ib1J+0FKiMGC03JylkuSQq1faZJ4ywqAHYJus83wxMPzMsJtTAwexRmML8ja7bkSEfoHWPthxhPRPfLCO00eIoIc4VPSRQVGQtEdxbOZXyJETTJaVTNp54Qt6P6s+AgkIrzOPR+Zx1mHi5F0f+5A6HEv+FVXvy92lPbATNGodlO5lTPoTTR2mcKRb2qFzVYf+tH/tsSAXOgW3wrF2QrB1QwGokHSdTSa60hWtF/fJ8wZOdgw7ILck9yxcBUbJNeweQaVKqfIYI/Dkl2mTxcFZJ69bc8Y/t9+p50xlHh65sk9TnicXdC++voxOnquLMEkFnHwSbR75y3y8CRYkEdD8WyiylNKSyjtt4beGSdoZR4rbzx7SoBLhqCq1xPHgwjOc2OAdzvfzNgF1DSkp0CqH8Rt8RV/FfsUy48U84UjZCHcSd1lPCE02XjZXIW8Ezp1MG3Qmj6DUWGKxzA1Jf1/swEt/CqbFovS6yR2e1zX4FL89naCGafaiZB4G7MjdtqAdfpj1AGOZsVLOqdP6+67a/tycG8Cn7dLErQRIAWU8drWsjt1WtsE1tgeMhocrut7g3k31/vq6Wv39B7zaMSw=",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: omori_utsu_law, poisson_process, negative_log_likelihood, numerical_optimization. The log-likelihood and the integral are in Part 5 (Ogata 1983); scipy.optimize.minimize does the search.",
+    "2": "zb64:eNpdUM1uwyAMfpXvmGhZpV0b7TxNeYiKEpJaDSYyptH29DP0MG0XwBbf7yfjSDLnASkmoQuHdUvrRvczCu/O3zEN8AP2ET7FvWjAxpjwit0eneIFvseSBOER5KuerHA8I5f4i9FbALGGVdyGtLT5g+xvg9bpIJ7Tge4gvbXFjne8wbsc+hEStAj/pYnEJbeVSZ2wkF5ahjMOIdN0WAp7pcRVcZFgnE5cDBoko7OYNVu9aj4rQJ5Dc7+jGZkMl2IT8amw9vZ0aq62Lf9vbKyOKNK3edQnLtdSzGpWJ0ps5LUStqU2zmvIiqu1fPoBixCIjw==",
+    "3": "zb64:eNqNUctygzAMvOcr9mhPyaT0yFB+IP9QhoegboztwQ5l+vUVmEmalkN1WlvSaleygx1VaajXttfqkgG5vw4FYmSvAD9hJxpBE5ngYTsIaIMzcAQcQxHwhEZCHvAncpodNYHaIrLl56VBhJJMu3adGPtQjZFDcpnqmFV5pMkO3+8g7QmsReAH55tIWZuTq8IH/ltG4oQN70zp1USoq+ay4+K4rejQqVDaZX3ZzaytP7iMm8UsN8P2ccGoAktiOjE/ywQrSBnML7vbq8mH4v5eCMM7QdtPTiynGJRRg/oicZ9dJCxwcVzIeDjPlxsrjfXT/8duHBuuo6E2JpQJFk5Xig+foEngvgEDvpUZ"
+   },
+   "kind": "synthetic",
+   "module": "M05",
+   "target": "func",
+   "tier": "core",
+   "title": "Fitting the aftershock decay"
+  },
+  "M05-T6": {
+   "categories": "zb64:eNqVVttuGzcQ/ZWBXiohkuqmcB4c5CFNUqOXFEHiPgQIKnC5lMR6l9zwYlko+u89M9xdre04QZ/2Rg7PnDlzZv+ZqbDLrXEpzi5odmlvDKW9Ib03+pqOPgfceqtNpK0P8unyaLzb/Z1JbZMJce/1dXxONtFeRXKeblSTsdxv8Q6Xg7ugmNYScP5p9vbsfHX17NNsSdvs9ItTjE3MbavCcUmtfnH56+btqyXV5fY136dNTCokfr7afLh6+f5q8/rlxw/8wbi6vH7zx2t5uVgj/qxaae+ijck4feTsPnI6FdXeMNBErUp6LzlNUiGVCJmqyoOKVq/pz2gKEdUmp5jJu3tbEGfnbMo1wh5sKhFbTcrVyECeONdksfMAjnYg2fUIOx9twvMJ3mZ49f9wkgUs2xq8q0044QCFjJ4OJpg7JwfldpNjOdYJDllUDtnausihCl7VJFu4sDpkFKMhg4LsP2d1DaDzirbBt3S2Pqfk6Yf1s8WaXomMJIKKspXvG79TAQBboWgiMl4Ayhng1u5yEHzvTcrBkWIausanxlb0s3ztszx46pQzTURwkAJ6DlSrpC4K9cF8zqyA1VgmqiGKYKssJfEcG5AoatUYgXSvvkElw8t4kbo1UQBem2O8A6+2OhVEqmmIPw/5vvIuBaXTmt7cmHAsHULmVpsukbnh5pNjS87Uglyq+ESgt4BsyOW2MmEpq1o9NkMBy/ofN/F5fQcKsY8or9WrQvmoAGk5rjsrTpH2bdcYtI6J8STwiTcozfC/bgtr+iWNyBQd9r4ZcmFuKuv6jkHZGqOw7vzsUY3btByLM+m4u0vKaVvfNBCBosuMDHDabvXe6j3iUqMOND9lkUxMrBtjw11VCCxhEA5GFbT8u/fIeqfQaDhTQvjMpesQtuK3AIcvLL8K4blZIAFUXBYjNDrmZI5vUUaUwKMtJGhJLqojaDpKN2PTm9uukQNdRAMPlWvVrR7r1uoNP/ei+oJn4Kttc0s6hxuVWGDzJ2frp4tBnV82srviCSJyU0/ccDhXmj6peE0/FmvkjO47Yt0Kdt/6YFdC24h/a1MydemxEb2qa8od+wgjPCmmbxY2tLLvYqhFZbjurBF+si6ZXQDf2PPb9/NET0gv/upO1ThYV6NOsAY1+EY5pWTIThq5CLVCGwtDPZeQrFBV+hXac83x29Y8Gmk5d0IGYoxUdNx+WxV6TodO7k+uzQqUxOJmRvq5yrYpnjO12gJ+/hj0xXLKwNBRE2Y7hZYH9YC2EZACt7s3MbpvzIiJrAbMANVPh6eL+4Apu6F4jyMrNRc4rJeV2D4jesc3GEGL0v88ApZi7HDrUl0F3VceUhyHj9XluOLu2wdFPB1I87sFXT6s6OKiN5HeEyCd4m7SDqZmK2AInAwEEzulEdeWmcL5LzFM0bC1vUHgmqqj/D2xrRxsDdi9FuESMBxvZWT0yscnDYoA/PlpoPbIp+LHTgw668yarngKs9/WpvWc/DueJudUB3WIFDOQKCFGuI6mMeIDY/GHoYWMuF3NLabbwz64kEnYr8Uh0EGxA2hqZx1+pzRQFIGqYngNfke5k2VTMeqpcDk9/GJi5pi+SijLuKCAtbtWjUDlafPgn+/D3kqsn3yTvpMZ1uZGjbPsa7+D76Q77rvcyHvF8pa7uLebCvHXs3//A3U0/d8=",
+   "forbidden": [
+    "seismostats",
+    "sgtl_tutorial.checkers"
+   ],
+   "hints": {
+    "1": "Glossary: mainshock, aftershock, magnitude_of_completeness, omori_utsu_law. This task only combines your functions of tasks 2-5 (Parts 2-5). Panel (a) is drawn like the demo of Part 1; panel (b) like the last demo of Part 5 (counts in bins evenly spaced in log time, divided by the bin widths). For GJ_MC, read the counts per bin near ML 2.0 together with the trial table, as in the two traps of Part 3.",
+    "2": "zb64:eNpNkV1ywyAMhK+yj82M2wM0J+gpMjLItiYGPCDHze0rkabNGz+77KflK+MoNbZPTJIjdGHUcuAQXfpmpTpzU6QVZPdX5u0parYgRSiJQZNyheiAVqpyxHiHSuIzlK7sDqlINGfRPXI7u2vblZHCJdF3GDCaVeZEtnrfShOVG/9jzLbLMJY9cVbz614zSpVZ8mXXgCR5b12aSHJbSrh2AEjWgkh38/zB880fgcGXChrLzTlM2SR2VsvN0VrwiSdRP0pnxEoHNsq84o1OZ0xm/t2Op8FybdBRMjhaYz1jvaNtFKwOO17L/CCiUEtrLzmDtbHnHuNxXp8Du4kpLP7ogCg3p/Nel0fOIVGX1iE7Wv8WUu6DPUXBJuXaBj+wAmN8TXE1yPRYJdtf2Y84d73rInl+VOfyKEE/fgDEWMVE",
+    "3": "zb64:eNpNUUFuwyAQvPsVc0zUSMmhqqqW+JJj/tBoDcRGtcGFdaL8vgt23B4QaDUzOzOogZxPXdDfNYCPI6C4s4jhjnBFsj+4O+6QZz3F1ibG0NeVsjfrOWXOkyaUJBi2UdDkC2UV38HJxA0WIRobRcDQ40mfBTZ5sYsCcO0CFsDg/JSgVqEyr7dZLlkdvEnY4/3t9XColJuXXh3Xi6eBWu94MhbEIgxqwk1c6UW2o/4KQuN8DfJGol8SU2SoI7K/fPPFeiN+zzvoHcb6L/AjTDEvy0XlvYWxvOd68M9RpaJ0s0YuCjpMGVU4IS0KwhFDqUj0D6SRtDV52od2Tg+JDCUg+RvDXaGUOqvWSbyGpKayQ04x5vRq8hQ8R9L8iZG87bFptpBi5eue/qSpDMzyWkLYmEo35/2G8QK9/Rp/AW8YtLI="
+   },
+   "kind": "artifact",
+   "module": "M05",
+   "target": "func",
+   "tier": "core",
+   "title": "The 2016 Gyeongju aftershocks"
+  },
+  "M05-T7": {
+   "categories": "zb64:eNpdk1tv00AQhf/KUV6aSLahfQSBFFUCoV6QaPLAU7S2x86SvZi9JLUQ/50Zu4loXxJfds6c+eb4z6IuG++ijolcMy4+YFHvlDHwAfWupcZkfhOoRespwvkEq1Kzh04RdCTHf4qfNRW2kZD2hAMN6fxq2RnVR2xCphW6t5oFlGunmvVBl9sUs7SVe3pWTUKtnePOXGezUdWiwOJSrV0vZn/6HDA3aXXXEd8Eb/FEOlr/lFSKV/iqQusolHfOD77rcNKu9acI7zBK+ey1mlzCsjosKYcrGeQKSz5NA/GPS6uPGFSMSNoSlk7pI2G7uV0VDKV3OuWWChiVzlfe9dMlt0x7KPZGkdGx1jPeF7gucFOgqqbJOt3nQDLTD0o5OD7OpAfjk9E1vkxvmQ3DjntxX3uWZMHfWRZXXgwwh5iCrnPSvFcsZZmC+T/uq7mhUJN+VmnHms1hN4OcENTEBly2w8idPEuEoMZ5Du8IR2UY1sC8gz/Bd2eIInygMb6ao9W8zKl0zsd4jo5we9WbHzQFpgQWb/InM8yMpiaDNlTm4ZKBl8BpxxUM4YKDQZFhiw/3uKmuecns4O5hjUYlZXwP0YnIw1ng1zz8pYTXFL2gUMJTGdTlPPtEKXPmbSPzs7iE13re0vJxvfn2/XF9v3u4nVlHMtSIwFu/io/LRzUF3owToLO1lyMsLk97DpuTtGEkFeTT0oEdCBajxLPk4WX8djXjtgafP4nBEq19d1Mt/v4DXz5cEQ==",
+   "forbidden": [
+    "sgtl_tutorial.checkers"
+   ],
+   "hints": {
+    "1": "Glossary: declustering, background_seismicity. Gardner and Knopoff (1974); SeismoStats (Mirwald et al. 2026) implements their windows. Part 7 shows the window sizes and the table SeismoStats needs.",
+    "2": "zb64:eNpNj0FuwzAMBL+yD2hSoMf62KJAD721D5AsGhEsioZERcjvS8sJkCOX3Nnld0aXEuo7fIspQC+EJZaqYGHKClmetBu5ApfDQz3mRamMMTm7kUwviBl/vx8TVqJtrIr0Ck/aifIuMHrUCzjBmcUgXq4EnnFC4Ne3CVWKwt+gkWlEFsqN/T1px01gt9LRTlo5zZIaG9z5RAc9u2hQKzIoZphdSsMQaE6tWm8qpgpvTQl+f2u/ePpwpU3vaaG4Di/G/fr5rOd/zoFt8A==",
+    "3": "zb64:eNpFj7FuwzAMRHd/xY0toP5AIHvJ0KFj2rmgJcoWKlGFRCfo31dxanQ78Mi7R8tXFm0TcBoBW8ut4RZ1BUKsTZFL7j7siFLjEuVzUwd7jCkoV+jKSNSXf5iqAXLCNCI75Chbw0opgDBHmQxaqcreoLJseebKfrBKc+JO8EDQmBlPQvHK+Hg/PxtkWiTq5tn0Gj1UkWWXKGEn+HtksCHR0v7juvVK1QvXlzcp3yUEeHZpax29w/frC8eWy0VJm4GjlNijyB76QBuWO8xM7gunnns3fHR6NJ+LaCWnv6mfcE8="
+   },
+   "kind": "artifact",
+   "module": "M05",
+   "target": "func",
+   "tier": "stretch",
+   "title": "Declustering the national catalog"
+  },
+  "M10-T1": {
+   "categories": "zb64:eNp1VE1v20YQ/SsDXSyhEi3ZaQDJQQLBaQ8tmhqViqKnYEUuJUbLHWJ3aYUO8t/zZpeU5TQ9CCI5X2/evJkvo92My9LrMFrR6F9uHTVVfvSknCYYaNfRjrzO2RY+o+1B9/acWxuodFxTwEenS+20zTWFqtZTsnxhLCvnA3lVNwYmZQv6c+cfuitPPigXJIIqH13jM5f/CVv9oAo1pvW0y0ZTGhWqQx+zTit3bqRQQb9oBE6e2FHNNhz8VB47ccy50IDCDayWPCN1jM3IPn1C0ABOHntsUojGCwpMt69f39HN/Ea8bhb0W2s6vC6Wk8TCd4GxdoRcsqtVpP0vHVpnSVFo0Wr0PDE9KtMC/7j52IZ8Sl7+kFOr/AAOiXe+6ejv7f17QN1G2hx9YKtj8roypurHdiZESHtBiNFeOlNSOzmnEX/Hs0YSOlXhAD5q+E2psnRZgcZzYWK5XE5WVFSF0Irk6hFzDcRtiFw7rQp5Vx7BueM++F3C631l9zMRl+BdY/qgQooiHPDEQHULQewrpJVGBQXAB+hA5TqjzfqeTq6Soc8WN7evfiZQTFcyBOj76ll4Mgib8KXBHoBMOwEayXcZdBl85pXwzgB8pNNBw9NduidVgM2x1NGfo1ATT9lehwnw+SA9I6f0jv6k/Z2pbGG61QAS1HJrCmraJJbY6W32itC585i3M13aGkU9TXTUXS/Ys4Dj2C3PoFwlDMoc84NGrhKrWmA+TKU+RZaEWy+wYnTBJ2sYOOGGtt5IBgQZvLy9fvN+vV1vftm+vfah+Ti4XiNLRr/qAC0mgSMkdr7ZPvSLO665aEHIH/PbyV30SnCs1lDMYn6uH9FE+OyqfWVnj352VuD/nyXJmAL6q5HR2pjYXxL6eIdtgfJA3pTCfBKDB8WqMvTTfCn2O2IZrMirZjccpF5oueH8+LzWT9rxsNcRXmzCn1TT6OIM/CHObnPRQO+xGoSkMGpTJCk+pPlLSG8N82hICWIFwTR7AsQfbPaylw1Iyi64EBOIwrm4o983WxrjiX4S7wnttGG7l55xubDGUk18HJ/80J6MVT9qnHwsfYgoTg5Rs3SlBMhG7uZzk9EsNSEM1SX+QKxwJ+T2eVvfKkPeVA2u7T/sjvjquN0nWQ071Tvf43Y6lQeZ/iEuBH45102sJ+pLemptHiq22ejrN3v4Up8=",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: sac_header, reference_time, day_of_year, utc. Part 2 lists the time headers; Helffrich et al. (2013) explain them. ObsPy's read gives tr.stats.starttime (the moment of the first sample) and tr.stats.sac (the header values that are set); a UTCDateTime plus a number of seconds is a new UTCDateTime.",
+    "2": "zb64:eNplT0FuwzAM+wqPG1AMO7cv6GV/cGJ5FmBLhWwvy14/Jd5OPVigaIki74JNLbYrjEJEz4TEhW5eZbZGiYxkJXSudMGWec0oTA0LGq0q0RElNfpbt9bRQn0UwsuuA6uOEhFKUyyDHXJHMq3neONvyA9k1IXMbewU7IIYdmg6ByaRdXitLKO7h3kWwV/lUnj2r7djQeBWEM7PA/X3K3hKZY9IBm4Q7QdjrvXJX4QPFYd6UJurTfI5PR5lNLff/oO//QLrKXFE",
+    "3": "zb64:eNpNkMFqwzAMhu95iv/YQg47F88wdh+FPIHi/l5MYztY7vr6i912zCCQZP3SJxmtUtWiv9M7YOpC9CSyRwtyImoRR4TUEz6stIMp9CxMjvapjDky1ZfMh6IVKnHbqxFDuinMDKXL6aJ28LmA4pZXfb1nJIlUHATt8zyivnVvOp6Gxme24K72CfrVuO4L0wO5SREUMmuD8CXH3nb6+MRCubDYEVyV+A++rY0q7Mv+cX2HH2IWd+0X2e1gzuiDR5jp4R1/Aew4YxM="
+   },
+   "kind": "synthetic",
+   "module": "M10",
+   "target": "func",
+   "tier": "core",
+   "title": "Pick times from a SAC header"
+  },
+  "M10-T2": {
+   "categories": "zb64:eNqNVE2P00gQ/SulXEhQYpLRchlpD7ArAZcBsYNWe6zY5bg17W7THxM8iP/Oq+54hpE47CmxXV313qv3+vuqHdidpNsZN+W0uqbVfz4H6rNrk/GOLp8pDUIpcCs0+0wTx4iXxjX08Rg/zS8idZKCuG5LiScJxK6j3tiEv2cf7lBKk8Xxa4qJQ6I++BENm9ZP83rTrLa0an1wEnbZmRQVyC1GRuMk4nA0nRQMR23c8ijkc6IxtwMl7ymObO21YgvL2CCjv78gL6fQVmzf0DtzX3vVgdqeBgnpAZ1Ogg+AbNLwRBnsIo+TNe5EgZPQeiF9GdV5gEwDg5YPCmKzJecTMSrQQIWM5PvS8Wb+mk1UAeRrFtfO26JV58uJeOZJy8aiSG2/86GT8FwRkH8uCQcB4y63ghUcIc1xJiuxwHJ0tafuLa2ZeqABRGA57DcNfYlCTG9zwhisCaS12U7XWzX4YxFpSyE7pXfm0BXER27vysP6QYKfBo7y523IAu4cC7C/vFP9wIrnWAn5MHJx2WdJOTgMT3myUFTlwBDIHDdFqrOnw+5vcnmcZrALaLFIGHX9VtwpDdsK03m64Zsywvldle1/CAaclsOp/DkKwMGeS0EVoTNd3SRYIA36sePEJQTg5qIyku4yGeSseWDd92OSJuG7WKb5vteteKfOc4iBS5d9NPTvYrjis5SBNLZs9RB90ry8hjaFir55KnpDJ7gZ/csc/fYGFPiuEuVj9DbDsPdssyzyhb5PW0THJjPZWSFdVQuae1UIz25KdV+umvXpWlhMS/zNIDhwSfDu1NAHzSJcXUyi0d7Te83T7y1P64Ht4y6fgrXRKMYkU1n1gV7RWqHQS9wuNjGcpeJVMnrJwBxH/JTkuakBr0bJIQhqrtjQjZywDcR9GW0EJvvlgfK0oHyGBJPCszoAa+cWiSqDS60soe1NKmoVLXYFXrnA/vHjLwutJig12o3pzHOFDhm1jXePK8oxs6VozQQSt2EuL+VbnXqpWdJ1jSjv9xdIGJL0WdUvyfidaa606DVKtjUKh91BDzSrHz8B25IZZQ==",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: fourier_transform, spectrum, nyquist_frequency, zero_phase_filter, in_place. Part 4 shows detrend, taper and filter; Part 5 gives the frequencies of np.fft.rfft and the amplitude scale. numpy has a companion function that returns the frequencies of rfft.",
+    "2": "zb64:eNo9z1FOwzAQBNCrzA8iQS0BxBe5ABxja68Vq4ltdjep2tPXdRA/1mpGeiP/JFyyeP2Cy+UKmxgm5HiE8JI3bsnClA4wKix4xxPIwOQmcPLovimlHlTPU32OhVQRDd1nFSWx6AE3lnwsEyn3yKmRj7Wxkud9QUIw5PBfPSuUljKzji0Lwr8rJxdZQcI4Y0CXiile4Hk26hGy1DhIXvAGy2jtMOBjFx5atNX/AXaJbp+mk+Z5NcZG81pbH7fouf7m2ojXO8cPYwc=",
+    "3": "zb64:eNo9TrtuwzAM3P0VtxRoARtBg0yFqjHIB3TwStv0A7EoRZLdJMjHR3brEODA473Ur/VnjWW+vgFFqK27wbaIPsFFWmWYBJ6NnbnZsE+84UQiiOT4xaxImsJRCGjNIEVr6JrjkCy9sA857uwtXE+BdabKv9gt2TONxSBuijgef9YGPSOQcSOH5VybZqr1fAn6JVtICzSx1EMixp4iKh6tdIgWZZ6+1kBcDEjt0PAYSWfdMDMqqs/JJlm9/9vmUHs8ygd2q0J/PAGV5Vgj"
+   },
+   "kind": "synthetic",
+   "module": "M10",
+   "target": "func",
+   "tier": "core",
+   "title": "Spectrum of a filtered trace"
+  },
+  "M10-T3": {
+   "categories": "zb64:eNp1kk1u2zAQha/yoFVT2IyCNEXhIncI7G66CibSyCIikQSHkiIUvXuHlN1k0W4EivPzvnnDX1Xn40ipOqA6cpqiA6EbPCUsPTtIeBZY0Us3jS8cdyDXbn9hBcVIK3yH1DOERv30FHgrtakUui3LVDtU3vFeAnOb5X76KaK1ksg1LJiEoXGUuJ6GFZ+OeETCZ8w3Bj9U4rR/QrIqo42zZGu7jiNrfYFYPFKkmYeSJPAzx3e0q9R3vPjUbzoCnT1xLHSyUAj/ZKPIcHymZGc2eMryHUnKdogvCh/JjrjFLNhvh6CWIXixufji4gFNz82r+mSbCwnOXoXUuMgFZnI2yX9Q7uq6vo7YdQanbZQcsg6v462ULW0ZeiPceNfKX9hrNzS+9JjSVofFpj7/kVs15tQ+sd4VniV6d97PNExcsE7+g6WbdknJnQiLPovUU3kBzqey2MszmWSiATLYILrUuJZLfqMxDHxQu3TlX029yw4+4t48lFHuTA3BOTv4zXxRVFP9/gNd3Osk",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: s_minus_p_time, hypocentral_distance, vp_vs_ratio. Part 7 gives the two travel times; Shearer (2019) discusses S-P times and distance.",
+    "2": "zb64:eNpdj7GOwkAMRH9lSk4KOV1LTUOHgB9wLg6xkuyGtTdR/h4nUCC6mbHmjXwKmGOq9QBrGdf9GSYDgx+ZesUFv5gUg4T8NmOJG3XsJmZDbFBFa2Gchm+ErI1VKXZ/L84emxh/ShxlkppRLV4iQ5Xov2NzeE5h40gYfUCCRRBCHsYFlBItaCSpFdC4phUnBYX6ddP1lw7US8fFFt9l8hFnO6Tpoy/NLX8OzOR9qIR7z29g+QTgJFzq",
+    "3": "zb64:eNpNjtENgzAMRP87xQ1AF6jSzIBgAkMMRCQximkqtm9K1aon39/d85lAMzbOWKMFbnfALPJEpHRAeZTkFD2CKCskoYWUGpbEtdBgyhJRFJQcymYvpquQn07avjD6a4vdx4qgepiC0A7KmQ4L54t37DAcMH9bLrMvjIHG9YOqNt+mn9BhkeD0HJIeceDcgIMy3u9OMjr7AmUGRLI="
+   },
+   "kind": "synthetic",
+   "module": "M10",
+   "target": "func",
+   "tier": "core",
+   "title": "Distance from an S-P time"
+  },
+  "M10-T4": {
+   "categories": "zb64:eNp1VU2P20YM/SuEL5VT2SiSUx3sIWi6yCGLLrp7aS4BLVHW1KMZZT5WVov+95IcyU5a5LDYMWdIPj7yUX9vmh7didqdcWNOmwNs/vA5QJddk4x3sFxD6gmeUiAcYPYZRoyRrcbt4bdjfJx/iDAG31CMxp1g8uEc+RJGiw0d9DdwsKgB9o0f52q739SwaU1M6BqSxE9+IFgNETAQTMG70x5oNJ/PA5ioMNYngJZv1RRz6DgTdMEPamCPhlyiAMmXFwm1niomizX/tF4AalnvfoGesKWwrcV2Ht5CP49eUt5B/BJSVQC8evUafgR64cCfWxpTX2ylks6HAZXA3ynlwJk6c6oh4dHS9gAID5hG65M1R7g3p8zVoWvZPvI/jPAeE94HZAomk3oF1nibB8dEtvVCQX0FJr4j4blmXgmCn/gXFxuYBYVj8Ug2CpyPctJ4eGFaq8sBkuE02Ak9PpiTcXVJWsXtW5gF7MrxenEetlvNOQWTmF5s+pKMG79S2/iWwNElCecmFU+87BObCibjSCG9Dzh9FQO4fLpgk+ys1ci7q7dwBtXVLFVKtb7Tkgq9C0q0FiIOo+Uy1/srIc7vWqZY0j8Ltz01Z+h85pqS99DRBB8+fILOfOX9xLP/Z4aHj/Bm/zMDDqn/kvFMMiWzyKT1k7Me2z3cU2pK1yRLwfP0/MjxQmT8g2+zJXj46c12QZN2YzA8oa0gepSjek+9t0tZnCUapnT+RpAVz1+YhYP6NimFRtNGnrRy7/JwZKqKbxm32PspwpAZD9ro4UiqySYQOQUl87TyowhE1WwrPvxcUlkMJ5IQx8jjybPwgjaTMKYNZf54rGRhCKSavVgYnLtBbt+pXjW3zg7zB9mZFAsAH40UKSB+vY3Hmr7lsXG8F7RpM2uT/a6CqOQgmg9obytC5czzwXyvjuIU0PFCCjzRntGE63tFsWD9Dgi55fKirBVMGm2lJE6y/HhL6RsGdeDAL9JCKflbZuA4q68QoBxX6T+sF70N2SYzsjD4/Rq2oPQhLSiv/bqB5EvOxD4LPTU01kcBqQOpEWQL7PBi4hrjUnoZb2Go8a6Ny6oQgGVdlAVSOTqx8l9obbJJC9P/9ysyKOLUuuQZK4XinvnYS7xYBerkcFeSbOHEsXXll4r1Y7ArEK/fi5FFKcOngx44b2glvUqFO6E+MgUsSZyXlkXNLitl0XmOmYcmWjMyHF1OeA2iT1gipW1ROdXFzX+NHzh/mZq/KPjd2GOklc4xW2b8uisWFcpnzWLhBVUMsygzW24XyeptMEdGU8YFWrI4LyTwd0Ntt1RQyVmPd88hyyZEzZgwnuH1fvPPvxI9urQ=",
+   "forbidden": [
+    "pyproj",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: record_section, epicentral_distance, hypocentral_distance. obspy.read reads one path; a Stream can be extended with +=. gps2dist_azimuth gives meters along the ellipsoid; tr.times(reftime=origin) gives seconds after the origin; ax.text writes a label at a point; DataFrame.to_string prints every row.",
+    "2": "zb64:eNp1UF1ugzAMvsr3uEppDzBOsOcdYDJgSlSII8ctsNPPhGqbNO0pkf39+i1hEe3LK2a6MQjvpkwzZEAnOXLBi78bbGRc44PTExAgCv/04Afrhkw2nhoMPj0GptSxI2Z5cGXPTCnAKLMGtJT6c6bi8p+scs4jFT4FXNkqmHPsOLnGhD4Wo+Rag8pcl6Pbsno+Dx4TGZdwzLcsf1huVJeZ6dagiFaD4tFkKWi3f5kNeqUFTN34LLNEGyHJNddLnsRAhmjlmxFQOpq431Xr7+Pmh/RrVNQeINQ4i0bjOnOeRUlepWckXj2b+KLBRC1PaMUNaeXSoL3H6Shi1E6/jrE3csu9TUDWmPZMh4+y3TVV1BCvd/05RtW4fAGe/7YW",
+    "3": "zb64:eNpVkU1ywyAMhfc+xVsmrafdJ5SrdGQsxxo7yAOkSW5fQabNRAsG/T19AnfVtHiYHb4AF3QTztAJZWac5IcjSqLAuYemFny4SEwjpqTnFtyozNl3k9UwhRmuVXlIhGsTDiY+yVo4QYo/msebgOKI+b4pRsmFoum2lJSMjWnxnUt6zU88jQyLWDI9OHpkTYVHDPdXIWud5HRJxtBan2TWX2no9rGtWnYuc9A4ZtBU4TTJSaLv4aqcxztcDrTy93L2ePvf6xOuAe6PTanwrSoVKqIRQUf2+w4v5ugmGSsNvGZcpcy4RNvTd/WRMVBYYFTY/WEbQaFh5foXMvaw5zKGvm3ZLnW+nUmi7e/3v7BWk/M="
+   },
+   "kind": "property",
+   "module": "M10",
+   "target": "func",
+   "tier": "core",
+   "title": "A record section"
+  },
+  "M10-T5": {
+   "categories": "zb64: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",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: peak_ground_velocity, instrument_response, pre_filter, local_magnitude, wood_anderson_seismograph. Part 6 removes a response with read_inventory and remove_response; Bormann & Dewey (2014) give the standard local magnitude formula; json.dumps writes a dict as text. plt.subplots(2, 1) makes a figure with two panels; ax.plot(x, y, 'o') draws a marker; fig.suptitle writes a line of text above the panels.",
+    "2": "zb64:eNpNkktv2zAQhP/KXIomgFOkQXOpTuor6cs1YCAoehHW1MoiTJEsH1bVX9+l5Lg+SeTukDPf8rPF6EIb3yIwtUg9Y1u/R6cNg+yyERMl7ezLiO3y9/P7twrOgqCcn0Q5uCPPrQOTXSGR54B7vFhd1gJH72yUhcORjVM6TRh16ueqD3wjtyYOFTYPT9Bx3jYU9hwTaBedyYlxJJO5wp7TXO8n7xTbFMig1eLUKkYX3LBUJZM4UU4iakuJY4WQLSaXA3aSr6HBG51yy030rFLIQwlWtGPvhMHZqNwgJ892P20+1l+bd/X6Q/P4a6FEhyVjF/h3ZqsmuA46xbP/k23lBl9S1P+Ddy4M2dCZNv8pRmbOuIPX6KT7qoa2QlfwxOsKY9BpudBqe2ISQRFftj/WFdpAI9Lo4Mmyibha8CuhsLC5uUcsY3hzK9+zk4J9oHDgdrXM/ZnIrHldBHe3ePx7MTSmw0lyvQKT6pdaSZ6tTsV06ZuEw47NpfGujMDmYSeJnts6vc9BKEWSJyNqCbRZP8hahu33x0ZeUDbp1T9LOvLQ",
+    "3": "zb64:eNqNUktP20AQvudXfJcqgBwEUbmkriVQgaqlIaISh16sjT12ttlX9xFqlf53dh07fZxYyZf5Zr7HePIdCV1x3xUAFu+BvNKmg27gNwRLlbZ1hGbxy2uSxFSGC7yBZ4bsCFiSekelJWe0cgSv8Xh9hyfuNz2NsTRruPBxYpKbdpe0+tcLCmZbch7Po5Xn4l3E8odiaNh0RlekvGUCNXeeqYrAFbYy0jWlIbYt/tA1ln4EUtUhxMi/YyJQKq6ZqksmjeA+1FQ6Q5W3QR7lh11kyG9W15efy6vL5Yfy47fiOCrRz9RI9bipOQzHQT8/P8PJCY4abWUQLPn7coeohIfjiCqZttIb5m2w9JdhwxQJnC8wyoO1jKvo2HNJYE3cG7TlLY+7n12cnr49g8uwun2EZHZLNkNQ3CfFFLeLgdckign+f4PSfNH3jbHjnOM14Z/A2UAN5rFP+GqRBDc6WKgg12Qdniz3ntQ4OuSfxDtIFxOEHxbxa/rdaTVdIP/09X4Jw/wm/oipUW2qrZa3h9KeIlUT4c2eMNbHSAnpkoUmqMpzrfpTYG6LefH7Bc8u7Bk="
+   },
+   "kind": "artifact",
+   "module": "M10",
+   "target": "answer",
+   "tier": "stretch",
+   "title": "Peak ground velocity against a magnitude expectation"
   }
  }
 }

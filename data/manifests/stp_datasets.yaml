@@ -1,21 +1,49 @@
-# Waveform datasets for Phase 2, to be requested from STP with your own account.
-# PLACEHOLDER: the request tool is not written yet, so fields may still change.
-# No waveforms are stored in this repository.
+# Waveform datasets that you fetch from STP with your own account.
+# No waveforms are stored in this repository:
+#   sgtl data list                   every dataset, its size, and what you already have
+#   sgtl data fetch NAME             the plan (a dry run: nothing is downloaded)
+#   sgtl data fetch NAME --apply     download into ~/sgtl/data/NAME/ (or $SGTL_DATA/NAME/)
+#   sgtl data verify NAME            check the files you have against "expected" below
 #
 # Every event value below is copied from data/catalogs/kma_catalog.csv (times in UTC).
+#   sequence:          the named space-time box in data/manifests/sequences.yaml that the events
+#                      come from (null: none)
+#   use:               module (small, used in the course modules) or project (for your research project)
+#   large:             true for a dataset of several gigabytes; fetching it also needs --large
 #   networks:          network codes to request (KS = KMA, KG = KIGAM)
-#   station_radius_km: request stations whose epicentral distance is at most this value
+#   station_radius_km: request every station whose distance from the dataset's center is at most this
+#                      value; the center is the mean latitude and the mean longitude of the events
 #   window_s:          [start, end] of each record in seconds relative to the event's origin time
+#   bands:             sensor bands to request: HH (broadband seismometer), HG (accelerometer) and
+#                      EL (short-period seismometer); a station gives three files per band (E, N, Z)
+#   expected:          what a complete download looks like; sgtl data verify compares with it
+#     stations:        stations within station_radius_km in STP's station list (its "sta" command)
+#                      on 2026-11-15
+#     basis:           "test fetch" = counted on a real download on 2026-11-15; "estimate" = the
+#                      station count times the share of stations with each band in the test fetches
+#     files_per_event: allowed range [min, max] of SAC files per event, for each band: 0.7 x the
+#                      smallest and 1.3 x the largest count of the test fetch (or of the estimate).
+#                      The project dataset starts in 2002, when far fewer stations recorded, so it
+#                      only has [0, 3 x stations]
+# mb_per_request and requests_per_second come from the same test fetches: 373 MB in 2736 requests
+# (Sangju, 279 s) and 307 MB in 2088 requests (Suncheon 2019, 116 s). One request = one station and
+# one band. STP is slower when it is busy.
 schema_version: 1
-status: placeholder
+status: active
 catalog: data/catalogs/kma_catalog.csv
+mb_per_request: 0.14
+requests_per_second: 10
 datasets:
   sangju2019:
     title: Six Sangju earthquakes, 2018-2022
     sequence: sangju2019
+    use: module
+    large: false
     networks: [KS, KG]
     station_radius_km: 100
     window_s: [-30, 470]
+    bands: [HH, HG, EL]
+    expected: {stations: 152, basis: test fetch, files_per_event: {HH: [48, 110], HG: [105, 312], EL: [18, 39]}}
     events:
       - {event_id: "2018000078", origin_utc: "2018-02-24T21:16:37Z", latitude: 36.51, longitude: 128.11, depth_km: 12.0, ml: 1.4}
       - {event_id: "2019009762", origin_utc: "2019-07-21T02:04:18Z", latitude: 36.5, longitude: 128.1, depth_km: 14.0, ml: 3.9}
@@ -26,9 +54,13 @@ datasets:
   suncheon2019:
     title: Six earthquakes of the October 2019 Suncheon swarm
     sequence: suncheon
+    use: module
+    large: false
     networks: [KS, KG]
     station_radius_km: 100
     window_s: [-30, 470]
+    bands: [HH, HG, EL]
+    expected: {stations: 116, basis: test fetch, files_per_event: {HH: [42, 78], HG: [119, 223], EL: [16, 32]}}
     events:
       - {event_id: "2019013284", origin_utc: "2019-10-06T00:01:57Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.5}
       - {event_id: "2019013285", origin_utc: "2019-10-06T01:01:01Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.7}
@@ -36,3 +68,150 @@ datasets:
       - {event_id: "2019013295", origin_utc: "2019-10-06T06:01:29Z", latitude: 34.93, longitude: 127.45, depth_km: 23.0, ml: 1.7}
       - {event_id: "2019013297", origin_utc: "2019-10-06T07:19:35Z", latitude: 34.92, longitude: 127.44, depth_km: 22.0, ml: 1.6}
       - {event_id: "2019013300", origin_utc: "2019-10-06T18:08:36Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.4}
+  gokseong2018:
+    title: Seven Gokseong earthquakes, 8 March 2018 (UTC)
+    sequence: null
+    use: module
+    large: false
+    networks: [KS, KG]
+    station_radius_km: 100
+    window_s: [-30, 470]
+    bands: [HH, HG, EL]
+    expected: {stations: 132, basis: estimate, files_per_event: {HH: [41, 95], HG: [91, 271], EL: [16, 36]}}
+    events:
+      - {event_id: "2018000094", origin_utc: "2018-03-08T14:16:47Z", latitude: 35.3, longitude: 127.33, depth_km: 15.0, ml: 2.0}
+      - {event_id: "2018000095", origin_utc: "2018-03-08T14:38:41Z", latitude: 35.31, longitude: 127.32, depth_km: 17.0, ml: 2.0}
+      - {event_id: "2018000096", origin_utc: "2018-03-08T15:06:12Z", latitude: 35.3, longitude: 127.34, depth_km: 15.0, ml: 1.3}
+      - {event_id: "2018000097", origin_utc: "2018-03-08T15:22:46Z", latitude: 35.3, longitude: 127.33, depth_km: 15.0, ml: 1.2}
+      - {event_id: "2018000098", origin_utc: "2018-03-08T16:26:48Z", latitude: 35.3, longitude: 127.33, depth_km: 14.0, ml: 1.8}
+      - {event_id: "2018000100", origin_utc: "2018-03-08T19:06:40Z", latitude: 35.3, longitude: 127.33, depth_km: 15.0, ml: 1.4}
+      - {event_id: "2018000101", origin_utc: "2018-03-08T20:12:35Z", latitude: 35.29, longitude: 127.33, depth_km: 13.0, ml: 1.1}
+  suncheon_area:
+    title: All Suncheon earthquakes of the catalog, 2002-2026 (research project)
+    sequence: suncheon
+    use: project
+    large: true
+    networks: [KS, KG]
+    station_radius_km: 100
+    window_s: [-30, 470]
+    bands: [HH, HG, EL]
+    expected: {stations: 114, basis: estimate, files_per_event: {HH: [0, 342], HG: [0, 342], EL: [0, 342]}}
+    events:
+      - {event_id: "2002000011", origin_utc: "2002-03-12T11:04:37Z", latitude: 34.9, longitude: 127.4, depth_km: null, ml: 2.4}
+      - {event_id: "2008000166", origin_utc: "2008-06-09T03:21:01Z", latitude: 34.86, longitude: 127.43, depth_km: null, ml: 1.8}
+      - {event_id: "2009000140", origin_utc: "2009-05-20T13:00:51Z", latitude: 34.85, longitude: 127.41, depth_km: null, ml: 1.7}
+      - {event_id: "2009000286", origin_utc: "2009-12-28T10:41:53Z", latitude: 34.97, longitude: 127.38, depth_km: null, ml: 1.8}
+      - {event_id: "2010000056", origin_utc: "2010-01-23T07:32:43Z", latitude: 34.98, longitude: 127.38, depth_km: null, ml: 1.1}
+      - {event_id: "2010000208", origin_utc: "2010-10-13T18:25:40Z", latitude: 34.98, longitude: 127.39, depth_km: null, ml: 1.9}
+      - {event_id: "2025007930", origin_utc: "2012-08-25T21:34:50Z", latitude: 34.98, longitude: 127.38, depth_km: 6.0, ml: 1.5}
+      - {event_id: "2013000109", origin_utc: "2013-01-29T04:47:08Z", latitude: 34.85, longitude: 127.46, depth_km: 19.0, ml: 1.7}
+      - {event_id: "2013000144", origin_utc: "2013-02-22T19:07:47Z", latitude: 34.86, longitude: 127.46, depth_km: 18.0, ml: 0.6}
+      - {event_id: "2013000146", origin_utc: "2013-02-25T15:01:53Z", latitude: 34.98, longitude: 127.39, depth_km: 12.0, ml: 0.5}
+      - {event_id: "2024006007", origin_utc: "2013-03-09T11:10:46Z", latitude: 34.84, longitude: 127.46, depth_km: 18.0, ml: 1.0}
+      - {event_id: "2013000190", origin_utc: "2013-04-29T20:10:11Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 0.9}
+      - {event_id: "2024005811", origin_utc: "2013-06-22T03:55:43Z", latitude: 34.98, longitude: 127.39, depth_km: 8.0, ml: 0.5}
+      - {event_id: "2013000333", origin_utc: "2013-07-25T20:48:32Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.0}
+      - {event_id: "2024005024", origin_utc: "2013-12-04T13:50:14Z", latitude: 34.86, longitude: 127.45, depth_km: 11.0, ml: 0.4}
+      - {event_id: "2023002404", origin_utc: "2014-01-31T10:08:40Z", latitude: 34.83, longitude: 127.44, depth_km: 16.0, ml: 0.5}
+      - {event_id: "2014000107", origin_utc: "2014-03-05T15:53:30Z", latitude: 34.98, longitude: 127.39, depth_km: 11.0, ml: 0.9}
+      - {event_id: "2023006904", origin_utc: "2014-09-08T03:38:57Z", latitude: 34.98, longitude: 127.39, depth_km: 9.0, ml: 0.3}
+      - {event_id: "2015000487", origin_utc: "2015-01-04T13:19:11Z", latitude: 34.97, longitude: 127.42, depth_km: 17.0, ml: 0.6}
+      - {event_id: "2015000093", origin_utc: "2015-03-20T11:30:50Z", latitude: 34.98, longitude: 127.38, depth_km: 8.0, ml: 0.6}
+      - {event_id: "2022005039", origin_utc: "2015-05-17T01:43:40Z", latitude: 34.86, longitude: 127.41, depth_km: 7.0, ml: 0.5}
+      - {event_id: "2022004907", origin_utc: "2015-09-11T16:58:52Z", latitude: 34.98, longitude: 127.39, depth_km: 9.0, ml: 0.6}
+      - {event_id: "2022004966", origin_utc: "2015-11-13T23:09:50Z", latitude: 34.97, longitude: 127.39, depth_km: 7.0, ml: 1.1}
+      - {event_id: "2023005912", origin_utc: "2016-03-02T16:01:48Z", latitude: 34.86, longitude: 127.41, depth_km: 11.0, ml: 0.8}
+      - {event_id: "2016000229", origin_utc: "2016-08-07T20:50:49Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 0.6}
+      - {event_id: "2017000003", origin_utc: "2017-01-01T19:03:51Z", latitude: 34.97, longitude: 127.37, depth_km: 8.0, ml: 0.7}
+      - {event_id: "2017000022", origin_utc: "2017-01-14T17:50:08Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.7}
+      - {event_id: "2017000261", origin_utc: "2017-07-03T19:48:04Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 0.9}
+      - {event_id: "2017000282", origin_utc: "2017-07-13T17:51:25Z", latitude: 34.85, longitude: 127.4, depth_km: 12.0, ml: 0.9}
+      - {event_id: "2017000304", origin_utc: "2017-08-07T18:26:04Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.3}
+      - {event_id: "2017000361", origin_utc: "2017-10-14T20:30:11Z", latitude: 34.9, longitude: 127.4, depth_km: 16.0, ml: 1.5}
+      - {event_id: "2017000395", origin_utc: "2017-11-09T16:50:15Z", latitude: 34.84, longitude: 127.45, depth_km: 17.0, ml: 1.4}
+      - {event_id: "2017000396", origin_utc: "2017-11-11T08:18:51Z", latitude: 34.84, longitude: 127.46, depth_km: 18.0, ml: 2.2}
+      - {event_id: "2018000072", origin_utc: "2018-02-19T18:18:33Z", latitude: 34.84, longitude: 127.46, depth_km: 17.0, ml: 1.1}
+      - {event_id: "2018003090", origin_utc: "2018-10-11T15:15:42Z", latitude: 34.99, longitude: 127.38, depth_km: 10.0, ml: 1.4}
+      - {event_id: "2018003091", origin_utc: "2018-10-11T15:16:14Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.2}
+      - {event_id: "2019000370", origin_utc: "2019-01-16T15:04:24Z", latitude: 34.97, longitude: 127.38, depth_km: 9.0, ml: 1.4}
+      - {event_id: "2019001274", origin_utc: "2019-02-17T19:21:39Z", latitude: 34.89, longitude: 127.41, depth_km: 11.0, ml: 1.1}
+      - {event_id: "2019001276", origin_utc: "2019-02-17T19:42:06Z", latitude: 34.89, longitude: 127.41, depth_km: 12.0, ml: 1.1}
+      - {event_id: "2019005622", origin_utc: "2019-05-14T08:28:34Z", latitude: 34.98, longitude: 127.39, depth_km: 12.0, ml: 1.7}
+      - {event_id: "2019005624", origin_utc: "2019-05-14T09:04:06Z", latitude: 34.97, longitude: 127.38, depth_km: 10.0, ml: 1.2}
+      - {event_id: "2019005627", origin_utc: "2019-05-14T12:40:35Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 0.8}
+      - {event_id: "2019005640", origin_utc: "2019-05-14T20:19:47Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.6}
+      - {event_id: "2019005879", origin_utc: "2019-05-17T20:02:30Z", latitude: 34.99, longitude: 127.38, depth_km: 10.0, ml: 1.2}
+      - {event_id: "2019006188", origin_utc: "2019-05-24T16:38:05Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 0.9}
+      - {event_id: "2019012496", origin_utc: "2019-09-18T19:34:15Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.6}
+      - {event_id: "2019013284", origin_utc: "2019-10-06T00:01:57Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.5}
+      - {event_id: "2019013285", origin_utc: "2019-10-06T01:01:01Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.7}
+      - {event_id: "2019013294", origin_utc: "2019-10-06T04:04:08Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.6}
+      - {event_id: "2019013295", origin_utc: "2019-10-06T06:01:29Z", latitude: 34.93, longitude: 127.45, depth_km: 23.0, ml: 1.7}
+      - {event_id: "2019013297", origin_utc: "2019-10-06T07:19:35Z", latitude: 34.92, longitude: 127.44, depth_km: 22.0, ml: 1.6}
+      - {event_id: "2019013300", origin_utc: "2019-10-06T18:08:36Z", latitude: 34.92, longitude: 127.44, depth_km: 23.0, ml: 1.4}
+      - {event_id: "2019014592", origin_utc: "2019-11-07T10:21:26Z", latitude: 34.99, longitude: 127.39, depth_km: 9.0, ml: 1.4}
+      - {event_id: "2019014827", origin_utc: "2019-11-14T01:02:11Z", latitude: 34.98, longitude: 127.37, depth_km: 13.0, ml: 1.7}
+      - {event_id: "2020000341", origin_utc: "2020-01-10T21:16:03Z", latitude: 34.98, longitude: 127.39, depth_km: 9.0, ml: 1.0}
+      - {event_id: "2020002122", origin_utc: "2020-03-01T07:22:25Z", latitude: 34.98, longitude: 127.39, depth_km: 9.0, ml: 1.4}
+      - {event_id: "2020002170", origin_utc: "2020-03-02T20:45:26Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.5}
+      - {event_id: "2020002289", origin_utc: "2020-03-05T20:21:11Z", latitude: 34.99, longitude: 127.38, depth_km: 10.0, ml: 1.2}
+      - {event_id: "2020003260", origin_utc: "2020-03-29T16:02:57Z", latitude: 34.99, longitude: 127.38, depth_km: 9.0, ml: 1.2}
+      - {event_id: "2020004156", origin_utc: "2020-04-18T15:32:45Z", latitude: 34.98, longitude: 127.38, depth_km: 12.0, ml: 1.5}
+      - {event_id: "2020004158", origin_utc: "2020-04-18T15:38:46Z", latitude: 34.98, longitude: 127.38, depth_km: 11.0, ml: 1.3}
+      - {event_id: "2020005782", origin_utc: "2020-05-16T13:46:35Z", latitude: 34.92, longitude: 127.43, depth_km: 13.0, ml: 1.2}
+      - {event_id: "2020007976", origin_utc: "2020-06-14T04:46:29Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.5}
+      - {event_id: "2020011631", origin_utc: "2020-08-19T08:11:13Z", latitude: 34.98, longitude: 127.39, depth_km: 9.0, ml: 0.9}
+      - {event_id: "2020015006", origin_utc: "2020-10-10T23:58:07Z", latitude: 34.86, longitude: 127.51, depth_km: 18.0, ml: 1.3}
+      - {event_id: "2020017679", origin_utc: "2020-12-01T01:37:53Z", latitude: 34.88, longitude: 127.42, depth_km: 12.0, ml: 1.6}
+      - {event_id: "2021000486", origin_utc: "2021-02-01T09:13:15Z", latitude: 34.93, longitude: 127.45, depth_km: 17.0, ml: 1.6}
+      - {event_id: "2021000630", origin_utc: "2021-02-09T18:35:15Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.2}
+      - {event_id: "2021000751", origin_utc: "2021-02-21T11:39:57Z", latitude: 34.98, longitude: 127.39, depth_km: 10.0, ml: 1.4}
+      - {event_id: "2021005471", origin_utc: "2021-09-26T09:01:09Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.2}
+      - {event_id: "2021006353", origin_utc: "2021-11-06T18:59:31Z", latitude: 34.98, longitude: 127.4, depth_km: 11.0, ml: 1.6}
+      - {event_id: "2022001370", origin_utc: "2022-03-17T02:06:29Z", latitude: 34.97, longitude: 127.44, depth_km: 20.0, ml: 1.7}
+      - {event_id: "2022001728", origin_utc: "2022-04-05T15:37:09Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.2}
+      - {event_id: "2022001730", origin_utc: "2022-04-05T15:49:59Z", latitude: 34.98, longitude: 127.39, depth_km: 12.0, ml: 1.4}
+      - {event_id: "2022002275", origin_utc: "2022-05-04T22:47:46Z", latitude: 34.98, longitude: 127.38, depth_km: 8.0, ml: 1.0}
+      - {event_id: "2022003241", origin_utc: "2022-06-17T16:30:04Z", latitude: 34.99, longitude: 127.38, depth_km: 10.0, ml: 1.0}
+      - {event_id: "2022004197", origin_utc: "2022-07-31T20:49:17Z", latitude: 34.92, longitude: 127.43, depth_km: 11.0, ml: 1.4}
+      - {event_id: "2022004217", origin_utc: "2022-08-01T11:12:18Z", latitude: 34.93, longitude: 127.43, depth_km: 11.0, ml: 1.3}
+      - {event_id: "2023000753", origin_utc: "2023-02-13T16:51:34Z", latitude: 34.84, longitude: 127.42, depth_km: 9.0, ml: 1.7}
+      - {event_id: "2023005570", origin_utc: "2023-09-18T14:58:40Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.0}
+      - {event_id: "2023005830", origin_utc: "2023-09-25T14:01:35Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.2}
+      - {event_id: "2023008535", origin_utc: "2023-12-15T09:42:31Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.9}
+      - {event_id: "2024001227", origin_utc: "2024-03-03T11:50:04Z", latitude: 34.98, longitude: 127.4, depth_km: 10.0, ml: 1.1}
+      - {event_id: "2024001379", origin_utc: "2024-03-11T16:22:58Z", latitude: 34.98, longitude: 127.39, depth_km: 9.0, ml: 1.0}
+      - {event_id: "2024001871", origin_utc: "2024-04-05T16:40:09Z", latitude: 34.99, longitude: 127.38, depth_km: 8.0, ml: 1.1}
+      - {event_id: "2024001923", origin_utc: "2024-04-09T14:25:01Z", latitude: 34.92, longitude: 127.34, depth_km: 22.0, ml: 1.3}
+      - {event_id: "2024002975", origin_utc: "2024-05-23T03:59:46Z", latitude: 34.98, longitude: 127.39, depth_km: 10.0, ml: 1.1}
+      - {event_id: "2024004455", origin_utc: "2024-07-09T07:12:40Z", latitude: 34.9, longitude: 127.45, depth_km: 10.0, ml: 1.2}
+      - {event_id: "2024004460", origin_utc: "2024-07-09T16:04:05Z", latitude: 34.89, longitude: 127.45, depth_km: 10.0, ml: 1.5}
+      - {event_id: "2024004969", origin_utc: "2024-07-31T16:46:35Z", latitude: 34.86, longitude: 127.43, depth_km: 12.0, ml: 1.2}
+      - {event_id: "2024005232", origin_utc: "2024-08-09T18:47:21Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 0.5}
+      - {event_id: "2024006967", origin_utc: "2024-10-06T04:27:59Z", latitude: 34.85, longitude: 127.42, depth_km: 10.0, ml: 1.0}
+      - {event_id: "2024006973", origin_utc: "2024-10-06T11:40:14Z", latitude: 34.98, longitude: 127.37, depth_km: 9.0, ml: 1.3}
+      - {event_id: "2024006974", origin_utc: "2024-10-06T11:49:43Z", latitude: 34.98, longitude: 127.39, depth_km: 9.0, ml: 1.1}
+      - {event_id: "2024007538", origin_utc: "2024-10-29T18:01:00Z", latitude: 34.98, longitude: 127.38, depth_km: 8.0, ml: 1.4}
+      - {event_id: "2024007656", origin_utc: "2024-11-03T16:44:11Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.0}
+      - {event_id: "2024008524", origin_utc: "2024-12-03T23:26:07Z", latitude: 34.87, longitude: 127.43, depth_km: 6.0, ml: 0.9}
+      - {event_id: "2024008931", origin_utc: "2024-12-19T13:34:36Z", latitude: 34.85, longitude: 127.43, depth_km: 13.0, ml: 1.5}
+      - {event_id: "2025000033", origin_utc: "2025-01-02T10:27:09Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.1}
+      - {event_id: "2025000404", origin_utc: "2025-01-19T07:41:45Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.1}
+      - {event_id: "2025000904", origin_utc: "2025-02-17T09:29:53Z", latitude: 34.85, longitude: 127.42, depth_km: 10.0, ml: 1.4}
+      - {event_id: "2025001268", origin_utc: "2025-03-07T11:42:41Z", latitude: 34.98, longitude: 127.39, depth_km: 10.0, ml: 1.3}
+      - {event_id: "2025003868", origin_utc: "2025-07-09T14:39:44Z", latitude: 34.9, longitude: 127.47, depth_km: 11.0, ml: 1.5}
+      - {event_id: "2025004062", origin_utc: "2025-07-15T09:08:54Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.5}
+      - {event_id: "2025004899", origin_utc: "2025-08-08T11:35:33Z", latitude: 34.98, longitude: 127.38, depth_km: 8.0, ml: 1.3}
+      - {event_id: "2025005632", origin_utc: "2025-08-28T07:59:58Z", latitude: 34.87, longitude: 127.5, depth_km: 14.0, ml: 1.0}
+      - {event_id: "2025005760", origin_utc: "2025-09-01T13:13:24Z", latitude: 34.9, longitude: 127.43, depth_km: 11.0, ml: 1.3}
+      - {event_id: "2025009947", origin_utc: "2025-12-06T17:16:06Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.6}
+      - {event_id: "2026000305", origin_utc: "2026-01-12T10:23:43Z", latitude: 34.85, longitude: 127.43, depth_km: 11.0, ml: 1.3}
+      - {event_id: "2026001826", origin_utc: "2026-03-10T13:06:37Z", latitude: 34.97, longitude: 127.4, depth_km: 26.0, ml: 1.4}
+      - {event_id: "2026002728", origin_utc: "2026-04-04T13:48:05Z", latitude: 34.99, longitude: 127.39, depth_km: 11.0, ml: 1.6}
+      - {event_id: "2026004666", origin_utc: "2026-06-01T02:21:40Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 0.9}
+      - {event_id: "2026004767", origin_utc: "2026-06-03T15:40:32Z", latitude: 34.98, longitude: 127.39, depth_km: 10.0, ml: 1.3}
+      - {event_id: "2026006360", origin_utc: "2026-07-18T16:41:47Z", latitude: 34.98, longitude: 127.39, depth_km: 8.0, ml: 1.2}
+      - {event_id: "2026008111", origin_utc: "2026-08-29T14:31:58Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.0}
+      - {event_id: "2026008367", origin_utc: "2026-09-03T21:43:47Z", latitude: 34.98, longitude: 127.38, depth_km: 9.0, ml: 1.5}
+      - {event_id: "2026010394", origin_utc: "2026-10-23T21:55:53Z", latitude: 34.98, longitude: 127.39, depth_km: 9.0, ml: 1.5}
+      - {event_id: "2026010395", origin_utc: "2026-10-23T22:38:02Z", latitude: 34.98, longitude: 127.38, depth_km: 10.0, ml: 1.4}

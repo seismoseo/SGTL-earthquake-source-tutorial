@@ -43,12 +43,11 @@ they differ from the UTC year. Use `origin_utc` for time.
   means 36.50 with the trailing zero dropped.
 - These are rounding steps, not error bars. The real location error is usually larger.
 
-## Magnitude pile-up just below ML 2.0
+## Magnitudes near ML 2.0
 
-Since 2018 the list has about 4.6 times as many events with ML 1.8-1.9 as with
-ML 2.0-2.1 (883 versus 190). Usually the number of events falls
-steadily as magnitude rises, so this step stands out. Its cause is not known. Keep it in mind when you
-fit magnitude-frequency relations: do not fit a single line across ML 2.0.
+Before you fit a magnitude-frequency relation to this list, count the events in the 0.1 bins on both sides of
+ML 2.0, year by year, and compare the counts with what the Gutenberg-Richter law predicts. Module M04 asks you
+to measure what you find there and to say what it means for b-values.
 
 ## Network-growth epochs
 

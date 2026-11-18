@@ -1,12 +1,16 @@
 {
- "date": "2026-11-15",
+ "date": "2026-11-19",
  "flavor": "student",
  "modules": [
   "M00",
   "M01",
-  "M02"
+  "M02",
+  "M03",
+  "M04",
+  "M05",
+  "M10"
  ],
- "source_commit": "05126e6ffa15aa9b1bb153a1a1db0db82a9139fa",
+ "source_commit": "97d77048f99adc35f260fe06051879dffd10093d",
  "source_dirty": false,
- "version": "0.1.0"
+ "version": "0.2.0"
 }

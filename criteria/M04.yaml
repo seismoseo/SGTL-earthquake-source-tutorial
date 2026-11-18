@@ -1,0 +1,20 @@
+module: M04
+frozen: 2026-11-16
+tasks:
+  # 8 sets of magnitudes built from whole bin numbers: dm 0.05, 0.1 and 0.2, noise below dm/1000, negative values,
+  # one value, empty bins inside the range; counts exact, centers within this many magnitude units
+  M04-T1: {trials: 8, center_tol: 1.0e-6}
+  # 8 made-up catalogs; time zero as text (Z, +09:00, no zone), Timestamp (UTC, KST, no zone) or datetime (KST);
+  # events exactly on both ends and one second outside; one window without events; exact rows and order
+  M04-T2: {trials: 8}
+  # 4 small probes (b earlier than a, wrapped day differences, a far event, a near event) and 6 made-up pairs of
+  # catalogs with true pairs, one-catalog events, decoys and rivals; no event within 20 % of a limit
+  M04-T3: {trials: 6, dt_tol_s: 0.001, dist_rel_tol: 0.01, dist_abs_tol_km: 0.05}
+  # the student's fmd must pass three made-up cases of task 1 again; then each epoch's value within this many
+  # magnitude units of the tallest bin of that fmd on the epoch's events plus 0.2 (the check counts nothing itself)
+  M04-T4: {tolerance: 0.3}
+  # 7 made-up catalogs (excess in some years, empty bins, events late on 31 December UTC, noisy magnitudes,
+  # other bins), then 2 property tests on the first one; ratios exact
+  M04-T5: {trials: 7}
+  # the student's own CSV table and PNG figure (no network in the check)
+  M04-T6: {min_events: 1000}

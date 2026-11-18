@@ -1,0 +1,23 @@
+module: M03
+frozen: 2026-11-16
+tasks:
+  # 12 origin times (2005-2026, in steps of 10 ms) in eight spellings; before_s and after_s with fractions;
+  # both ends within this many seconds
+  M03-T1: {trials: 12, tol_s: 0.001}
+  # 8 made-up station tables around random centers (radius 20-150 km), no station within 1.5 % of the radius;
+  # distance_km within this relative difference of ObsPy's geodesic distance
+  M03-T2: {trials: 8, dist_rel_tol: 0.006}
+  # 3 made-up SAC trees written by the check (exact counts and gaps), then the Sangju tree of the data folder: the
+  # function must run without changing it, and on a copy of one band folder with one component file removed its
+  # own result must gain exactly that gap (the check counts nothing in the real tree)
+  M03-T3: {trials: 3}
+  # 2 made-up inventories with 9 queries each (value within rel_tol of ObsPy's stored value, exact None), then
+  # 5 random channels of the Sangju dataset in StationMetadata, within real_rel_tol (the files' stage gains and
+  # stored sensitivities differ by up to about 1 %)
+  M03-T4: {trials: 2, rel_tol: 1.0e-6, real_cases: 5, real_rel_tol: 0.02}
+  # 10 made-up catalog rows (Korean clock readings of known UTC moments: early morning, month and year changes,
+  # a leap day, summer 1987, fractions of a second); then envelope_evidence on 3 sets of 5 made-up records
+  # (noise level, peak time and size, distances and the colleague's sample counts known from how they were
+  # built; t_peak_tol_s, ratio_rel_tol, dist_rel_tol, n_wrong within one sample); then the student's table must
+  # equal the student's own function on the real records (the check computes no real values of its own)
+  M03-T5: {trials: 10, tol_s: 0.001, t_peak_tol_s: 0.5, ratio_rel_tol: 0.15, dist_rel_tol: 0.01}

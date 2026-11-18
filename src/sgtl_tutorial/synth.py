@@ -47,17 +47,16 @@ def _decimals(dm: float) -> int:
 
 def gr_magnitudes(rng: np.random.Generator, n: int, b: float = 1.0, mc: float = 1.0,
                   dm: float = 0.1) -> np.ndarray:
-    """``n`` magnitudes that follow the Gutenberg-Richter law above ``mc``, rounded to steps of ``dm``.
+    """``n`` made-up magnitudes that follow the Gutenberg-Richter law from ``mc`` up, on the grid ``mc + k dm``.
 
-    Before rounding, magnitudes start at ``mc - dm/2`` so that every rounded value is >= ``mc``.
+    Practice data for demos and checks; with ``dm = 0`` the magnitudes are not binned (all >= ``mc``).
     """
-    beta = float(b) * np.log(10.0)
-    m = (mc - dm / 2.0) + rng.exponential(1.0 / beta, int(n))
+    n = int(n)
     if dm and dm > 0:
-        m = mc + np.round((m - mc) / dm) * dm
-        m = np.round(m, _decimals(dm) + 1)
-        m = np.maximum(m, mc)
-    return m
+        q = 10.0 ** (-float(b) * float(dm))
+        k = rng.geometric(1.0 - q, n) - 1
+        return np.round(mc + k * float(dm), _decimals(dm) + 1)
+    return mc - np.log10(1.0 - rng.random(n)) / float(b)
 
 
 def random_utc_times(rng: np.random.Generator, n: int, start="2020-01-01", end="2021-01-01",

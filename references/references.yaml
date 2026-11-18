@@ -59,7 +59,7 @@
   doi: 10.1007/978-90-481-8697-6
   url: null
   status: "V"
-  used_in: [M10, M20, M31]
+  used_in: [M03, M10, M20, M31]
   note: null
 
 - key: havskov2016
@@ -81,7 +81,7 @@
   doi: 10.1017/CBO9781139547260
   url: null
   status: "V"
-  used_in: [M10]
+  used_in: [M03, M10]
   note: null
 
 - key: bormann2012
@@ -180,7 +180,7 @@
   doi: 10.2312/GFZ.NMSOP-2_IS_3.3
   url: null
   status: "V"
-  used_in: [M04, M10]
+  used_in: [M03, M04, M10]
   note: Title paraphrased.
 
 - key: husen2010
@@ -664,7 +664,7 @@
   doi: 10.1785/BSSA0250010001
   url: null
   status: "V"
-  used_in: [M04]
+  used_in: [M03, M04]
   note: null
 
 - key: hutton1987
@@ -675,7 +675,7 @@
   doi: 10.1785/BSSA0770062074
   url: null
   status: "V"
-  used_in: [M04, M10]
+  used_in: [M03, M04, M10]
   note: null
 
 - key: sheen2018
@@ -686,7 +686,7 @@
   doi: 10.1785/0120180112
   url: null
   status: "V"
-  used_in: [M04, M10]
+  used_in: [M03, M04, M10]
   note: null
 
 - key: gutenberg1944
@@ -785,7 +785,7 @@
   doi: 10.1785/0120040007
   url: null
   status: "V"
-  used_in: [M05]
+  used_in: [M04, M05]
   note: null
 
 - key: vanderelst2021
@@ -939,7 +939,7 @@
   doi: 10.1029/JB084iB05p02348
   url: null
   status: "V"
-  used_in: [M52, M53, M54]
+  used_in: [M04, M52, M53, M54]
   note: null
 
 - key: zhu2002
@@ -1247,7 +1247,7 @@
   doi: null
   url: https://koreascience.kr/article/JAKO198323034629158.page
   status: "V"
-  used_in: [M30, M31, M32, M41, M52]
+  used_in: [M10, M30, M31, M32, M41, M52]
   note: In Korean. No DOI. The kim1983 velocity model in PocketQuake (Conrad 15 km, Moho 32 km).
 
 - key: kim2011
@@ -1280,7 +1280,7 @@
   doi: null
   url: https://www.weather.go.kr/w/earthquake-volcano/search/korea.do
   status: "V"
-  used_in: [M00, M01, M02, M04]
+  used_in: [M00, M01, M02, M03, M04, M05]
   note: 'The source of the catalog subsets in data/catalogs/. Reuse needs the KOGL Type 1 attribution (see the README). Times are in KST. URL checked (HTTP 200) on 2026-11-15.'
 
 - key: lee2006
@@ -1324,7 +1324,7 @@
   doi: 10.1002/2017GL072899
   url: null
   status: "V"
-  used_in: [M04, M54]
+  used_in: [M04, M05, M54]
   note: null
 
 - key: uchide2018
@@ -1346,7 +1346,7 @@
   doi: 10.1093/gji/ggz009
   url: null
   status: "V"
-  used_in: [M05, M41, M54]
+  used_in: [M04, M05, M41, M54]
   note: A good model of a research-level Korean study.
 
 - key: kim2018
@@ -1412,7 +1412,7 @@
   doi: 10.1785/gssrl.81.3.530
   url: null
   status: "V"
-  used_in: [M03, M10, M20]
+  used_in: [M03, M04, M10, M20]
   note: null
 
 - key: krischer2015
@@ -1423,7 +1423,7 @@
   doi: 10.1088/1749-4699/8/1/014003
   url: null
   status: "V"
-  used_in: [M01, M10]
+  used_in: [M01, M03, M04, M10]
   note: null
 
 - key: wessel2019
@@ -1434,7 +1434,7 @@
   doi: 10.1029/2019GC008515
   url: null
   status: "V"
-  used_in: [M02]
+  used_in: [M02, M04]
   note: null
 
 - key: pygmt
@@ -1456,7 +1456,7 @@
   doi: 10.1038/s41586-020-2649-2
   url: null
   status: "V"
-  used_in: [M01, M02]
+  used_in: [M01, M02, M10]
   note: null
 
 - key: virtanen2020
@@ -1467,7 +1467,7 @@
   doi: 10.1038/s41592-019-0686-2
   url: null
   status: "V"
-  used_in: [M01, M31]
+  used_in: [M01, M10, M31]
   note: null
 
 - key: mckinney2010
@@ -1522,7 +1522,7 @@
   doi: 10.1109/MCSE.2007.55
   url: null
   status: "V"
-  used_in: [M02]
+  used_in: [M02, M04, M10]
   note: null
 
 - key: rougier2014
@@ -1799,3 +1799,91 @@
   status: "V"
   used_in: [docs, M00]
   note: Only the title and venue were checked, not the detailed findings.
+
+- key: isc_bulletin
+  authors: International Seismological Centre
+  year: null
+  title: ISC Bulletin
+  venue: International Seismological Centre, Thatcham, United Kingdom (dataset)
+  doi: 10.31905/D808B830
+  url: http://www.isc.ac.uk/iscbulletin/search/
+  status: "V"
+  used_in: [M04]
+  note: Dataset DOI checked on Crossref on 2026-11-15. Cite it with the date you accessed the bulletin.
+
+- key: usgs_comcat
+  authors: U.S. Geological Survey, Earthquake Hazards Program
+  year: 2017
+  title: Advanced National Seismic System (ANSS) Comprehensive Catalog
+  venue: U.S. Geological Survey (dataset)
+  doi: 10.5066/F7MS3QZH
+  url: https://earthquake.usgs.gov/earthquakes/search/
+  status: "V"
+  used_in: [M04]
+  note: Dataset DOI checked on DataCite on 2026-11-15. Cite it with the date you accessed ComCat.
+
+- key: schorlemmer2011
+  authors: Schorlemmer, Euchner, Kästli & Saul
+  year: 2011
+  title: 'QuakeML: status of the XML-based seismological data exchange format'
+  venue: Annals of Geophysics 54(1)
+  doi: 10.4401/ag-4874
+  url: null
+  status: "V"
+  used_in: [M04]
+  note: null
+
+- key: ross2019_ridgecrest
+  authors: Ross, Idini, Jia, Stephenson, Zhong, Wang, Zhan, Simons, Fielding, Yun, Hauksson, Moore, Liu & Jung
+  year: 2019
+  title: Hierarchical interlocked orthogonal faulting in the 2019 Ridgecrest earthquake sequence
+  venue: Science 366(6463):346-351
+  doi: 10.1126/science.aaz0109
+  url: null
+  status: "V"
+  used_in: [M04]
+  note: null
+
+- key: kimsk2019
+  authors: Kim & Lee
+  year: 2019
+  title: Comparison of the aftershock activities of the 2016 M5.8 Gyeongju and 2017 M5.4 Pohang earthquakes, Korea
+  venue: Journal of the Geological Society of Korea 55(2):207-218 (in Korean)
+  doi: 10.14770/jgsk.2019.55.2.207
+  url: null
+  status: "V"
+  used_in: [M05]
+  note: Authors Sung Kyun Kim and Jung Mo Lee. Checked in Crossref on 2026-11-15; the abstract (read on OpenAlex) reports maximum-likelihood b-values and Omori p-values for both aftershock sequences.
+
+- key: leegs2018
+  authors: Lee, Kyung & Lee
+  year: 2018
+  title: Temporal and spatial variations of the ML 5.8 Gyeongju earthquake on September 12, 2016
+  venue: Journal of the Korean Earth Science Society 39(4):342-348
+  doi: 10.5467/jkess.2018.39.4.342
+  url: null
+  status: "V"
+  used_in: [M05]
+  note: Authors Gyeong Su Lee, Jai Bok Kyung and Sang Jun Lee. Checked in Crossref on 2026-11-15; the abstract (read on OpenAlex) reports a b-value for the aftershocks.
+
+- key: kigam2021_bulletin2019
+  authors: Korea Institute of Geoscience and Mineral Resources (KIGAM), Earthquake Research Center
+  year: 2021
+  title: 2019 학술지진연보 (2019 Academic Annual Report of Earthquakes)
+  venue: KIGAM report, January 2021, 525 pages (in Korean)
+  doi: null
+  url: null
+  status: "V"
+  used_in: [M51]
+  note: 'No DOI. Title, publisher and date checked on 2026-11-16 against the report PDF. One analysis page per event, each with a report number: KEMS-2019-062 is the 2019-07-21 11:04:18.487 KST Sangju ML 3.9 (Mw 3.8) earthquake, with fault planes 288/89/7 and 198/83/179 (strike/dip/rake); the 2019 issue does not name the mechanism method. Quoted in the Sangju reference run (mentor).'
+
+- key: scherbaum2001
+  authors: Scherbaum
+  year: 2001
+  title: 'Of Poles and Zeros: Fundamentals of Digital Seismology (2nd ed.)'
+  venue: Springer (Modern Approaches in Geophysics)
+  doi: 10.1007/978-1-4020-6861-4
+  url: null
+  status: "V"
+  used_in: [M03, M10]
+  note: Checked in Crossref on 2026-11-16 (author, title, series, publisher and year 2001); Crossref gives the main title only, the subtitle is the book's own.
