@@ -191,7 +191,7 @@
   doi: 10.5078/corssa-55815573
   url: null
   status: "V"
-  used_in: [M31, M32, M41]
+  used_in: [M30, M31, M32, M41]
   note: DataCite lists the authors in the order Hardebeck, Husen.
 
 - key: mignan2012
@@ -554,7 +554,7 @@
   doi: 10.1785/0120010200
   url: null
   status: "V*"
-  used_in: [M51]
+  used_in: [M21, M51]
   note: HASH. Crossref lists only the first author.
 
 - key: hardebeck2003
@@ -576,7 +576,7 @@
   doi: 10.1785/0220230329
   url: null
   status: "V"
-  used_in: [M51]
+  used_in: [M21, M51]
   note: null
 
 - key: snoke2003
@@ -620,7 +620,7 @@
   doi: 10.1093/gji/ggaa401
   url: null
   status: "V"
-  used_in: [M51]
+  used_in: [M21, M51]
   note: null
 
 - key: hardebeck2006
@@ -1269,7 +1269,7 @@
   doi: 10.14770/jgsk.2024.001
   url: null
   status: "V"
-  used_in: [M03, M10]
+  used_in: [M03, M10, M20]
   note: The paper behind StationMetadata, by Byeong-Seok Ahn (Pukyong National University). Checked in Crossref.
 
 - key: kma_catalog
@@ -1280,7 +1280,7 @@
   doi: null
   url: https://www.weather.go.kr/w/earthquake-volcano/search/korea.do
   status: "V"
-  used_in: [M00, M01, M02, M03, M04, M05]
+  used_in: [M00, M01, M02, M03, M04, M05, M21]
   note: 'The source of the catalog subsets in data/catalogs/. Reuse needs the KOGL Type 1 attribution (see the README). Times are in KST. URL checked (HTTP 200) on 2026-11-15.'
 
 - key: lee2006
@@ -1412,7 +1412,7 @@
   doi: 10.1785/gssrl.81.3.530
   url: null
   status: "V"
-  used_in: [M03, M04, M10, M20]
+  used_in: [M03, M04, M10, M20, M21, M30]
   note: null
 
 - key: krischer2015
@@ -1423,7 +1423,7 @@
   doi: 10.1088/1749-4699/8/1/014003
   url: null
   status: "V"
-  used_in: [M01, M03, M04, M10]
+  used_in: [M01, M03, M04, M10, M20, M30]
   note: null
 
 - key: wessel2019
@@ -1467,7 +1467,7 @@
   doi: 10.1038/s41592-019-0686-2
   url: null
   status: "V"
-  used_in: [M01, M10, M31]
+  used_in: [M01, M10, M21, M31]
   note: null
 
 - key: mckinney2010
@@ -1885,5 +1885,93 @@
   doi: 10.1007/978-1-4020-6861-4
   url: null
   status: "V"
-  used_in: [M03, M10]
+  used_in: [M03, M10, M20]
   note: Checked in Crossref on 2026-11-16 (author, title, series, publisher and year 2001); Crossref gives the main title only, the subtitle is the book's own.
+
+- key: maeda1985
+  authors: Maeda
+  year: 1985
+  title: A method for reading and checking phase time in auto-processing system of seismic wave data
+  venue: Zisin (Journal of the Seismological Society of Japan, 2nd series) 38(3):365-379
+  doi: 10.4294/zisin1948.38.3_365
+  url: null
+  status: "V"
+  used_in: [M20]
+  note: Checked in Crossref on 2026-11-19 (author, title, journal, volume, issue, pages, year). In Japanese with an English abstract; the AIC onset of M20 task 3 (ObsPy's aic_simple).
+
+- key: baer1987
+  authors: Baer & Kradolfer
+  year: 1987
+  title: An automatic phase picker for local and teleseismic events
+  venue: Bulletin of the Seismological Society of America 77(4):1437-1445
+  doi: 10.1785/BSSA0770041437
+  url: null
+  status: "V"
+  used_in: [M20]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). ObsPy's pk_baer implements this picker.
+
+- key: scherbaum1997
+  authors: Scherbaum & Bouin
+  year: 1997
+  title: FIR filter effects and nucleation phases
+  venue: Geophysical Journal International 130(3):661-668
+  doi: 10.1111/j.1365-246X.1997.tb01860.x
+  url: null
+  status: "V"
+  used_in: [M20]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). How acausal (zero-phase) filters put energy ahead of an onset.
+
+- key: diehl2009
+  authors: Diehl, Kissling, Husen & Aldersons
+  year: 2009
+  title: 'Consistent phase picking for regional tomography models: application to the greater Alpine region'
+  venue: Geophysical Journal International 176(2):542-554
+  doi: 10.1111/j.1365-246X.2008.03985.x
+  url: null
+  status: "V"
+  used_in: [M20]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). Pick uncertainties and quality classes that make manual and automatic picks consistent.
+
+- key: mousavi2019_stead
+  authors: Mousavi, Sheng, Zhu & Beroza
+  year: 2019
+  title: 'STanford EArthquake Dataset (STEAD): a global data set of seismic signals for AI'
+  venue: IEEE Access 7:179464-179476
+  doi: 10.1109/ACCESS.2019.2947848
+  url: null
+  status: "V"
+  used_in: [M21]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, pages, year). The training data of the 'stead' PhaseNet weights in SeisBench.
+
+- key: munchmeyer2022
+  authors: Münchmeyer, Woollam, Rietbrock, Tilmann, Lange, Bornstein, Diehl, Giunchi, Haslinger, Jozinović, Michelini, Saul & Soto
+  year: 2022
+  title: 'Which picker fits my data? A quantitative evaluation of deep learning based seismic pickers'
+  venue: 'Journal of Geophysical Research: Solid Earth 127(1):e2021JB023499'
+  doi: 10.1029/2021JB023499
+  url: null
+  status: "V"
+  used_in: [M21]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, article number, year). Compares pickers and training data sets across regions, including on data the models never saw.
+
+- key: crotwell1999
+  authors: Crotwell, Owens & Ritsema
+  year: 1999
+  title: 'The TauP Toolkit: flexible seismic travel-time and ray-path utilities'
+  venue: Seismological Research Letters 70(2):154-160
+  doi: 10.1785/gssrl.70.2.154
+  url: null
+  status: "V"
+  used_in: [M30]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). The program behind obspy.taup, used as the production travel-time tool in M30.
+
+- key: chapman1973
+  authors: Chapman
+  year: 1973
+  title: The Earth flattening transformation in body wave theory
+  venue: Geophysical Journal of the Royal Astronomical Society 35(1-3):55-70
+  doi: 10.1111/j.1365-246X.1973.tb02414.x
+  url: null
+  status: "V"
+  used_in: [M30]
+  note: Checked in Crossref on 2026-11-19 (author, title, journal, volume, pages; Crossref gives 2009-09-15, the online date, as its issue date). Why flat-layer and spherical travel times differ slightly, and how to convert one into the other.

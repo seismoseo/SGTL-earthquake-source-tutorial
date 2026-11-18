@@ -31,6 +31,7 @@ Everything big lives in `~/sgtl/`, outside the repository (set `SGTL_HOME` to us
 | `~/sgtl/downloads/` | the Miniforge installer |
 | `~/sgtl/run/`, `~/sgtl/logs/` | the JupyterLab start script and its log |
 | `~/sgtl/data/` | waveforms and other data you download later (never in the repository) |
+| `~/sgtl/seisbench/` | the PhaseNet weights for SeisBench (component `seisbench`, module M21) |
 
 To remove everything: stop JupyterLab (`bin/sgtl-lab stop --apply`), then delete `~/sgtl/`.
 
@@ -42,6 +43,7 @@ To remove everything: stop JupyterLab (`bin/sgtl-lab stop --apply`), then delete
 |---|---|---|
 | `env` | the course environment `sgtl`, the tutorial's helper package, the Jupyter kernel | [below](#what-env-does) |
 | `tools` | HYPOINVERSE, HypoDD with the lab patch, PocketQuake v1.16.1, EQNet with PhaseNet+ weights, SKHASH | [below](#tools-hypoinverse-hypodd-pocketquake-eqnet-and-skhash) |
+| `seisbench` | the PhaseNet weights `stead` and `original` (version 2) for SeisBench, used in module M21 | [below](#the-component-seisbench-phasenet-weights-for-seisbench) |
 | `pyfk` | the separate Python 3.9 environment `sgtl-pyfk` (`envs/pyfk.yml`) for PyFK synthetic seismograms | [below](#pyfk-synthetic-seismograms-with-pyfk) |
 | `mt` | MTUQ (moment tensor inversion) | [below](#mt-moment-tensors-with-mtuq) |
 | `coulomb` | Elastic_stresses_py (Coulomb stress changes) | [below](#coulomb-coulomb-stress-with-elastic_stresses_py) |
@@ -98,7 +100,7 @@ download whose checksum does not match, and with `--apply` it refuses any entry 
 | `SGTL_HOME` | install folder (default `~/sgtl`) |
 | `SGTL_CONDA` | the conda, mamba or micromamba program to use (default: found automatically) |
 | `SGTL_ENV_FILE` | another environment file instead of `environment.yml` (mentor use) |
-| `SGTL_ENV` | `tools`, `mt`, `coulomb`, `metadata` and `data`: the course environment to use instead of `~/sgtl/envs/sgtl` (mentor use) |
+| `SGTL_ENV` | `tools`, `seisbench`, `mt`, `coulomb`, `metadata` and `data`: the course environment to use instead of `~/sgtl/envs/sgtl` (mentor use) |
 | `SGTL_LAB_PORT` | the JupyterLab port instead of your default one |
 
 ## JupyterLab on the server: `bin/sgtl-lab`
@@ -302,6 +304,26 @@ network description into every station file, changes nothing else, and then read
 (the check-up). It gives 547 files for 545 station codes: BRD and CHS are in both networks, KG and KS, at different
 sites. (The repository's README speaks of 546 stations.) Please cite Ahn et al. (2024) whenever you use these files.
 The repository states no license, so do not share copies; point others to the repository instead.
+
+## The component `seisbench`: PhaseNet weights for SeisBench
+
+Module M21 runs two pretrained PhaseNet pickers with SeisBench (version 0.11.7 in the course environment). A
+*pretrained model* is a neural network whose *weights* (its numbers) were already fitted to a large set of records
+with known picks: `stead` was trained by the SeisBench team on the STEAD data set, and `original` is the model of
+Zhu and Beroza (2019), trained on records from Northern California. SeisBench would download weights the first time
+a model is used; this component downloads them once, checks every file against its SHA-256 checksum in
+`install/checksums.txt`, and puts them where SeisBench looks. Measured on a shared server (November 2026):
+
+| What goes where | Disk | First install |
+|---|---|---|
+| `~/sgtl/seisbench/models/v3/phasenet/`: a `.json` description and a `.pt` weights file for `stead` and for `original` (version 2); SeisBench's settings file `~/sgtl/seisbench/config.json` (kept if it exists) | about 2.2 MB | under 1 minute |
+
+It also sets `SEISBENCH_CACHE_ROOT=~/sgtl/seisbench` in `~/sgtl/tools/env.sh` and in the Jupyter kernel
+"SGTL (Python 3.12)", so SeisBench reads these files and never downloads anything by itself; restart the kernel
+afterwards. The check-up loads both models with every download switched off and runs each on a made-up 60-second
+record on one CPU core (a few seconds). Like the others, it is a dry run without `--apply` and can be run again
+safely. It needs the course environment first: `bin/sgtl-install env seisbench --apply` installs both.
+`bin/sgtl doctor` shows whether the weights are in place (the line "SeisBench PhaseNet weights").
 
 ## The component `data`: your STP files and the course waveforms
 

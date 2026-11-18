@@ -8,9 +8,12 @@
   "M03",
   "M04",
   "M05",
-  "M10"
+  "M10",
+  "M20",
+  "M21",
+  "M30"
  ],
- "source_commit": "97d77048f99adc35f260fe06051879dffd10093d",
+ "source_commit": "a019a19779d762fd67f0194a5baf025076438a22",
  "source_dirty": false,
- "version": "0.2.0"
+ "version": "0.3.0"
 }

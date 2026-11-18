@@ -58,7 +58,7 @@ dependencies:
   - fortran-compiler
   - pip
   - pip:
-      - seisbench==0.11.0
+      - seisbench==0.11.7         # 0.11.0 fails to load its models unless xdas is installed
       - pyocto
       - seismostats==1.0.1
       - tectonic-utils==0.2.1

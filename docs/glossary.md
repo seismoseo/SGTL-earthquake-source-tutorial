@@ -13,16 +13,18 @@ mentor or open a friction report.
 |---|---|---|---|---|
 | a-value | a값 | The productivity term of the Gutenberg-Richter law: log10 of the number of events at or above magnitude 0. | `a_value` | M05 |
 | absolute location | 절대 진원 결정 | Locating each earthquake on its own from its arrival times and a velocity model. | `absolute_location` | M31, M32 |
-| accelerometer | 가속도계 | A sensor that measures ground acceleration and stays on scale in strong shaking. | `accelerometer` | M03 |
+| accelerometer | 가속도계 | A sensor that measures ground acceleration and stays on scale in strong shaking. | `accelerometer` | M03, M10 |
 | aftershock | 여진 | An earthquake that follows a larger earthquake nearby and belongs to its sequence. | `aftershock` | M02, M04, M05 |
 | AI log | AI 사용 기록 | Your record of AI help, one Markdown file per module in work/ai\_log/ (for example work/ai\_log/M01.md), with an entry every time AI help shaped your work. | `ai_log` | M00 |
-| Akaike information criterion (AIC) | 아카이케 정보 기준 | A score for comparing models that weighs how well each fits the data against how many numbers it needs; the lower score wins. | `akaike_information_criterion` | M10 |
+| Akaike information criterion (AIC) | 아카이케 정보 기준 | A score for comparing models that weighs how well each fits the data against how many numbers it needs; the lower score wins. | `akaike_information_criterion` | M10, M20 |
 | aliasing | 에일리어싱(겹침 현상) † | The false, lower frequency that a wave above the Nyquist frequency takes on when it is sampled too slowly. | `aliasing` | M10 |
+| amplitude normalization | 진폭 정규화 | Scaling each piece of record before a network sees it, for example by its largest value or its standard deviation, so that large and small earthquakes give numbers of the same size. | `amplitude_normalization` | M21 |
 | analytic signal | 해석 신호 | A record paired with a copy of itself in which every frequency is shifted by a quarter of a cycle; the size of the pair is the envelope. | `analytic_signal` | M03 |
+| annotations (SeisBench) | 주석 결과 (SeisBench annotation) † | SeisBench's name for the output of a model run on a record: an ObsPy Stream with one probability curve per phase (P, S and noise) for every station. | `seisbench_annotation` | M21 |
 | arrival time | 도달 시각 | The time a seismic phase reaches a station. | `arrival_time` | M20, M30 |
 | autoregressive model | 자기회귀 모형 | A rule that predicts each sample of a record from the few samples just before it. | `autoregressive_model` | M10 |
 | auxiliary plane | 보조면 | The nodal plane that is not the fault plane. | `auxiliary_plane` | M50 |
-| aware datetime | 인식 시각, 시간대 정보가 있는 시각 † | A date and time with its time zone attached, so it names one exact instant. | `aware_datetime` | M01 |
+| aware datetime | 인식 시각, 시간대 정보가 있는 시각 † | A date and time with its time zone attached, so it names one exact instant. | `aware_datetime` | M01, M03 |
 | azimuth | 방위각 | The direction from the earthquake to a station, measured clockwise from north. | `azimuth` | M31, M50 |
 | azimuthal gap | 방위각 공백 † | The largest angle between neighboring stations as seen from the epicenter; a large gap means a poorly constrained location. | `azimuthal_gap` | M31, M32 |
 | b-positive | b-positive (양의 규모 차이 b값) † | A b-value estimated from the positive magnitude differences between consecutive events, which resists short-term incompleteness (van der Elst 2021). | `b_positive` | M05 |
@@ -34,39 +36,47 @@ mentor or open a friction report.
 | band-pass filter | 대역 통과 필터 | A filter that keeps the frequencies between two corner frequencies and removes the rest. | `bandpass_filter` | M10, M20 |
 | beachball | 비치볼, 단층면해 그림 | The map-view drawing of a focal mechanism, with the compressional quadrants shaded. | `beachball` | M50, M51 |
 | bias of an estimator | 추정량의 편향 | A systematic error: averaged over many repeats, the estimate differs from the true value. | `estimator_bias` | M05 |
-| BLAS | 기본 선형대수 서브프로그램 † | Basic Linear Algebra Subprograms: the fast library behind NumPy's matrix and vector arithmetic; it can start many threads unless it is told to use one. | `blas` | M00 |
+| bisection | 이분법 | Finding where a quantity crosses a target value by halving an interval that contains the crossing, again and again. | `bisection` | M30 |
+| BLAS | 기본 선형대수 서브프로그램 † | Basic Linear Algebra Subprograms: the fast library behind NumPy's matrix and vector arithmetic; it can start many threads unless it is told to use one. | `blas` | M00, M10 |
+| blinding (edge samples) | 가장자리 표본 제외 (blinding) † | Throwing away a network's output near both ends of each piece of record, where it saw too little record around a sample; it makes probability curves start later and end earlier than the record. | `blinding` | M21 |
 | body wave | 실체파 | A seismic wave that travels through the inside of the Earth: P or S. | `body_wave` | M10, M30 |
 | body-wave magnitude (mb) | 실체파 규모 | A magnitude from the amplitude of the first P waves (period near one second) recorded far away; it stops growing for large earthquakes, near 6. | `body_wave_magnitude` | M04 |
 | boolean array | 불리언 배열 | An array of True and False values, one per element or row, that says where a condition holds. | `boolean_array` | M01 |
 | bootstrap | 부트스트랩 | Estimating uncertainty by repeating an analysis many times on resampled data. | `bootstrap` | M41 |
 | branch | 브랜치 | A named line of commits that lets you work on a change without disturbing the main line. | `branch` | M00 |
-| broadband seismometer | 광대역 지진계 | A seismometer that records ground velocity faithfully over a wide range of periods, from a fraction of a second to tens of seconds. | `broadband_seismometer` | M03 |
+| broadband seismometer | 광대역 지진계 | A seismometer that records ground velocity faithfully over a wide range of periods, from a fraction of a second to tens of seconds. | `broadband_seismometer` | M03, M10 |
 | broadcasting | 브로드캐스팅 | NumPy's rule for combining arrays of different shapes, for example one number with a whole array, without writing a loop. | `broadcasting` | M01 |
 | Butterworth filter | 버터워스 필터 | A common filter design that passes its band as evenly as possible and fades smoothly outside it; more corners make the fade steeper. | `butterworth_filter` | M10 |
 | byte-order mark (BOM) | 바이트 순서 표식 † | An invisible marker that some programs write at the very start of a UTF-8 text file; a program that does not expect it reads it as part of the first value. | `byte_order_mark` | M01 |
 | catalog matching | 지진 목록 대조 † | Pairing the rows of two catalogs that describe the same earthquakes, using limits on the differences in origin time and epicenter. | `catalog_matching` | M04 |
-| causal filter | 인과 필터 | A filter that uses only the present and past samples: nothing appears before an arrival, but waves come out delayed and reshaped. | `causal_filter` | M10 |
+| causal filter | 인과 필터 | A filter that uses only the present and past samples: nothing appears before an arrival, but waves come out delayed and reshaped. | `causal_filter` | M10, M20 |
 | central angle | 중심각 | The angle at the Earth's center between the lines to two points on its surface. | `central_angle` | M01 |
+| change point | 변화점 | The sample at which the statistics of a record, such as its variance, change. | `change_point` | M20 |
 | channel | 채널 | One recorded component of a station, named with three letters such as HHZ (band, instrument type, orientation). | `channel` | M03, M10 |
+| characteristic function | 특성 함수 † | A trace computed from a record, such as its squared samples, whose changes a detector looks for. | `characteristic_function` | M20 |
 | check | 점검, 체크 | A test that runs your function on cases with known answers and prints PASS or FAIL without showing the solution. | `check` | M00 |
-| checksum (SHA-256 fingerprint) | 체크섬 | A short fingerprint computed from every byte of a file, here with SHA-256: if even one byte changes, the fingerprint changes, so an unchanged fingerprint shows that the file is intact. | `checksum` | M03 |
+| checksum (SHA-256 fingerprint) | 체크섬 | A short fingerprint computed from every byte of a file, here with SHA-256: if even one byte changes, the fingerprint changes, so an unchanged fingerprint shows that the file is intact. | `checksum` | M03, M21 |
+| cluster (PocketQuake) | 클러스터 (PocketQuake) † | PocketQuake's name for one set of earthquakes processed together, registered under a short name (its slug); its results go to their own folder. | `pocketquake_cluster` | M21, M32 |
 | CLVD | 보상 선형 벡터 쌍극자 † | Compensated linear vector dipole: a non-double-couple part of a moment tensor with no volume change. | `clvd` | M53 |
 | ComCat | USGS 통합 지진 목록 | The U.S. Geological Survey's Comprehensive Catalog of earthquakes, which also lists larger Korean events. | `comcat` | M04 |
 | commit | 커밋 | One saved snapshot of changes in a git repository, with a short message that says what changed and why. | `commit` | M00 |
 | commit hash | 커밋 해시 | The code of 40 letters and digits (often shortened to the first 7) that names one commit exactly. | `commit_hash` | M00 |
 | completeness check | 자료 완전성 점검 † | A comparison of the data you asked for with the data you received, made before any analysis. | `completeness_check` | M03 |
-| component | 성분 | The direction of motion a channel records: vertical (Z), north (N) or east (E). | `component` | M10 |
+| component | 성분 | The direction of motion a channel records: vertical (Z), north (N) or east (E). | `component` | M03, M10 |
 | conda | 콘다 | A package manager that installs Python and scientific libraries into separate environments. | `conda` | M00 |
 | condition number | 조건수 | The ratio of the largest to the smallest singular value of a matrix; a large number means an unstable inversion. | `condition_number` | M41 |
 | continuous waveform | 연속 파형 | Waveform data recorded all the time, as opposed to short windows cut around known events. | `continuous_waveform` | M03, M22 |
 | corner frequency (of a filter) | 차단 주파수(코너 주파수) † | A frequency where a filter starts to weaken the signal; a band-pass filter has two. | `filter_corner` | M10 |
 | Coulomb failure stress change (ΔCFS) | 쿨롱 파괴 응력 변화 | The change in shear stress in the slip direction plus effective friction times the change in normal stress (unclamping positive); a positive value brings a fault closer to failure. | `coulomb_failure_stress_change` | M54 |
-| counts | 카운트, 디지털 값 | The raw integer numbers that a digitizer records, before the instrument response is removed. | `counts` | M10 |
+| counts | 카운트, 디지털 값 | The raw integer numbers that a digitizer records, before the instrument response is removed. | `counts` | M03, M10 |
 | covariance matrix | 공분산 행렬 | A matrix that describes the uncertainty of estimated parameters and how their errors trade off. | `covariance_matrix` | M31 |
 | CPU core | CPU 코어 | One processing unit of a computer; all users of a shared server share a fixed number of them. | `cpu_core` | M00 |
 | CPU time | CPU 시간 | The time the processor cores spent on a program, added over all its threads; CPU time divided by wall-clock time is the number of busy cores. | `cpu_time` | M10 |
 | credentials | 계정 정보, 인증 정보 | The user name and password (or key) that let a program act in your name; never share, paste or commit them. | `credentials` | M03 |
+| critical angle | 임계각 | The angle from the vertical at which a ray meeting a faster layer below is bent to run along the boundary: sin(angle) = slower speed / faster speed. | `critical_angle` | M30 |
+| critical distance | 임계 거리 | The shortest epicentral distance at which the head wave along a given boundary arrives. | `critical_distance` | M30 |
 | cross-correlation | 상호상관, 교차상관 | A measure of how similar two signals are at each relative time shift. | `cross_correlation` | M22, M41 |
+| crossover distance | 교차 거리 | The epicentral distance beyond which a head wave arrives before the direct wave. | `crossover_distance` | M30 |
 | CSV file | CSV 파일 | A plain-text table with one row per line and commas between the columns; the earthquake catalogs in this course are CSV files. | `csv` | M00 |
 | cumulative count | 누적 개수 | A running total: the number of events up to a given time, or at or above a given magnitude. | `cumulative_count` | M04 |
 | cumulative distribution function (CDF) | 누적 분포 함수 | The probability that a random value is at or below a given value. | `cumulative_distribution_function` | M05 |
@@ -79,38 +89,47 @@ mentor or open a friction report.
 | decimal degrees | 십진 도 표기 † | Latitude and longitude written as one decimal number, such as 35.85°, instead of degrees, minutes and seconds. | `decimal_degrees` | M02 |
 | declustering | 디클러스터링, 종속 지진 제거 † | Removing aftershocks and other dependent events so that the remaining events behave like independent background earthquakes. | `declustering` | M05 |
 | deep-learning picker | 딥러닝 위상 검출기 † | A neural network trained on labeled seismograms to find P and S arrivals, such as PhaseNet. | `deep_learning_picker` | M21 |
-| detrend | 추세 제거 | Removing the mean or a straight line from a record before filtering or transforming it. | `detrend` | M10 |
+| deterministic computation | 결정론적 계산 | A computation that gives exactly the same output, byte for byte, every time it runs on the same input with the same software and settings. | `deterministic_computation` | M21 |
+| detrend | 추세 제거 | Removing the mean or a straight line from a record before filtering or transforming it. | `detrend` | M10, M20 |
 | differential time | 도달 시간 차 † | The difference between the arrival times of the same phase from two events at one station. | `differential_time` | M41 |
 | digitizer | 디지타이저, 아날로그-디지털 변환기 | The device that measures a sensor's voltage many times per second and writes it as whole numbers (counts). | `digitizer` | M03 |
 | dip | 경사 | The angle of the fault plane below the horizontal, from 0 to 90 degrees. | `dip` | M50 |
+| direct wave | 직접파 | The wave that leaves the source upward and reaches the station without being reflected, bending only where it crosses a layer boundary. | `direct_wave` | M30 |
 | docstring | 독스트링 | The text in triple quotes just below a def line that says what a function does, what it takes and what it returns; help() prints it. | `docstring` | M01 |
 | double couple | 이중 우력, 더블 커플 † | The moment tensor of slip on a flat fault: two opposite pairs of forces with no net force or torque. | `double_couple` | M52, M53 |
 | double difference | 이중차분 | The observed minus the predicted differential time of an event pair at one station. | `double_difference` | M41 |
-| dry run | 드라이 런, 시험 실행 | Running a script so that it only prints what it would do, without changing anything. | `dry_run` | M00 |
+| dry run | 드라이 런, 시험 실행 | Running a script so that it only prints what it would do, without changing anything. | `dry_run` | M00, M03, M21 |
+| Earth-flattening transformation | 지구 평탄화 변환 † | A change of depths and speeds that makes travel times in flat layers equal to those in a spherical Earth, and back. | `earth_flattening` | M30 |
 | earthquake catalog | 지진 목록, 지진 카탈로그 | A table of earthquakes with origin time, location, depth and magnitude, made by a seismological agency. | `earthquake_catalog` | M00, M01, M02, M04, M05 |
 | earthquake detection | 지진 검출 | Finding earthquakes in continuous data. | `detection` | M22 |
 | earthquake sequence | 지진 시퀀스 † | A group of earthquakes that are close in space and time and are thought to be related. | `earthquake_sequence` | M02, M04, M05 |
 | earthquake swarm | 군발지진 | A sequence without one clearly largest event, often lasting days to months. | `earthquake_swarm` | M05 |
 | effective friction coefficient | 유효 마찰 계수 | The friction coefficient reduced to include pore-pressure changes, often written μ' = μ(1 - B). | `effective_friction` | M54 |
 | elastic half-space | 반무한 탄성체 | A uniform elastic body that fills everything below a flat free surface. | `elastic_half_space` | M54 |
+| emergent onset | 점진적 초동 (서서히 나타나는 온셋) † | An onset that grows slowly out of the noise, so that its time is uncertain by a tenth of a second or more. | `emergent_onset` | M20 |
 | envelope | 포락선 | A smooth curve that follows the size of the wiggles of a signal, computed as the size of the analytic signal. | `envelope` | M03 |
 | environment | 가상 환경 | A self-contained set of Python and packages with fixed versions, so results do not change when other software changes. | `environment` | M00 |
+| environment variable | 환경 변수 | A named setting that a program reads from its environment, such as OMP\_NUM\_THREADS; a program started from Python inherits the environment of the Python process. | `environment_variable` | M21 |
 | epicenter | 진앙 | The point on the Earth's surface directly above the hypocenter. | `epicenter` | M01, M02, M04, M31 |
-| epicentral distance | 진앙 거리 | The distance from the epicenter to a station along the Earth's surface. | `epicentral_distance` | M03 |
+| epicentral distance | 진앙 거리 | The distance from the epicenter to a station along the Earth's surface. | `epicentral_distance` | M03, M10, M20, M30 |
 | error ellipse | 오차 타원 | The region where the true epicenter probably lies, drawn from the covariance matrix. | `error_ellipse` | M04, M31 |
 | ETAS model | ETAS 모형 † | The Epidemic-Type Aftershock Sequence model, in which every earthquake can trigger others and the rates add up. | `etas` | M05 |
 | exponential distribution | 지수 분포 | A distribution of positive numbers in which larger values become rarer by a constant factor per unit; magnitudes above Mc follow it with rate beta = b ln 10. | `exponential_distribution` | M05 |
 | f-string | f-문자열 | A Python string written with f before the opening quote, in which names in curly braces are replaced by their values. | `f_string` | M01 |
+| false pick | 오검출 피킹 † | A pick where no real arrival is, for example on noise, on a spike, or on another phase. | `false_pick` | M21 |
+| false trigger | 오트리거, 잘못된 트리거 † | A trigger on noise, a spike or anything else than the arrival you are looking for. | `false_trigger` | M20, M22 |
 | far field | 원거리장 | The part of the wavefield that decays as 1/r and dominates far from the source. | `far_field` | M52 |
 | fault | 단층 | A fracture in rock along which the two sides have slipped past each other. | `fault` | M50 |
 | FDSN | 국제 디지털 지진관측망 연맹 | The International Federation of Digital Seismograph Networks, which also defines standard web services for seismic data. | `fdsn` | M03, M04 |
+| Fermat's principle | 페르마의 원리 | A seismic ray follows the path along which the travel time is least (more exactly, does not change for small changes of the path). | `fermats_principle` | M30 |
 | figure and axes | 그림과 축 영역 † | In Matplotlib the figure is the whole image, and an axes is one plotting panel inside it with its own x and y axes. | `figure_axes` | M02 |
 | file permissions | 파일 권한 | The rules that say who may read, write or run a file; chmod 600 lets only the owner read and write it. | `file_permissions` | M03 |
 | filter order (corners) | 필터 차수 | How steeply a filter weakens the frequencies outside its band; ObsPy calls it the number of corners. | `filter_order` | M10 |
-| first-motion polarity | 초동 극성 | Whether the first P-wave motion is up (compression) or down (dilatation). | `polarity` | M20, M51 |
-| floating-point number | 부동소수점 수 | How computers store decimal numbers: in binary, so most decimals such as 0.1 are stored as a value very close to, but not exactly, that number. | `floating_point_number` | M04 |
+| first arrival | 최초 도달파 (초동) † | The wave that reaches a station first, whichever path it took: the direct wave near the source, a head wave beyond a crossover distance; the onset a picker marks. | `first_arrival` | M30 |
+| first-motion polarity | 초동 극성 | Whether the first P-wave motion is up (compression) or down (dilatation). | `polarity` | M20, M21, M51 |
+| floating-point number | 부동소수점 수 | How computers store decimal numbers: in binary, so most decimals such as 0.1 are stored as a value very close to, but not exactly, that number. | `floating_point_number` | M04, M20 |
 | focal depth | 진원 깊이 | The depth of the hypocenter below the surface, in kilometers. | `focal_depth` | M01, M04, M31 |
-| focal mechanism | 단층면해, 진원 메커니즘 | The orientation of the fault and the direction of slip, estimated from seismic waves. | `focal_mechanism` | M50, M51 |
+| focal mechanism | 단층면해, 진원 메커니즘 | The orientation of the fault and the direction of slip, estimated from seismic waves. | `focal_mechanism` | M21, M50, M51 |
 | focal sphere | 진원구 | An imaginary small sphere around the hypocenter on which the directions of rays leaving the source are plotted. | `focal_sphere` | M50 |
 | foreshock | 전진 | An earthquake that comes before a larger earthquake nearby. | `foreshock` | M04, M05 |
 | Fourier transform | 푸리에 변환 | Writing a record as a sum of sines and cosines of different frequencies; numpy.fft computes the discrete version. | `fourier_transform` | M10 |
@@ -120,22 +139,27 @@ mentor or open a friction report.
 | Geiger's method | 가이거 방법 | Iterative linearized location: start from a guess, fit the time residuals with small changes, and repeat. | `geiger_method` | M31 |
 | geometric spreading | 기하학적 확산 | The decrease of amplitude with distance because the wave energy spreads over a larger area. | `geometric_spreading` | M52, M53 |
 | git | 깃 | A version-control program that records snapshots of your files so you can compare and undo changes. | `git` | M00 |
-| great-circle distance | 대원 거리 | The shortest distance between two points measured along the surface of the Earth. | `great_circle_distance` | M01, M02, M04 |
+| great-circle distance | 대원 거리 | The shortest distance between two points measured along the surface of the Earth. | `great_circle_distance` | M01, M02, M03, M04 |
 | Green's function | 그린 함수 | The seismogram that a unit impulse source would produce at a station; synthetics are sums of Green's functions weighted by moment-tensor elements. | `greens_function` | M52, M53 |
 | grid search | 격자 탐색 | Trying every point on a grid of candidate answers and keeping the best one. | `grid_search` | M31, M51 |
-| ground motion | 지반 운동 | The displacement, velocity or acceleration of the ground at a station. | `ground_motion` | M10 |
+| ground motion | 지반 운동 | The displacement, velocity or acceleration of the ground at a station. | `ground_motion` | M03, M10 |
 | group delay | 군지연 † | The time by which a filter delays the waves of one frequency. | `group_delay` | M10 |
 | Gutenberg-Richter law | 구텐베르크-리히터 법칙 | The rule that the number of earthquakes at or above magnitude M falls by about ten times per magnitude unit: log10 N = a - bM. | `gutenberg_richter_law` | M04, M05 |
-| head wave | 선두파 | A wave that travels along a layer boundary, such as Pn along the Moho; in this tutorial only a travel-time idea, never used for location. | `head_wave` | M02, M30 |
+| half-space | 반무한 공간 | A layer with no bottom: in a layered model, the deepest layer, which continues downward forever. | `half_space` | M30 |
+| head wave | 선두파 | A wave that travels along a layer boundary, such as Pn along the Moho; in this tutorial only a travel-time idea, never used for location. | `head_wave` | M02, M20, M30 |
 | histogram | 히스토그램 | A bar chart of how many values fall into each bin (interval), for example how many earthquakes have magnitudes in each 0.1-wide bin. | `histogram` | M02, M05 |
 | home directory | 홈 디렉터리 | Your own top folder on the server, written ~ in the shell; your files and the course software live under it. | `home_directory` | M00 |
 | hypocenter | 진원 | The point inside the Earth where an earthquake rupture starts. | `hypocenter` | M01, M04, M31 |
-| hypocentral distance | 진원 거리 | The straight-line distance from the hypocenter (at depth) to a station. | `hypocentral_distance` | M03 |
+| hypocentral distance | 진원 거리 | The straight-line distance from the hypocenter (at depth) to a station. | `hypocentral_distance` | M03, M10, M20, M30 |
 | HypoDD | 이중차분 진원 재결정 프로그램 | The standard double-difference relocation program (Waldhauser 2001). | `hypodd` | M41 |
 | HYPOINVERSE | 진원 결정 프로그램 | A standard USGS program that locates earthquakes in layered velocity models. | `hypoinverse` | M32 |
+| impulsive onset | 급격한 초동 (임펄스형 온셋) † | An onset that leaves the noise within a sample or two; it can be timed to a few hundredths of a second. | `impulsive_onset` | M20 |
 | in place (operation) | 제자리 연산(원본 수정) † | A method that overwrites the object it is called on instead of returning a changed copy; ObsPy's detrend, taper and filter work this way. | `in_place` | M10 |
+| inference | 추론 | Running a trained network on new data to get its output; nothing is learned while it runs. | `inference` | M21 |
 | instrument code | 계기 코드 † | The second letter of a channel code: the kind of sensor (H high-gain seismometer, L low-gain seismometer; G an accelerometer in the KS and KG networks). | `instrument_code` | M03 |
 | instrument response | 계기 응답 | How the instrument turns ground motion into recorded counts, as a function of frequency. | `instrument_response` | M03, M10 |
+| integer overflow | 정수 오버플로 | What happens when a result is too large for its whole-number type: it wraps around to a wrong value without a warning (32-bit integers hold up to about 2.1 billion). | `integer_overflow` | M20 |
+| intercept time | 절편 시간 | Where the straight travel-time line of a head wave, extended back, meets zero distance; it depends on the layer thicknesses and the source depth. | `intercept_time` | M30 |
 | inverse transform sampling | 역변환 표본추출 † | Making random draws from a distribution by putting uniform random numbers between 0 and 1 into the inverse of its cumulative distribution function. | `inverse_transform_sampling` | M05 |
 | ISC | 국제지진센터 | The International Seismological Centre, which combines reports from many agencies into one global bulletin. | `isc` | M04 |
 | isotropic component | 등방 성분 | The volume-change part of a moment tensor, as in an explosion or implosion. | `isotropic_component` | M53 |
@@ -144,11 +168,12 @@ mentor or open a friction report.
 | Kagan angle | 카간 각 | The smallest rotation that turns one double-couple mechanism into another; 0 degrees means identical. | `kagan_angle` | M51, M53 |
 | kernel | 커널 | The program behind a Jupyter notebook that runs your code cells; in this tutorial it is "SGTL (Python 3.12)". | `kernel` | M00 |
 | KOGL Type 1 | 공공누리 제1유형: 출처표시 | The Korea Open Government License that lets anyone reuse public data if they name the source. | `kogl` | M01, M02, M04 |
-| KST | 한국 표준시 | Korea Standard Time, UTC plus 9 hours; the KMA catalog gives its times in KST. | `kst` | M00, M01, M02, M04 |
+| KST | 한국 표준시 | Korea Standard Time, UTC plus 9 hours; the KMA catalog gives its times in KST. | `kst` | M00, M01, M02, M03, M04, M10 |
 | L1 and L2 norms | L1·L2 노름 | Two ways to add up residuals: absolute values (L1, less sensitive to outliers) or squares (L2). | `l1_l2_norm` | M53 |
-| least squares | 최소제곱법 | Choosing the model that makes the sum of squared residuals smallest. | `least_squares` | M31, M53 |
+| least squares | 최소제곱법 | Choosing the model that makes the sum of squared residuals smallest. | `least_squares` | M30, M31, M53 |
 | likelihood | 가능도, 우도 | How probable the observed data are under a model, seen as a function of the model's parameter values. | `likelihood` | M05 |
-| local magnitude (ML) | 국지 규모 | A magnitude from the largest amplitudes on nearby seismometers, corrected for distance; the KMA catalog reports ML. | `local_magnitude` | M00, M01, M02, M04, M05, M10 |
+| local magnitude (ML) | 국지 규모 | A magnitude from the largest amplitudes on nearby seismometers, corrected for distance; the KMA catalog reports ML. | `local_magnitude` | M00, M01, M02, M03, M04, M05, M10 |
+| local maximum (peak) | 극댓값 | A sample of a curve that is higher than both of its neighbours. | `local_maximum` | M21 |
 | location code | 위치 코드 † | The part of a SEED id that tells apart two sensors of the same kind at one station; it is often empty. | `location_code` | M03 |
 | lower-hemisphere projection | 하반구 투영 | Drawing the rays that leave the source downward, as seen from above, on a flat circle. | `lower_hemisphere_projection` | M50 |
 | lune | 룬 도표 † | A part of a sphere (Tape and Tape 2012) on which every moment-tensor source type has a place, from explosion to double couple. | `lune` | M53 |
@@ -162,20 +187,25 @@ mentor or open a friction report.
 | Markdown | 마크다운 | A way to format plain text with a few marks, such as # for a heading and \*\*bold\*\* for bold text; notebook text cells and these docs use it. | `markdown` | M00 |
 | maximum curvature (MAXC) | 최대 곡률법 † | A quick estimate of the magnitude of completeness: the magnitude bin with the most events in the non-cumulative FMD, often with 0.2 added. | `maximum_curvature` | M04, M05 |
 | maximum likelihood estimation | 최대가능도 추정, 최대우도 추정 | Choosing the model parameters that make the observed data most probable. | `maximum_likelihood` | M05, M53 |
+| median absolute deviation (MAD) | 중앙값 절대 편차 | The median of the distances of the values from their own median: a measure of scatter that a few wild values cannot pull far. | `median_absolute_deviation` | M21 |
+| median absolute error | 중앙 절대 오차 | The median of the sizes of a set of errors, ignoring their signs; a few very large errors barely move it. | `median_absolute_error` | M20 |
 | memory (RAM) | 메모리 | The fast working storage that a running program uses; when the server runs out, programs are killed. | `memory` | M00 |
 | microearthquake | 미소지진 | In KMA usage, an earthquake smaller than ML 2.0. | `microearthquake` | M04 |
 | miniSEED | 지진파형 파일 형식 | A standard binary file format for waveform data. | `miniseed` | M03 |
 | misfit function | 목적 함수, 불일치 함수 † | A single number that measures how badly a model fits the data; location searches for its minimum. | `misfit_function` | M31 |
+| model weights | 모형 가중치 † | The numbers inside a neural network that training has set; the same network with other weights is a different picker. | `model_weights` | M21 |
 | Moho (crust-mantle boundary) | 모호면, 모호로비치치 불연속면 | The boundary between the crust and the mantle, about 30-35 km deep under South Korea. | `crust_mantle_boundary` | M30 |
 | moment magnitude (Mw) | 모멘트 규모 | A magnitude computed from the seismic moment; unlike ML it does not saturate for large earthquakes. | `moment_magnitude` | M04, M52, M53 |
 | moment tensor | 모멘트 텐서 | A symmetric 3-by-3 matrix that describes the forces of an earthquake treated as a point source. | `moment_tensor` | M52, M53 |
 | Monte Carlo simulation | 몬테카를로 시뮬레이션 | Repeating a calculation on many random data sets to see how much the results scatter. | `monte_carlo_simulation` | M05 |
-| naive datetime | 나이브 시각, 시간대 정보가 없는 시각 † | A date and time with no time zone attached, so Python cannot tell which instant on Earth it means. | `naive_datetime` | M01 |
+| moving average | 이동 평균 | The average of the last N samples of a record, computed again at every sample. | `moving_average` | M20 |
+| naive datetime | 나이브 시각, 시간대 정보가 없는 시각 † | A date and time with no time zone attached, so Python cannot tell which instant on Earth it means. | `naive_datetime` | M01, M03 |
 | NaN (not a number) | 숫자가 아닌 값, 결측값 표시 † | A special floating-point value meaning 'not a number'; pandas uses it to mark a missing value. | `nan` | M01 |
 | nearest-neighbor distance | 최근접 이웃 거리 | A distance in space, time and magnitude to the most likely parent event (Zaliapin and Ben-Zion), used to separate clusters from background. | `nearest_neighbor_distance` | M05 |
 | negative log-likelihood | 음의 로그 가능도 | Minus the natural logarithm of the likelihood; minimizing it gives the same parameters as maximizing the likelihood. | `negative_log_likelihood` | M05 |
-| network code | 관측망 코드 | A two-letter code for the network a station belongs to, for example KS (KMA) or KG (KIGAM). | `network_code` | M02, M03 |
+| network code | 관측망 코드 | A two-letter code for the network a station belongs to, for example KS (KMA) or KG (KIGAM). | `network_code` | M02, M03, M10 |
 | network epoch | 관측망 시기 † | A period in which a seismic network had about the same stations, so its catalog has about the same completeness. | `network_epoch` | M04 |
+| neural network | 신경망 | A computer model made of many simple arithmetic steps linked in a chain, whose numbers (weights) are set by training on examples; PhaseNet is one. | `neural_network` | M21 |
 | nice | 우선순위 낮추기 명령 † | A command that runs a program at a lower priority, so that it gives way to other people's work on the shared server. | `nice` | M00 |
 | nodal plane | 절면 | One of the two planes on which P-wave amplitude is zero; one of them is the fault plane. | `nodal_plane` | M50, M51 |
 | normal fault | 정단층 | A fault on which the upper side moves down; the crust is extended (rake near -90 degrees). | `normal_fault` | M50 |
@@ -186,28 +216,36 @@ mentor or open a friction report.
 | Nyquist frequency | 나이퀴스트 주파수 | Half the sampling rate: the highest frequency a sampled signal can represent. | `nyquist_frequency` | M10 |
 | Okada solution | 오카다 해 | Formulas for the displacement and strain caused by slip on a rectangular fault in an elastic half-space (Okada 1992). | `okada_solution` | M54 |
 | Omori-Utsu law | 오모리-우츠 법칙 | The rule that the aftershock rate decays with time t after the mainshock as K/(t + c)^p. | `omori_utsu_law` | M05 |
-| origin time | 진원시, 발생 시각 | The time when the earthquake rupture starts at the hypocenter. | `origin_time` | M00, M01, M02, M04, M31 |
-| overall sensitivity | 전체 감도 † | The counts recorded per unit of ground motion (for example counts per m/s) where the response is flat: the product of the gains of all stages. | `overall_sensitivity` | M03 |
+| onset | 온셋, 도달 시작점 † | The first sample where a new arrival starts to show in a record. | `onset` | M20, M21 |
+| origin time | 진원시, 발생 시각 | The time when the earthquake rupture starts at the hypocenter. | `origin_time` | M00, M01, M02, M04, M10, M21, M30, M31 |
+| overall sensitivity | 전체 감도 † | The counts recorded per unit of ground motion (for example counts per m/s) where the response is flat: the product of the gains of all stages. | `overall_sensitivity` | M03, M20 |
 | P and T axes | P축과 T축 | The pressure (P) and tension (T) axes, which lie halfway between the two nodal planes. | `p_t_axes` | M50 |
-| P wave | P파 | The compressional body wave; it is the fastest wave and arrives first. | `p_wave` | M20, M30 |
+| P wave | P파 | The compressional body wave; it is the fastest wave and arrives first. | `p_wave` | M03, M10, M20, M21, M30 |
 | pandas index | 판다스 인덱스 | The row labels of a pandas DataFrame or Series; they stay attached to the rows when you select or sort them. | `pandas_index` | M01 |
 | pandas Series | 판다스 시리즈 | One column of a pandas table: a list of values with a label (index) for each. | `pandas_series` | M01 |
 | parameter trade-off | 매개변수 상충 관계 † | When a change of one model parameter can be compensated by a change of another, so that the data cannot tell them apart well. | `parameter_trade_off` | M05 |
 | path | 경로 | The address of a file or folder; an absolute path starts at the top folder /, a relative path starts from the working directory. | `path` | M00 |
 | peak ground velocity (PGV) | 최대 지반 속도 | The largest absolute ground velocity of a record, measured after the instrument response is removed. | `peak_ground_velocity` | M10 |
 | phase association | 위상 연관 † | Grouping picks from many stations into events, so that each pick belongs to one earthquake. | `phase_association` | M21, M22 |
-| phase pick | 위상 피킹, 도달 시각 읽기 † | A measured arrival time of a seismic phase (P or S) at one station, made by a person or a program. | `phase_pick` | M20, M21 |
+| phase pick | 위상 피킹, 도달 시각 읽기 † | A measured arrival time of a seismic phase (P or S) at one station, made by a person or a program. | `phase_pick` | M10, M20, M21, M30 |
+| PhaseNet | PhaseNet | A deep-learning picker (Zhu and Beroza, 2019) that turns 30 s of a three-component record into P, S and noise probabilities for every sample. | `phasenet` | M21 |
+| PhaseNet+ | PhaseNet+ | A network of the PhaseNet family (EQNet) that also gives every P pick a first-motion polarity and an amplitude; PocketQuake uses it through sgtl. | `phasenet_plus` | M21, M51 |
+| pick probability | 피킹 확률 | The output of a deep-learning picker: for every sample a number from 0 to 1 that says how likely it is that a P (or S) wave arrives at that moment. | `pick_probability` | M21 |
+| pick threshold | 피킹 임계값 | The smallest pick probability that may become a pick; a lower threshold gives more picks, and more false ones. | `pick_threshold` | M21 |
+| pick uncertainty | 피킹 불확실성 | How far the true arrival time may lie from a pick, in seconds; every pick carries one. | `pick_uncertainty` | M20, M31 |
 | pipe | 파이프 | The \| sign in the shell, which feeds the output of one command into the next command. | `pipe` | M00 |
-| PocketQuake | 지진 분석 도구 모음 | The SGTL processing toolchain that runs picking, location, relocation and focal mechanisms in sequence. | `pocketquake` | M32, M60 |
+| Pn and Sn | Pn파와 Sn파 | The P and S head waves that run along the top of the mantle, just below the Moho; never used for location in this course. | `pn_sn` | M30 |
+| PocketQuake | 지진 분석 도구 모음 | The SGTL processing toolchain that runs picking, location, relocation and focal mechanisms in sequence. | `pocketquake` | M21, M32, M60 |
 | point source | 점 진원 | Treating an earthquake as happening at one point, which is fine when the wavelengths are much longer than the rupture. | `point_source` | M52 |
 | Poisson process | 푸아송 과정 | Events that happen at random times, independently of each other, at an average rate (events per unit of time) that can stay the same or change with time, as it falls after a mainshock. | `poisson_process` | M05 |
 | Poisson's ratio | 푸아송 비 | The ratio of sideways contraction to lengthwise extension when a material is stretched. | `poisson_ratio` | M54 |
-| polarity reversal | 극성 반전 | A channel that records the ground motion upside down; a negative stage gain in the metadata marks it. | `polarity_reversal` | M03 |
+| polarity reversal | 극성 반전 | A channel that records the ground motion upside down. By convention a negative stage gain in the metadata marks it, but metadata can be wrong: the records decide (first motions compared with neighbours at the same azimuth, over several earthquakes). | `polarity_reversal` | M03, M10, M20 |
 | poles and zeros | 극점과 영점 | A compact way to write an instrument response as a ratio of two polynomials. | `poles_and_zeros` | M10 |
 | pore pressure | 공극압 | The pressure of the fluid in the pores and cracks of rock. | `pore_pressure` | M54 |
 | port | 포트 | A number that picks out one program listening for network connections on a computer; JupyterLab listens on one port, and the SSH tunnel forwards it to your laptop. | `port` | M00 |
-| pre-filter | 사전 필터 † | A smooth taper in frequency used while removing the response, so that frequencies where the response is tiny are not blown up. | `pre_filter` | M03 |
+| pre-filter | 사전 필터 † | A smooth taper in frequency used while removing the response, so that frequencies where the response is tiny are not blown up. | `pre_filter` | M03, M10 |
 | prediction | 예측 | A short written guess of a result, made before you run the code, so you can learn from the difference. | `prediction` | M00, M01, M05 |
+| pretrained model | 사전 학습 모형 | A network together with weights that someone already trained on a labeled data set, ready to be run on new records. | `pretrained_model` | M21 |
 | private copy | 비공개 사본 저장소 † | Your own private GitHub repository that keeps the tutorial's history and holds your work. | `private_copy` | M00 |
 | pull | 풀 | Fetching new commits from a remote and merging them into the copy on your computer. | `pull` | M00 |
 | pull request | 풀 리퀘스트 | A GitHub page that proposes merging one branch into another, so someone can review the change first. | `pull_request` | M00 |
@@ -221,40 +259,45 @@ mentor or open a friction report.
 | ray parameter | 파선 변수 † | p = sin(i)/v, which stays constant along a ray in a layered Earth. | `ray_parameter` | M30 |
 | receiver fault | 수용 단층 † | The fault on which the stress change is calculated. | `receiver_fault` | M54 |
 | record section | 레코드 섹션(거리별 파형 배열도) † | A figure of many seismograms, each drawn at its distance from the source, against time after the origin. | `record_section` | M10 |
+| reduced travel time | 환산 주시 † | Travel time minus distance divided by a fixed speed (t - x / v); it tilts travel-time curves so that small differences show. | `reduced_travel_time` | M30 |
 | reference time (SAC) | 기준 시각 | The moment written in the nz headers of a SAC file; every other SAC time (b, e, o, a, t0) is a number of seconds after it. | `reference_time` | M10 |
 | relative relocation | 상대 진원 재결정 † | Improving the locations of nearby events relative to each other by using differences of travel times. | `relative_relocation` | M41 |
 | remote | 원격 저장소 | A named link from your repository to another copy of it, usually on GitHub, that git can push to and pull from; origin and upstream are the two remotes in this course. | `remote` | M00 |
 | repository | 저장소 | A folder whose full history of changes is tracked by git. | `repository` | M00 |
-| residual | 잔차 | An observed value minus the value the model predicts, for example an arrival time. | `residual` | M31, M41 |
-| response removal | 계기 응답 제거 | Dividing a record by the instrument response, frequency by frequency, to turn counts into ground motion. | `response_removal` | M03 |
+| residual | 잔차 | An observed value minus the value the model predicts, for example an arrival time. | `residual` | M30, M31, M41 |
+| response removal | 계기 응답 제거 | Dividing a record by the instrument response, frequency by frequency, to turn counts into ground motion. | `response_removal` | M03, M10 |
 | response stage | 응답 단계 † | One step of the recording chain, such as the sensor, the digitizer or a digital filter, with its own gain and units. | `response_stage` | M03 |
 | retired station | 폐쇄된 관측소, 운영 종료 관측소 † | A station that no longer records; its code stays in old data and in full station rosters, but not in a list of today's stations. | `retired_station` | M03 |
 | reverse fault | 역단층 | A fault on which the upper side moves up; the crust is shortened (rake near +90 degrees). | `reverse_fault` | M50 |
-| RMS residual | RMS 잔차 | The root mean square of the travel-time residuals of one event. | `rms_residual` | M31, M32 |
-| S wave | S파 | The shear body wave; it is slower than P and usually larger on the horizontal components. | `s_wave` | M20, M30 |
-| S-P time | S-P 시간 | The delay between the S and P arrivals at a station; it grows with distance from the source. | `s_minus_p_time` | M30, M31 |
+| RMS residual | RMS 잔차 | The root mean square of the travel-time residuals of one event. | `rms_residual` | M30, M31, M32 |
+| S wave | S파 | The shear body wave; it is slower than P and usually larger on the horizontal components. | `s_wave` | M03, M10, M20, M21, M30 |
+| S-P time | S-P 시간 | The delay between the S and P arrivals at a station; it grows with distance from the source. | `s_minus_p_time` | M10, M20, M30, M31 |
 | S/P amplitude ratio | S/P 진폭비 | The ratio of S-wave to P-wave amplitude, which adds information to polarities when estimating mechanisms. | `sp_amplitude_ratio` | M51 |
-| SAC file | SAC 파일 | A waveform file in the format of the Seismic Analysis Code: one channel per file, a header with the station, channel and times, then the samples. | `sac_file` | M03 |
+| SAC file | SAC 파일 | A waveform file in the format of the Seismic Analysis Code: one channel per file, a header with the station, channel and times, then the samples. | `sac_file` | M03, M10 |
 | SAC header | SAC 헤더 | The fixed block of numbers and short texts at the start of a SAC file: reference time, sampling interval, picks, station and event positions; -12345 means not set. | `sac_header` | M10 |
-| sampling rate | 표본화율, 샘플링 레이트 † | The number of samples recorded per second, in hertz. | `sampling_rate` | M10 |
+| sampling rate | 표본화율, 샘플링 레이트 † | The number of samples recorded per second, in hertz. | `sampling_rate` | M03, M10, M20 |
 | scale bar | 축척 막대 | A bar on a map that shows how long a given distance, such as 50 km, is on the map. | `scale_bar` | M02 |
 | scatter plot | 산점도 | A plot with one marker per item at its x and y position, for example one dot per earthquake. | `scatter_plot` | M02 |
 | SEED id | SEED 식별자 † | The full name of a recorded channel, written NET.STA.LOC.CHA, for example KS.SAJB..HHZ (an empty location code gives two dots in a row). | `seed_id` | M03 |
 | seismic moment (M0) | 지진 모멘트 | Shear modulus times fault area times average slip, in newton-meters; the physical size of an earthquake. | `seismic_moment` | M04, M52, M53, M54 |
 | seismicity | 지진활동 | The earthquakes that occur in a region over a period of time. | `seismicity` | M02, M04, M05 |
-| seismogram | 지진 기록, 지진파형 | A record of ground motion against time at one station. | `seismogram` | M01, M10 |
+| seismogram | 지진 기록, 지진파형 | A record of ground motion against time at one station. | `seismogram` | M01, M03, M10 |
 | seismometer | 지진계 | An instrument that measures ground motion. | `seismometer` | M10 |
 | sentence case | 첫 단어만 대문자로 쓰는 표기 † | Writing labels and titles like a sentence: only the first word and proper names start with a capital letter, as in 'Depth (km)'. | `sentence_case` | M02 |
 | server | 서버 | A shared computer that many people log in to and run programs on at the same time. | `server` | M00 |
 | shear modulus | 전단 탄성 계수, 강성률 | A rock's resistance to shearing, about 30 GPa in the crust. | `shear_modulus` | M52, M54 |
 | shear stress | 전단 응력 | The stress parallel to a plane, which tends to make the plane slip. | `shear_stress` | M54 |
 | shell | 셸 | A program that reads the commands you type and runs them; on the lab server it is bash. | `shell` | M00 |
+| shooting method | 슈팅 방법(사격법) † | Finding the ray that reaches a given station by trial: fire a ray, see where it lands, adjust its ray parameter and fire again. | `shooting_method` | M30 |
 | short-period seismometer | 단주기 지진계 | A seismometer that records ground velocity well at periods of about one second and shorter. | `short_period_seismometer` | M03 |
 | short-term aftershock incompleteness | 단기 여진 불완전성 † | The temporary loss of small events right after a large earthquake, when its waves and its many aftershocks hide them on the seismograms. | `transient_incompleteness` | M05 |
-| signal-to-noise ratio (SNR) | 신호 대 잡음비 | How much larger the signal is than the background noise. | `signal_to_noise_ratio` | M20 |
+| signal-to-noise ratio (SNR) | 신호 대 잡음비 | How much larger the signal is than the background noise. | `signal_to_noise_ratio` | M03, M20 |
 | Skempton coefficient (B) | 스켐프턴 계수 | The fraction of a change in mean stress that appears as a change in pore-fluid pressure. | `skempton_coefficient` | M54 |
-| SKHASH | 단층면해 결정 프로그램 | A Python program, successor of HASH, that finds focal mechanisms and their uncertainty from polarities and S/P ratios. | `skhash` | M51 |
+| SKHASH | 단층면해 결정 프로그램 | A Python program, successor of HASH, that finds focal mechanisms and their uncertainty from polarities and S/P ratios. | `skhash` | M21, M51 |
+| sliding window | 이동 창 † | A piece of record of fixed length that is moved along the record in steps, so a program that sees only 30 s at a time can cover a long record. | `sliding_window` | M21 |
 | slip | 미끄러짐, 단층 변위 † | The relative movement of the two sides of a fault during an earthquake. | `slip` | M52, M54 |
+| slowness | 느림도(속도의 역수) † | One divided by the wave speed, in seconds per kilometre. | `slowness` | M30 |
+| Snell's law | 스넬의 법칙 | At a boundary between two layers, sin(angle from the vertical) divided by the wave speed is the same on both sides; it tells how a ray bends. | `snells_law` | M30 |
 | source fault | 원인 단층 † | The fault whose slip causes the stress change. | `source_fault` | M54 |
 | source time function | 진원 시간 함수 | The time history of moment release at the source. | `source_time_function` | M52 |
 | spectrum | 스펙트럼 | The amplitude of a signal at each frequency. | `spectrum` | M10 |
@@ -267,20 +310,23 @@ mentor or open a friction report.
 | station code | 관측소 코드 | The short code of one seismic station, such as SAJB or CHS; together with the network code it names one site. | `station_code` | M03 |
 | station epoch | 관측소 운영 기간, 에포크 † | A period during which a station or channel kept the same site, instruments and settings; station metadata lists one epoch per change. | `station_epoch` | M03 |
 | StationXML | 관측소 메타데이터 XML 형식 | An XML file format for station locations, channels and instrument responses. | `stationxml` | M03, M10 |
+| STEAD (Stanford Earthquake Dataset) | STEAD (스탠퍼드 지진 자료 집합) | About a million labeled three-component records of earthquakes and noise from many regions, used to train many deep-learning pickers. | `stead` | M21 |
 | stereonet | 스테레오넷, 평사투영망 | A printed net for projecting directions on a sphere onto a flat circle by hand. | `stereonet` | M50 |
 | STP | 파형 전송 프로그램 † | Seismogram Transfer Program: a client that fetches waveforms from a data center with your personal account. | `stp` | M03 |
-| stream (ObsPy Stream) | 스트림 | A list of ObsPy Traces, for example the three components of one station, as obspy.read returns them. | `stream` | M10 |
+| stream (ObsPy Stream) | 스트림 | A list of ObsPy Traces, for example the three components of one station, as obspy.read returns them. | `stream` | M10, M21 |
 | stress tensor | 응력 텐서 | A symmetric 3-by-3 matrix that gives the force per area on any plane through a point. | `stress_tensor` | M54 |
 | strike | 주향 | The compass direction of a horizontal line on the fault plane, chosen so that the fault dips to the right. | `strike` | M50 |
 | strike-slip fault | 주향이동단층 | A fault on which the two sides slide horizontally past each other (rake near 0 or 180 degrees). | `strike_slip_fault` | M50 |
 | subprocess | 하위 프로세스(서브프로세스) † | A new program started by a running program; it gets only the environment variables that it is handed. | `subprocess` | M10 |
 | surface wave | 표면파 | A seismic wave that travels along the Earth's surface; it is slower than body waves and often largest at long distances. | `surface_wave` | M10, M53 |
 | synthetic seismogram | 합성 지진 기록, 합성 파형 | A seismogram computed from a source and an Earth model instead of recorded. | `synthetic_seismogram` | M52, M53 |
+| systematic error | 계통 오차 | An error with the same sign and about the same size every time, such as picks that are always a few samples late; averaging more values does not remove it. | `systematic_error` | M21 |
 | takeoff angle | 이탈각 † | The angle between a ray leaving the source and the downward vertical. | `takeoff_angle` | M30, M51 |
-| taper | 테이퍼 † | A smooth fade of both ends of a record to zero, so that filters and transforms do not see a jump where the record starts and stops. | `taper` | M10 |
+| taper | 테이퍼 † | A smooth fade of both ends of a record to zero, so that filters and transforms do not see a jump where the record starts and stops. | `taper` | M10, M20 |
+| TauP | TauP | A widely used program (also inside ObsPy as obspy.taup) that computes travel times and ray paths in a layered spherical Earth model. | `taup` | M30 |
 | template matching | 템플릿 매칭 | Scanning continuous data with the waveforms of a known earthquake to find similar, often smaller, events. | `template_matching` | M22 |
 | terminal | 터미널 | The window on your laptop where you type commands to a shell. | `terminal` | M00 |
-| thread | 스레드 | One stream of work inside a running program; more threads use more CPU cores at the same time. | `thread` | M00 |
+| thread | 스레드 | One stream of work inside a running program; more threads use more CPU cores at the same time. | `thread` | M00, M10, M21 |
 | thread pool | 스레드 풀 | A set of threads that a library starts once and reuses for parallel work; on the shared server each pool is capped at one thread. | `thread_pool` | M00 |
 | tidal stress | 조석 응력 | Small daily stress changes caused by the tides of the solid Earth and the oceans. | `tidal_stress` | M54 |
 | time shift | 시간 이동 | A small shift allowed between data and synthetics to absorb errors of the velocity model. | `time_shift` | M53 |
@@ -288,43 +334,45 @@ mentor or open a friction report.
 | time zero | 기준 시각 † | The moment chosen as t = 0 when the times of a sequence are counted, usually the origin time of the mainshock. | `time_zero` | M04 |
 | time zone | 시간대 | A region that keeps one clock time, given as an offset from UTC (KST is UTC + 9 h); Python's zoneinfo module finds named zones such as 'Asia/Seoul' in a time-zone database. | `time_zone` | M01 |
 | time-magnitude plot | 시간-규모 그림 † | A plot of each earthquake's magnitude against its origin time, one marker per event. | `time_magnitude_plot` | M02, M04 |
-| trace (ObsPy Trace) | 트레이스 | One channel's record in ObsPy: the samples in tr.data and their description (station, channel, start time, sampling rate) in tr.stats. | `trace` | M10 |
+| trace (ObsPy Trace) | 트레이스 | One channel's record in ObsPy: the samples in tr.data and their description (station, channel, start time, sampling rate) in tr.stats. | `trace` | M10, M21 |
 | traceback | 트레이스백 | The error report Python prints when a line fails; the last line names the error, and the lines above show where it happened. | `traceback` | M01 |
-| travel time | 주시 | The time a seismic wave takes to travel from the source to a station. | `travel_time` | M30 |
+| training data | 학습 자료 | The labeled examples a network learns from, for a picker records with analysts' picks; the network also learns the habits of those analysts. | `training_data` | M21 |
+| travel time | 주시 | The time a seismic wave takes to travel from the source to a station. | `travel_time` | M03, M30 |
 | trigger | 트리거 | The moment a detector declares that a signal has started, for example when STA/LTA rises above a threshold. | `trigger` | M20, M22 |
+| trigger threshold | 트리거 문턱값 | The value a ratio must rise above to turn a trigger on (thr\_on), or fall back to to turn it off again (thr\_off). | `trigger_threshold` | M20, M22 |
 | two-factor authentication (2FA) | 2단계 인증 | Logging in with your password plus a one-time code from your phone, so a stolen password alone is not enough. | `two_factor_authentication` | M00 |
 | upstream | 업스트림, 원본 저장소 | The original repository your copy came from; you pull tutorial updates from it. | `upstream` | M00 |
-| UTC | 협정 세계시 | Coordinated Universal Time, the reference clock used for all times in this tutorial. | `utc` | M00, M01, M02, M04 |
+| UTC | 협정 세계시 | Coordinated Universal Time, the reference clock used for all times in this tutorial. | `utc` | M00, M01, M02, M03, M04, M10, M21 |
 | variance reduction | 분산 감소량 | How much of the recorded signal the synthetics explain, in percent. | `variance_reduction` | M53 |
 | vectorization | 벡터화 | Doing a calculation on a whole array at once instead of looping over the items one by one. | `vectorization` | M01, M02 |
-| velocity model | 속도 구조 모델 | Seismic wave speeds as a function of depth; this tutorial uses layered one-dimensional models. | `velocity_model` | M30, M31 |
-| Vp/Vs ratio | Vp/Vs 비 | The ratio of P-wave speed to S-wave speed; about 1.73 in many crustal rocks. | `vp_vs_ratio` | M30 |
+| velocity model | 속도 구조 모델 | Seismic wave speeds as a function of depth; this tutorial uses layered one-dimensional models. | `velocity_model` | M10, M30, M31 |
+| Vp/Vs ratio | Vp/Vs 비 | The ratio of P-wave speed to S-wave speed; about 1.73 in many crustal rocks. | `vp_vs_ratio` | M10, M30 |
 | Wadati diagram | 와다티 도표 | A plot of S-P time against P arrival time; its slope is Vp/Vs minus 1, and the line reaches zero S-P time at the origin time. | `wadati_diagram` | M30, M31 |
 | water level (response removal) | 워터 레벨 † | A floor, in decibels below the largest value of an instrument response, under which the response may not fall when a record is divided by it. | `water_level` | M10 |
 | waveform inversion | 파형 역산 | Finding source parameters by fitting synthetic seismograms to recorded ones. | `waveform_inversion` | M53 |
-| widget | 위젯 | A control in a notebook, such as a slider or a button, that runs code again when you move it; the course's explorers use widgets to redraw a figure. | `widget` | M05, M10 |
-| Wood-Anderson seismograph | 우드-앤더슨 지진계 | The torsion seismograph that Richter used for the local magnitude scale; today its records are simulated from digital data. | `wood_anderson_seismograph` | M03 |
+| widget | 위젯 | A control in a notebook, such as a slider or a button, that runs code again when you move it; the course's explorers use widgets to redraw a figure. | `widget` | M05, M10, M20, M30 |
+| Wood-Anderson seismograph | 우드-앤더슨 지진계 | The torsion seismograph that Richter used for the local magnitude scale; today its records are simulated from digital data. | `wood_anderson_seismograph` | M03, M10 |
 | working directory | 작업 디렉터리 | The folder your shell is in right now; pwd prints it, and relative paths start from it. | `working_directory` | M00 |
-| zero-phase filter | 영위상 필터 | A filter run forward and then backward: peaks stay in place, but some energy spreads to times before an arrival. | `zero_phase_filter` | M10 |
+| zero-phase filter | 영위상 필터 | A filter run forward and then backward: peaks stay in place, but some energy spreads to times before an arrival. | `zero_phase_filter` | M10, M20 |
 
 ## Terms by module
 
 - **M00 Start here:** AI log, BLAS, branch, check, commit, commit hash, conda, CPU core, CSV file, dry run, earthquake catalog, environment, function, git, home directory, JupyterLab, kernel, KST, local magnitude (ML), Markdown, memory (RAM), nice, notebook, origin time, path, pipe, port, prediction, private copy, pull, pull request, push, remote, repository, server, shell, SSH (secure shell), SSH tunnel, terminal, thread, thread pool, two-factor authentication (2FA), upstream, UTC, working directory
 - **M01 Python for earthquake catalogs:** aware datetime, boolean array, broadcasting, byte-order mark (BOM), central angle, DataFrame, daylight saving time, docstring, earthquake catalog, epicenter, f-string, focal depth, function, great-circle distance, hypocenter, KOGL Type 1, KST, local magnitude (ML), mainshock, naive datetime, NaN (not a number), origin time, pandas index, pandas Series, prediction, radian, random seed, seismogram, time zone, traceback, UTC, vectorization
 - **M02 Figures and maps:** aftershock, DataFrame, decimal degrees, earthquake catalog, earthquake sequence, epicenter, figure and axes, function, great-circle distance, head wave, histogram, KOGL Type 1, KST, local magnitude (ML), magnitude, mainshock, map projection, map region, network code, origin time, scale bar, scatter plot, seismicity, sentence case, station, time-magnitude plot, UTC, vectorization
-- **M03 Getting seismic data: STP, stations, time windows, responses:** accelerometer, analytic signal, band code, broadband seismometer, channel, checksum (SHA-256 fingerprint), completeness check, continuous waveform, credentials, digitizer, envelope, epicentral distance, FDSN, file permissions, hypocentral distance, instrument code, instrument response, location code, miniSEED, network code, overall sensitivity, polarity reversal, pre-filter, response removal, response stage, retired station, SAC file, SEED id, short-period seismometer, stage gain, station, station code, station epoch, StationXML, STP, time window, Wood-Anderson seismograph
+- **M03 Getting seismic data: STP, stations, time windows, responses:** accelerometer, analytic signal, aware datetime, band code, broadband seismometer, channel, checksum (SHA-256 fingerprint), completeness check, component, continuous waveform, counts, credentials, digitizer, dry run, envelope, epicentral distance, FDSN, file permissions, great-circle distance, ground motion, hypocentral distance, instrument code, instrument response, KST, local magnitude (ML), location code, miniSEED, naive datetime, network code, overall sensitivity, P wave, polarity reversal, pre-filter, response removal, response stage, retired station, S wave, SAC file, sampling rate, SEED id, seismogram, short-period seismometer, signal-to-noise ratio (SNR), stage gain, station, station code, station epoch, StationXML, STP, time window, travel time, UTC, Wood-Anderson seismograph
 - **M04 Earthquake catalogs: read, clean, look:** aftershock, b-value, body-wave magnitude (mb), catalog matching, ComCat, cumulative count, earthquake catalog, earthquake sequence, epicenter, error ellipse, FDSN, floating-point number, focal depth, foreshock, frequency-magnitude distribution, great-circle distance, Gutenberg-Richter law, hypocenter, ISC, KOGL Type 1, KST, local magnitude (ML), magnitude, magnitude bin width (Δm), magnitude of completeness (Mc), magnitude type, mainshock, maximum curvature (MAXC), microearthquake, moment magnitude (Mw), network epoch, origin time, QuakeML, seismic moment (M0), seismicity, time zero, time-magnitude plot, UTC
 - **M05 Statistical seismology: b-value, completeness, aftershock decay:** a-value, aftershock, b-positive, b-value, b-value stability method, background seismicity, bias of an estimator, cumulative distribution function (CDF), declustering, earthquake catalog, earthquake sequence, earthquake swarm, ETAS model, exponential distribution, foreshock, frequency-magnitude distribution, Gutenberg-Richter law, histogram, inverse transform sampling, likelihood, local magnitude (ML), magnitude bin width (Δm), magnitude of completeness (Mc), mainshock, maximum curvature (MAXC), maximum likelihood estimation, Monte Carlo simulation, nearest-neighbor distance, negative log-likelihood, null hypothesis test, numerical optimization, Omori-Utsu law, parameter trade-off, Poisson process, prediction, random seed, seismicity, short-term aftershock incompleteness, standard error, widget
-- **M10 Seismograms: reading, filtering, spectra, record sections:** Akaike information criterion (AIC), aliasing, autoregressive model, back azimuth, band-pass filter, body wave, Butterworth filter, causal filter, channel, component, corner frequency (of a filter), counts, CPU time, day of the year (Julian day), decibel (dB), detrend, filter order (corners), Fourier transform, ground motion, group delay, in place (operation), instrument response, local magnitude (ML), Nyquist frequency, peak ground velocity (PGV), poles and zeros, radial and transverse components (R, T), record section, reference time (SAC), SAC header, sampling rate, seismogram, seismometer, spectrum, station, StationXML, stream (ObsPy Stream), subprocess, surface wave, taper, trace (ObsPy Trace), water level (response removal), widget, zero-phase filter
-- **M20 Picking by hand and STA/LTA triggers:** arrival time, band-pass filter, first-motion polarity, P wave, phase pick, S wave, signal-to-noise ratio (SNR), STA/LTA, trigger
-- **M21 Deep-learning pickers:** deep-learning picker, phase association, phase pick
-- **M22 Earthquake detection:** continuous waveform, cross-correlation, earthquake detection, phase association, template matching, trigger
-- **M30 Travel times:** arrival time, body wave, head wave, Moho (crust-mantle boundary), P wave, ray parameter, S wave, S-P time, takeoff angle, travel time, velocity model, Vp/Vs ratio, Wadati diagram
-- **M31 Earthquake location:** absolute location, azimuth, azimuthal gap, covariance matrix, epicenter, error ellipse, focal depth, Geiger's method, grid search, hypocenter, Jacobian matrix, least squares, misfit function, origin time, residual, RMS residual, S-P time, velocity model, Wadati diagram
-- **M32 HYPOINVERSE through PocketQuake:** absolute location, azimuthal gap, HYPOINVERSE, PocketQuake, RMS residual
+- **M10 Seismograms: reading, filtering, spectra, record sections:** accelerometer, Akaike information criterion (AIC), aliasing, autoregressive model, back azimuth, band-pass filter, BLAS, body wave, broadband seismometer, Butterworth filter, causal filter, channel, component, corner frequency (of a filter), counts, CPU time, day of the year (Julian day), decibel (dB), detrend, epicentral distance, filter order (corners), Fourier transform, ground motion, group delay, hypocentral distance, in place (operation), instrument response, KST, local magnitude (ML), network code, Nyquist frequency, origin time, P wave, peak ground velocity (PGV), phase pick, polarity reversal, poles and zeros, pre-filter, radial and transverse components (R, T), record section, reference time (SAC), response removal, S wave, S-P time, SAC file, SAC header, sampling rate, seismogram, seismometer, spectrum, station, StationXML, stream (ObsPy Stream), subprocess, surface wave, taper, thread, trace (ObsPy Trace), UTC, velocity model, Vp/Vs ratio, water level (response removal), widget, Wood-Anderson seismograph, zero-phase filter
+- **M20 Picking arrivals: STA/LTA triggers, onset times and picks by hand:** Akaike information criterion (AIC), arrival time, band-pass filter, causal filter, change point, characteristic function, detrend, emergent onset, epicentral distance, false trigger, first-motion polarity, floating-point number, head wave, hypocentral distance, impulsive onset, integer overflow, median absolute error, moving average, onset, overall sensitivity, P wave, phase pick, pick uncertainty, polarity reversal, S wave, S-P time, sampling rate, signal-to-noise ratio (SNR), STA/LTA, taper, trigger, trigger threshold, widget, zero-phase filter
+- **M21 Deep-learning pickers: probability curves, pretrained weights and PocketQuake's picker:** amplitude normalization, annotations (SeisBench), blinding (edge samples), checksum (SHA-256 fingerprint), cluster (PocketQuake), deep-learning picker, deterministic computation, dry run, environment variable, false pick, first-motion polarity, focal mechanism, inference, local maximum (peak), median absolute deviation (MAD), model weights, neural network, onset, origin time, P wave, phase association, phase pick, PhaseNet, PhaseNet+, pick probability, pick threshold, PocketQuake, pretrained model, S wave, SKHASH, sliding window, STEAD (Stanford Earthquake Dataset), stream (ObsPy Stream), systematic error, thread, trace (ObsPy Trace), training data, UTC
+- **M22 Earthquake detection:** continuous waveform, cross-correlation, earthquake detection, false trigger, phase association, template matching, trigger, trigger threshold
+- **M30 Travel times in a layered crust:** arrival time, bisection, body wave, critical angle, critical distance, crossover distance, direct wave, Earth-flattening transformation, epicentral distance, Fermat's principle, first arrival, half-space, head wave, hypocentral distance, intercept time, least squares, Moho (crust-mantle boundary), origin time, P wave, phase pick, Pn and Sn, ray parameter, reduced travel time, residual, RMS residual, S wave, S-P time, shooting method, slowness, Snell's law, takeoff angle, TauP, travel time, velocity model, Vp/Vs ratio, Wadati diagram, widget
+- **M31 Earthquake location:** absolute location, azimuth, azimuthal gap, covariance matrix, epicenter, error ellipse, focal depth, Geiger's method, grid search, hypocenter, Jacobian matrix, least squares, misfit function, origin time, pick uncertainty, residual, RMS residual, S-P time, velocity model, Wadati diagram
+- **M32 HYPOINVERSE through PocketQuake:** absolute location, azimuthal gap, cluster (PocketQuake), HYPOINVERSE, PocketQuake, RMS residual
 - **M41 Relative relocation (double difference):** bootstrap, condition number, cross-correlation, cycle skipping, damping, differential time, double difference, HypoDD, Jacobian matrix, relative relocation, residual
 - **M50 The focal sphere:** auxiliary plane, azimuth, beachball, dip, fault, focal mechanism, focal sphere, lower-hemisphere projection, nodal plane, normal fault, P and T axes, radiation pattern, rake, reverse fault, stereonet, strike, strike-slip fault
-- **M51 Focal mechanisms from polarities:** beachball, first-motion polarity, focal mechanism, grid search, Kagan angle, nodal plane, S/P amplitude ratio, SKHASH, takeoff angle
+- **M51 Focal mechanisms from polarities:** beachball, first-motion polarity, focal mechanism, grid search, Kagan angle, nodal plane, PhaseNet+, S/P amplitude ratio, SKHASH, takeoff angle
 - **M52 Synthetic seismograms:** back azimuth, double couple, far field, frequency-wavenumber (FK) method, geometric spreading, Green's function, moment magnitude (Mw), moment tensor, point source, radial and transverse components (R, T), radiation pattern, seismic moment (M0), shear modulus, slip, source time function, synthetic seismogram
 - **M53 Moment tensor inversion:** CLVD, damping, double couple, geometric spreading, Green's function, isotropic component, Kagan angle, L1 and L2 norms, least squares, lune, maximum likelihood estimation, moment magnitude (Mw), moment tensor, seismic moment (M0), surface wave, synthetic seismogram, time shift, variance reduction, waveform inversion
 - **M54 Coulomb stress change:** Coulomb failure stress change (ΔCFS), effective friction coefficient, elastic half-space, normal stress, null hypothesis test, Okada solution, Poisson's ratio, pore pressure, receiver fault, seismic moment (M0), shear modulus, shear stress, Skempton coefficient (B), slip, source fault, stress tensor, tidal stress

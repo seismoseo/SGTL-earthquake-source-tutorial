@@ -261,7 +261,7 @@ tools_install_skhash() {
 tools_write_envsh() {
   local f="$TOOLS_DIR/env.sh"
   step "Settings for your shell: $f"
-  action "write $f (EQNET_DIR, SKHASH_DIR, POCKETQUAKE_DIR, POCKETQUAKE_PYTHON, and $TOOLS_BIN on PATH)"
+  action "write $f (EQNET_DIR, SKHASH_DIR, POCKETQUAKE_DIR, POCKETQUAKE_PYTHON, SEISBENCH_CACHE_ROOT, and $TOOLS_BIN on PATH)"
   [[ $APPLY -eq 1 ]] || return 0
   mkdir -p "$TOOLS_DIR"
   {
@@ -272,6 +272,7 @@ tools_write_envsh() {
     printf 'export SKHASH_DIR=%q\n' "$TOOLS_DIR/SKHASH/SKHASH"
     printf 'export POCKETQUAKE_DIR=%q\n' "$SGTL_HOME/PocketQuake"
     printf 'export POCKETQUAKE_PYTHON=%q\n' "$TOOLS_PREFIX/bin/python"
+    printf 'export SEISBENCH_CACHE_ROOT=%q\n' "$SGTL_HOME/seisbench"   # weights of bin/sgtl-install seisbench
     # shellcheck disable=SC2016  # ${PATH} is for the file, expanded when it is sourced
     printf 'case ":${PATH}:" in *:%q:*) ;; *) export PATH=%q:"${PATH}" ;; esac\n' "$TOOLS_BIN" "$TOOLS_BIN"
   } >"$f.part"

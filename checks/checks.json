@@ -6,7 +6,10 @@
   "M03",
   "M04",
   "M05",
-  "M10"
+  "M10",
+  "M20",
+  "M21",
+  "M30"
  ],
  "schema": "sgtl-checks/1",
  "tasks": {
@@ -101,6 +104,8 @@
     "pyproj",
     "geopy",
     "obspy.geodetics",
+    "obspy.taup",
+    "pyrocko",
     "haversine",
     "sklearn",
     "geographiclib",
@@ -152,6 +157,8 @@
     "pyproj",
     "geopy",
     "obspy.geodetics",
+    "obspy.taup",
+    "pyrocko",
     "haversine",
     "sklearn",
     "geographiclib",
@@ -308,7 +315,7 @@
    "title": "What arrived?"
   },
   "M03-T4": {
-   "categories": "zb64:eNqVVV9v2zYQ/yoHA0OdQnaAPDrrQ5/2srRFO2DYk8GIJ4kIxRPIY1x32HffHSmpdtIO2EMC+Xi8u98fkn9vOoqj4c0BNp+RcwxggPPkEbbPxmdsoI+Ugz3m4DjdHKBEJWmi5Ng9I4Q8PmIEE+xVKjB+5XugCB8oIJwGDBAIcKJ2AOqAB8PQDiYE9NDSM0bZMiCwG3G/aWATaDciG2vY6HRf2LCj8DCHwCUpx+BCYuM9WvmCM+UIZbUjbzHu4XMO8OjCberZ7+ZcWMoCEyTU2WQUx3Ci7C1YanSQ/9q325lp8uf7MvBoLO7yJP2fMTBFhwmMj2jsGSaTEtoCZyJvouOzYvlL56xEKgzsjTK5h/frN0jHHqE3gmpEEyo3C10RW4q2xirnMJKyA3lKzqJgOIU6XcJQdJLO2quE3DesCiBMkWxuuXktaBlaUPjdokCZusuhLZ0KtATy9TMSHjMXiSTlhXgH0Uccw+DRJE1A0E4rPq1Y6dmeHA/CwR38clNkgWou2a4/irWs6zoxYBdprFJ+fEyfztC5YNMefid60lbFb6nO8SbJqscDeGpLQAxoMTXVnal4GeVPZsVUiEgDRW4zv+ZBha60CmyxoTpZzXJJ/FYdFPMo1Bwv4sK6TySbRcJ+EC1cYEUmuaqPkdppopDwRqNttXmPfFziGjZC8SDwK+h1RbLb7I3MtIc/KT5dcEqiSyGr2EcclhY3rLuL+2bk+rmbffID8xJfGmmptJZVKio7WnFt5PqBK9t7eMienRyn73nH4nvJRSHzPJ+FbfXSnNe5WJ3TFLV0zUDK400ZuphEh/1jRS2z1q5qy6uLqqLYw29qfq3twiQ5s9G6i3bzIK+O3QEebr80+u/t2zvx6ULKWsKASIGxFigTniKFfjcbfqZV+NcbGO2rk6slZp3nLYdyavR0rCsB+SRKN4vLm+/2pnhx1Vq9aUSWToUsxl9QOgGUBac8CO1QidXw1SkRZ8nViIDjxOcLKEXM/wPk4iVYDDHP2BRfz7pdPxwvHorm+n0ptwGJceF9eLFBkmuOkBP5qCcbfn1X44pzK+e9RsUOpaJeMboqWcuamOuffwHcAY5d",
+   "categories": "zb64:eNqVVc2O2zgMfhUiQLGZwkmBHjPtoadeOruLtkDRU6CxaFuoLHolarJp0XcvKdmeZDpYYA8JEoqk+P1I+rHpKI6GNwfYfETOMYABzpNH2D4Yn7GBPlIO9piD43RzgBKVpImSY/eAEPJ4jxFMsFepwPgv3wJF+JMCwmnAAIEAJ2oHoA54MAztYEJADy09YJSSAYHdiPtNA5tAuxHZWMNGp/vEhh2FuzkELkk7BhcSG+/Ryi84U45QVjvyFuMePuYA9y68Sj373ZwLS1tggoQ6m4ziGE6UvQVLjQ7yX3W7nZkmf74tA4/G4i5Psv8DBqboMIHxEY09w2RSQlvgTORNdHxWLF91zkqkwsDeKJN7+CztEoZCrKTqou6Q3HeslCFMkWxuefkrg/UIvZERm99FuVXaJU3UWamO2FK0CfKUnEVBewq6j5GNJxMNI/yTMSnVVSLdZamx2EpNgSP4/G7RpuDpcmhLWQGdoDR4np77zEU8SXki60GUk2kZPJqkCbq58ev02rEStz05HkTz1/DipggG1XZSrn+K6azrOgHfRRqryH/dp7/P0Llg0x4+EH2DglC+Up3jjySrHg/gqS0BsaZF4bb4NhWXo3xkVkyFiDRQ5Dbz7zyoBWaRKIpB1eNqo0uFt+qtmEeh5ngRFy19IimWA9UPIroLrMgkV5U30jtNFBLeaLStB6BHPi5xDRuhWLWvoNcVyW6zNzLTHr5Q/HbBKYkuhSwNFVMtPluri+Fm5PpzNxvyGVsTP+fYta1SsVr4cSPXD1zZ3sNd9uzkoD3mHbVcc1HIPM/231YvzXmdi9U5TVFL18TcebwpQxeT6LCfV9Qya91VbXl1hVUUe3ivR0p7uzBJzmy07mK7eZACsHSAkdQEB7h79anRr5cvX4tPF1LWFgZECoy1QZnwFCn0u9nwM63Cv97NOPvpwkDaYtZ5LjmUU6OnY10JyCdRullc3jzam+LFJSxnG96JLJ0KWYy/oHQCKAtOeSraoRKr4atTIs6SSxMBx4nPF1CKmP8HyMUbsRhinrEpvp51u35SnjwhzfXLU24DEuPCu/CkQJJrjpAT+agnG968rXHFuZXzXqNih9JRrxhdlaxlTcz18xeubJe7",
    "forbidden": [
     "sgtl_tutorial"
    ],
@@ -622,6 +629,309 @@
    "target": "answer",
    "tier": "stretch",
    "title": "Peak ground velocity against a magnitude expectation"
+  },
+  "M20-T1": {
+   "categories": "zb64:eNptVU1v2zgQ/SsDX2K3ljZNiy7gIodue1z0sClQFEUPtERJ3FCkyg+7brH/fd8MZaVpfAhik8OZ9968Gf9cNYMKqkk6mJhMU3XZNcl4t9rR6rPPgYLCV+q8tf4YKQ2a1D56m5Omg7JZR/KdHEc1TlbHmj7iyzvvEqclFe8jXocS8i2roNtz6JZaldSXf7/Ss2d0U6+2tELkqBIX/0enHBwpelG9J5fH6UQqBHXicp31KkXkJutdz/85Ea290zPeSYe5ymZLR5MGcp4+qA+kXMsfjeuMMwsHqe24tjU/1AX+hml2tD8Jj8a7mJRL1IEiuPE3+oOcTWpHrTmYVpNWzYDKrvXHq0gxj/zYALU/OrLa9cC0HrVykMH5xBFxIzimoBsTL2IIph+SyCkSvH5FiPWhjbTPiY6B1eDblzfV3qTlUgSwKvQLX7qTVkjzjEsvb8ApO0Z30AG5j7QG0RNSqgm6466VLB5lFB1VcMb1G1FTkCABE6B7rSfyzqJZe479E3L0YL1jzZA6iX7SrdKVqVZR+rrmQzginSZ9i+OZ4Ib2Gow0nXye/cMpRlEqHtU06fapTnmK3ANo73YQHX2yFjIMGoZy7CMDHQBphALG1fS+9Ew8OviQKszDSAqAFTSbu85ee3QhGKDFWOWJMbDx4QSQhKqnR4CkNTX9VbgUZ4pfqKIXS/bZL/yALdFla0Vivi+pxhwTFKHrN9QFPz7J5B2tQbOI9Cjn4C2coL/Dsbbw6UxAMnk6D+SGtTqXkKIaMknlwlVSVcW9i+rlFOOIqjyBM6bkfQHAw4/PImxNb9M5wEiJu49vL0OUoZqB0dqAnpw8Z72g6WZR5u+HDMvbX0j9inzy0VyYbuxA16PKbLULFtmVfp6pWu/vSQ1atbijZEaN3vo0LAEiogZAVRzf5BC0W6ivz7ye0tryOgvZ8YDhJCkYtzeH4vo31CCL5h06V9pi7rBo8AYzwzPm7UGv67re0uhbfXuFSvoKWVvPnipisBmrsglYiTuQLEqUJpY9YpxMOnsFJGZLcn/nfZ9jhkDRmgnr5JMP9zjFougHuUUnhOkcvPweYJYGbhz/QdxJ6vEmEH3Pvz4C84cOvkIjf2vWAK68yWGr37Y4PTi/bD5GDR+koBM0AhROCTNdY1lfb4B6iWcPIfh6e2nWdqztvNYFKzbbrTCQgrfQVkeRqV799z/jeovJ",
+   "forbidden": [
+    "obspy.signal.trigger",
+    "obspy.signal.headers",
+    "obspy.Trace.trigger",
+    "obspy.Stream.trigger",
+    "obspy.core.util.base._get_function_from_entry_point",
+    "pyrocko",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: sta_lta, characteristic_function, moving_average, integer_overflow. Part 2 explains the two windows; Trnkoczy (2012) shows the ratio and its settings. np.cumsum gives running totals; np.divide takes out= and where= arguments.",
+    "2": "zb64:eNp1j11KBEEMhK9SB1gHBfHBRxHBY2S3005jT6KdzDZzezM/sCL41ul8VZV6F3RtyZ4x0SeDkKuSPz2CWqMFJAn2PVNjFB/wMpea0GaRIh9wdaoGzfCRD8ziTQ5zao5efAzL+xNM9/8NnKdVQ7IEIEk7im2LVHLmxnLhzbPrkTDgTRv4ym2B0fRVGbnpBKlOuMMDVE4hvpbEt4Cg42RDJXNI3HNIDedln9du/+D1Dx7zgNdbQi4tsNhser5oWPUxbv/9Ea3oHMZr/zWrMq3DXmSnuRoPP5E0iKw=",
+    "3": "zb64:eNqVUbluwzAM3f0Vb0yAFE2AokPq6l+YmD5QWUopOgH69aHkYyjQoRqkgY/vUn2LDxYH4PwJ1NozEo03zwmU0PpI+v52QPqeSLhxVa1RySe34AnHA2wp5AsyhTCEDjMGscXGvpxdDIw7+YnhY+hYbI/CDNtXNYcmFfQvMwjTeGExQxJHBK+EF5xMp8h6SgojNnepj6Jrmh0Wt5Ch6xXUqgkyXXuYkDOKdR6SMa65mcQP2fUer2VS1dnr5usftP5PWp9phXSIW/c/LLG0ntXym7M1pOQ+DEKKuZ6zQUtMoynIR88y1wmXv4N9Yhxd1Q13xoWuX7AVLGJP6EueBw=="
+   },
+   "kind": "oracle",
+   "module": "M20",
+   "target": "func",
+   "tier": "core",
+   "title": "An STA/LTA ratio"
+  },
+  "M20-T2": {
+   "categories": "zb64:eNp1kk2P00AMhv+Klcu2UloJIe2hN8SBOxzQCiE0bZxkxMSTHTubjRD/HXsmTbsgjjP+ev34/VXh8+SCl6U6QfUUpwSSfNdhYmh822KCuceE4ODFhQkhp7M+pU/IfQzNER4+JXSC6QE8A2v9RU5vC0CiFfyIBE1EBooCMiWyPmUcRKrBUfOfurbN+QxeQB/HqoaqjWlwYro/49oseLY47Kyb5u1hdF5X0a9ZteKBpuGsw9gNY0Dw1PiLyvEE4geEmBpMNWhjwNeS8m33rob3+xp2jzU87r+vIglwGGUpA5UQ2Uq9p27DlyX2CysXZM//4p1YBxLeQK6kpUf4GEmSu4glMcgcT3ekCghF6c7xBVeutYJ3S/6eex9Km0ySc+Q+uW2vqAnnrS0hNrzhv+8NrnOe8kJae1Bq+LrtY6cpOLU4lZVWvEFNccoJ6gvTE5zSWoPSOyl+8SFAVxxkv3QTmW2ida3eUHJnrdHjnDHEWa1QJI1IB6TGFH24QXrTPlNBys0uU9LNtIAtPnhmPdsJLiHqQdReTv7WmsfMKVJ3KERt1JeohtmOaZvnDPOSg1mBXxXYEiZdPWh9JzZfc/AjH+FrTD9t3Th1fY5ebbcmbz6wc93Er9ExofpXvG53XkDJNcfq9x8zJlZa",
+   "forbidden": [
+    "obspy.signal.trigger",
+    "obspy.signal.headers",
+    "obspy.Trace.trigger",
+    "obspy.Stream.trigger",
+    "obspy.core.util.base._get_function_from_entry_point",
+    "pyrocko",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: trigger, trigger_threshold. Part 3 explains why there are two thresholds. enumerate gives the index and the value of every sample; None makes a handy 'no trigger is on' marker.",
+    "2": "zb64:eNptj9GNAjEMRFuZAk5bAFcBFfB58oKzifDGJ8eQ9nHCieODr1jxzJvxsaKrXdoBneQKz6a3LcfLaLT/CjdoPfOCUy7CqAq3sm1sKGPzheZkHhODfNpSsea4k9zia9U7D+iPVlC9wHjnfQ13z2wv6nD/4ThExT+yIsWwsmh/ElP6DmnYUhru/8ohSmojl2azBcc01/PESGjoxTPodUvzIjLzz6KN3xoIRYEndnkAyblqTQ==",
+    "3": "zb64:eNqFkb1uwzAMhHc/xY0NkAxdHVWvEtARbQtRJENi4vbtQ8X5cdGhGo+873iQmcjnYoH2CzAUwedJfhB8EbuHSkUoy3Mek4w+DraZKZyQrpxhfHT8bbcwVwoXtkg9ZGQUOk+BS9soBPPIsboh2Q+DunxBihYU3cNXFeqUqOZ80FmL1XteoUc88lZY+ocqSBkdhzQv7L5/wQ05h487fIs7GDt8bmrzdeS79t/AIj4Eja05tTdHV/G/yFUPVGSJ2Nhm8Fq0o+MJdXX5ghuzUnyY"
+   },
+   "kind": "oracle",
+   "module": "M20",
+   "target": "func",
+   "tier": "core",
+   "title": "Trigger on and off"
+  },
+  "M20-T3": {
+   "categories": "zb64:eNplUUFu2zAQ/MpApwSwDTtAczCaQ5FTLz0kBYqi6GFjrSTC5NIgV1bcon/vkkqcOj1QpJbLmdmZ3w23PTdbNN/jmBAls8JlkEIHxpHTCVkpKWJXK5OTNk4rfHM6YI87bHAVE9bX9bZzKSsOpX+gbHCMTOHgGdYj5ZekBeFIyZHsuKCuF7XoBevCHJyMGU46J05PW3gTtEcaBV2KATfQiC9Y2iGKP62aBZoupkBahnhgHZNU3mmIRitjeOJkAFPRe4OPd3a2j2e5aknpuiBt/9H+KneeNvMumrYyUGUK9OzCGP73axo4cX3y6fN9KXhKPWdd4avVzm2l4UVLhQ/kvXWVRxV/YtcPmi/xC5iJEKZUX7G0+TKOBTq7q/6U4m4g6dkyqmi1pFOEj73ZrkPIeDrN/O4Xn6HKkHlr8szO92EW/mL63tbm3DC7MwtPUfrlkfzIVf1jDPyqnsyZem+pWvYTFXKqfkjUGtaLhDGP5JG9O2QzLs0i+fkikvsomminZQabs93ix2aBpa237dZOt2/bT/TuaIN+WDV//gKXXPdb",
+   "forbidden": [
+    "obspy.signal.trigger",
+    "obspy.signal.headers",
+    "obspy.Trace.trigger",
+    "obspy.Stream.trigger",
+    "obspy.core.util.base._get_function_from_entry_point",
+    "pyrocko",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: akaike_information_criterion, change_point. Part 4 gives the formula; Maeda (1985) derives it. np.var and np.log do most of the work; np.argmin finds the position of the smallest value (the first one on a tie).",
+    "2": "zb64:eNqNT0FOxEAM+4ofsFSwQhxAXJG4rBA/CN20Hc1MUmXSXfX3pIWVOHKIFMeOZb8Lrmrn9oxKmUEYipI/PYLMaIUOKCyjTzh1eFMDX9hWZAymFUe44oQ7HA/otc6Lc1CeKjf4xCg6bg7beiFLJD3f8JCseYgb1blwO2AuS9u9cszD/0x+n3/CZKh0+GRfTHY245oi+C6sVELo4VCWaNmi6MfqkwqS+AtqknMIyf9ka70aB41VF0NJcfriojK2rXXG69Za1G/ovvsG2TtwPQ==",
+    "3": "zb64:eNp1TksOgjAQ3XOKtwQ/RIlxQQpH4A4jFmhaWsJMiMe3gLrzJbOZ91Wv+gTV1IgoK0DJoPEkIRCjc4HkflsVRhhO+16GOlHchlnzz9OFGRYVCuR5jgZnFGWkLA5wPlULzYZ8qxE6rOmdmVkiyzROLsZkOCJdXTbeNfvjioVSZ0lvFo0HtXbtxmev/Yp4JBcjBdvCbeCO1Jn4nQIbMcHjAsP75OwN20hKTQ=="
+   },
+   "kind": "oracle",
+   "module": "M20",
+   "target": "func",
+   "tier": "core",
+   "title": "The AIC onset"
+  },
+  "M20-T4": {
+   "categories": "zb64:eNptVE2P0zAQ/SujXmghKR/HclotWgkJLYgtB07ITaaJ1cSOZuwtAfHfmbGTtLtwy8eM57037/n3ytiqPFtX+/NqB6vvPhLcfLwF7xgDQ+V7hCP5HozzoUWCXFuAJ5D36RU4GApgGXrLbF2Te7SATT90CC72B6Qt7C89FB3nut78XL+RIx2UQD66ej0Q/mB4CWQCbjYQvBzs1vfy/22qezXXeQ5XhQUcBCWgqxmsq7pYY13IPPkmTQrnaIkDBLJNg1TKx4zvffqZSCuLf5gNXWQYVRzR60eu88eruu2qgFXVGtdgXVo3xLDIeYyuClZGTb9TVyBToZ4Ig2GWj9ZtocZAgr2AYAaR2rha8HZBVfd0khLBIW27CVTWmLaVH8b1JiHI5WUYB1zmD7Y6yWJMqNrMMu3xJLCVQu7YwUGmlYoFfiH5cmgNqyDdCOcWs3aGmtijC6kiF4hWe4pYJKyViWy6XG+TjnemY8zAPAkCxfQVQyQnDeAPPIzwbX/7QZa3t+K0tY7pfRoyyZu1zlvaJNvde4d5iFpSzTatk9Mk58vM6b8C5OfJDISVpzr5w0cBLIZfZNipP/PKH/Y3rz/tbxLH8RKQdMRSLyvUPcwQJkiK4U4wm2VW60U2cav14PBRFkGWkcEc/KO4oiUxVyHFSSNluhOWM8FCn5VBmhJEsYWjvsgpJA43JNodwXTKqmkzZO2SYUdNTeZumzbMfnoq+xTZU0oCbcVsgbfJcjpFsneSwC0/auyCmUJ2Eg2iC6LFkv8cuOnIOTKt72b1M5Ulj934bG1KKQfmWWSvN3QJpXXX4TW08H0S/LTKSeSr4EukpC/b6EzeNeWj6SKyQnrQm/ACqfcJl7j43YwHzNmMTy4+nSpb5YADQ51sqyp9PvCX8QUvFwMXCtuAtsuRKTlibdCGSbHIUZLFnR14C7ctVqdrmh26JrR65S1Y1vl+lBWl6zF91qjM92SSdLllkgZUI83zEuTt6s9fNhAlkQ==",
+   "forbidden": [
+    "obspy.signal.trigger",
+    "obspy.signal.headers",
+    "obspy.Trace.trigger",
+    "obspy.Stream.trigger",
+    "obspy.core.util.base._get_function_from_entry_point",
+    "pyrocko",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: bandpass_filter, causal_filter, zero_phase_filter, taper. The Contract lists the five steps; M10 showed detrend, taper and filter on a copy. round() gives the nearest whole number; tr.stats.delta is the time between samples and tr.stats.npts the number of samples.",
+    "2": "zb64:eNpFkLFOxEAMRH9lGsSdFFJBw/UIGgpEfzKJL2eReFf25qLw9exuiGiieP08M/abYgnW+zO6EFekKyMZdXyC8RRuXF8mJm2QKLLhCXc4vJLqEaQ9vvLnIZI7JGGRdMVjVjJl89ov4z9sIV7JGWuYsbAxBrmxtvicTeGJzhs81j/RFOA0xZG9xcesZcwqlgEEraIl7r3vXB2vWDIZBrbzItqHxXfcKEk4QS6lygHEoWGHm5on79J94z0ot3ixMNW5i5inIrIZNTkGR0TjHLTyxTgGT7m+BFvIehxkx73wtIoOeSuXfjuncb5Qf2xg+24k3Tmoc9riUoKP0mU36rcT1rJoWWqq5X/g2i4NJJkYcZx9k5hI178c5aZsNxq9/QXuRLFA",
+    "3": "zb64:eNplUctuwjAQvOcr5lIplETqob0g1+ee+gtok6yJRfyQbUjp19eGBkqxtLI09szszorZhb3E+WzeAdE7f4JTSCGjbS5hmCwCG3fkYcHe8IQPshaJPF9/dmSH1lOMUEbbVhn6avCK3gXLITb45uD8SJFBETt9ZCsrodzBDvLaQAp6t+OwnbUd3BxrxETbKVEtSqeIZPzEUTYQ5SFC27/Y9B9bNUhj2Dr7eyuFVTWPbHExho5g49NJbnBuCR31e3w6y5WgItnJazZKh5jgFnW08IHv/BpQwsSUv71k8iNlDe9ieuSYjOYOGVPm5lSWnSzWJDOVdJ8niZxq3KUBQnLoGnQujVm5nw5D2dWquk2UdXKV0EI20obLki/LX6PYPUOc4Y7TzHxL8Afaia4l"
+   },
+   "kind": "oracle",
+   "module": "M20",
+   "target": "func",
+   "tier": "core",
+   "title": "An automatic picker on a filtered record"
+  },
+  "M20-T5": {
+   "categories": "zb64:eNptVWFv2zYQ/SsHf5kMOIKcNG1jYAiMJEOLLK0BOQOWLwEtnW02EqmRVFRv2H/f3VGSvTb5FJqnu3fv3j3+Myls3ViDJkwWMFnp4gVWYA0oeEUXdKEqKPbKGKwgQVNqswNt4GkKypSQx8i9dfpva8LbsV/AOribppMZTErtgzIFcq3c1gh0DNoaD3YLB9s62OoKodIItXUIgdLBPMvgpYatszX9gHD/sARsdEGY0aXw6FF+LrXDIhD6iKzTYa/Hj62pDpBwWKU24NoKpwtouFuDyqEbgQjMrXW1EkLW9AWH+Qisbn2AvXqNFQtbtTVh77+dQbNXHmcDCTMIusbnNhQzaKlpF5Q24fDsBWFjK+V0OMwIG4KzHTQEg2sthoSgPHy5W6f5etnn5tk4yMcS4Ntiz2GfPj0dy/EPn/OvEPB74Ak8rm8goZ4Av6u6oTbOs4v5WfbuLLtcZ+8X2YdF9jHNrjL6oyzEuDavTG4pGac/oQfT1hum/muDRpgQcrgrVhPxCTrIAOTyhqThVBGEWmPPShXUwG2xR5rB1rb0rbFAE7SuFDXwl7kyu28tPPwOF+kV0KDC/q9WvSAk3JIuqZH5VfbhfJ6dZ+/mH6fcrKiotJ2prCpT+A1DEWFw2QgqX68IsaNRJrUtSQvwkF1MZ3EsynsJ9Rh+vV2ulzkNoAfOXfbAuUUfEatSbar/qUQFKdgoqkVwJCcSlpVDSp6zfHTkjT+iqSc0G9ea/ph6ikimBIhCTES0+nxznz/f5H8MWEiqKApdBvC8ScMCRRycPJJJXCAjDaKZHS6G2p6uqWG1pS0awfDgdB9eEeG0NSTTnUSQML6x/je4tTLiFJ4s7STlE+bacEzTCUV8VM7pV3IGyvaKEZixmqSciM/w+UenmUVj4as3rIUZNarGMloKbc+Zp8ajqfzJFORnK1EuDdJKK1vqirfsqCAaRkUXqEgc/bb94scPQe1I7NSqDkR9/CnZWBqnmNBoVOQh0rGlzSAb2Nu2KsW8isqyK1mp6kn9ercPdGPE0gI4IsDzvcyJL6P6GECfZseW4APJS9MQRLeDe6awHC1iq9zgjKqvQEZBOypOQSMbqeycJUPu9G5XYWTOlehOJTTklP7yXg9RDFElcrHqTYrXfDBb36mmwfKa0w7GNtpnf47muUF4nMEtg7sG9qSYIv6fRxa4EVQUfNEXIwxIbqSiJo8Zk0fOcxuF0KN/42lxg3Z+eGbEyEfXiaZD/Z74zM9+Ii/k6at1XGMSUEUTkhY6wtc/EieylTgqZARwsGQp2I3v7tj2+7HALCpUpk/mXQSSAktqJQ8GF+JTLqeEOhkmGL23szFQKOCTBPpI14mnM4I7WsLD8CJiyW/Uqe0vKNMGQ4dkSFmaZZdSPEsvwfO2nlzN5WaeZhDf0k4bYm+cSm+TqqoGH2GSaMt3bEu8aITVtsHrEk9czJPmKVaGEVd7eNdYnff5urfvkh4FZjocmsHh/InFxTrXk3//A261B4s=",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: phase_pick, pick_uncertainty, polarity, onset. Part 6 says how to pick; Diehl et al. (2009) explain uncertainties. The picker E2 writes the file in the right format when you press Save; picker.picks shows what it holds.",
+    "2": "zb64:eNo9UUGOwjAM/MocdyVAe4b7SntDYj9gWtNGhLhyXCp4/U6K2EsiO+OZ8eSnYDHv6x41xANLihExKoqKa43WjmSlwi44NsTXDt/mUOlGWNENnmY3hEHONgcEVTsrPcRt5tW4jgRWDZ5reVeP1EmGE+k9PorhqW7baZSquKQc6p8b3MSv60AWGimW+FjlNmWKNjopmEtHMkklHixfapNl8RSPzdqZuEXFifApddcDeltB5KES9zg1V4LRPD2txL+rw3tS7rrD76iFDergYbM3j7rSZ7MrJHDaHiEDjdBpnxgaje1bGK/4cBEOeQuK4uHKUS5LQHP1DmZxKwO/YBiy7v4AuWqRSA==",
+    "3": "zb64:eNptkEFLw0AQhe/9Fe/YQurRQ4gRQQ8ihUARvJVlM8kO3cyU3W1Lgz/eiXhSH+zAHN773s6gCeR8QJOLK6zS4solsGD39HF46V4Pb7sKQi5RLhg42Vzfw1yTJtrUK5i6GmgulAp7F5HIa+orzKoT9WCLNG1tNoUnwjVQInBBJHehjBIIopyprdCcxVuOYym3ZX3HJ57tPbbfoP0CcgiaeFYp/8N+kzLPBCc9UriVMMEHJ+Mf2KoZOJJZ6wfgxP5I6S5bv/UGP7Kegqh6XErstx3caFa7R892O4tCZPuOiyojVJZVqP0CB3hygg=="
+   },
+   "kind": "artifact",
+   "module": "M20",
+   "target": "answer",
+   "tier": "core",
+   "title": "Picking P and S by hand"
+  },
+  "M20-T6": {
+   "categories": "zb64:eNp9VUtvIzcM/iuEL7GBsVFg2wJNsYcgbYEtuk1Qu4fuZSDPaGxtNJIrSnHcYv97SVHzcLLoyWOJEvk9SP27UCn69ck0T7i4hcVfPgXgpfpUp9jAs7JJI6igwfkI56OKcOEYf3Yljo7CwTxTVOeDbDZHj9oB6hiNO4B3EHkFgm58aBGWTYoQPZyNa/25xgoalVBZ2CvXrk8KMX/Vx38quPtwX+JAmabG1Qb+SHyhBk6tqdyDMo5i4hH0i2qiveTdV0XQfXAOJmowEakSTDbiZlHBQofgQ0a/9b2G/LfG19BnpPTGJYReuaRsWTKcqPGOwblkLTGlpUiMKhpi4KzoiEHU7SpnJbJ6FTlrvlkKgj5hhL0GBa1p4ltQT/qCcPMZvbuBZeZAUYTvhPdftw+/Q2esXmW4N0IQRV4mWWmJKNzR0TFash69bTOlWDf4XE0KTCplASo4BNNWA7+cKPgzEYW5wnvvYqCCAdUFK0HgUr/XAZkUZrP822vrizCZMraPMDSQJvpwOuaJf2elfjtIi8AHfdAlG1nUakVh8ewHFYkhupNU5Wy8TgvxGGrvqrxUwAz0e6clQvdCM6peyw0VWPmR43Ihf3ZdVf5M4dFgNA2uRhxrqYfhPFCOsUOKgBli66lgthx31eShfBOHkY191LfF5JraLygH1xILEyZy7+Wd0nob0qc/JeoC/azDRRJqUuwiXVpKL9GF0HF5aDhupWyKjEsagSFdtcTAJZ9+hGj6QinJM/SEKcVl12UrVmyjD9sHiPol8v6fu/ucxPl1q6LiLLsRd+cTm4dU1oHYoQEyTBgRD7bKHT4n+PgbvNv8AFqFePw7qSc9ZiYMznrVbuAXHRuBynkE+Hb3SFUFwrHsfZuoUz5+824lMucpxaGk4fuf7nZ32593uVIhaSi0S67JWKlSom5syYGda9nkalPmQE7Rq1av04kmJIqPKeMTmV+m3nJmguTI3tDp82jdXHtVUo8qWrMPigQPBIhGwSNnkUvZ1NQFJ57OWScOHxEYRyN7NqxGtLhm6RjxOD6u1L+aUZPWI5jvKtJNtWpPa+KteRd/T+7Jh3I+HjWcKY+caRhww4qNTwR1nLn5onL+K26DZYmsCGpTc53V1VyvZmO/Gl6GYoDhxAzqZO0bnDy5/LQqvhRhDP6vExklmoMbn2N5n+CoyjSg9qeRwSG3sgfvc5n0nJhGoM5fKFlZnjyayANlfJlKN1M5VkUtM2qaNIOBZ7NnkPDVy9r6PK06by090l3wfRk5JNEtuGxsmukNNWvE+ZuIRSD3qvwfodetUa4enmIjx2S1uNsMxFRDtNrjeOJNONCut3nwCZ1L2abjXHyv6VNezV69vLnKqnDQpPL1JZvFl/8Ar2BFHA==",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: median_absolute_error, false_trigger. Part 7 explains the robust statistics. json.dumps writes a dict as text (None becomes null); str() of a UTCDateTime gives ISO text in UTC; the difference of two UTCDateTime is in seconds; drop the missed stations before you take a median.",
+    "2": "zb64:eNpdkc1OwzAQhF9lboAU5QHghIpQA1Jb0UMlLtU2WZJVE7uy14369vgngMTBh13vzHxeNwazdZ1/hGPqcLPB4SLt2eNLRgaZDmfmC0Q9dnB29jU+0iRTO8ArqVhz57Fef0aHNlplTRs0SqAWu2b1fjw0m5ft4bgHORvitQ4M66QXU+PVOvCV3Q2eVcX0sF+Fo3fSVXDBgILaY8LCfUvB01iViVPKSue5WWEW09n5AdYsfoXnKaexczFHfC6S3RTJW0xiQulNZAKNUJkYYiJLa03nF7z81oWujS/QLMl7qqB05mLBnZDxif830me80hEHOnk7BmVcaQwcxbRsYyTXs9d/AzVWg7U+Ev/EV5idaMl722835Ztm0SG30geVNNI/SQqJRVmjYx9Grb8BunWzYA==",
+    "3": "zb64:eNptUctOwzAQvOcrRj2BCD8QGV/gQEFqK/VQiUtk7E1jSO3Kdqha1H/HD1JA4rTa3dHM7CxzJK1TngNo7oDOOpCQPdgKzh44bIejHR32Wr57dHqgBrhiOng8Pr5gL0LPa+S+UEGOAcFiNb9/bjfzxcNy0675dfXD7CkEbbaZm22dVrypojxYFMxG/joptFGViTHYnQhaZjeIgIU1FOV/r26xE2YUQ33ZF3IywR2nM1noCRcfuAFMmzhJ5YbtSGlhksEEJOes8/yflXbw+kTTbhBuSz7kGa+Y7K0nc7koi6Z7kb2kXCEjlaKOjIr4p/VykSPmGf+ZM2+l/6jxKoxq+1ONgzbKHlpfQ2iZSiKsUaTq9DM/2S6z6cxzlTJqHflxCIV/9uatmTXle9+fnOUYXJxmeOrOXyHqsak="
+   },
+   "kind": "artifact",
+   "module": "M20",
+   "target": "answer",
+   "tier": "core",
+   "title": "Your picker against your own picks"
+  },
+  "M21-T1": {
+   "categories": "zb64:eNp9VMuK20AQ/JXGlyRgGXL1LWQhtw0kCyEnM5LammGlaTEPyyLk39PdM36FTQ42kqYf1VXV82vT4khLk2zAaGnsN3vYfKcJgY6wUg4wu+41ggkIHIcBkjWe/xCuKTv4pFEw5ZggoOksmAQjGn59jNxsYYP9gNLlq/+7iYsafnSBEynoyyhFopnmEXfwYimiYvF4Yiwzmte417guhxPCZFYYCMhDcNH5QaoczTjK43yBg77fQqQCLWTJOrspT9LfUwJX5gvYUSiQjxQmkwT0N0w5eDCQMiOC98lNGA9xCyczZowfZKK0EHxsnsDnaV4ZbTBr1O9clCfhmdAPyW5hcclyR3g2z9pmMHPDLTFIp5+P5OuoYFo64SOnYHxf6ehGpudOIa63hTYnnUpHcoNlZj3GHTxh53omO9CkZ5bPkBlSJXta/J6nLJLrJ67KmjpkjYhKK37iGE0MUpWpR6aCsXhYLP+5BB17KVZJhVjmS2d1vsdzk71L8TqtkqnTFsGFwRYDg/3iLmNrCBeKrI7vOfqYMNzZpmTuL2TfqtTUHsdkFIGnhgmS5i8s2KMTec4rmzRgshdaJ+cPnHVgTD9kQtH6JtKbApAf1xvDhaiOsk+xwkiNivufzRP9qteNPohVa7lrszpti+xWFOrFGHcHhSmXeF3fclHdIGsi74Nfa1YsBtIZWCo2RGfGsjCm+FJA6iD/cq6AjxQS9tCuNwOUhXlD+2JS6argVeeyRZcFve77u1j3Tu6bpJdDhV0tMwdq5UzvJIGkrZdAfmhuAJT1G2A9Fo8ZWMxajF87U7mzBECOmZmIo5vFCxRkQwLlwZY75lxIr8GfyadguiQMWNFFfrwas/aTa0AVP2bfJUd+t/n9B7HC9TQ=",
+   "forbidden": [
+    "scipy.signal",
+    "scipy.ndimage",
+    "seisbench",
+    "obspy.signal",
+    "torch",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: pick_probability, pick_threshold, local_maximum, false_pick. Part 1 shows a real curve; Zhu & Beroza (2019) describe how PhaseNet's output becomes picks. NumPy can compare a whole array with the same array shifted by one sample (slices such as p[1:-1] and p[:-2]).",
+    "2": "zb64:eNo1UFuOwzAIvMp8ttJqD7A5wZ6iwjFNUB0TGSdZ374k7n4hYJgHvxmHlmg/eEqO4J1Lg9GyJsaN/0ZeK+rMqIeCc7S7d1QhhlmmmcvZZgStMzL7JOhWbMCLefWVGsPRWkBBd+5Mc2GbNcUBpuViXxDaWaVgLRooSJLavrqEVbdWrA6YFFGP3B0k8QW55UuKsMr4gubUIM9PjGvUdHOIp6BUmGI7rZ/nTH6/SH5MtD58dFDD7RM8Ojfl0b3KwobIqdJ9OD9EyQX+bXfefmNXBIdfnibxsIFcvqfqPJJhPKp/8QL11U5pY/t+A8S2jeI=",
+    "3": "zb64:eNpNkN1ugzAMRu95iu+ylVil7RKxvEpliCFRQ4Jid9LefgZKtbv82Oc7dh9z5uoAdN9Ar4EhtKyJkZ/LwFXwidsN+ePLNf3K9JB37d75qhaEOAe7aqCMjVIyY+CpVAZl/36iSbm2+xMpEpPo/qehsoSSvMU8eNUt5YjhZdVfpCjqGsOBaQzYVRxiPk7SHvkGW2sZaIgpWtMUq3V1zcaKE/pcsLHPCVM07zEVOb2XmO8zrXfBxcjCY8lerq4zC/LHDFsa9OC4Zo4/NiWND1gNLv1/+mt/LaRUZd9C42J5npOSa83bRLcdaDCBc43u+gdcsIXf"
+   },
+   "kind": "oracle",
+   "module": "M21",
+   "target": "func",
+   "tier": "core",
+   "title": "From a probability curve to picks"
+  },
+  "M21-T2": {
+   "categories": "zb64:eNp1VdFuG0cM/BVCL5EB3bmtn+oEAVynRtA0gRGpKPJk7N1R1sJ7u9ddrhWh6L93uCvJCmy/SXfkcDjk8P6dDXlytjfCs0uafQs5kpjOMW1MojFEJtkYT8EzxbCldYhkKIkRGzwZP9CEQG7pE/OEKLdDPCMxCU0xdAVqsv0DWZ/swOXt1vohbNvZgmbAG41o6a8sOQKSJqCi9gcj5iaaUcNlU/L64PLo06H8otZekFhEFS6lonVWdm/r0zGDyCa4gUKXph39tboGMK/03aNxmdPieTck/F0Wp2jk89hxTIXzaFOy/r7RtpJSXwagPUcpvA31jk18RYOisg9FWutpd5S/FPKhGaCCllhp+xsGRh8yuvFBaA0IusCDcXIsTB8/HkgkCutS5fOfdNH+SiAgm3+yeWDKfuBI7xQXw3T48/783Yer1dXy99X78yTTHWh5F8xwvry6bumGpa/ql5TS03J1i+IRys7HMGRM+PNPF2cHynjE7jXOCryfZY6J3yS6Va2+sNCW7f1GEs2TsBkW9Ai9VdBfzkrVkIUO1KB+S1+zr0jsXGn4Fl3Sz5XZW7JFgR2tjXUkISwoIsHqhgnH0XrjLqmz/jzdi2swGTHOUWKbOvZouWnMNLldbcombiSa/iWTYHZJTSJk4BZt8pbgkmVLKkDJpT7HR0ZrPbzk2ZHHXidir50op7svZ3RvHzW8bEraiylNx6nY4waQ6eU9w9ZA54Bfpq5ZIWNT4fLcjWrll80YItahLjSUfFpG6nZPnkOO1wfV9yUti6I1FeloCEykQJR+yFk8qYGnZU/uRo3rWLaMCqgHDtokVKJ5F7B31vcuDzzUVdszalTL41gO6lSBh1A0wIXZ73CdQ0t/RyuFx0hqQNQM8aE9JM/1yvF3o76iT8t2efXHb2cLWscwPqG8qXeoTko2kZOemVe6183o2MHlmn+Mrrm4RU3kNUfs3VMndZJW29DstLFr4aEuVTltqJAqxQcdtgJX0Q5vyxoUrmQlsVvT5HKiAypcKuYStwHa1CjdZkQSXHYCtSCHixnrd0BfR+6xKeh/XpcLQDTEMFUO9TAkxPih2JJh5N0+qU5uGwPOZz2/R8GKjbTT8rYadWt2Pyyzru7+suWUDezq7IRxrmL97Bxmto+5Dl5Ni1NePw7Wy8lQ7nSed6dHXseuJYoa7ey//wEGx3sc",
+   "forbidden": [
+    "scipy.signal",
+    "scipy.ndimage",
+    "seisbench",
+    "obspy.signal",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: seisbench_annotation, blinding, pick_probability. Part 1 printed the start times of a record and of its curves. A curve's stats hold network, station, channel, starttime and delta; an obspy UTCDateTime plus a number of seconds is a new UTCDateTime.",
+    "2": "zb64:eNpVkMFqxDAMRH9lbr2UQq/NtRR67hdobaUWcaRgKRv279fr0IUen6RhRvOtOKxl/0A122BXbojCiEaJHTYP+onGtE4IWngMtkLOmJutA1nz32kqpMoVSiuD+twX2aAmzhParrjZ3jDvmkJMh4p8wTs6PI1fHJmCcEgUSHTiGjSBcgZTKtgkLf3IOZlmR9g/rR0KD2qBkLXbLszbGbvLHKIu+fzjEM12TJC5Z72BGqPyHK9jacpnggcU+S3sgSvVnXHpxmvvh9AecopnDZddah702T/4as8arMeReLsDVbuCPw==",
+    "3": "zb64:eNo9kbFuwzAMRPd8xW1dsnR1XU1F5wL9AlqiYyGKZIh0Av99KTmpIVgARd2dHsdaHuKA4RMY+bbqjhRF3WkuFUx+wei3emeHmDHqwqCci5LGksUNJ9g3rguJdZhG70isyhU0t38vkCi2HLiKL5VR5l72i2lxQqYbuw/INa6IrTGxCH5gCX6fBtFf5TDYy2aiJFe8Y96yb0Fgqwu2pG+CQEpnBE5t06WyLCUFSx5wodUdmpt6e/d/6NddUaoKjRYJa9rEqDQKLUGvNg7CvuQgh1CcMUqxgx7S6DEm1gdzfmo1W87BDWZKIfSkt2JE1lommpLxyIZVQLBhuNMl3k2CzG+wC/iyx3xXQ/TC1iZ2hpSqHDDtzaVDaD7HJP4AAvKc5w=="
+   },
+   "kind": "property",
+   "module": "M21",
+   "target": "func",
+   "tier": "core",
+   "title": "The best pick of every station"
+  },
+  "M21-T3": {
+   "categories": "zb64:eNp1k03P0zAMgP+K1Qub1Lc/YJyQ+Dgg7QACxGnyWm8Na+MSJysT4r9jJ115meCytU1iP37s/Ky6NA2uxUjVDqovPXlAiHgcCHoeOoHYEwiOBBe6QZxdS7BZv0nE6FiP+A6mHoXq/EgYYv894YW2Ndw4BTgl3+adY5Kox3iC2cVec33GIdGbEDjsLFcgcAKeQZw/KwR6mSlAZGh5nDBQU9VQnTiMGI34A8UUjHnSxCjwGiO+DcaW4xupgbc8pNFLDdGNdMDl/1hD506ng2RqKyZJjq9HLPhXQw88C3SsTBE0absGlQZeweTaixHnFergePufFF2hK/l4cJ2WwzCb6yMbpOkW6PFKGhvjQptJRidm4skoVqTSH8taVjNNOYom0AP74aY/BHzKuHHmJU0D74km+zjCBnVniur3GzuvvcrOiocc4oDAoTwdMw6HjoJxfOQQS2sLjFb34Bo2a7m51CmQ6Htt+/xd0vKWNW1zBnFnvxZq3dGR8O0fPdrYwFqy7dvd26cqSkPViE/LC5Z4uZqCvEysbrja1Em2lcM18EkI6Ae2UcVZV+q7AOvdMwPJuyj/BFzUj24YnFDLvlPZ75xS3ym17OW7RcqJnwrJymfkYtIfI5eqN7ry94Vqe/RnHbzcqeO2WWrP2IsTu8gPU/CiJKrt0N7mZM5Xb736WO5g0mm3CX/5TPQe95C8xpAyvbkvLjbVr99YCoAv",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: systematic_error, median_absolute_deviation. pandas merge with how='outer' keeps keys that have no partner, and indicator=True tells you where each row came from; DataFrame.duplicated(subset=...) finds repeated keys. Subtracting two UTCDateTime values gives seconds.",
+    "2": "zb64:eNo9kDFuwzAMRa/ytyZA0APUc4cuGbsatM3UamXSoOgYvn0o2+gkSPp6/1FfglVtKB/oR9XC8JHxxxt6zcskBRd+snibBqjkDevIgk59hFOXuWCkJyP5tYFRiveEb8oLf5qpIT3AKYh2pCNcImA8MzkPtSeesdDEYOpP5luBpzg5DHCpm5Zu+2HbXUEyYGL74TD6112jJm6gi0fbryZp4IsdgSOdZEg9edUS132I2z5Uhe9rV23mTH3oTLNve2VBt+Guwk0YTXPwTxNMSZbDtSU8glu7TNcSBSf+TndwLhzfZgEoal5xp/X7C/yNiEE=",
+    "3": "zb64:eNp1UD1vgzAQ3fkVb2ujIGVH1FvXjF2iCJ3jI1wDNrJNIv59DYZs9eKT7t5n/eBZYXnVF3DhJ9vYiIG00C526OjJkHjFEZcQKYqzJcaOAl+LdFMTPI9MkQ0SE8SC4Pzya1UBIboRL0lEhB/qJ/723vmi/nVi2aisWrspssfA/s5wLegjrGRHRBkYnxTWoaFDptL/7PWh3LRsMmDkRtF5VdSL7ynsYu8Noicb+sV7lcOe4Gw/N7QPOoGNtG3zBmcdDGKn3RReHXtGFoGElaoE94FxprMq7pIq1HR7IBWCLXo2uoHIGmSdEsH5pUw9LxHVH1N/ib4="
+   },
+   "kind": "synthetic",
+   "module": "M21",
+   "target": "func",
+   "tier": "core",
+   "title": "Matching two sets of picks"
+  },
+  "M21-T4": {
+   "categories": "zb64:eNp1Vsuy3DQQ/ZWu2TCXsh2K1+KmWISEFJCq5MJcFqxuaSzZFiNLRo+ZuCj+ne6W/MiD1Xgsdev06dNH/ufQukmrcLiHw+OgoB1Ue4HWJSPBugheCQmzSx7i4BWu024Jk8ZdnTNS+QDHTvsQK9zrk60whbC9kncVOJ9DKYnyIPWSMyZvwVkF3t1gwiXOpy0eosYGfk/8BJgOWmVMANfBg/ARvgXRC22fgxLtQGBmGFOIMCAUDvnyiVKFpg1X6LRRHMonJdscKjioq7Kx1pIK/pPA8YsnhHYVJuF+4RXYNJ6xsgbeKDUxKBABonof4ciM/MRBv7yCm44DyDhPCkL0d/cgbM4ImFFjNrBiVBW+luUZRiSDUEnd6xhoU4jamLLMIDvnRxEJ4vT3EyIPucqzwk1StzEfq96LNpqZ676oORSeKwgm9RV8tisVjNo+Td6dn8obhqYlQtatMM+XZnHjumTbqB2G0xlZAUvXkZBJxCFUWzA8+qSo66+FCbmSda1ujdDjyvoWIx2STrIQPaXnyug07t499nicqCX0Kqtu6WrehDWyTqgK1gyVC+c5ElKfH46O5Ku0h9PPL+qvv/se47B0P3ltY7jLQC11Tcm6dSaNdgVa6BBSElUwOSO8jjPkbRAdowpwG1wooGEQV9QQqq6BtygGjy2/KEgTxucwlAn2IQREsWXUhYbtDRb5FYOzrs7dWmEtzaNib95hkXs1BNJZxkW63ROF6nB5j4qRzt+mkkbqwbUXFX9LCLiBk4q8Vdmr9s6OJOsrQhNno8q05qMe5jg4iymxJPz1uh9IrdgAtQxyqSPW+Fyj/mRqI7vOO8vTwHor7rJIrDByG0TkGV628URw1fdAI7Tr5sri6LC2yE0xru85q9/CG3hJ5rGoKpQzC3TRRXxmQhZtScd5ldSZk2ybXJXD/77m1n8iG4Nss2NkZUQqhR0Gc21ybuCdLa3L+7KayA8Csi+J7J2xsdvlv3R+PqveTGOPgI2jOC5KC0tBRbwSUbz21Ll13LIww2qHqJMo8uxPgwhoYVHjfqKC3EOctUGJ4qJJYVPsbVB2VwYPgkBRfTA0e9DZdAn0ya2aXfu83Btdhz+dd+Mu93E3QhjFt40gVVDfNXnuDictLiDzvJMI6pLgw8uvcwmL7NRNkWsIW3wvpLZFfXfJZP2tmkUCSC0rk4SGUCF/PY/JzfnLsyb00Txj6f0VnDXbLZfTZ01TDjFNZv6BrDRfG71GEvdHfRHyRYKNJKfnckqzalpYJVBeLjfbcodYFQlSszb4nLSJG79v8zoffiopFnkcaYrQasYJLeDNqTm9+PXHTCiVEUiZC5sb/TgoxMM24mEZp65M0xqMjk+OOefhKC6/N7uiZxrNj2+y6jOh/3dB0JNUnUhYONvsN5nsT25HPu9jBZbIXDdqraYPgKVunpNyPWwfJ+4c0G/+eHyJs6ceaUvuSpW/B9bUvERfGs3h3/8A28NlYg==",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: pocketquake_cluster, environment_variable, deterministic_computation, checksum. pandas read_csv takes dtype={'Event_ID': str}; pathlib's glob('*_picks.csv') lists only the pick files; obspy's UTCDateTime reads ISO text. For identical, hashlib.sha256(path.read_bytes()).hexdigest() fingerprints one file.",
+    "2": "zb64:eNo9UUFuwzAM+wpvbbcgD9h13YBehgHrzoWTKItQxw5kNV1+P9kudjEgipQo+hRwjzKkF4xRoBNByA0kDTwnLcDTZeH+mto+rRjZUwIHBDcTTJiZWQFy/YQ764S3lYJeTke4BKVfbZDU9dc8a27Q3dgbu3B4KD3lGLD/IDUnVzxj1+7s/aqNQ4NlcokaKNvK/ff59eiUzrmIY12biwNcGLBI7FzHnnVrCuAGA6N3Yghi8Bt4LFfVSya3Ej4f/Rbv/xksUcx4H+fFCT0E4YdkEQ6asDditymlQzGxkmzIKZWxGaoKsQjlFoqTOteqasyIvmAD91qD2+JN7Bu8hZoKJ5GqbW3/AFOEk3g=",
+    "3": "zb64:eNpVUMtOxDAMvO9XzJFHxQdU0BMcuPEHVdq6W2vTpDjeLivEv+OkXQlySOzxeJyxkBtI6gPsPI/sKTVA/WKJToSHduH+lJ76tKIUEUfkwhi9tVXggOBmQhRLm01F3KXJQVFx3u+dYpNwYZ3wtlLQ9v0VLkHpSyskdf2Jhk3gyCuhM6DOalTIPBSScgwVlsklqqA8271I7FzHnvWKUeIMG4+7RyzRO8kgjwWyHnzs2H1zEFqi6O47mYUGf3z/98qSFHIOcGG4gUIZmJ32E2LIC5H8VuiuumU52Awtn62R06b/LWXjZsefj1XR0knottK0Qf3kwpEGJFLlYDwebA3cO1/v3/35BTqEkYE="
+   },
+   "kind": "artifact",
+   "module": "M21",
+   "target": "answer",
+   "tier": "core",
+   "title": "PocketQuake's pick files, three runs"
+  },
+  "M21-T5": {
+   "categories": "zb64:eNplVMGuGjEM/BWLE0jAB9DDU1XKEVV9pVVPyMuG3ajZOEoctqjqv9dxeCz0HTdre8Yzk/yZNZR9i/E628DsIwRyGC1fgc5gfuOJ3RUG64+jsV3PMKcIq+l7ASfp5rSBAyA/FqJvARu6mCVsy6/Vf/8a42hcz5YwO1MckAv6V8M5ekAIUoEJtsi4izgYGC33wL0ROJcHnyAxsiWvo842Jj4OpAfzcmIuxvPRtjD2xmuf9SEz9DLU8uLDc0tPrk1AXjY9KFuZ8KLUBpuS9d2qohaK3wqH3px+ySzfmhaulCOcsz/pqGDlD2PjTFLOJKA4aVrnCEctNFGoFdUMphylw1MlBpVYWiyVi2VoZRdPLGtTqGIgfEeXzecYKW5KSYcX89y+BDHrjNYJzdojI3pBNaVpDT/eEyy/Rax3VDa3pcWrBxuUXUSbzBOdulXCq9hES5E+scG2BKrLRgVVcT36GrmbyhOL+R73CxiywHdWtnpZw57Y1LknGoKUJVmwbiXFgMIa3Vggd+iSUQCKrYkF4pUiV6PUGmiuU0LmGpEg8suBCM7l85YunVKcWoVIDTbWCbs6UDL5RU1Mb3Y8lNRw620op9CJc4dixnYNEiAbp1VbUt+53qPN274FOK10fsH7OXEvEY40JrXitVJYw+7Rd4UXPZnuHEu461Db+fsG4oiqclAjt6piGjEE0240Fcly4XNnK0mV8SUAj+GAUaSDHGB+WCjIGAV+dSmBSHewp2gqlJZJPARKnKvu2qoGeWVXkHLK6CA5G5K+Ps8X7iTXsJN8T3dcZVpIuinKVewj5a4+HfKaDcHd534iz1Het/Xs7z86D8H0",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: polarity, phasenet_plus, focal_mechanism. Part 5 gives PocketQuake's rule. numpy's where picks one of two values per element and can be nested.",
+    "2": "zb64:eNqdjzEOwkAMBL+yD0A8gBQ0UNDRQIsuiUOsXM6R7ejE78mBEFDQ0NqzI80hIYu2tgF38J6UwIYkmCQGZb+hkTiPaQUNbISAc4gz7VVFKwxEU1nhCJVs1fI+YuJmKJITck8J7PaWLefgiBTMMXK6ZOJr7wipfXIqdag5FvSLK48Vdj+NozzB2f7QFmwLKfV5afzIGujVbwvWtuhYzS+jOEt67EzU13flDHUV",
+    "3": "zb64:eNp9j7FywkAMRHt/xXZp4AcYc2lInyZpmTsQWMP5dCPJePj72DiBoYna1dvZxye0RVAlR2W/4SB56EvYAOZSMbJ3iPiOeaAPVdGmrQHLbbZA6x3hEyqjhaa1QSk8ovpmqCopJs5zdXRkiuboueznYCJyTJTDL/GFsSMl3HsQy/E564Udic+dhxV2/wK9TP/rF4CyEd6bM18JKR4umDyXoRf6c7dF+sRqvu/FWQq2uA9dwUSdjkg3zOITFH4AIpJrSg=="
+   },
+   "kind": "synthetic",
+   "module": "M21",
+   "target": "func",
+   "tier": "core",
+   "title": "First motions from a pick table"
+  },
+  "M30-T1": {
+   "categories": "zb64:eNp1VcFu2zAM/RUiwNAES7K2wC4Bdht2HIp1wLBLB8aWYyGypEqyXW/Yv+9RctKm226xxEe+90gqvxZVy/ag6o22vk+LHS2+uz5Q09sqaWdpvqbUKupcrQwl3htFOtHIkQ56UJaWTFaNVDnTd5ZcyF8Dm17F1Za+uXAkpPKGtSUOgaeILEcAm+A6pFoLBhGMFH7aLta0aDgmFdPG8KTC37Qa1ibS2CoB5RjivRtU5hkRWoFipJwl4JBtvimRrnkRtqWo7VKv6AN5GqjrY6KYeKK9Mm6kGwJnNagwzWBBQgFVwcWo4hppAKxQwFkz0cFR7yk5AN/RUoJnJRS9go/cOXtAEhdnNnAo63Wh4+z/F5X6ILIa4zgVjU8/jp3ocVaR7bu9Cmtii2x0s/koJ34qxp61cYf8yh5Se5mB5w7kotalTeUs1KHFZ5OT7hQCg6LKCM3lqFMLF27ozYr2fSLAaD57Tx0s6FxM0N5wKB196e4nHOaOG8WX/WEjONhfqxEB2UlGdTvNUydiPJIPoANcJwV2dFTKU8tm0DCyt0kbmoS2qDcwJZ64YSBA9oY6ySP6s2bfclRnrXfZxvsXmuPI3qt6RzmQru6uqI+FwGnAB59Rc8D91cVdzFWKxE2tfGpfGdtgdfjsQcrgvUvJZZ46xTIXW/p6OWllviTac0iXQ/yfFdg9tyM5XyCoWIJrN1oZ1Mzx5E5MgfWhTRsU/jfvOYCMxiy+6raky1+JZUux+q0KpzlHz0Cu1k2DMzvvQzzv015J68CuLBt6Z2vGj+W9VcZciSvjqkx9KfGSBwZbhlIuHntdHWXfPKcWBugZIDVgHPZCXoQxL+DzyKDueULGgBXdlOdLPLh32KXnAcnX8iowXsCpODrXl/Wc+9LHng1Fo31EJ6GD5bY8Z/NDup9gCdg1OsS0E1QozZNakvJCZ63hqoXH8TGk5dPDLb0trXu4XeFywBbVkjKDxNqs5acKbnOC/mPDi5glnt/P/Hn1XO31JK1PDuGZvM6jOXMVCw8O2c7Q3u9emX2du1b6ir3Gv4fQ2tJHl10r5E/cT2S3i99/ACLITQ4=",
+   "forbidden": [
+    "obspy.taup",
+    "pyrocko",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: direct_wave, ray_parameter, snells_law, shooting_method, bisection. Part 2 of the notebook draws one ray through three layers; Shearer (2019) treats travel times in layered media in the chapter on ray theory, and Stein & Wysession (2003) in the section on layered media.",
+    "2": "zb64:eNplULtuwzAM/JUbbSBw27VA1qLdO3RlLDoWYj0g0nb996XsFA3QTSLvxfuIWFNx8oobc0aK0wYdGRNtXAR0SQvvA0lz6fkEig4+PowO6B8zU9F/vA5vqWIYhbYKocBqrHwCUz/eNS4cneysitIE8bHxLc7IWE4IpinwamPHK22CS7X0/S2yCL6htMNrRKUby8PyCc2CPontWwj3yZw6fNaAv2IyB3w1ucW1pFUwlBTwDFIzP9tj9TqmWTH5YBFIbByZrKOXKj6QKIsiDWaaxGQzs5O2wztN9yp8tJMXmioog65kPdasx2uO6qcjQCDtRz6acF7srNq8/QzvHOa8b9QHlu4HoSybSw==",
+    "3": "zb64:eNp1kEFuwyAQRfc+xV86UqS024hwjm4neGJQMCAGO+3tO7aTqqpUViA+77/B+CMWi32dL4BpPrh7YhHQNS+M5hmS5+oYIYHJeUT64mqPMFKYB+TbFiqe5G+mMwWV0sj2xb/VPOENLeMdJ5hIdWRpK2OxXeXC1DCnFiLMR18OFhM151nwiUdQt6TvpnO34kyxv7ynMAyRf2SetXtwJz2DMk/QwequKOsLj0apD2tmLQEkrEdclLPsiDtz2cie4u3VsnXoTp1FlSNcTo1Ckv02jL6h2G4M+o9XcvdNFv85nNAvShBt3mz7nBgLxVnH0egQRC0dH74BBWGGgg=="
+   },
+   "kind": "oracle",
+   "module": "M30",
+   "target": "func",
+   "tier": "core",
+   "title": "Direct-wave travel time by shooting"
+  },
+  "M30-T2": {
+   "categories": "zb64:eNp1VE1v2zAM/StEgKEJ6mRrjyl2GLDtWBTrgGGngrHpWKgsefqIawz776Mox6mT9pRYEsn3Hh/5d1E6FVSJerGFxW8bHQTVkgd0BE7tmwC7GGBIF8eXUCkf0JQEyoOxYQPfsGxA0x5ae+BYryrqcfCwG0AFD6FR5bMh78fcHLxUK8DAN3RKi2av6Q6wquR8ypKT2hpQa7nhSn6zKICxW+/51p2DN9Ul2lecCiGFMMXPKNm6Tshby89DgwZu4AMsr+HT5gae29UGvivO3zfE9yJMQ1itezyQlAf6E1H7fFUpR2V4SudFSrpTnr+VNbCj0BOZuQQTjMQAT581OiBj474BGxl+sCk+MHABmJGJJLV1LYakxw8K0RnOEmKnKekXGke0haWIVFxWLd4QhOlmTVkYhFpb7hrXAGvoHO3N+iuY2HYDC+1wkGcMLn9w+akRd0I69PasN5KdK5kjGRE2lZ/6O5c6h/XOmv0Gvmj+kcw7G02FbpAPeZwtNBrOd0RV1oO9hAOz3ZG2PXv1LhUn5j+MF7jjyALoaHAR6JRq7t2ck68ktmAHi88/w+EpZ/vI/6SUsDN2PdFJBO+t0MuIS1bORVZvZMXyT7TEeUuhwppMc5jBMosCkvKvGfChNJChEXp+6dlS+fdShBUjt+OwsWHAkY+a+9JGjtgR3OP9Eb9BM7WmjiY7e6+S2OedKrX1R7++6fkN/OTjkwL0whc8jUazlZxt35kUa7aMUKzOwBhfneZWBYHYNehP5nkQoz6eamT/+B67jqotyGu4eriCmHos9ayOrYFDJ6Hjg8er2V3eRT66Gkta55a8a9hapcUz9u1oyByaBZC3e8tPK9ubE/MxhNvuZA9MffOzVXLMbKr5KCQZV3kx2oQjdnDMdOH3WeR2Gta0dkWw5DVZctyZZE/hL1O4PqCO5BP7Ry4zWWca0zRfyByHPCijcdMyGecxes4LXqvOb+CXdc8TzPQog5QFhdCgrte+Y+XSZmVfVQX0KjQzHWYKCxeX+cmq5vovaSpv4RpuoWFtfJpYPrnZLP79Bx/Yemc=",
+   "forbidden": [
+    "obspy.taup",
+    "pyrocko",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: head_wave, critical_angle, critical_distance, crossover_distance, intercept_time. Part 3 of the notebook draws the path; Shearer (2019) and Stein & Wysession (2003) derive the head wave of one layer over a half-space, and NMSOP-2 IS 11.1 (Havskov et al. 2012) shows the travel-time branches of a layered crust.",
+    "2": "zb64:eNp1kLFuwzAMRH/lxgQwXHQ10LFDlkwFOga0xMRCZckQZTv++1JyG7QoOtmSju+OdwpYY7LSIQ+MgclipYVBPoZbvctxQrzC08YJAQMJEm2YKNHIWe8mvOAZT1guocUpIzBbAUHinIyS+qi8PFBGH+dgKW2gYMEL69+O3TUuQ3xc9azqUHgN2Avj5vT1TOcWr3+GSsQH1wlMiiJsEUN9WjXqPOFA3pctXD4W8wY9q1NV7DGbnwM2rqEDWbsXsEb9OvMRWMnS4t3lAeLCwR119WVfHS6AyQx7uKZOmuSyM+RhnWQKWoYGrJ7zWNI8qLhD3wuvNFNN3VjV9y/65Od/R02UMqrCFm/VVivQbtIv33XgVOoqEQp8ZM6CTbdXWWKTL+W6Q+9ED991iLuF3Y9Vdr0qQ3ntJ3JExc4=",
+    "3": "zb64:eNpdkMFygzAMRO98xR6TKTO9Z1x/Qn+BMSAaT8FiLJOEv69stymtj/JK+3ZNsHi+yxtgIt/BE9KV0PMWRhd3zG6n+BSaW6dbKjY+CWQlGm3jJ5jAVQnX840sOMIIb3EgBE51+udwlbjjFrzACSYnyV7Uy80z3t27bcxMH2KPpOnqh89AIuBQzt7djm21eDn+9TRrovz9jXIQj3wPtsWq5gWhMeJDi4GLUTG5dRXuFTl1WzOvLqagjTTm0Q3RJ/sLJduS68uwSC6c/PlQsBlJr9XujkI1VGHxqFU3JvmFfuLmw49KoNnKDWCKvKDaa6Q2l6RZJ45UqVjqeqHqvdCQvEbncMGuRWD0UUdd9jk9zlh82ASnfzZn+wWSCqnt"
+   },
+   "kind": "oracle",
+   "module": "M30",
+   "target": "func",
+   "tier": "core",
+   "title": "Head waves along a boundary"
+  },
+  "M30-T3": {
+   "categories": "zb64:eNp1VcFu40YM/RXClyao5MS7LYoa6KnAXtpFg02aoqcFLdH21NKMOhxZ9hb99z7OKI6DtocAkUiRj+890n8ttiH2nBZrWnySNEZPTGkcOqGbdP9ZKzoOn496S2FLaQq0dd4loW0XOOlyUdHC9UPHo7pNJ1bk9zBG2o6+SS54ckrR7faJ8H/aC/XcSj0O1LAKam/GHDnbN2Hy9Mh+98dIg2sOmvOfh7tnpRDzQ0AphzquBwDuOgTGpK4V6kJQoWF/VtdwR5sw+lbpRkWoicAbHd99fH+/PHPf3S7p5xAOxKn0/Y1bTo5ax7vI/ZoYMDICaQ0bU8coQBMfpaIHhFvEdeJhQAIbfiFNbONWhrSAB13sA1BHkqP4RLoPE2FyVhqC80kxAobebvNonfNS2PRHiSp1tIIznxSzMGj3rHfPw5Ke8EVOQDWDCQmN6UxWBcR+7DdozJtwFFrluj7UGdi/JRpYFTX+Rx173eylOaAJSKUU4AGZbL7/VG1NLpEXAf0vXIGjb42YPsQLU7qkT2OxBJzUAmwjXUe8Nao/vrv/SnM553eUMCPtQdsEJZPMbrEozNhBExTxFHM1kFDA8o6dz4MX09Tqdv4y+7WRrLLBmGJAM0tb0ofZcKYKnekHOtCJvqamwgNafJEYbKoTInVDd3TInbIide/8qDVMcelWPIzvVpk97WHdda6vXRgkbxYeZh/mni9iUk2rihTd2nYWcnZezSe5EhOkpyhYyVzqsX4ow82zHbzJdORulKyJvXub0QvrGLPjsfg2PgxnIYyZEXE0+bE7H1x62+PmfFvo1nRd+OZ0u6bJpLGXs+W1YUgYq8IueqZa/xw5ipYu5ipbupMxgPV5VQGRUz4VmYS0B5zdvi5CXmjImbsgBjwnZKnKvlxrjuJABje+GWQjTeilyJtJvzQvfnYYwHjEJBIbGVKBgk/rL7Pev1zdstcjdt26tMDdou9pj1S7FNv1lactS0G30E+PT1Um4denH5f08GL4EkQ9e20IsnPrrG52xCNa4GTo2KWSW6zt7JZNfC6izvwGf/HfqCNOp3ZuwHI+RcuL8noTXhY330RPcuJmtsbmjCXyLSw9YCFW9xW9w9/7e9JiNnNxDn1X0eobRFeEX46//wEXhzEr",
+   "forbidden": [
+    "numpy.polyfit",
+    "numpy.polynomial",
+    "numpy.linalg.lstsq",
+    "scipy",
+    "sklearn",
+    "statsmodels",
+    "torch",
+    "xarray",
+    "obspy.signal",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: wadati_diagram, vp_vs_ratio, s_minus_p_time, least_squares, origin_time. Part 4 derives the straight line; NMSOP-2 IS 11.1 (Havskov et al. 2012) shows the Wadati diagram.",
+    "2": "zb64:eNp1jjEOwjAMRa/yx1aoBVYqDsCOuofGgKU2DXEKye1JmjKyfcvPz/9i8JmdlhMCzvAWymjEHAVNmltcn4SRlPhGXotyJJBxtgQW+LSSZcJ8RxUSPpEyCHUVfznW0PxmTRq3+A9H8epuBdh4cgNZnx8USULLy7CdbKXYEByp4Zk65coHKL86ZscPNvA8UYfe7nvJsiN2xdN+AWHiT+k=",
+    "3": "zb64:eNptj1EKwjAQRP97ivlUVMRfSXMGwRPEuGoISbHbaNrTd2PVghgIzE7ezBKV9Rqq1yhnXwPqgM4F4mIfJ4ngYmJ8HirlJ3zOcApoLrAUO2rpjPwOfg1ZsP2H8T0ZUdJpfzsDmVhoiW7g5znr6uoehJOx/gXLXajnTRrRoxY0YwULxxiobco/dmJ4vRwBbpBDRg=="
+   },
+   "kind": "synthetic",
+   "module": "M30",
+   "target": "func",
+   "tier": "core",
+   "title": "The Wadati diagram"
+  },
+  "M30-T4": {
+   "categories": "zb64:eNp9Vk1v40YM/SuEL7UBW4v0mEUPBRY9tdlgvUDRUzCWKGvg0Yw6HNlrFP3v5Yck20jQSyJlhuTje49U/lkd0hgblz3S6hlWf6Uxw5Cx8XXxKRKMhFA6hA5dAxd3RnAhxSNQ6hFusZBiuFbwe0oncAXwjPk6H18htZqjTw2GLfhYMLeuRvgFnmAcoCQ9jmN/wCyXc7oQ7OBpCy42cEIc9AK6HLhWURzVagurunPxiM3Ox2EsC/52jIoepmMNTgeC4g6Bn/INDXjJRnD0Z4wV/JnyCSQwDdpUlpchOB/B5eyukuKEEdqceknSK4rGZ6zLTij4kEOXjUO7N7E4k9R4Ki7WWIHF+fpkEa3P3CqX9WcX6BkOeE3MhoM6J6LEwUss//FOH4lg8Ads0/vCFbwaskdGJ4UeEMbmUXmapH8UVxngSr1TAb5hGTOzBVrj4kunSU7I3GUk34wuvBGsHTztvojkw9Wo3TLVCNzqiDBwb+wBQcWyiWMkiWc1coN5swXqfFve+CT3JL8opAHfXhWzPe9h3YbkCn1mLPon8AQv7gUuHQvoC8HQOTY3/4AWLyimcBF+VvNttKvo4k66l7724nfGcxWR5kZMKE5awa93CkjKyJ72HLLm082shVStsy++duEmHruMMekx1C7GxNb4wYefpelJwQczSCcfqZfkvknFlCRuXPrtR74hSWtWrFj73AUEmdV2GoYllYCu4CUVqcsmVYV+Iuh99P3YSyk3T6qwLRWMWKMs7VSbZQ6+/bEHKj4E6FJoDHed+p7nSi9WsB8PJTs2yyQqrMUIUwnBZ35jWRYeBb4MombjClpavbHUfZRI2jcTma/k6uQui73E3bw13q+RxjeaYd6F5ZKWQ3rYILBeHN/gwE/zEL1fNpsKvgsXHdYndkxkbrz5ksE8sxFCmMZx/ePt1G8toT5Ne1T9u9ES4r3/vXa3dc3bPGI7PflAr4x90nEHwsFlx17o0d22HtigLa/7G9sVfI3iaH8UumUACLNuIzanQeFVRrPkorTW3xpLUkUcxr3fBCzpiOJswy0pFrR3lVWdV63JFab1e/OOraKJXgOi+R67ny3oSQXXoZoh2jz0bDtzMdk00N8jO6y5A0I949exlB2tvfBKsWr+GD+waCdbQ3Jesn5b+dYzsz9fEDjsVCGykUEcae6P39dDIt4oZ2OPILBc0y5bjGeS6xa8tSpvNh1atYLfZNZcPckkX77FjZIpoKOys3ZpWqnT4lmAuiN/KrlzHLxakE1An069bkFT4N2qtRzMrNlZkSqgnX4LaFm+XGQM5Q6xZHc8UFeLnzQTvSZYIwkmCn5gX35nH7j5PwA5z4gG4HDV+atW//4HroMqYw==",
+   "forbidden": [
+    "numpy.polyfit",
+    "numpy.polynomial",
+    "numpy.linalg.lstsq",
+    "scipy",
+    "sklearn",
+    "statsmodels",
+    "torch",
+    "xarray",
+    "obspy.signal",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: first_arrival, head_wave, residual, rms_residual, least_squares, origin_time. Part 5 explains why the first arrival is the time to compare a pick with, and what a common shift, a trend with distance, a split between P and S and scatter each say about a model; Husen & Hardebeck (2010) discuss residuals in earthquake location.",
+    "2": "zb64:eNpdUUtOw0AMvYqXrdR2ww7EFokFFaJcwMk4HauTmWA7iXJ7nIlaJHbzeX4/v2eYiwR9hq4IWCSQMiuUDgjbCENEpQOooRh0UvoKCSzU2nHGicC4JwXM4VAZaCJZoCljDugH51kH+hIoHUBoSNgSYJ2CZqmfkTD8ccEcSfwY0aBkAlZ3IolJYIdwxvN/fF4l79Srk8Ui5+v+xd+Uw4gJXqE0SjJRgJ7zqBt7x6IGKMITujnO9/jghZCc4NuvGrmzDd/jjbRidOzXZLuHwHHD7UF/RhSX0R5TIqfnbaInzOuIvz5sqSs4Zf3/+rgAduZBdGxMsDWPAGwnePNSP7eleMm148t2VRpQ0CgtXj1b5UmEasfNhSNSGWiVfRjFK3J2W4F9pbn11aLW5Kg3eDr9ApXHuvY=",
+    "3": "zb64:eNpdUcFqwzAMvecrdGyhuewYsnxCGewDihLLtVlid5KTUMr+fbKzrGwCg2Q/vfck28hAODi4ORRqKtBorWdJHUDzqoXxTEOC5CcSiBZ8EuC4SlewNvcvxHfo4xwM8r15Emh/mxypAI+eOHeXF8BgIDlM4AhNveJChf8EZzxDyHyw+qASLZN08BPFTuyFeCHTQf00usdBjUFks2kp9Fi14rzdMYUhO4qBIMxTr8Dioyd1ZfNoOI6QRVV6+ifNMabMmwkmwpDzg2LVSRE5gnzOyOqtsn/Xqs0yxhttKxkJJdUbVqA8/C5WL/CKOnsqtfGSMAzUbatZfXLQwkv5gOrqdW89Dh/FoZ6Htnsz43iR02YpJzpHqbPO5W1P3r++AfogoqA="
+   },
+   "kind": "synthetic",
+   "module": "M30",
+   "target": "func",
+   "tier": "core",
+   "title": "Travel-time residuals of two models"
+  },
+  "M30-T5": {
+   "categories": "zb64:eNptVMuO00AQ/JVWLtmVkrAW0gLhxOPCZRWxe+G0mtjteJTxjDWPGAvx71S3vQEBR89011RVV/vHquFTZE6rPa2+hRIp254TtTZTY1M2vsaX9bSU0dhxZJpCoZ6Nz3S2LvScI6cdPZlyoGzOKHvpfbb+eW7d4+xiG6bc8fVakM89HSe6f/2mou80WHpF1ds7ujHHUDJVVbWr3knNwHEhcbtbbWjV2pjy1sRoL8Zd2bcm0mHRYECUTXQWnbkzfnk5cp1pNBcwEhk5hLPeKCAtgBRaMn6CPN/s6CNPwTdkqI4hpXARKi8KgJzJ4jXFpMhtNHVmVLvgTzhumIU75PjGxGlHH9J5tqoN8W9OiYJ30ywwxN5kUfaVc4keULkMjukmDxvK6VY45jFQtf1MvvTDJOTNhBnZ3AGH1YfZuBe2Nw/mYZnhTAH6EvlAqdSdMpjd7UPD7j+ZkKZ1omOxLm8xvJMLR7il5RvgZBXkzMQxqb2jPGXSGYZAEKxEZ6NF+r42UhtDr2eps8OA0gVAhch5x05k1Ox0MgcTM91jQKgMppln0FrHyh0stg1njr310G1r0fEEo2rj3B+gyfQSwAExO8noGtu2YItQw80j3l8SbXNi19LJyniujUsNMdIwqUN7SrIKncXYYc2keSy+zjZ4qhHAE/qPnEdmT7H4pGyHziTeekAqzTkXiIoMRRMFaYL7ex139MUrsw2tD2t1Yf24JsdSrfzwMmbdhNGPJjbv/w1ZDkiTx3Jg84CqDOd+zLgM0qW4skLiGkayHpan0lp5jxHx3mJVyvzzeBSOvxdPr8UG2YvpuiWSEEmmRBekSipIT3J2gKpPoR+kVe6vgdVpqZWzgGfNNGjDz2avILIDqQsFuZpHKNfyI3Cc0rz5d7uKYPfPX1/9tjE=",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: taup, earth_flattening, direct_wave. Part 6 shows the model file and the three ObsPy calls; Crotwell et al. (1999) describe TauP, and the ObsPy documentation of obspy.taup lists the phase names.",
+    "2": "zb64:eNpFjrFuwzAMRH/lNi9GP6D9gg4NOnQ32OgcEVEkQaJj+O8jyUA7EeTd491nxJ6Kq+/Yixphnqhec6ZDkIOlwhIEj+QYsGogdjU/fJ4hs8z43TQ4qJ3K2BaTLS8npHF8WFNwLEgrjrS1uccZIck/+CPb9/HVkRkSXQMK+GQ54LSaxCsh9Y4bbbEiT4bF9ME6fL1O9lLbOuVp4FNt084wx9wC+rVduvfvo8Ym3gpZP3An81ApJShrs7aA3phy9TMucoGu3VEaWBFT5NsLnChyJQ==",
+    "3": "zb64:eNpFj1FqAzEMRP/3FPO3LaQfJdBC6voIuUJQ13LWxGsbW2no7St7oTUIzDDzNDI+RLbY3+kTMCvHwhWPGoQbZGVE+uHakD227DheEm1sJ/N1D9ENw5DRSQhJMgg+R8fVfihP6F5sR5uYaff3pAy/nXyuYFpWuNCE0sKnqVcxjq/2r9Ntg2JVqqydctINb8f31xfVW1m5KmeEpNj/Q5hqDNwEc5khYWOQKKPIetEcJdeB9oAznRE8Uk6sfZseh15qbvN0Dd/alpbbgOo8GYoRuuaA/dfs8y+WW2Oi"
+   },
+   "kind": "tool_reference",
+   "module": "M30",
+   "target": "func",
+   "tier": "core",
+   "title": "Travel times from TauP"
   }
  }
 }

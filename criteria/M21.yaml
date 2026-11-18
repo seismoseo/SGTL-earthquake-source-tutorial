@@ -1,0 +1,23 @@
+module: M21
+frozen: 2026-11-19
+tasks:
+  # made-up curves: bumps on a smooth wiggle, some closer and some farther apart than the gap (never within 2
+  # samples of it), curves rising at the last sample or falling from the first; the expected picks come from
+  # scipy.signal.find_peaks(height=threshold, distance=gap in samples). Times within this many samples.
+  M21-T1: {trials: 150, time_tol_samples: 0.25}
+  # 8 made-up annotation Streams (1-3 stations, own start times, peaks inside and outside the window, noise curves
+  # with high peaks), then real_stations random HH stations of the Sangju mainshock annotated by the check with
+  # the pinned weights (model, version); window_s after the KMA origin; every row on the model's curve within
+  # prob_tol and half a sample; for station-phases whose best in-window SeisBench pick reaches strong_prob and lies
+  # at least 1 s inside the window, the row must sit on that pick (within half a sample)
+  M21-T2: {trials: 8, real_stations: 3, model: stead, version: "2", threshold: 0.3, min_gap_s: 1.0,
+           window_s: [-2.0, 40.0], strong_prob: 0.5, prob_tol: 1.0e-6}
+  # 40 pairs of made-up pick tables (with and without event_id), then 3 tables that hold one key twice
+  M21-T3: {trials: 40, diff_tol_s: 1.0e-6}
+  # 6 made-up PocketQuake pick folders for the reader; then the student's three copies: fingerprints among the
+  # logged picks fingerprints of at least min_runs successful runs of the cluster that include the picking stage;
+  # every probability of the first run and the rerun at least default_min_prob (PocketQuake's PNPLUS_MIN_PROB)
+  M21-T4: {trials: 6, min_runs: 3, default_min_prob: 0.3}
+  # 40 made-up pick tables (polarities on both sides of and exactly at +-min_weight, probabilities on both sides
+  # of min_prob, NaN polarities, S picks), then 3 tables without a polarity column (see the category missing-column)
+  M21-T5: {trials: 40}

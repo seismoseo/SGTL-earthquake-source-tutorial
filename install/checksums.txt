@@ -60,3 +60,13 @@ KS_KG_metadata_1.0.2.SACPZ.zip  cb882e85a1f86c496c4a825c7b81391160517db89f1ef920
 # "sgtl data fetch" runs ~/.sgtl/stp-client.pl only when its SHA-256 equals this value (otherwise fetching
 # refuses to start). Checksum source: computed on 2026-11-16 from the copy used to fetch the test data.
 #fingerprint stp-client.pl 5fda02921159959abac53af474b646e260c20f62e52a0d99f200a087eb9b0df9
+
+# --- Component "seisbench" (install/components/seisbench.sh) ---------------------------------------
+# PhaseNet weights for SeisBench (module M21): 'stead' (trained by the SeisBench team on STEAD) and 'original' (Zhu &
+# Beroza 2019, Northern California), version 2 each, from SeisBench's model repository (models/v3 layout). The name is
+# the path inside SEISBENCH_CACHE_ROOT/models/v3/. Checksum source: computed from the files; downloads on 2026-11-19
+# agree with copies of the same files downloaded in February and March 2026.
+phasenet/stead.json.v2  a500dd76b8507a96da36e8cbf6b1051f29fd71fd5d5fc1be450ac9020634e00c  https://hifis-storage.desy.de:2880/Helmholtz/HelmholtzAI/SeisBench/models/v3/phasenet/stead.json.v2
+phasenet/stead.pt.v2  761c46496139e9917a7480ff56f660914124c806511ea794f0005518358b09ec  https://hifis-storage.desy.de:2880/Helmholtz/HelmholtzAI/SeisBench/models/v3/phasenet/stead.pt.v2
+phasenet/original.json.v2  33a2540c49b87ebc78fe7a913c4d369f394d21b03f2a791713a23eb512b4e282  https://hifis-storage.desy.de:2880/Helmholtz/HelmholtzAI/SeisBench/models/v3/phasenet/original.json.v2
+phasenet/original.pt.v2  184dd85b896eebf8d5967ee15a722a477fa2e4ce479a3b113ecbcb8a6419113f  https://hifis-storage.desy.de:2880/Helmholtz/HelmholtzAI/SeisBench/models/v3/phasenet/original.pt.v2
