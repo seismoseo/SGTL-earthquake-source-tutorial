@@ -11,7 +11,7 @@ File formats (all plain text, written by the data maintainers):
 * ``data/manifests/sequences.yaml``: ``{name: {center_lat, center_lon, radius_km, start_utc,
   end_utc, description}}``.
 * ``data/stations/stations.csv``: ``network,station,latitude,longitude,start_date``.
-* ``data/velocity_models/<name>.csv``: ``top_km,vp_km_s,vs_km_s``; citations in
+* ``data/velocity_models/<name>.csv``: ``top_km,vp,vs`` (km, km/s, km/s); citations in
   ``data/velocity_models/citations.yaml`` as ``{name: citation}``.
 """
 from __future__ import annotations
@@ -157,8 +157,8 @@ def velocity_models() -> List[str]:
 
 
 def velocity_model(name: str) -> pd.DataFrame:
-    """A 1-D layered velocity model: columns ``top_km`` (depth of the layer top), ``vp_km_s``,
-    ``vs_km_s``. The source is in ``df.attrs["citation"]``."""
+    """A 1-D layered velocity model: columns ``top_km`` (depth of the layer top, km), ``vp`` and ``vs``
+    (P and S speeds in the layer, km/s). The source is in ``df.attrs["citation"]``."""
     folder = repo_path("data", "velocity_models")
     path = folder / f"{name}.csv"
     if not path.is_file():

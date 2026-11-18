@@ -178,6 +178,37 @@ def _stack_check(timeout: float = 300.0) -> Tuple[str, str]:
     return "FAIL", f"the test process {how} during {stage}{hint}. {_STACK_FIX}"
 
 
+SEISBENCH_FILES = ("phasenet/stead.json.v2", "phasenet/stead.pt.v2", "phasenet/original.json.v2",
+                   "phasenet/original.pt.v2")
+
+
+def _seisbench_weights(repo: Optional[Path]) -> Tuple[str, str]:
+    """The PhaseNet weights of ``bin/sgtl-install seisbench`` (module M21), checked against install/checksums.txt."""
+    env = os.environ.get("SEISBENCH_CACHE_ROOT", "").strip()
+    home = os.environ.get("SGTL_HOME", "").strip()
+    root = Path(env).expanduser() if env else (Path(home).expanduser() if home else Path.home() / "sgtl") / "seisbench"
+    pins = {}
+    sums = repo / "install" / "checksums.txt" if repo is not None else None
+    if sums is not None and sums.is_file():
+        for row in sums.read_text(encoding="utf-8").splitlines():
+            parts = row.split()
+            if len(parts) >= 2 and parts[0] in SEISBENCH_FILES:
+                pins[parts[0]] = parts[1]
+    folder = root / "models" / "v3"
+    fix = "run: bin/sgtl-install seisbench --apply; needed in M21"
+    missing = [n for n in SEISBENCH_FILES if not (folder / n).is_file()]
+    if missing:
+        return "WARN", f"not found in {_paths.short_path(folder / 'phasenet')} ({fix})"
+    changed = [n for n in SEISBENCH_FILES if n in pins and _sha256(folder / n) != pins[n]]
+    if changed:
+        return "WARN", (f"{', '.join(Path(n).name for n in changed)} in {_paths.short_path(folder / 'phasenet')} "
+                        f"differ from install/checksums.txt ({fix})")
+    where = _paths.short_path(root) + ("" if env else " (notebooks find them; in a shell, source "
+                                                      f"{_paths.short_path(root.parent / 'tools' / 'env.sh')})")
+    checked = "checksums match" if len(pins) == len(SEISBENCH_FILES) else "checksums not compared"
+    return "PASS", f"stead and original, version 2, in {where}; {checked}"
+
+
 def doctor() -> int:
     results: List[Tuple[str, str]] = []
     add = results.append
@@ -236,6 +267,11 @@ def doctor() -> int:
     data = _paths.data_root()
     add(_line("PASS" if data.is_dir() else "WARN", "Data folder",
               f"{_paths.short_path(data)}" + ("" if data.is_dir() else " missing (run: sgtl-install data)")))
+    try:
+        status, detail = _seisbench_weights(repo)
+    except OSError as exc:
+        status, detail = "WARN", f"could not be read ({type(exc).__name__})"
+    add(_line(status, "SeisBench PhaseNet weights", detail))
     try:
         import warnings
 

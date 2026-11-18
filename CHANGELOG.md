@@ -4,6 +4,73 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v0.3.0 — picking arrivals, deep-learning pickers and travel times
+
+**After updating, update the course environment and add the PhaseNet weights once:**
+`bin/sgtl-install env seisbench --apply`. The environment moves to SeisBench 0.11.7 (see Changed), and the new
+component `seisbench` puts the weights that module M21 needs into `~/sgtl/seisbench`. Then restart the Jupyter kernel
+"SGTL (Python 3.12)". No rebuild is needed.
+
+### Added
+- Module M20 (picking arrivals: an STA/LTA ratio and a two-threshold trigger, onset times with the Akaike
+  information criterion, how band-pass filters move automatic picks, P and S picks by hand with an uncertainty and
+  a first-motion polarity, the signs of each station's gains next to your polarities in a table by azimuth, your
+  automatic picker against your own picks over a grid of settings, and ObsPy's `pk_baer` picker as a production
+  tool: what each setting does, an unchanged rerun, then one setting changed), module M21 (deep-learning pickers:
+  picks from a probability curve, two pretrained PhaseNet models in SeisBench, PocketQuake's picking stage run
+  through `sgtl pq`, and a table of first motions for focal mechanisms) and module M30 (travel times in a layered
+  crust: direct waves by shooting, head waves as a travel-time idea that is never used for locating, the Wadati
+  diagram from your own picks, residuals of two published velocity models against each model's first arrival, the
+  earliest of the direct wave and the head waves, and TauP as a production tool). All three work on the Sangju
+  earthquake of 21 July 2019 from your M03 download and are delivered unexecuted; start them with
+  `bin/sgtl new M20` and so on. Do M20 first: M21 and M30 read your M20 picks (`work/picks/M20_manual_picks.csv`).
+  M21 runs PocketQuake on one CPU core and needs the components `tools` and `seisbench`.
+- Three optional explorers: E2 in M20 (`st.widgets.phase_picker`) is a picker for P and S: click on a record (or
+  type a time), give the uncertainty and the polarity, and "Save" writes your picks to the file that M21 and M30
+  read; E3 in M20 (`st.widgets.stalta_tuner`) shows your STA/LTA ratio and your triggers under sliders; E4 in M30
+  (`st.widgets.traveltime_explorer`) draws your direct-wave and head-wave travel times while you change the layers
+  and the source depth. As before, an explorer never does a task for you, and the picker never chooses a pick.
+- Installer component `seisbench` (`bin/sgtl-install seisbench`): the PhaseNet weights `stead` and `original`
+  (version 2) for SeisBench, every file pinned by its SHA-256 checksum in `install/checksums.txt`, in
+  `~/sgtl/seisbench` (about 2 MB). It sets `SEISBENCH_CACHE_ROOT` in `~/sgtl/tools/env.sh` and in the Jupyter
+  kernel, so SeisBench reads these files and downloads nothing by itself, and its check-up runs both models on a
+  made-up record. Like the other components, it is a dry run without `--apply` (details: `install/README.md`).
+- `bin/sgtl doctor` has a new line, "SeisBench PhaseNet weights": PASS when the four files are in place and match
+  their checksums, otherwise WARN with the command that fixes it.
+- A new check result, `runtime-name`: a function fails when it builds the name of a module or an attribute while it
+  runs, runs code given as text (`eval`, `exec`, `compile`), looks names up with `globals()`, `vars()`, `__dict__`
+  or `sys.modules`, changes where imports come from or loads code from a file or from data (`sys.path`, `pickle`,
+  `yaml.load`), or was itself made with `exec`. The message asks you to write the names out in full.
+- Glossary terms and references for M20, M21 and M30.
+- Dataset `sangju2019_hours` in `data/manifests/stp_datasets.yaml`: three hours of continuous records (one hour
+  before to two hours after the Sangju ML 3.9 earthquake of 21 July 2019) from the broadband and short-period
+  stations within 50 km, about 100 MB. The detection module M22 uses it; it arrives in a later version.
+
+### Changed
+- `bin/sgtl data fetch`: the size estimate of the dry run now grows with the length of the records, so long records
+  are no longer underestimated.
+- M03 Part 6 said that a negative stage gain in the station metadata means that the channel records the ground
+  motion upside down. For the Sangju records this is not so. Eleven broadband channels of the Sangju ML 3.9
+  earthquake have a negative first-stage gain, yet the same files store a positive overall sensitivity. On all
+  eleven the first motion goes the same way as on the accelerometer at the same site (whose gains are positive)
+  and on neighbouring stations at nearly the same azimuth, and the same way that KIGAM's published mechanism
+  predicts. M03 now shows this disagreement and lets the records decide: take first-motion polarities from the
+  counts. If you have already started M03, `bin/sgtl diff M03` shows the change.
+- The library check of `st.check` (the part that refuses a ready-made function where a task asks you to write your
+  own) also catches the same step done another way: a method such as `Trace.trigger`, a twin such as
+  `np.ma.polyfit`, a module reached through another name, a list or a helper function. M01 tasks 1 and 4 now also
+  refuse `obspy.taup` and `pyrocko`.
+- M10 task 1: the example in the Contract is now a made-up file, with a made-up date and pick time. The rule it
+  shows is the same: `a` counts from the reference time. `bin/sgtl diff M10` shows the change.
+- The course environment pins SeisBench 0.11.7 instead of 0.11.0: with 0.11.0, `import seisbench.models` failed
+  unless the extra package xdas was installed.
+- The Jupyter kernel also sets `SEISBENCH_CACHE_ROOT=~/sgtl/seisbench`, and `bin/sgtl-install tools` writes the
+  same line into `~/sgtl/tools/env.sh`.
+- The glossary's "Terms by module" and the reading list now list every term and reference that a module's header
+  names; some terms of M03 and M10 were missing.
+- `st.data.velocity_model` (and `src/sgtl_tutorial/data.py`): the documentation now names the columns as they are in
+  the files (`top_km`, `vp`, `vs`).
+
 ## v0.2.0 — waveform data, seismograms, earthquake catalogs and statistical seismology
 
 **After updating, rebuild the course environment once:** `bin/sgtl-install env --apply --rebuild`. PyTorch now

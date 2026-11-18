@@ -747,7 +747,9 @@ def _print_plan(plan: Plan, meta: dict) -> None:
     when = f"{abs(start):g} s {'before' if start < 0 else 'after'} the origin time"
     print(f"Requests: {n} STP 'win' commands, one per station and band ({', '.join(ds.bands)}), each a record "
           f"of {ds.window_s[1] - ds.window_s[0]:g} s starting {when}; in {_n(len(plan.sessions), 'STP session')}")
-    print(f"Download: about {_fmt_mb(n * mb_per)}, {_fmt_minutes(n / rps)} at {rps:g} requests per second "
+    # mb_per_request was measured on records of 500 s; a longer record is proportionally larger.
+    size_mb = n * mb_per * (ds.window_s[1] - ds.window_s[0]) / 500.0
+    print(f"Download: about {_fmt_mb(size_mb)}, {_fmt_minutes(n / rps)} at {rps:g} requests per second "
           "(longer when STP is busy)")
 
 

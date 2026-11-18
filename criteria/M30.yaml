@@ -1,0 +1,32 @@
+module: M30
+frozen: 2026-11-19
+tasks:
+  # 6 one-layer models (straight-line formula), 4 two-layer models by Fermat's principle (one with a slower lower
+  # layer, one with the source above the boundary), then kim1983, kim2011 and a random four-layer model through
+  # ObsPy's TauP on an Earth-flattened copy, at 0-150 km. Times within tol_s. Why 5 ms: TauP on the flattened
+  # copy reproduces the flat-layer times to 0.1 ms or better at < 150 km and depths < 30 km (measured on kim1983
+  # at 5, 14 and 25 km depth), while TauP on the same layers without flattening differs by up to 0.06 s (P) and
+  # 0.11 s (S) at 150 km; the slips the categories name (straight ray, source layer, phase) cost 0.05 s or more.
+  M30-T1: {half_space_cases: 6, tol_s: 0.005}
+  # 8 cases: kim1983 at 14 km (the Moho for P, the 15-km boundary for S), kim2011 (a shallow source, a source
+  # below a boundary, the Moho for S), a random three-layer model, and a model with a faster middle layer (no head
+  # wave). Truth leg by leg from Fermat's principle; crossover distances where that head wave meets the direct
+  # wave of the half-space formula or the two-layer brute force (every source here is in the first two layers).
+  # A student direct_time inside the 5 ms of task 1 moves a crossover by at most 1 % for these models.
+  M30-T2: {tol_s: 0.005, critical_tol_km: 0.02, crossover_rel_tol: 0.01, crossover_abs_tol_km: 0.1}
+  # 12 made-up sets of 5-15 stations (half exact lines, half with scatter, compared with numpy.polyfit), then the
+  # student's own picks of the Sangju mainshock: at least min_stations with P and S, Vp/Vs inside vp_vs_range and
+  # the origin time within origin_window_s of the KMA origin time (KMA reports whole seconds). Loose on purpose:
+  # crustal Vp/Vs lies near 1.7-1.8; the check only catches broken pick tables, never grades the values.
+  M30-T3: {trials: 12, origin_tol_s: 1.0e-6, ratio_tol: 1.0e-6, min_stations: 5, vp_vs_range: [1.60, 1.95],
+           origin_window_s: 2.0}
+  # 6 made-up tables (8-13 P rows and 1-11 S rows at 2-220 km, shuffled, odd index, extra columns) on models of
+  # one to three rows with the source in the top layer (one with a fast middle layer, so no head wave along the
+  # half-space); every wave that comes first somewhere gets at least two rows of each phase. Observed times: the
+  # check's own first arrival (the earliest of its straight-line direct wave and its leg-formula head waves, the
+  # functions it hands to the student's function) plus chosen residuals; exact arithmetic, slopes against
+  # numpy.polyfit
+  M30-T4: {trials: 6, tol_s: 1.0e-9, slope_rel_tol: 1.0e-6}
+  # kim1983 at 14 km (3-150 km, past both crossover distances), kim2011 and kim1983 at random depths; TauP of the
+  # check on the same layers; the first case is run twice and must give identical numbers
+  M30-T5: {tol_s: 0.002}

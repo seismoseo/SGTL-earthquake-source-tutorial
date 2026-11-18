@@ -1,0 +1,30 @@
+module: M20
+frozen: 2026-11-19
+tasks:
+  # 10 made-up records (steps in noise, an arrival, a Python list, zeros at the start, int32 and float32 records
+  # with large values, a noise-free step, tiny and full-length windows, a large offset); compared sample by sample
+  # with ObsPy's classic_sta_lta on the float64 values (0 where the long window holds only zeros)
+  M20-T1: {trials: 10, rel_tol: 1.0e-4, abs_tol: 1.0e-6}
+  # random curves (whole-number values, so that values equal the thresholds; also float curves, open ends and
+  # curves that never trigger), compared exactly with ObsPy's trigger_onset
+  M20-T2: {trials: 300}
+  # noise that changes size by a known factor at a known sample (2-30 times larger or smaller, 30-500 samples,
+  # some offsets) and the example of the Contract; within tol_samples of ObsPy's aic_simple
+  M20-T3: {trials: 40, tol_samples: 1}
+  # made-up records (50-200 Hz, sharp and slow onsets, signal-to-noise 8-100, both filter kinds, two without an
+  # arrival); within tol_samples of the same five steps done with ObsPy (classic_sta_lta, trigger_onset,
+  # aic_simple)
+  M20-T4: {trials: 12, tol_samples: 2}
+  # the student's own picks file and SAC files; no hidden reference values. The record must change at each pick
+  # (RMS of a causal 1 Hz high-pass in the second after the pick over the RMS before it: p_jump for P on the
+  # named vertical channel, before = 5.5 to 0.5 s ahead; s_jump for S on the named horizontal, before = 2.0 to
+  # 0.5 s ahead). One source: a straight-line fit of S-P against P time with a slope in wadati_slope (Vp/Vs - 1),
+  # residuals within wadati_rms_s (RMS) and wadati_max_s (largest), the line reaching S-P = 0 within
+  # origin_tol_s of the KMA origin, and S-P per km of hypocentral distance inside sp_per_km at every station
+  M20-T5: {min_stations: 6, max_epi_km: 100.0, p_unc_s: [0.005, 0.5], s_unc_s: [0.01, 1.0], min_polarities: 3,
+           p_jump: 3.0, s_jump: 1.5, wadati_slope: [0.45, 1.1], wadati_rms_s: 0.3, wadati_max_s: 0.6,
+           origin_tol_s: 3.0, sp_per_km: [0.07, 0.17]}
+  # the student's JSON file, picks file and auto_pick (it must pass picker_cases made-up cases of task 4 again);
+  # the check reruns the student's own picker on the student's records with the chosen setting and one more grid
+  # setting: picks within tol_samples, statistics within stat_tol_s; nothing printed
+  M20-T6: {picker_cases: 3, tol_samples: 1, stat_tol_s: 0.011, min_settings: 4}

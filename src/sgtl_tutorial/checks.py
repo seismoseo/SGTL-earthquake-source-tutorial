@@ -8,7 +8,9 @@ How a check runs (``st.check("M01-T1", func=great_circle_km)``):
    parts: the static scan of the session's code and objects (``astguard.scan_session``) and the run-time guard,
    an audit hook that marks the session when a checker module is imported or a checker file is read by anything
    but this engine (``astguard.watch_checkers``).
-3. A function target is screened by the AST guard against the spec's ``forbidden`` list.
+3. A function target is screened by the AST guard against the spec's ``forbidden`` list (category
+   ``forbidden-import``); a function that builds module or attribute names while it runs, or whose code cannot be
+   read, FAILs with category ``runtime-name`` (``astguard.check_function``).
 4. The checker ``check_T1(target, ctx)`` of ``sgtl_tutorial/checkers/m01.py`` runs and returns an
    :class:`Outcome`. The engine reads and compiles that file itself into a fresh namespace that never enters
    ``sys.modules`` and is emptied after the check. If anything inside raises NotImplementedError, status is
@@ -65,6 +67,12 @@ DEFAULT_MESSAGES = {
     "forbidden-import": "This task asks you to write this step yourself, so the rule is: do not use {rules} here.",
     "checker-internals": "A check must judge your own work, so the rule is: do not import, call or copy the "
                          "checkers' own code (sgtl_tutorial.checkers) in your notebook.",
+    "runtime-name": "The check reads your function's code to see which libraries it uses, so the rule is: write "
+                    "each import and each name you take from a module out in full (import x, from x import y, x.y, "
+                    "or getattr(x, \"y\") with the name in quotes) and define the function with def in a notebook "
+                    "cell. Do not put such names together while the code runs (import_module or getattr with a "
+                    "name made of pieces or kept in a variable), and do not use eval, exec, compile, globals(), "
+                    "locals(), vars(), __dict__ or sys.modules.",
     "exception": "Your code stopped with an error: {error}",
 }
 _SHOW_FOUND = 3
@@ -535,17 +543,31 @@ def check(task_id: str, answer: Any = None, *, func: Optional[Callable] = None, 
 
     # 4. AST guard
     if callable(target) and spec.get("forbidden"):
-        rep = astguard.check_function(target, spec["forbidden"])
+        rep = astguard.check_function(target, spec["forbidden"], repo=repo)
         if rep.note:
             notes.append("Note: " + rep.note)
         if not rep.ok:
-            msg = _category_text(spec, "forbidden-import") or DEFAULT_MESSAGES["forbidden-import"]
-            msg = msg.replace("{rules}", ", ".join(rep.violations))
-            out = Outcome(passed=False, n_cases=0, n_failed=0, category="forbidden-import", message=msg,
+            rule_msg = _category_text(spec, "forbidden-import") or DEFAULT_MESSAGES["forbidden-import"]
+            rule_msg = rule_msg.replace("{rules}", ", ".join(rep.violations))
+            if rep.runtime:  # names built while the code runs: the guard cannot judge them, so they come first
+                msg = _category_text(spec, "runtime-name") or DEFAULT_MESSAGES["runtime-name"]
+                shown, more = rep.runtime[:_SHOW_FOUND], len(rep.runtime) - _SHOW_FOUND
+                out = Outcome(passed=False, n_cases=0, n_failed=0, category="runtime-name", message=msg,
+                              details={"found": list(rep.runtime), "rules": rep.offending})
+                return finish(FAIL, [
+                    f"FAIL · names built while the code runs · {seed_txt}",
+                    f"Problem (runtime-name): {msg}",
+                    "Found in your code: " + "; ".join(shown) + (f" (and {more} more)" if more > 0 else ""),
+                ] + ([f"Also (forbidden-import): {rule_msg} Found: {', '.join(rep.offending)}"]
+                     if rep.violations else []) + [
+                    "Next step: write those names out in full in the code (or leave the step out), then run this "
+                    f'check again. Stuck? st.hint("{task_id}", 1)',
+                ], out, counted=True)
+            out = Outcome(passed=False, n_cases=0, n_failed=0, category="forbidden-import", message=rule_msg,
                           details={"found": rep.offending})
             return finish(FAIL, [
                 f"FAIL · library rule broken · {seed_txt}",
-                f"Problem (forbidden-import): {msg}",
+                f"Problem (forbidden-import): {rule_msg}",
                 f"Found in your code: {', '.join(rep.offending)}",
                 f'Next step: rewrite the function without it. Stuck? st.hint("{task_id}", 1)',
             ], out, counted=True)

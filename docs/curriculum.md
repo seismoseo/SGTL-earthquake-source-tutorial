@@ -9,7 +9,9 @@ the full list is in [reading_list.md](reading_list.md). Gates are explained in
 **Explorers** (E1-E10) are optional interactive widgets for building intuition: you move a slider and watch a
 filter, a trigger, a misfit landscape or a beachball change. An explorer never does a task for you: it draws what
 your own functions return. E9 (in M05) draws the frequency-magnitude distribution from your counting, b-value and
-Mc functions; E1 (in M10) is a filter bench that shows your amplitude spectra.
+Mc functions; E1 (in M10) is a filter bench that shows your amplitude spectra; E2 (in M20) is the picker with which
+you pick P and S by hand and save your picks; E3 (in M20) shows your STA/LTA ratio and triggers under sliders; E4
+(in M30) draws your direct-wave and head-wave travel times while you change the layers and the source depth.
 
 ## Part 0 and 1: tools, catalogs and statistics (weeks 1-2)
 
@@ -27,10 +29,10 @@ Mc functions; E1 (in M10) is a filter bench that shows your amplitude spectra.
 
 | Week | Module | You will be able to | Data | Tools |
 |---|---|---|---|---|
-| 3 | **M20** Picking and triggers | pick P and S by hand with polarities; write an STA/LTA trigger and tune it | Sangju 2019; one practice day of continuous data | ObsPy (as a reference); explorers E2 (picker), E3 (trigger) |
-| 3 | **M21** Deep-learning pickers | run PhaseNet-type pickers; compare their picks and polarities with yours | Sangju 2019 | SeisBench, EQNet / PhaseNet+ |
+| 3 | **M20** Picking arrivals | write an STA/LTA ratio and a two-threshold trigger and match ObsPy on made-up records; time an onset with the Akaike information criterion; measure, on made-up onsets of known time, how far zero-phase and causal band-pass filters move automatic picks; pick P and S by hand at six or more stations within 100 km, with an uncertainty for every pick and the first-motion polarity of every clear P; compare your automatic picks with your own manual picks over a grid of settings and justify the one you choose; rerun ObsPy's Baer-Kradolfer picker unchanged, then with one setting changed | the Sangju ML 3.9 earthquake of 21 July 2019 (your M03 download); StationMetadata | NumPy, ObsPy (as the reference); explorers E2 (picker), E3 (STA/LTA tuner) |
+| 3 | **M21** Deep-learning pickers | turn a pick-probability curve into picks with a threshold and a minimum gap; run two pretrained PhaseNet models with SeisBench and measure how their P and S picks differ from your own M20 picks; run PocketQuake's picking stage twice unchanged and once with another probability threshold, and explain what changed in its pick files; turn PocketQuake's picks and their first-motion polarities into a table of first motions for focal mechanisms | Sangju 2019 (your M03 download); your M20 picks | SeisBench with the PhaseNet weights of `bin/sgtl-install seisbench`; PocketQuake with EQNet / PhaseNet+ (`sgtl pq`, one core) |
 | 3 | **M22** Detection (stretch) | explain association and template matching; find small events in continuous data | continuous data | cross-correlation, PyOcto |
-| 3 | **M30** Travel times | compute direct-wave travel times in layered models; use the Wadati diagram; know head waves as a concept (never used to locate) | kim1983 and kim2011 velocity models | NumPy, ObsPy TauP (as a reference); explorer E4; hand exercise NMSOP-2 EX 11.1 first (exercise 11.1 of the *New Manual of Seismological Observatory Practice*, 2nd edition) |
+| 3 | **M30** Travel times in a layered crust | compute direct-wave travel times in a flat layered crust by shooting on the ray parameter, and test them against a half-space, a brute-force search and TauP; compute head-wave times, critical and crossover distances, and know head waves as a concept (never used to locate); estimate the origin time and Vp/Vs from your own picks with a Wadati diagram and compare them with the KMA catalog; compare two published velocity models by the travel-time residuals of your picks; run TauP unchanged, then with one changed parameter | kim1983 and kim2011 velocity models; Sangju 2019 and your M20 picks; KMA catalog | NumPy, ObsPy TauP (as the reference); explorer E4 (travel-time curves); hand exercise NMSOP-2 EX 11.1 first (exercise 11.1 of the *New Manual of Seismological Observatory Practice*, 2nd edition) |
 | 4 | **M31** Earthquake location | locate by grid search and by Geiger's method with direct P and S within about 100 km; estimate uncertainty | Sangju 2019 picks | NumPy; explorer E5 (misfit landscape) |
 | 4 | **M32** HYPOINVERSE via PocketQuake | run a production locator; rerun it unchanged, then change one setting and explain | Sangju 2019 | PocketQuake, HYPOINVERSE |
 | 5 | **M41** Relative relocation | build differential times from the catalog and from cross-correlation; set up and solve the double-difference system; bootstrap the result; run HypoDD | Sangju 2019 | NumPy, SciPy, PocketQuake, HypoDD; explorers E6 (lag and cycle skipping), E7 (DD toy) |

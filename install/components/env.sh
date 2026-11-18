@@ -139,7 +139,7 @@ env_write_kernel() {
   local prefix="$1" kdir="$1/share/jupyter/kernels/$ENV_KERNEL_NAME" user_k vars
   vars=(OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_MAX_THREADS=1 NUMBA_NUM_THREADS=1
     NUMPY_MADVISE_HUGEPAGE=0 PYTHONNOUSERSITE=1 LD_LIBRARY_PATH=
-    "SGTL_REPO=$REPO" "SGTL_HOME=$SGTL_HOME" "GMT_LIBRARY_PATH=$prefix/lib"
+    "SGTL_REPO=$REPO" "SGTL_HOME=$SGTL_HOME" "GMT_LIBRARY_PATH=$prefix/lib" "SEISBENCH_CACHE_ROOT=$SGTL_HOME/seisbench"
     "PATH=$prefix/bin:/usr/local/bin:/usr/bin:/bin")
   if [[ "$SGTL_HOME" != "${HOME%/}/sgtl" ]]; then vars+=("SGTL_DATA=$SGTL_HOME/data"); fi
   action "write the Jupyter kernel \"$ENV_DISPLAY_NAME\" (name: $ENV_KERNEL_NAME) to $kdir/kernel.json"

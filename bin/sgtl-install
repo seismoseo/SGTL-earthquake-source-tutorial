@@ -21,6 +21,7 @@ Components (default: env):
              tutorial's helper package, and the Jupyter kernel "SGTL (Python 3.12)". Installs
              Miniforge (the conda package manager) first if no conda or mamba is found.
   tools      HYPOINVERSE, HypoDD, PocketQuake, EQNet + PhaseNet+ weights, SKHASH
+  seisbench  SeisBench PhaseNet weights (stead, original; pinned versions) for module M21
   pyfk       the PyFK synthetic-seismogram environment "sgtl-pyfk"
   mt         MTUQ moment-tensor inversion
   coulomb    Elastic_stresses_py Coulomb stress
@@ -39,7 +40,7 @@ Environment variables:
   SGTL_HOME        install folder (default: ~/sgtl)
   SGTL_CONDA       the conda or mamba program to use (default: found automatically)
   SGTL_ENV_FILE    environment file to use instead of environment.yml (for the mentor)
-  SGTL_ENV         tools, mt, coulomb, metadata, data: the course environment to use
+  SGTL_ENV         tools, seisbench, mt, coulomb, metadata, data: the course environment to use
                    (default: $SGTL_HOME/envs/sgtl)
 
 Examples:
@@ -154,7 +155,7 @@ placeholder_component() {
 }
 
 # ---------------------------------------------------------------------------------------------
-KNOWN_COMPONENTS=(env tools pyfk mt coulomb metadata data)
+KNOWN_COMPONENTS=(env tools seisbench pyfk mt coulomb metadata data)
 
 component_file() { printf '%s/%s.sh' "$COMPONENT_DIR" "$1"; }
 
