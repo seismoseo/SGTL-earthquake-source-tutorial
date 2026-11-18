@@ -27,6 +27,14 @@ dependencies:
   - scikit-fmm
   - plotly
   - cutde>=25.7
+  # conda-forge PyTorch (CPU build): the pip wheel loads the system libstdc++ first and then clashes
+  # with conda's C++ libraries ("CXXABI_1.3.15 not found" when matplotlib/obspy are imported after torch).
+  # Use the OpenBLAS build (cpu_generic), not the MKL one (cpu_mkl): with MKL as the BLAS/LAPACK of every
+  # package, GMT aborts in pygmt fig.plot(x=..., y=...) ("double free or corruption"). Keep OpenBLAS and
+  # GNU OpenMP, as before PyTorch came from conda-forge.
+  - pytorch=2.6.*=cpu_generic*
+  - libblas=*=*openblas
+  - _openmp_mutex=*=*_gnu
   # Jupyter and notebook tooling
   - jupyterlab=4.5
   - ipykernel
@@ -35,10 +43,11 @@ dependencies:
   - jupytext
   - nbformat
   - nbclient
-  - nbmake
+  # No nbmake: nothing in the course uses it, and the only conda-forge build that accepts a current nbclient
+  # (1.3.4) declares a wider range than its own wheel (pip check: "requires nbclient<0.7.0") and pulls pydantic 1.
   - nbdime
   - papermill
-  - pytest<9                     # nbmake 1.3.4 does not load under pytest 9
+  - pytest<9                     # the course tests are validated with pytest 8; move to 9 together with them
   # command-line tools used by the tutorial
   - git
   - gh
@@ -49,8 +58,6 @@ dependencies:
   - fortran-compiler
   - pip
   - pip:
-      - --extra-index-url https://download.pytorch.org/whl/cpu
-      - torch==2.6.0
       - seisbench==0.11.0
       - pyocto
       - seismostats==1.0.1

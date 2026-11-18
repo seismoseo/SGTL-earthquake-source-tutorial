@@ -3,22 +3,34 @@
 How a check runs (``st.check("M01-T1", func=great_circle_km)``):
 
 1. The task must have a logged prediction (``st.predict``), else status NO PREDICTION.
-2. A function target is screened by the AST guard against the spec's ``forbidden`` list.
-3. The checker ``sgtl_tutorial.checkers.m01.check_T1(target, ctx)`` runs and returns an
-   :class:`Outcome`. If anything inside raises NotImplementedError, status is NOT STARTED.
-4. A short box is printed; one JSON line is appended to ``<repo>/work/.sgtl/progress.jsonl``.
-5. With ``SGTL_STRICT=1`` (CI), anything but PASS raises AssertionError.
+2. The session guard (every task kind): when the notebook session imported or used the checkers' own code
+   (``sgtl_tutorial.checkers``), the check FAILs with category ``checker-internals`` and no checker runs. Two
+   parts: the static scan of the session's code and objects (``astguard.scan_session``) and the run-time guard,
+   an audit hook that marks the session when a checker module is imported or a checker file is read by anything
+   but this engine (``astguard.watch_checkers``).
+3. A function target is screened by the AST guard against the spec's ``forbidden`` list.
+4. The checker ``check_T1(target, ctx)`` of ``sgtl_tutorial/checkers/m01.py`` runs and returns an
+   :class:`Outcome`. The engine reads and compiles that file itself into a fresh namespace that never enters
+   ``sys.modules`` and is emptied after the check. If anything inside raises NotImplementedError, status is
+   NOT STARTED.
+5. A short box is printed; one JSON line is appended to ``<repo>/work/.sgtl/progress.jsonl``.
+6. With ``SGTL_STRICT=1`` (CI), anything but PASS raises AssertionError.
 
-Only PASS and FAIL count as attempts. Real-data expected values are never printed.
+Only PASS and FAIL count as attempts. Real-data expected values are never printed. In ``checks/checks.json`` the
+locked hints (levels 2 and 3) and the failure categories are stored zlib-compressed and base64-encoded (not secret,
+just not readable at a glance); only ``hint`` (once the level is unlocked) and ``check`` (when a category fires)
+decode them, and ``task_spec`` shows only what is unlocked.
 """
 from __future__ import annotations
 
-import importlib
+import base64
+import builtins
 import json
 import os
 import re
 import textwrap
-from dataclasses import dataclass, field
+import zlib
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
@@ -51,8 +63,16 @@ _EMPTY_PREDICTIONS = {"", "...", "todo", "tbd", "write your prediction here", "y
 _NOT_TOLERANCE = {"trials", "cases", "n_cases", "seed", "note", "notes", "frozen"}
 DEFAULT_MESSAGES = {
     "forbidden-import": "This task asks you to write this step yourself, so the rule is: do not use {rules} here.",
+    "checker-internals": "A check must judge your own work, so the rule is: do not import, call or copy the "
+                         "checkers' own code (sgtl_tutorial.checkers) in your notebook.",
     "exception": "Your code stopped with an error: {error}",
 }
+_SHOW_FOUND = 3
+
+try:  # from now on keep a private record of the cells this IPython session runs (see astguard.scan_session)
+    astguard.install_cell_record()
+except Exception:  # noqa: BLE001 - never block "import sgtl_tutorial"
+    pass
 
 
 # ----------------------------------------------------------------------------- data classes
@@ -139,13 +159,61 @@ def _signature(kind: str, files: List[Path]) -> Tuple:
     return (kind,) + tuple((str(p), p.stat().st_mtime_ns, p.stat().st_size) for p in files)
 
 
+_ENCODED = "zb64:"  # prefix of a text stored zlib-compressed and base64-encoded (see tools/compile_checks.py)
+
+
+def _encode(text: str) -> str:
+    return _ENCODED + base64.b64encode(zlib.compress(text.encode("utf-8"), 9)).decode("ascii")
+
+
+def _decode(value: Any) -> str:
+    if isinstance(value, str) and value.startswith(_ENCODED):
+        return zlib.decompress(base64.b64decode(value[len(_ENCODED):])).decode("utf-8")
+    return "" if value is None else str(value)
+
+
 def _normalize_spec(task: str, spec: Optional[dict], module: Optional[str]) -> dict:
+    """A loaded spec keeps the locked hints (levels 2 and 3) and the failure categories encoded, whatever the
+    source (checks.json stores them encoded; the instructor's YAML is encoded here)."""
     spec = dict(spec or {})
     spec.setdefault("module", module or task.split("-")[0])
-    spec["hints"] = {int(k): str(v) for k, v in (spec.get("hints") or {}).items()}
-    spec["categories"] = {str(k): str(v) for k, v in (spec.get("categories") or {}).items()}
+    hints: Dict[int, str] = {}
+    for k, v in (spec.get("hints") or {}).items():
+        level = int(k)
+        if level <= 1:
+            hints[level] = _decode(v)
+        else:
+            hints[level] = v if isinstance(v, str) and v.startswith(_ENCODED) else _encode(_decode(v))
+    spec["hints"] = hints
+    cats = spec.get("categories") or {}
+    if isinstance(cats, dict):
+        cats = _encode(json.dumps({str(k): str(v) for k, v in cats.items()}, sort_keys=True)) if cats else ""
+    spec["categories"] = cats if isinstance(cats, str) else ""
     spec["forbidden"] = [str(f) for f in (spec.get("forbidden") or [])]
     return spec
+
+
+def _categories(spec: dict) -> Dict[str, str]:
+    raw = spec.get("categories")
+    if isinstance(raw, dict):
+        return {str(k): str(v) for k, v in raw.items()}
+    try:
+        data = json.loads(_decode(raw)) if raw else {}
+    except (ValueError, zlib.error):
+        return {}
+    return {str(k): str(v) for k, v in data.items()} if isinstance(data, dict) else {}
+
+
+def _category_text(spec: dict, category: Optional[str]) -> Optional[str]:
+    """The fixed message of one failure category (decoded only when that category fires)."""
+    return _categories(spec).get(category) if category else None
+
+
+def _hint_text(spec: dict, level: int) -> str:
+    try:
+        return _decode(spec.get("hints", {}).get(level))
+    except (ValueError, zlib.error):
+        return ""
 
 
 def load_specs(repo: Optional[Path] = None) -> Dict[str, dict]:
@@ -188,8 +256,8 @@ def load_criteria(repo: Optional[Path] = None) -> Dict[str, dict]:
     return _CACHE[key]
 
 
-def task_spec(task_id: str, repo: Optional[Path] = None) -> dict:
-    """The spec of one task (raises KeyError with a plain message when unknown)."""
+def _spec(task_id: str, repo: Optional[Path] = None) -> dict:
+    """The engine's spec of one task (raises KeyError with a plain message when unknown)."""
     if not TASK_RE.match(task_id or ""):
         raise KeyError(f"{task_id!r} is not a task id; task ids look like 'M01-T1'.")
     specs = load_specs(repo)
@@ -198,6 +266,20 @@ def task_spec(task_id: str, repo: Optional[Path] = None) -> dict:
         raise KeyError(f"Unknown task {task_id!r}. Tasks of this module: {', '.join(same) or 'none found'}. "
                        "If your copy of the tutorial is old, update it (see docs).")
     return specs[task_id]
+
+
+def task_spec(task_id: str, repo: Optional[Path] = None) -> dict:
+    """The spec of one task as you may see it: the hints unlocked so far (level 1 always, level 2 after one failed
+    check, level 3 after two) and the failure categories your checks of this task have reported."""
+    repo = Path(repo or _paths.repo_root())
+    spec = _spec(task_id, repo)
+    out = {k: v for k, v in spec.items() if k not in ("hints", "categories")}
+    unlocked = _unlocked_hint(task_id, repo)
+    out["hints"] = {lvl: _hint_text(spec, lvl) for lvl in sorted(spec["hints"]) if lvl <= unlocked}
+    fired = {str(e.get("category")) for e in _events(task_id, "check", repo) if e.get("category")}
+    cats = _categories(spec)
+    out["categories"] = {k: cats[k] for k in sorted(fired) if k in cats}
+    return out
 
 
 # ----------------------------------------------------------------------------- log queries
@@ -220,6 +302,11 @@ def _n_attempts(task: str, repo: Path) -> int:
 
 def _reroll_index(task: str, repo: Path, user: str) -> int:
     return len(_events(task, "reroll", repo, user))
+
+
+def _unlocked_hint(task: str, repo: Path) -> int:
+    """Highest hint level open now: 1 always, 2 after one failed check, 3 after two."""
+    return 1 + min(_n_fail(task, repo), 2)
 
 
 def _max_hint_shown(task: str, repo: Path) -> int:
@@ -286,7 +373,7 @@ def _is_empty_prediction(text: str) -> bool:
 def predict(task_id: str, text: str) -> None:
     """Log your prediction for a task (what you expect, before you code). Required before st.check."""
     repo = _paths.repo_root()
-    spec = task_spec(task_id, repo)
+    spec = _spec(task_id, repo)
     clean = (text or "").strip()
     if _is_empty_prediction(clean):
         print(_box(_title(task_id, spec), [
@@ -313,12 +400,46 @@ def _student_frames(exc: BaseException, target: Any) -> bool:
     return False
 
 
-def _resolve_checker(task: str, spec: dict) -> Callable:
+def _checkers_dir() -> Path:
+    return Path(__file__).resolve().parent / "checkers"
+
+
+def _checker_path(module_id: str) -> Path:
+    """The checker file of a module: ``"m04"`` -> ``<package>/checkers/m04.py``."""
+    return _checkers_dir() / f"{module_id}.py"
+
+
+def _resolve_checker(task: str, namespace: Dict[str, Any]) -> Callable:
+    """Load the task's checker privately: read its file, compile it and run it in ``namespace`` (a fresh dict from
+    ``check``), so the module never enters ``sys.modules``. The run-time guard allows this read only when ``check``
+    itself calls this function; read from anywhere else, a checker file marks the session.
+
+    Checker modules may import the package (``from .. import synth``) and the checkers' package helpers
+    (``from . import Outcome``), not each other. The code is compiled under a name in angle brackets, so warnings
+    and tracebacks never reopen the file."""
     m = TASK_RE.match(task)
     assert m is not None
-    modname = f"sgtl_tutorial.checkers.{m.group(1).lower()}"
-    mod = importlib.import_module(modname)
-    return getattr(mod, f"check_T{m.group(2)}")
+    module_id = m.group(1).lower()
+    path = Path(_checker_path(module_id))
+    with open(path, "rb") as fh:
+        source = fh.read()
+    namespace.update({"__name__": f"{astguard.CHECKERS}.{module_id}", "__package__": astguard.CHECKERS,
+                      "__builtins__": builtins, "__loader__": None, "__spec__": None})
+    exec(compile(source, f"<sgtl checker {path.name}>", "exec", dont_inherit=True), namespace)
+    return namespace[f"check_T{m.group(2)}"]
+
+
+def _shareable(outcome: Optional[Outcome]) -> Optional[Outcome]:
+    """The Outcome handed back to the notebook. For real-data cases it keeps only what the box may show (the
+    inputs and the student's own value): an error size or an expected value there would give the answer away."""
+    details = outcome.details if outcome is not None else None
+    if not isinstance(details, dict) or not details.get("real_data"):
+        return outcome
+    keep = {k: details[k] for k in ("real_data", "note", "found") if k in details}
+    example = details.get("example")
+    if isinstance(example, dict):
+        keep["example"] = {k: example[k] for k in ("inputs", "got") if k in example}
+    return replace(outcome, details=keep)
 
 
 def _as_outcome(value: Any) -> Outcome:
@@ -335,7 +456,7 @@ def check(task_id: str, answer: Any = None, *, func: Optional[Callable] = None, 
     """Check your function (``func=``) or your answer (``answer=``) for a task and print the result."""
     sess = current()
     repo = _paths.repo_root()
-    spec = task_spec(task_id, repo)
+    spec = _spec(task_id, repo)
     criteria = dict(load_criteria(repo).get(task_id, {}))
     strict = _strict()
     user = user_name()
@@ -359,7 +480,7 @@ def check(task_id: str, answer: Any = None, *, func: Optional[Callable] = None, 
         text = _box(title, lines)
         log_event("check", task_id, status=status, attempt=attempt, seed=seed, category=cat, repo=repo,
                   reroll=reroll_n)
-        res = CheckResult(task=task_id, status=status, outcome=outcome, seed=seed, reroll=reroll_n,
+        res = CheckResult(task=task_id, status=status, outcome=_shareable(outcome), seed=seed, reroll=reroll_n,
                           attempt=attempt, text=text, _shown=True)
         print(text)
         if strict and status != PASS:
@@ -383,14 +504,42 @@ def check(task_id: str, answer: Any = None, *, func: Optional[Callable] = None, 
             f"Next step: finish the task, then pass {what}.",
         ])
 
-    # 3. AST guard
+    # 3. session guard (every task kind): the checkers' own code must not have been used in this session
     notes: List[str] = []
+    marks = astguard.watch_checkers(*_ENGINE_CODES, _checkers_dir())
+    if marks is None:
+        return finish(ERROR, [
+            "ERROR · the session guard could not start, so nothing was checked (nothing was counted).",
+            "Next step: restart the kernel (Kernel > Restart Kernel), run your cells again from the top, then run "
+            "this check again. If this happens again, tell your mentor.",
+        ])
+    session_rep = astguard.scan_session(repo)
+    if session_rep.note:
+        if strict:
+            raise AssertionError(f"{task_id}: session guard failed: {session_rep.note}")
+        notes.append("Note: " + session_rep.note)
+    found = list(session_rep.found) + list(marks)
+    if found:
+        msg = _category_text(spec, "checker-internals") or DEFAULT_MESSAGES["checker-internals"]
+        shown = found[:_SHOW_FOUND]
+        more = len(found) - len(shown)
+        out = Outcome(passed=False, n_cases=0, n_failed=0, category="checker-internals", message=msg,
+                      details={"found": found})
+        return finish(FAIL, notes + [
+            f"FAIL · rule broken: the checkers' own code was used · {seed_txt}",
+            f"Problem (checker-internals): {msg}",
+            "Found in your session: " + "; ".join(shown) + (f" (and {more} more)" if more else ""),
+            "Next step: delete that code, restart the kernel (Kernel > Restart Kernel), run your cells again "
+            "from the top, then run this check again.",
+        ], out, counted=True)
+
+    # 4. AST guard
     if callable(target) and spec.get("forbidden"):
         rep = astguard.check_function(target, spec["forbidden"])
         if rep.note:
             notes.append("Note: " + rep.note)
         if not rep.ok:
-            msg = spec["categories"].get("forbidden-import") or DEFAULT_MESSAGES["forbidden-import"]
+            msg = _category_text(spec, "forbidden-import") or DEFAULT_MESSAGES["forbidden-import"]
             msg = msg.replace("{rules}", ", ".join(rep.violations))
             out = Outcome(passed=False, n_cases=0, n_failed=0, category="forbidden-import", message=msg,
                           details={"found": rep.offending})
@@ -401,7 +550,7 @@ def check(task_id: str, answer: Any = None, *, func: Optional[Callable] = None, 
                 f'Next step: rewrite the function without it. Stuck? st.hint("{task_id}", 1)',
             ], out, counted=True)
 
-    # 4. run the checker
+    # 5. run the checker
     from .synth import rng_for
 
     context = CheckContext(rng=rng_for(user, task_id, reroll_n), seed=seed, reroll=reroll_n, criteria=criteria,
@@ -411,26 +560,52 @@ def check(task_id: str, answer: Any = None, *, func: Optional[Callable] = None, 
         if k in context:
             raise TypeError(f"st.check: the keyword {k!r} is reserved; use another name.")
         context[k] = v
+    namespace: Dict[str, Any] = {}  # the checker's module namespace: private, emptied when the check ends
     try:
-        checker = _resolve_checker(task_id, spec)
-    except (ImportError, AttributeError) as exc:
-        missing = isinstance(exc, ModuleNotFoundError) and str(getattr(exc, "name", "")).startswith(
-            "sgtl_tutorial.checkers")
-        why = ("there is no checker for this task in your copy of the tutorial" if missing or
-               isinstance(exc, AttributeError) else f"the checker needs a package that is missing ({exc})")
-        return finish(ERROR, [f"ERROR · {why} (nothing was counted).",
-                              "Next step: run 'sgtl doctor' in a terminal; if that does not help, tell your mentor."])
+        try:  # called from here only: the run-time guard allows the read for check() itself, nobody else
+            checker = _resolve_checker(task_id, namespace)
+        except (OSError, KeyError, ImportError) as exc:
+            why = (f"the checker needs a package that is missing ({exc})" if isinstance(exc, ImportError)
+                   else "there is no checker for this task in your copy of the tutorial")
+            return finish(ERROR, [f"ERROR · {why} (nothing was counted).", "Next step: run 'sgtl doctor' in a "
+                                  "terminal; if that does not help, tell your mentor."])
+        except Exception as exc:  # noqa: BLE001 - a broken checker file
+            return finish(ERROR, [f"ERROR · the checker for this task could not start ({type(exc).__name__}); "
+                                  "nothing was counted.", "Next step: tell your mentor."])
+        return _run_checker(task_id, checker, target, context, finish, notes, seed_txt, criteria, repo, spec)
+    finally:
+        namespace.clear()
+
+
+def _run_checker(task_id: str, checker: Callable, target: Any, context: "CheckContext", finish: Callable,
+                 notes: List[str], seed_txt: str, criteria: dict, repo: Path, spec: dict) -> "CheckResult":
+    """Steps 5 and 6 of :func:`check`: run the loaded checker on the target and report.
+
+    Whatever is raised from here (strict mode's AssertionError, an interrupt) is raised outside the ``except``
+    blocks, so it carries no traceback into the checker's frames and their local values."""
+    failure: Optional[Tuple[str, str]] = None
+    escaped: Optional[BaseException] = None
     try:
         outcome = _as_outcome(checker(target, context))
     except NotImplementedError:
-        return finish(NOT_STARTED, notes + [
-            "NOT STARTED · your function still raises NotImplementedError (nothing was counted).",
-            'Next step: replace the line "raise NotImplementedError(...)" with your code, '
-            "then run this check again.",
-        ])
+        failure = ("not-started", "")
     except Exception as exc:  # noqa: BLE001 - shown to the student in plain words
-        err = f"{type(exc).__name__}: {exc}"
-        if _student_frames(exc, target):
+        failure = ("student" if _student_frames(exc, target) else "checker", f"{type(exc).__name__}: {exc}")
+    except KeyboardInterrupt:
+        escaped = KeyboardInterrupt("the check was interrupted")
+    except SystemExit as exc:
+        escaped = SystemExit(exc.code)
+    if escaped is not None:
+        raise escaped
+    if failure is not None:
+        kind, err = failure
+        if kind == "not-started":
+            return finish(NOT_STARTED, notes + [
+                "NOT STARTED · your function still raises NotImplementedError (nothing was counted).",
+                'Next step: replace the line "raise NotImplementedError(...)" with your code, '
+                "then run this check again.",
+            ])
+        if kind == "student":
             msg = DEFAULT_MESSAGES["exception"].replace("{error}", _fmt(err, 300))
             out = Outcome(passed=False, n_cases=1, n_failed=1, category="exception", message=msg)
             return finish(FAIL, notes + [
@@ -445,7 +620,7 @@ def check(task_id: str, answer: Any = None, *, func: Optional[Callable] = None, 
             "If it does, tell your mentor.",
         ])
 
-    # 5. report
+    # 6. report
     n = int(outcome.n_cases or 0)
     n_pass = max(0, n - int(outcome.n_failed or 0))
     tol = _tolerance_text(criteria)
@@ -467,7 +642,7 @@ def check(task_id: str, answer: Any = None, *, func: Optional[Callable] = None, 
         return finish(PASS, lines, outcome, counted=True)
 
     cat = outcome.category or "wrong"
-    msg = spec["categories"].get(cat) or outcome.message or "Some cases are outside the tolerance."
+    msg = _category_text(spec, cat) or outcome.message or "Some cases are outside the tolerance."
     lines.append(f"Problem ({cat}): {msg}")
     example = details.get("example") or {k: details[k] for k in ("inputs", "got", "error") if k in details}
     if example and not real:
@@ -495,12 +670,12 @@ def check(task_id: str, answer: Any = None, *, func: Optional[Callable] = None, 
 def hint(task_id: str, level: int = 1) -> None:
     """Show a hint. Level 1 is always available; level 2 after 1 failed check; level 3 after 2."""
     repo = _paths.repo_root()
-    spec = task_spec(task_id, repo)
+    spec = _spec(task_id, repo)
     level = int(level)
     if level not in (1, 2, 3):
         raise ValueError("Hint levels are 1, 2 and 3.")
     n_fail = _n_fail(task_id, repo)
-    unlocked = 1 + min(n_fail, 2)
+    unlocked = _unlocked_hint(task_id, repo)
     title = f"Hint {level} of 3 · {_title(task_id, spec)}"
     if level > unlocked:
         log_event("hint", task_id, status="locked", repo=repo, level=level)
@@ -511,7 +686,7 @@ def hint(task_id: str, level: int = 1) -> None:
             f'Try st.hint("{task_id}", {unlocked}) first, or run the check with your best attempt.',
         ]))
         return None
-    text = spec["hints"].get(level)
+    text = _hint_text(spec, level)  # a locked hint is never decoded
     if not text:
         log_event("hint", task_id, status="missing", repo=repo, level=level)
         print(_box(title, ["There is no hint at this level for this task. Ask your mentor."]))
@@ -524,7 +699,7 @@ def hint(task_id: str, level: int = 1) -> None:
 def reroll(task_id: str) -> None:
     """Draw new practice cases for a synthetic check (new seed; logged)."""
     repo = _paths.repo_root()
-    task_spec(task_id, repo)
+    _spec(task_id, repo)
     user = user_name()
     n = _reroll_index(task_id, repo, user) + 1
     seed = seed_for(user, task_id, n)
@@ -576,3 +751,15 @@ def progress(module: Optional[str] = None):
     cols = ["module", "task", "title", "tier", "predicted", "attempts", "failed", "status", "hints_seen",
             "last_activity"]
     return pd.DataFrame(rows, columns=cols)
+
+
+# ----------------------------------------------------------------------------- run-time guard
+# check() and the loader it calls are the only readers of a checker file the run-time guard allows
+# (astguard.watch_checkers). In an IPython kernel the guard starts here, at "import sgtl_tutorial"; anywhere else at
+# the first check.
+_ENGINE_CODES = (check.__code__, _resolve_checker.__code__)
+try:
+    if astguard._ipython_shell() is not None:
+        astguard.watch_checkers(*_ENGINE_CODES, _checkers_dir())
+except Exception:  # noqa: BLE001 - never block "import sgtl_tutorial"
+    pass

@@ -727,15 +727,6 @@ def check_T4(target: Any, ctx: Any) -> Outcome:
 
 
 # ----------------------------------------------------------------------------- M02-T5
-def _geodesic_km(lat0: float, lon0: float, lat: np.ndarray, lon: np.ndarray) -> np.ndarray:
-    from pyproj import Geod
-
-    lat = np.asarray(lat, dtype=float)
-    lon = np.asarray(lon, dtype=float)
-    _a, _b, dist = Geod(ellps="WGS84").inv(np.full(lat.shape, lon0), np.full(lat.shape, lat0), lon, lat)
-    return np.asarray(dist) / 1000.0
-
-
 def _t5_made_up(rng: np.random.Generator, radius: float, rel: float) -> Dict[str, Any]:
     """Events at known geodesic distances from a known center; none within 2*rel of the radius."""
     from pyproj import Geod
@@ -757,7 +748,8 @@ def _t5_made_up(rng: np.random.Generator, radius: float, rel: float) -> Dict[str
             "empty": empty_inside}
 
 
-def _t5_real(rng: np.random.Generator, ctx: Any, rel: float) -> Dict[str, Any]:
+def _t5_real_inputs(rng: np.random.Generator, ctx: Any) -> Dict[str, Any]:
+    """Inputs for the real catalog around the Sangju mainshock. No expected counts (DESIGN.md section 4)."""
     from .. import data as sdata
 
     cat = sdata.kma_catalog()
@@ -766,48 +758,69 @@ def _t5_real(rng: np.random.Generator, ctx: Any, rel: float) -> Dict[str, Any]:
     row = cat.loc[cat["event_id"].astype(str) == str(big.get("event_id"))]
     if row.empty:
         row = seq.loc[[seq["ml"].idxmax()]]
-    lat0, lon0 = float(row["latitude"].iloc[0]), float(row["longitude"].iloc[0])
     r_min = float(_crit(ctx, "radius_min_km", 10.0))
     r_max = float(_crit(ctx, "radius_max_km", 30.0))
     radius = float(np.round(rng.uniform(r_min, r_max), 1))
     first = int(rng.integers(1990, 2006))
     last = int(rng.integers(2020, 2026))
-    dist = _geodesic_km(lat0, lon0, cat["latitude"].to_numpy(), cat["longitude"].to_numpy())
-    years = _calendar_years(cat["origin_utc"])
-    lo = _per_year(years[dist <= radius * (1.0 - rel)], first, last)
-    hi = _per_year(years[dist <= radius * (1.0 + rel)], first, last)
-    return {"df": cat, "lat0": lat0, "lon0": lon0, "radius": radius, "first": first, "last": last,
-            "lo": lo, "hi": hi, "empty": [int(y) for y, c in zip(range(first, last + 1), hi) if c == 0]}
+    return {"df": cat, "lat0": float(row["latitude"].iloc[0]), "lon0": float(row["longitude"].iloc[0]),
+            "radius": radius, "first": first, "last": last}
+
+
+def _t5_real_problem(target: Any, case: Dict[str, Any]) -> Tuple[Optional[str], str]:
+    """Properties of the student's own counts on the real catalog: every year once, whole non-negative
+    numbers, and never fewer events inside a larger circle (the same function at 1.5 times the radius)."""
+    counts = []
+    for scale in (1.0, 1.5):
+        res = target(case["df"].copy(), case["lat0"], case["lon0"], case["radius"] * scale, case["first"],
+                     case["last"])
+        cat, found = _series_problem(res, case["first"], case["last"], [])
+        if cat:
+            return ("year-range" if cat in ("missing-zero-years", "off-by-one") else cat), found
+        vals = _float_array(res.to_numpy())
+        if vals is None or np.isnan(vals).any():
+            return "year-range", "missing (NaN) counts"
+        if (vals < 0).any() or not np.allclose(vals, np.round(vals)):
+            return "distance", "counts that are negative or not whole numbers"
+        counts.append(vals)
+    if (counts[1] < counts[0]).any():
+        return "distance", "fewer events inside a larger circle than inside a smaller one in some years"
+    return None, ""
 
 
 def check_T5(target: Any, ctx: Any) -> Outcome:
-    """Yearly counts within a radius: made-up events at known distances, then the real catalog."""
+    """Yearly counts within a radius: made-up events at known distances (truth by construction), then
+    properties of the student's own counts on the real catalog (the check never counts the real catalog)."""
     rng = ctx.rng
     rel = float(_crit(ctx, "distance_rel_tol", 0.005))
     r_min = float(_crit(ctx, "radius_min_km", 10.0))
     r_max = float(_crit(ctx, "radius_max_km", 30.0))
     radius = float(np.round(rng.uniform(r_min, r_max), 1))
-    cases = [dict(_t5_made_up(rng, radius, rel), radius=radius, real=False), dict(_t5_real(rng, ctx, rel), real=True)]
-    n_cases = len(cases)
-    for case in cases:
-        real = case["real"]
-        inputs = {"case": "Sangju mainshock, KMA catalog" if real else "made-up catalog",
-                  "lat0": round(case["lat0"], 4), "lon0": round(case["lon0"], 4), "radius_km": case["radius"],
-                  "start_year": case["first"], "end_year": case["last"]}
-        res = target(case["df"].copy(), case["lat0"], case["lon0"], case["radius"], case["first"], case["last"])
-        cat, found = _series_problem(res, case["first"], case["last"], case["empty"])
-        if cat == "missing-zero-years" or cat == "off-by-one":
-            cat = "year-range"
-        if cat:
-            return _fail(cat, n_cases, example={"inputs": inputs, "got": found}, real_data=real)
-        vals = _float_array(res.to_numpy())
-        if vals is None or np.isnan(vals).any():
-            return _fail("year-range", n_cases, example={"inputs": inputs, "got": "missing (NaN) counts"},
-                         real_data=real)
-        bad = (vals < case["lo"]) | (vals > case["hi"])
-        if bad.any():
-            yrs = np.arange(case["first"], case["last"] + 1)[bad]
-            return _fail("distance", n_cases, n_failed=int(bad.sum()), real_data=real,
-                         example={"inputs": inputs, "got": f"wrong counts in {int(bad.sum())} years "
-                                  f"(first: {int(yrs[0])})"})
+    made = _t5_made_up(rng, radius, rel)
+    n_cases = 2
+    inputs = {"case": "made-up catalog", "lat0": round(made["lat0"], 4), "lon0": round(made["lon0"], 4),
+              "radius_km": radius, "start_year": made["first"], "end_year": made["last"]}
+    res = target(made["df"].copy(), made["lat0"], made["lon0"], radius, made["first"], made["last"])
+    cat, found = _series_problem(res, made["first"], made["last"], made["empty"])
+    if cat == "missing-zero-years" or cat == "off-by-one":
+        cat = "year-range"
+    if cat:
+        return _fail(cat, n_cases, example={"inputs": inputs, "got": found}, real_data=False)
+    vals = _float_array(res.to_numpy())
+    if vals is None or np.isnan(vals).any():
+        return _fail("year-range", n_cases, example={"inputs": inputs, "got": "missing (NaN) counts"},
+                     real_data=False)
+    bad = (vals < made["lo"]) | (vals > made["hi"])
+    if bad.any():
+        yrs = np.arange(made["first"], made["last"] + 1)[bad]
+        return _fail("distance", n_cases, n_failed=int(bad.sum()), real_data=False,
+                     example={"inputs": inputs, "got": f"wrong counts in {int(bad.sum())} years "
+                              f"(first: {int(yrs[0])})"})
+    real = _t5_real_inputs(rng, ctx)
+    cat, found = _t5_real_problem(target, real)
+    if cat:
+        inputs = {"case": "Sangju mainshock, KMA catalog", "lat0": round(real["lat0"], 4),
+                  "lon0": round(real["lon0"], 4), "radius_km": real["radius"], "start_year": real["first"],
+                  "end_year": real["last"]}
+        return _fail(cat, n_cases, example={"inputs": inputs, "got": found}, real_data=True)
     return outcome_from_cases(np.ones(n_cases, dtype=bool))

@@ -1,0 +1,34 @@
+SGTL tutorial patch for HypoDD 2.1b by Felix Waldhauser (https://github.com/fwaldhauser/HypoDD,
+tag V2.1b, commit fb40407fb768cbdc23a11e27bc841f5d4a98abb7). install/components/tools.sh applies it.
+
+1. include/hypoDD.inc: MAXDATA 3000000 -> 15000000, the most differential times (observations)
+   hypoDD can hold. The lab uses this size for large catalogs. The arrays then need more than
+   2 GB of address space, so tools.sh compiles with -mcmodel=large (memory is used only as needed).
+2. src/hypoDD/Makefile: remove an LDFLAGS line that points to the library folder of an old macOS
+   compiler and breaks linking on Linux. (tools.sh also gives LDFLAGS on the make command line,
+   which replaces the same line in src/ph2dt and src/ncsn2pha.)
+
+Copyright (c) 2026 Minseong Seo (SGTL, Seoul National University). MIT License (this patch).
+
+--- a/include/hypoDD.inc
++++ b/include/hypoDD.inc
+@@ -18,7 +18,7 @@
+ 
+ c parameters for large size problems 
+       parameter(MAXEVE=   6500,    
+-     &          MAXDATA=  3000000,
++     &          MAXDATA= 15000000,
+      &          MAXEVE0=  215,	
+      &          MAXDATA0= 100000,	
+      &          MAXLAY=   50,	
+--- a/src/hypoDD/Makefile
++++ b/src/hypoDD/Makefile
+@@ -23,7 +23,7 @@
+ CFLAGS	= -O -I$(INCLDIR)
+ 
+ #LDFLAGS = 
+-LDFLAGS = -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -lgcc
++LDFLAGS =
+ listflg = -L -c -O
+ 
+ # Flags for GNU g77 compiler

@@ -10,3 +10,53 @@
 # (The later rebuilds 26.9.4-1 and 26.9.4-2 list only Windows and CI changes in their release notes.)
 # Checksum source: GitHub release asset digest (GitHub REST API), checked 2026-11-15.
 Miniforge3-26.9.4-0-Linux-x86_64.sh  621428f40496a90702753b09237794518a081d9979d9f845a525de761b6056f7  https://github.com/conda-forge/miniforge/releases/download/26.9.4-0/Miniforge3-26.9.4-0-Linux-x86_64.sh
+
+# Component "mt": MTUQ's dependencies that the course environment lacks, as wheels from PyPI for CPython 3.12 on
+# Linux x86_64 (installed with pip --no-deps, only when missing). numba 0.65.1 needs llvmlite 0.47 and accepts
+# NumPy 1.22 to 2.4, so the course's NumPy 1.26.4 stays. Checksum source: PyPI JSON API sha256 digests, checked
+# 2026-11-15 and confirmed by downloading.
+llvmlite-0.47.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl  5853bf26160857c0c2573415ff4efe01c4c651e59e2c55c2a088740acfee51cd  https://files.pythonhosted.org/packages/e6/4b/e3f2cd17822cf772a4a51a0a8080b0032e6d37b2dbe8cfb724eac4e31c52/llvmlite-0.47.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
+numba-0.65.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl  52bc6f3ceb8fcaff9b2ae26b4c6b1e9fee39db8d355534c0fe4f39a901246b84  https://files.pythonhosted.org/packages/69/47/a415af0283e4db0398104c6d1c11c9861a98dc67a7aa442a7769ed5d6196/numba-0.65.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
+retry-0.9.2-py2.py3-none-any.whl  ccddf89761fa2c726ab29391837d4327f819ea14d244c232a1d24c67a2f98606  https://files.pythonhosted.org/packages/4b/0d/53aea75710af4528a25ed6837d71d117602b01946b307a3912cb3cfcbcba/retry-0.9.2-py2.py3-none-any.whl
+# seisgen 0.2.1 and seisclient 0.0.2 (pure Python, need only numpy, scipy, obspy and h5py, all in the course
+# environment): PyPI JSON API sha256 digests, checked 2026-11-16 and confirmed by downloading.
+seisgen-0.2.1-py3-none-any.whl  cfd42e2c6dad683416fd63fa891163aeeeffa63442265b14d4c759d7b73d7f89  https://files.pythonhosted.org/packages/33/14/9f4130598e61b8f4e731dcec6dc9d41ae2ff3f49d378db3f9a304a90c651/seisgen-0.2.1-py3-none-any.whl
+seisclient-0.0.2-py3-none-any.whl  eb7a6fb183d9be38b4d45abdcaf4478c767d6683fbbc75cef2b2f46b3cfe4615  https://files.pythonhosted.org/packages/3b/0b/d922cff5b357da1ec3b8e808c94d3fe9ffd37ad4af9fe07b660bf1989b45/seisclient-0.0.2-py3-none-any.whl
+# (MTUQ itself is fetched with git at commit 2157be553ac24d69bf84b54f56d247a239b2e801; git checks it by that hash.)
+
+# Component "coulomb": poetry-core, the build tool that Elastic_stresses_py's pyproject.toml names (installed into the
+# course environment only when missing, so that pip needs no unpinned download to build it). Checksum source: PyPI
+# JSON API sha256 digest, checked 2026-11-15 and confirmed by downloading.
+poetry_core-2.5.0-py3-none-any.whl  98ee465b66f7e14bb9fbe68fb5e00d0cff184f036993ec94610ae4b5612f3add  https://files.pythonhosted.org/packages/b7/25/7ed0a2ea4fe12f7fd0394387b5debbcd6fdbd06e5ac9daab96ba11471da8/poetry_core-2.5.0-py3-none-any.whl
+# (Elastic_stresses_py itself is installed by pip from git at commit 5dfc485f920a23956538dc55c67feedbd36cb091.)
+
+# --- Component "tools" (install/components/tools.sh) ---------------------------------------------
+# HYPOINVERSE-2000 version 1.40 (Fred Klein, USGS): Fortran source code, manual and an example.
+# Linked from https://www.usgs.gov/software/hypoinverse-earthquake-location ("version 1.4").
+# Checksum source: computed from the file, two downloads on 2026-11-15 agreed.
+hyp1.40.tar  c7ef454f45df4c4f04eed599cd464e03223ffd69e6efc9aa8be0611fe7411006  https://escweb.wr.usgs.gov/content/software/HYPOINVERSE/hyp1.40.tar
+# HypoDD 2.1b (Felix Waldhauser): his GitHub repository, tag V2.1b = commit fb40407 (source archive
+# made by GitHub). His web page (https://www.ldeo.columbia.edu/~felixw/hypoDD.html) offers only 1.3.
+# Checksum source: computed from the file, two downloads on 2026-11-15 agreed. If GitHub ever packs
+# the archive differently, the checksum stops matching and the installer refuses it (safe).
+fb40407fb768cbdc23a11e27bc841f5d4a98abb7.tar.gz  a9c915b80872062720d2b17558ebfb8dffe5cb91fa5016e73599098a151722bd  https://github.com/fwaldhauser/HypoDD/archive/fb40407fb768cbdc23a11e27bc841f5d4a98abb7.tar.gz
+# PhaseNet+ weights (Zhu et al.) used by PocketQuake: release PhaseNet-Plus-v1 of github.com/AI4EPS/models.
+# Checksum source: computed from the file on 2026-11-15; equal to the lab's copy.
+model_99.pth  f1643330e34bffaa4f7e3a5f7dd9205fb4019d76e5b9b6cb598232360d22f384  https://github.com/AI4EPS/models/releases/download/PhaseNet-Plus-v1/model_99.pth
+# Git repositories are pinned by commit in install/components/tools.sh (git checks every object):
+#   PocketQuake v1.16.1 = a97a021ca11699b4ba58349a895c1f2481065211 (submodule korea-cluster-relocation
+#   d0679858c09ecdd14e7406375a4fc872a545060d); EQNet ad492ef0fe93493662d324f7747851be2c9fc7b8;
+#   SKHASH 352816d6308e2a94b10510b28b997d923318b3b3.
+
+# --- Component "metadata" (install/components/metadata.sh) ---------------------------------------
+# StationMetadata 1.0.2 (Byeong-Seok Ahn), github.com/ByeongSeokAhn/StationMetadata, commit 4830550.
+# Checksum source: computed from the files on 2026-11-15.
+KS_KG_metadata_1.0.2.xml.zip  e0a14e1ddb4277f74d6d327d8609d8e2e985a9a86f43408a4dbaa21a09802eb4  https://raw.githubusercontent.com/ByeongSeokAhn/StationMetadata/483055001ae45b6a5a9546753cd49cb900f498de/KS_KG_metadata_1.0.2.xml.zip
+KS_KG_metadata_1.0.2.SACPZ.zip  cb882e85a1f86c496c4a825c7b81391160517db89f1ef9206ece152c11995edc  https://raw.githubusercontent.com/ByeongSeokAhn/StationMetadata/483055001ae45b6a5a9546753cd49cb900f498de/KS_KG_metadata_1.0.2.SACPZ.zip
+
+# --- STP program (sgtl data fetch and install/components/data.sh) -----------------------------------------
+# The STP program stp-client.pl is personal: the mentor gives it to each intern, it is never in this repository,
+# and the installer never downloads it. So its entry is the comment line below, which only sgtl reads:
+# "sgtl data fetch" runs ~/.sgtl/stp-client.pl only when its SHA-256 equals this value (otherwise fetching
+# refuses to start). Checksum source: computed on 2026-11-16 from the copy used to fetch the test data.
+#fingerprint stp-client.pl 5fda02921159959abac53af474b646e260c20f62e52a0d99f200a087eb9b0df9

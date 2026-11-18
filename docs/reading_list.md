@@ -56,32 +56,52 @@ your mentor. Never commit PDFs to your repository.
 - Software Carpentry (n.d.). Plotting and Programming in Python. <https://swcarpentry.github.io/python-novice-gapminder/> `swc_gapminder`
 - Wessel et al. (2019). The Generic Mapping Tools version 6. [doi:10.1029/2019GC008515](https://doi.org/10.1029/2019GC008515) `wessel2019`
 
-## M03 · Getting waveforms with STP, and instrument responses
+## M03 · Getting seismic data: STP, stations, time windows, responses
 
 - Ahn, Kang & Jung (2024). Station metadata integration of regional seismic networks in the southern Korean Peninsula. [doi:10.14770/jgsk.2024.001](https://doi.org/10.14770/jgsk.2024.001) `ahn2024`
 - Beyreuther et al. (2010). ObsPy: a Python toolbox for seismology. [doi:10.1785/gssrl.81.3.530](https://doi.org/10.1785/gssrl.81.3.530) `beyreuther2010`
+- Bormann & Dewey (2014). The new IASPEI standards for determining magnitudes from digital data (NMSOP-2 IS 3.3). [doi:10.2312/GFZ.NMSOP-2_IS_3.3](https://doi.org/10.2312/GFZ.NMSOP-2_IS_3.3) `bormann2014`
+- Havskov & Ottemöller (2010). Routine Data Processing in Earthquake Seismology. [doi:10.1007/978-90-481-8697-6](https://doi.org/10.1007/978-90-481-8697-6) `havskov2010`
 - Havskov & Alguacil (2016). Instrumentation in Earthquake Seismology (2nd ed.). [doi:10.1007/978-3-319-21314-9](https://doi.org/10.1007/978-3-319-21314-9) `havskov2016`
+- Helffrich, Wookey & Bastow (2013). The Seismic Analysis Code: A Primer and User's Guide. [doi:10.1017/CBO9781139547260](https://doi.org/10.1017/CBO9781139547260) `helffrich2013`
+- Hutton & Boore (1987). The ML scale in Southern California. [doi:10.1785/BSSA0770062074](https://doi.org/10.1785/BSSA0770062074) `hutton1987`
+- Korea Meteorological Administration (KMA) (n.d.). Domestic earthquake catalog (국내지진 목록). <https://www.weather.go.kr/w/earthquake-volcano/search/korea.do> `kma_catalog`
+- Krischer et al. (2015). ObsPy: a bridge for seismology into the scientific Python ecosystem. [doi:10.1088/1749-4699/8/1/014003](https://doi.org/10.1088/1749-4699/8/1/014003) `krischer2015`
 - The ObsPy developers (n.d.). ObsPy tutorial. <https://docs.obspy.org/tutorial/> *(partly verified)* `obspy_tutorial`
+- Richter (1935). An instrumental earthquake magnitude scale. [doi:10.1785/BSSA0250010001](https://doi.org/10.1785/BSSA0250010001) `richter1935`
+- Scherbaum (2001). Of Poles and Zeros: Fundamentals of Digital Seismology (2nd ed.). [doi:10.1007/978-1-4020-6861-4](https://doi.org/10.1007/978-1-4020-6861-4) `scherbaum2001`
+- Sheen, Kang & Rhie (2018). A local magnitude scale for South Korea. [doi:10.1785/0120180112](https://doi.org/10.1785/0120180112) `sheen2018`
 
-## M04 · Earthquake catalogs
+## M04 · Earthquake catalogs: read, clean, look
 
+- Beyreuther et al. (2010). ObsPy: a Python toolbox for seismology. [doi:10.1785/gssrl.81.3.530](https://doi.org/10.1785/gssrl.81.3.530) `beyreuther2010`
 - Bormann (2012). Magnitude determinations (NMSOP-2 EX 3.1). [doi:10.2312/GFZ.NMSOP-2_EX_3.1](https://doi.org/10.2312/GFZ.NMSOP-2_EX_3.1) `bormann2012_ex3_1`
 - Bormann & Dewey (2014). The new IASPEI standards for determining magnitudes from digital data (NMSOP-2 IS 3.3). [doi:10.2312/GFZ.NMSOP-2_IS_3.3](https://doi.org/10.2312/GFZ.NMSOP-2_IS_3.3) `bormann2014`
 - Grigoli et al. (2018). The November 2017 Mw 5.5 Pohang earthquake: a possible case of induced seismicity in South Korea. [doi:10.1126/science.aat2010](https://doi.org/10.1126/science.aat2010) `grigoli2018`
 - Gutenberg & Richter (1944). Frequency of earthquakes in California. [doi:10.1785/BSSA0340040185](https://doi.org/10.1785/BSSA0340040185) `gutenberg1944`
+- Hanks & Kanamori (1979). A moment magnitude scale. [doi:10.1029/JB084iB05p02348](https://doi.org/10.1029/JB084iB05p02348) `hanks1979`
 - Hong et al. (2017). The 12 September 2016 ML 5.8 mid-crustal earthquake in the Korean Peninsula and its seismic implications. [doi:10.1002/2017GL072899](https://doi.org/10.1002/2017GL072899) `hong2017`
+- Hunter (2007). Matplotlib: a 2D graphics environment. [doi:10.1109/MCSE.2007.55](https://doi.org/10.1109/MCSE.2007.55) `hunter2007`
 - Hutton & Boore (1987). The ML scale in Southern California. [doi:10.1785/BSSA0770062074](https://doi.org/10.1785/BSSA0770062074) `hutton1987`
+- International Seismological Centre (n.d.). ISC Bulletin. [doi:10.31905/D808B830](https://doi.org/10.31905/D808B830) `isc_bulletin`
 - Kim et al. (2018). Assessing whether the 2017 Mw 5.4 Pohang earthquake in South Korea was an induced event. [doi:10.1126/science.aat6081](https://doi.org/10.1126/science.aat6081) `kim2018`
 - Korea Meteorological Administration (KMA) (n.d.). Domestic earthquake catalog (국내지진 목록). <https://www.weather.go.kr/w/earthquake-volcano/search/korea.do> `kma_catalog`
+- Krischer et al. (2015). ObsPy: a bridge for seismology into the scientific Python ecosystem. [doi:10.1088/1749-4699/8/1/014003](https://doi.org/10.1088/1749-4699/8/1/014003) `krischer2015`
 - Lee & Yang (2006). Historical seismicity of Korea. [doi:10.1785/0120050050](https://doi.org/10.1785/0120050050) *(verified; Crossref lists only the first author)* `lee2006`
 - McKinney (2010). Data structures for statistical computing in Python. [doi:10.25080/Majora-92bf1922-00a](https://doi.org/10.25080/Majora-92bf1922-00a) `mckinney2010`
 - Mignan & Woessner (2012). Estimating the magnitude of completeness for earthquake catalogs. [doi:10.5078/corssa-00180805](https://doi.org/10.5078/corssa-00180805) `mignan2012`
 - Richter (1935). An instrumental earthquake magnitude scale. [doi:10.1785/BSSA0250010001](https://doi.org/10.1785/BSSA0250010001) `richter1935`
+- Ross, Idini, Jia, Stephenson, Zhong, Wang, Zhan, Simons, Fielding, Yun, Hauksson, Moore, Liu & Jung (2019). Hierarchical interlocked orthogonal faulting in the 2019 Ridgecrest earthquake sequence. [doi:10.1126/science.aaz0109](https://doi.org/10.1126/science.aaz0109) `ross2019_ridgecrest`
+- Schorlemmer, Euchner, Kästli & Saul (2011). QuakeML: status of the XML-based seismological data exchange format. [doi:10.4401/ag-4874](https://doi.org/10.4401/ag-4874) `schorlemmer2011`
 - Shearer (2019). Introduction to Seismology (3rd ed.). [doi:10.1017/9781316877111](https://doi.org/10.1017/9781316877111) `shearer2019`
 - Sheen, Kang & Rhie (2018). A local magnitude scale for South Korea. [doi:10.1785/0120180112](https://doi.org/10.1785/0120180112) `sheen2018`
+- U.S. Geological Survey, Earthquake Hazards Program (2017). Advanced National Seismic System (ANSS) Comprehensive Catalog. [doi:10.5066/F7MS3QZH](https://doi.org/10.5066/F7MS3QZH) `usgs_comcat`
+- Wessel et al. (2019). The Generic Mapping Tools version 6. [doi:10.1029/2019GC008515](https://doi.org/10.1029/2019GC008515) `wessel2019`
 - Wiemer & Wyss (2000). Minimum magnitude of completeness in earthquake catalogs: examples from Alaska, the western United States, and Japan. [doi:10.1785/0119990114](https://doi.org/10.1785/0119990114) `wiemer2000`
+- Woessner & Wiemer (2005). Assessing the quality of earthquake catalogues: estimating the magnitude of completeness and its uncertainty. [doi:10.1785/0120040007](https://doi.org/10.1785/0120040007) `woessner2005`
+- Woo, Rhie, Kim, Kang, Kim & Kim (2019). The 2016 Gyeongju earthquake sequence revisited: aftershock interactions within a complex fault system. [doi:10.1093/gji/ggz009](https://doi.org/10.1093/gji/ggz009) `woo2019`
 
-## M05 · Statistical seismology
+## M05 · Statistical seismology: b-value, completeness, aftershock decay
 
 - Aki (1965). Maximum likelihood estimate of b in the formula log N = a - bM and its confidence limits. <https://cir.nii.ac.jp/crid/1370567185522869642> `aki1965`
 - Bender (1983). Maximum likelihood estimation of b values for magnitude grouped data. [doi:10.1785/BSSA0730030831](https://doi.org/10.1785/BSSA0730030831) `bender1983`
@@ -89,6 +109,10 @@ your mentor. Never commit PDFs to your repository.
 - Gardner & Knopoff (1974). Is the sequence of earthquakes in Southern California, with aftershocks removed, Poissonian?. [doi:10.1785/BSSA0640051363](https://doi.org/10.1785/BSSA0640051363) `gardner1974`
 - Gutenberg & Richter (1944). Frequency of earthquakes in California. [doi:10.1785/BSSA0340040185](https://doi.org/10.1785/BSSA0340040185) `gutenberg1944`
 - Helmstetter, Kagan & Jackson (2006). Comparison of short-term and time-independent earthquake forecast models for southern California. [doi:10.1785/0120050067](https://doi.org/10.1785/0120050067) `helmstetter2006`
+- Hong et al. (2017). The 12 September 2016 ML 5.8 mid-crustal earthquake in the Korean Peninsula and its seismic implications. [doi:10.1002/2017GL072899](https://doi.org/10.1002/2017GL072899) `hong2017`
+- Kim & Lee (2019). Comparison of the aftershock activities of the 2016 M5.8 Gyeongju and 2017 M5.4 Pohang earthquakes, Korea. [doi:10.14770/jgsk.2019.55.2.207](https://doi.org/10.14770/jgsk.2019.55.2.207) `kimsk2019`
+- Korea Meteorological Administration (KMA) (n.d.). Domestic earthquake catalog (국내지진 목록). <https://www.weather.go.kr/w/earthquake-volcano/search/korea.do> `kma_catalog`
+- Lee, Kyung & Lee (2018). Temporal and spatial variations of the ML 5.8 Gyeongju earthquake on September 12, 2016. [doi:10.5467/jkess.2018.39.4.342](https://doi.org/10.5467/jkess.2018.39.4.342) `leegs2018`
 - Maiti & Kim (2025). An updated, homogeneous, and declustered earthquake catalog for South Korea and neighboring regions. [doi:10.5194/nhess-25-4021-2025](https://doi.org/10.5194/nhess-25-4021-2025) `maiti2025`
 - Marzocchi & Sandri (2003). A review and new insights on the estimation of the b-value and its uncertainty. [doi:10.4401/ag-3472](https://doi.org/10.4401/ag-3472) `marzocchi2003`
 - Mignan & Woessner (2012). Estimating the magnitude of completeness for earthquake catalogs. [doi:10.5078/corssa-00180805](https://doi.org/10.5078/corssa-00180805) `mignan2012`
@@ -107,22 +131,27 @@ your mentor. Never commit PDFs to your repository.
 - Zaliapin, Gabrielov, Keilis-Borok & Wong (2008). Clustering analysis of seismicity and aftershock identification. [doi:10.1103/PhysRevLett.101.018501](https://doi.org/10.1103/PhysRevLett.101.018501) `zaliapin2008`
 - Zaliapin & Ben-Zion (2013). Earthquake clusters in southern California I: identification and stability. [doi:10.1002/jgrb.50179](https://doi.org/10.1002/jgrb.50179) `zaliapin2013`
 
-## M10 · Seismograms: counts and ground motion
+## M10 · Seismograms: reading, filtering, spectra, record sections
 
 - Ahn, Kang & Jung (2024). Station metadata integration of regional seismic networks in the southern Korean Peninsula. [doi:10.14770/jgsk.2024.001](https://doi.org/10.14770/jgsk.2024.001) `ahn2024`
 - Beyreuther et al. (2010). ObsPy: a Python toolbox for seismology. [doi:10.1785/gssrl.81.3.530](https://doi.org/10.1785/gssrl.81.3.530) `beyreuther2010`
 - Bormann (ed.) (2012). New Manual of Seismological Observatory Practice 2 (NMSOP-2). [doi:10.2312/GFZ.NMSOP-2](https://doi.org/10.2312/GFZ.NMSOP-2) `bormann2012`
 - Bormann (2012). Magnitude determinations (NMSOP-2 EX 3.1). [doi:10.2312/GFZ.NMSOP-2_EX_3.1](https://doi.org/10.2312/GFZ.NMSOP-2_EX_3.1) `bormann2012_ex3_1`
 - Bormann & Dewey (2014). The new IASPEI standards for determining magnitudes from digital data (NMSOP-2 IS 3.3). [doi:10.2312/GFZ.NMSOP-2_IS_3.3](https://doi.org/10.2312/GFZ.NMSOP-2_IS_3.3) `bormann2014`
+- Harris et al. (2020). Array programming with NumPy. [doi:10.1038/s41586-020-2649-2](https://doi.org/10.1038/s41586-020-2649-2) `harris2020`
 - Havskov & Ottemöller (2010). Routine Data Processing in Earthquake Seismology. [doi:10.1007/978-90-481-8697-6](https://doi.org/10.1007/978-90-481-8697-6) `havskov2010`
 - Havskov & Alguacil (2016). Instrumentation in Earthquake Seismology (2nd ed.). [doi:10.1007/978-3-319-21314-9](https://doi.org/10.1007/978-3-319-21314-9) `havskov2016`
 - Helffrich, Wookey & Bastow (2013). The Seismic Analysis Code: A Primer and User's Guide. [doi:10.1017/CBO9781139547260](https://doi.org/10.1017/CBO9781139547260) `helffrich2013`
+- Hunter (2007). Matplotlib: a 2D graphics environment. [doi:10.1109/MCSE.2007.55](https://doi.org/10.1109/MCSE.2007.55) `hunter2007`
 - Hutton & Boore (1987). The ML scale in Southern California. [doi:10.1785/BSSA0770062074](https://doi.org/10.1785/BSSA0770062074) `hutton1987`
+- Kim & Kim (1983). A study on the crustal structure of South Korea by using seismic waves. <https://koreascience.kr/article/JAKO198323034629158.page> `kim1983`
 - Krischer et al. (2015). ObsPy: a bridge for seismology into the scientific Python ecosystem. [doi:10.1088/1749-4699/8/1/014003](https://doi.org/10.1088/1749-4699/8/1/014003) `krischer2015`
 - Krischer et al. (2018). seismo-live: an educational online library of Jupyter notebooks for seismology. [doi:10.1785/0220180167](https://doi.org/10.1785/0220180167) `krischer2018`
 - The ObsPy developers (n.d.). ObsPy tutorial. <https://docs.obspy.org/tutorial/> *(partly verified)* `obspy_tutorial`
+- Scherbaum (2001). Of Poles and Zeros: Fundamentals of Digital Seismology (2nd ed.). [doi:10.1007/978-1-4020-6861-4](https://doi.org/10.1007/978-1-4020-6861-4) `scherbaum2001`
 - Shearer (2019). Introduction to Seismology (3rd ed.). [doi:10.1017/9781316877111](https://doi.org/10.1017/9781316877111) `shearer2019`
 - Sheen, Kang & Rhie (2018). A local magnitude scale for South Korea. [doi:10.1785/0120180112](https://doi.org/10.1785/0120180112) `sheen2018`
+- Virtanen et al. (2020). SciPy 1.0: fundamental algorithms for scientific computing in Python. [doi:10.1038/s41592-019-0686-2](https://doi.org/10.1038/s41592-019-0686-2) `virtanen2020`
 
 ## M20 · Picking by hand and STA/LTA triggers
 
@@ -226,6 +255,7 @@ your mentor. Never commit PDFs to your repository.
 - Hardebeck & Shearer (2003). Using S/P amplitude ratios to constrain the focal mechanisms of small earthquakes. [doi:10.1785/0120020236](https://doi.org/10.1785/0120020236) *(verified; Crossref lists only the first author)* `hardebeck2003`
 - Hardebeck & Michael (2006). Damped regional-scale stress inversions: methodology and examples for southern California and the Coalinga aftershock sequence. [doi:10.1029/2005JB004144](https://doi.org/10.1029/2005JB004144) `hardebeck2006`
 - Kagan (1991). 3-D rotation of double-couple earthquake sources. [doi:10.1111/j.1365-246X.1991.tb06343.x](https://doi.org/10.1111/j.1365-246X.1991.tb06343.x) `kagan1991`
+- Korea Institute of Geoscience and Mineral Resources (KIGAM), Earthquake Research Center (2021). 2019 학술지진연보 (2019 Academic Annual Report of Earthquakes). no DOI or link `kigam2021_bulletin2019`
 - Park et al. (2007). Focal mechanisms of recent earthquakes in the southern Korean Peninsula. [doi:10.1111/j.1365-246X.2007.03321.x](https://doi.org/10.1111/j.1365-246X.2007.03321.x) `park2007`
 - Reasenberg & Oppenheimer (1985). FPFIT, FPPLOT and FPPAGE: Fortran computer programs for calculating and displaying earthquake fault-plane solutions. [doi:10.3133/ofr85739](https://doi.org/10.3133/ofr85739) `reasenberg1985`
 - Ross, Meier & Hauksson (2018). P wave arrival picking and first-motion polarity determination with deep learning. [doi:10.1029/2017JB015251](https://doi.org/10.1029/2017JB015251) `ross2018`
@@ -371,14 +401,17 @@ your mentor. Never commit PDFs to your repository.
 - `hutton1987` Hutton & Boore (1987). The ML scale in Southern California. *Bulletin of the Seismological Society of America 77(6):2074-2094*. [doi:10.1785/BSSA0770062074](https://doi.org/10.1785/BSSA0770062074). Status: V (verified).
 - `iana_tzdb` Internet Assigned Numbers Authority (IANA) (n.d.). Time zone database (tz database). *IANA*. <https://www.iana.org/time-zones>. Status: V (verified). The database behind Python's zoneinfo module; Korea's zone is Asia/Seoul. It is updated several times a year, so note the release you used. URL checked (HTTP 200) on 2026-11-15.
 - `iana_tzdb_asia` tz database contributors (n.d.). The file "asia" of the tz database: the clock history of Asian time zones, Asia/Seoul among them. *IANA time zone database*. <https://data.iana.org/time-zones/tzdb/asia>. Status: P (partly verified). Read the comments above the Asia/Seoul zone and the "Rule ROK" lines. The comments cite their own historical sources, which were not checked. URL checked (HTTP 200) on 2026-11-15.
+- `isc_bulletin` International Seismological Centre (n.d.). ISC Bulletin. *International Seismological Centre, Thatcham, United Kingdom (dataset)*. [doi:10.31905/D808B830](https://doi.org/10.31905/D808B830). Status: V (verified). Dataset DOI checked on Crossref on 2026-11-15. Cite it with the date you accessed the bulletin.
 - `jost1989` Jost & Herrmann (1989). A student's guide to and review of moment tensors. *Seismological Research Letters 60(2):37-57*. [doi:10.1785/gssrl.60.2.37](https://doi.org/10.1785/gssrl.60.2.37). Status: V (verified). Good first read on moment tensors.
 - `jupyter2019` Project Jupyter et al. (2019). nbgrader: a tool for creating and grading assignments in the Jupyter Notebook. *Journal of Open Source Education 2(11):32*. [doi:10.21105/jose.00032](https://doi.org/10.21105/jose.00032). Status: V (verified).
 - `kagan1991` Kagan (1991). 3-D rotation of double-couple earthquake sources. *Geophysical Journal International 106(3):709-716*. [doi:10.1111/j.1365-246X.1991.tb06343.x](https://doi.org/10.1111/j.1365-246X.1991.tb06343.x). Status: V (verified).
 - `kazemitabaar2023` Kazemitabaar et al. (2023). Studying the effect of AI code generators on supporting novice learners in introductory programming. *Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems*. [doi:10.1145/3544548.3580919](https://doi.org/10.1145/3544548.3580919). Status: V (verified). Only the title and venue were checked, not the detailed findings.
 - `kazemitabaar2024` Kazemitabaar et al. (2024). CodeAid: evaluating a classroom deployment of an LLM-based programming assistant that balances student and educator needs. *Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems*. [doi:10.1145/3613904.3642773](https://doi.org/10.1145/3613904.3642773). Status: V (verified). Only the title and venue were checked, not the detailed findings.
+- `kigam2021_bulletin2019` Korea Institute of Geoscience and Mineral Resources (KIGAM), Earthquake Research Center (2021). 2019 학술지진연보 (2019 Academic Annual Report of Earthquakes). *KIGAM report, January 2021, 525 pages (in Korean)*. no DOI or link. Status: V (verified). No DOI. Title, publisher and date checked on 2026-11-16 against the report PDF. One analysis page per event, each with a report number: KEMS-2019-062 is the 2019-07-21 11:04:18.487 KST Sangju ML 3.9 (Mw 3.8) earthquake, with fault planes 288/89/7 and 198/83/179 (strike/dip/rake); the 2019 issue does not name the mechanism method. Quoted in the Sangju reference run (mentor).
 - `kim1983` Kim & Kim (1983). A study on the crustal structure of South Korea by using seismic waves. *Journal of the Korean Institute of Mining Geology 16(1):51-61 (now Economic and Environmental Geology)*. <https://koreascience.kr/article/JAKO198323034629158.page>. Status: V (verified). In Korean. No DOI. The kim1983 velocity model in PocketQuake (Conrad 15 km, Moho 32 km).
 - `kim2011` Kim, Rhie & Kim (2011). Forward waveform modelling procedure for 1-D crustal velocity structure and its application to the southern Korean Peninsula. *Geophysical Journal International 185(1):453-468*. [doi:10.1111/j.1365-246X.2011.04949.x](https://doi.org/10.1111/j.1365-246X.2011.04949.x). Status: V (verified). The kim2011 velocity model in PocketQuake.
 - `kim2018` Kim et al. (2018). Assessing whether the 2017 Mw 5.4 Pohang earthquake in South Korea was an induced event. *Science 360:1007-1009*. [doi:10.1126/science.aat6081](https://doi.org/10.1126/science.aat6081). Status: V (verified).
+- `kimsk2019` Kim & Lee (2019). Comparison of the aftershock activities of the 2016 M5.8 Gyeongju and 2017 M5.4 Pohang earthquakes, Korea. *Journal of the Geological Society of Korea 55(2):207-218 (in Korean)*. [doi:10.14770/jgsk.2019.55.2.207](https://doi.org/10.14770/jgsk.2019.55.2.207). Status: V (verified). Authors Sung Kyun Kim and Jung Mo Lee. Checked in Crossref on 2026-11-15; the abstract (read on OpenAlex) reports maximum-likelihood b-values and Omori p-values for both aftershock sequences.
 - `king1994` King, Stein & Lin (1994). Static stress changes and the triggering of earthquakes. *Bulletin of the Seismological Society of America 84(3):935-953*. [doi:10.1785/BSSA0840030935](https://doi.org/10.1785/BSSA0840030935). Status: V (verified). Start here for Coulomb stress.
 - `klein2002` Klein (2002). User's guide to HYPOINVERSE-2000, a Fortran program to solve for earthquake locations and magnitudes. *U.S. Geological Survey Open-File Report 02-171*. [doi:10.3133/ofr02171](https://doi.org/10.3133/ofr02171). Status: V (verified).
 - `kluyver2016` Kluyver et al. (2016). Jupyter Notebooks: a publishing format for reproducible computational workflows. *Positioning and Power in Academic Publishing: Players, Agents and Agendas, pp. 87-90*. [doi:10.3233/978-1-61499-649-1-87](https://doi.org/10.3233/978-1-61499-649-1-87). Status: V (verified).
@@ -390,6 +423,7 @@ your mentor. Never commit PDFs to your repository.
 - `lay1995` Lay & Wallace (1995). Modern Global Seismology. *Academic Press (International Geophysics Series 58)*. no DOI or link. Status: V (verified). ISBN 978-0-12-732870-6.
 - `lee2006` Lee & Yang (2006). Historical seismicity of Korea. *Bulletin of the Seismological Society of America 96(3):846-855*. [doi:10.1785/0120050050](https://doi.org/10.1785/0120050050). Status: V\* (verified; Crossref lists only the first author). Crossref lists only the first author.
 - `lee2011` Lee et al. (2011). Computational thinking for youth in practice. *ACM Inroads 2(1):32-37*. [doi:10.1145/1929887.1929902](https://doi.org/10.1145/1929887.1929902). Status: V (verified). Use-Modify-Create.
+- `leegs2018` Lee, Kyung & Lee (2018). Temporal and spatial variations of the ML 5.8 Gyeongju earthquake on September 12, 2016. *Journal of the Korean Earth Science Society 39(4):342-348*. [doi:10.5467/jkess.2018.39.4.342](https://doi.org/10.5467/jkess.2018.39.4.342). Status: V (verified). Authors Gyeong Su Lee, Jai Bok Kyung and Sang Jun Lee. Checked in Crossref on 2026-11-15; the abstract (read on OpenAlex) reports a b-value for the aftershocks.
 - `leonard2010` Leonard (2010). Earthquake fault scaling: self-consistent relating of rupture length, width, average displacement, and moment release. *Bulletin of the Seismological Society of America 100(5A):1971-1988*. [doi:10.1785/0120090189](https://doi.org/10.1785/0120090189). Status: V (verified).
 - `liffiton2023` Liffiton et al. (2023). CodeHelp: using large language models with guardrails for scalable support in programming classes. *Proceedings of the 23rd Koli Calling International Conference on Computing Education Research*. [doi:10.1145/3631802.3631830](https://doi.org/10.1145/3631802.3631830). Status: V (verified). Only the title and venue were checked, not the detailed findings.
 - `lim2020` Lim et al. (2020). The 2017 Mw 5.5 Pohang earthquake, South Korea, and poroelastic stress changes associated with fluid injection. *Journal of Geophysical Research: Solid Earth 125:e2019JB019134*. [doi:10.1029/2019JB019134](https://doi.org/10.1029/2019JB019134). Status: V (verified).
@@ -425,9 +459,12 @@ your mentor. Never commit PDFs to your repository.
 - `richter1935` Richter (1935). An instrumental earthquake magnitude scale. *Bulletin of the Seismological Society of America 25(1):1-32*. [doi:10.1785/BSSA0250010001](https://doi.org/10.1785/BSSA0250010001). Status: V (verified).
 - `ross2018` Ross, Meier & Hauksson (2018). P wave arrival picking and first-motion polarity determination with deep learning. *Journal of Geophysical Research: Solid Earth 123(6):5120-5129*. [doi:10.1029/2017JB015251](https://doi.org/10.1029/2017JB015251). Status: V (verified).
 - `ross2019` Ross, Trugman, Hauksson & Shearer (2019). Searching for hidden earthquakes in Southern California. *Science 364:767-771*. [doi:10.1126/science.aaw6888](https://doi.org/10.1126/science.aaw6888). Status: V (verified).
+- `ross2019_ridgecrest` Ross, Idini, Jia, Stephenson, Zhong, Wang, Zhan, Simons, Fielding, Yun, Hauksson, Moore, Liu & Jung (2019). Hierarchical interlocked orthogonal faulting in the 2019 Ridgecrest earthquake sequence. *Science 366(6463):346-351*. [doi:10.1126/science.aaz0109](https://doi.org/10.1126/science.aaz0109). Status: V (verified).
 - `rougier2014` Rougier, Droettboom & Bourne (2014). Ten simple rules for better figures. *PLoS Computational Biology 10(9):e1003833*. [doi:10.1371/journal.pcbi.1003833](https://doi.org/10.1371/journal.pcbi.1003833). Status: V (verified). Checked in Crossref. Open access.
 - `rule2019` Rule et al. (2019). Ten simple rules for writing and sharing computational analyses in Jupyter Notebooks. *PLOS Computational Biology 15(7):e1007007*. [doi:10.1371/journal.pcbi.1007007](https://doi.org/10.1371/journal.pcbi.1007007). Status: V (verified).
 - `schaff2004` Schaff et al. (2004). Optimizing correlation techniques for improved earthquake location. *Bulletin of the Seismological Society of America 94(2):705-721*. [doi:10.1785/0120020238](https://doi.org/10.1785/0120020238). Status: V\* (verified; Crossref lists only the first author). Crossref lists only the first author.
+- `scherbaum2001` Scherbaum (2001). Of Poles and Zeros: Fundamentals of Digital Seismology (2nd ed.). *Springer (Modern Approaches in Geophysics)*. [doi:10.1007/978-1-4020-6861-4](https://doi.org/10.1007/978-1-4020-6861-4). Status: V (verified). Checked in Crossref on 2026-11-16 (author, title, series, publisher and year 2001); Crossref gives the main title only, the subtitle is the book's own.
+- `schorlemmer2011` Schorlemmer, Euchner, Kästli & Saul (2011). QuakeML: status of the XML-based seismological data exchange format. *Annals of Geophysics 54(1)*. [doi:10.4401/ag-4874](https://doi.org/10.4401/ag-4874). Status: V (verified).
 - `sentance2019` Sentance, Waite & Kallia (2019). Teaching computer programming with PRIMM: a sociocultural perspective. *Computer Science Education 29(2-3):136-176*. [doi:10.1080/08993408.2019.1608781](https://doi.org/10.1080/08993408.2019.1608781). Status: V (verified). Predict-Run-Investigate-Modify-Make.
 - `serc_focal_primer` SERC (Carleton College), NAGT workshop material (n.d.). Focal mechanism primer. *Science Education Resource Center*. <https://serc.carleton.edu/files/NAGTWorkshops/structure04/Focal_mechanism_primer.pdf>. Status: P (partly verified). URL checked (HTTP 200) on 2026-11-15; author and year not checked.
 - `shearer2019` Shearer (2019). Introduction to Seismology (3rd ed.). *Cambridge University Press*. [doi:10.1017/9781316877111](https://doi.org/10.1017/9781316877111). Status: V (verified). Chapter numbers in module headers were not checked against the printed book.
@@ -457,6 +494,7 @@ your mentor. Never commit PDFs to your repository.
 - `trugman2017` Trugman & Shearer (2017). GrowClust: a hierarchical clustering algorithm for relative earthquake relocation, with application to the Spanish Springs and Sheldon, Nevada, earthquake sequences. *Seismological Research Letters 88(2A):379-391*. [doi:10.1785/0220160188](https://doi.org/10.1785/0220160188). Status: V (verified).
 - `uchide2018` Uchide & Song (2018). Fault rupture model of the 2016 Gyeongju, South Korea, earthquake and its implication for the underground fault system. *Geophysical Research Letters 45:2257-2264*. [doi:10.1002/2017GL076960](https://doi.org/10.1002/2017GL076960). Status: V (verified). Whether the slip model is in SRCMOD was not verified.
 - `uchide2020` Uchide (2020). Focal mechanisms of small earthquakes beneath the Japanese islands based on first-motion polarities picked using deep learning. *Geophysical Journal International 223(3):1658-1671*. [doi:10.1093/gji/ggaa401](https://doi.org/10.1093/gji/ggaa401). Status: V (verified).
+- `usgs_comcat` U.S. Geological Survey, Earthquake Hazards Program (2017). Advanced National Seismic System (ANSS) Comprehensive Catalog. *U.S. Geological Survey (dataset)*. [doi:10.5066/F7MS3QZH](https://doi.org/10.5066/F7MS3QZH). Status: V (verified). Dataset DOI checked on DataCite on 2026-11-15. Cite it with the date you accessed ComCat.
 - `utsu1965` Utsu (1965). A method for determining the value of b in a formula log n = a - bM showing the magnitude-frequency relation for earthquakes (in Japanese). *Geophysical Bulletin of Hokkaido University 13:99-103*. [doi:10.14943/gbhu.13.99](https://doi.org/10.14943/gbhu.13.99). Status: V (verified). The DOI resolves to the HUSCAP handle 2115/13887.
 - `utsu1995` Utsu, Ogata & Matsu'ura (1995). The centenary of the Omori formula for a decay law of aftershock activity. *Journal of Physics of the Earth 43(1):1-33*. [doi:10.4294/jpe1952.43.1](https://doi.org/10.4294/jpe1952.43.1). Status: V (verified).
 - `vanderelst2021` van der Elst (2021). B-positive: a robust estimator of aftershock magnitude distribution in transiently incomplete catalogs. *Journal of Geophysical Research: Solid Earth 126(2):e2020JB021027*. [doi:10.1029/2020JB021027](https://doi.org/10.1029/2020JB021027). Status: V (verified).

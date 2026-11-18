@@ -1,0 +1,28 @@
+module: M10
+frozen: 2026-11-16
+tasks:
+  # 8 SAC files written by the check (random reference times incl. a millisecond part and 31 December of a leap
+  # year; b and o of both signs; picks missing in some), then 10 random files of the student's download: copies
+  # with picks written into the raw header, and untouched ones (no picks); times within this many seconds
+  M10-T1: {trials: 8, real_files: 10, tol_s: 1.0e-4}
+  # 8 made-up traces (20-250 Hz, odd and even npts, offsets, whole-number data); sines on the frequency grid:
+  # inside the band within in_band_rel_tol of their amplitude, outside at least out_band_db below it
+  M10-T2: {trials: 8, in_band_rel_tol: 0.05, out_band_db: 20.0, freq_rel_tol: 1.0e-6}
+  # fresh distances 1-300 km, vp 5-8 km/s, vp/vs 1.6-1.9 (forward relation only); scalars and arrays
+  M10-T3: {trials: 200, rel_tol: 1.0e-6}
+  # 5 made-up sections (6-12 traces, shuffled, Stream or SAC files, symmetric pulses at known times), then 6 random
+  # HHZ files of the Sangju ML 3.9 earthquake (distances from the header coordinates, never printed)
+  M10-T4: {trials: 5, real_files: 6, dist_rel_tol: 0.01, dist_abs_tol_km: 0.1, time_tol_s: 0.03, scale_rel_tol: 0.02,
+           peak_rel_tol: 0.03}
+  # the student's JSON file, PNG file and Figure, and the student's band_amplitude_spectrum (it must pass three
+  # made-up cases of task 2 again; the checker has no spectrum code of its own). PGV within pgv_factor of the
+  # check's own response removal; distance and formula values recomputed from the student's numbers. f_peak_hz
+  # within fpeak_rel_tol of the peak of the student's own spectrum of the check's velocity record: over the 50 HH horizontal channels of the
+  # Sangju ML 3.9 event, 7 legitimate variants (taper 1 or 10 %, linear detrend, float32 samples, no taper in
+  # remove_response, no taper before it, one sample less) moved the peak by at most 0.3 %, while the next
+  # highest spectral peaks of the default channel, and the peak of its vertical component, lie more than 15 %
+  # away. Figure: the record panel
+  # within window_tol_s of -5..40 s, both panels correlated with the check's own curves at figure_corr_min or
+  # more, the PGV marker within marker_tol_s of the check's largest swing
+  M10-T5: {pgv_factor: 1.5, dist_rel_tol: 0.02, dist_abs_tol_km: 0.2, formula_rel_tol: 0.02, fpeak_rel_tol: 0.05,
+           window_tol_s: 0.5, figure_corr_min: 0.9, marker_tol_s: 0.05}

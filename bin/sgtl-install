@@ -20,11 +20,13 @@ Components (default: env):
   env        the course environment "sgtl" (Python 3.12, ObsPy, PyGMT, JupyterLab, ...), the
              tutorial's helper package, and the Jupyter kernel "SGTL (Python 3.12)". Installs
              Miniforge (the conda package manager) first if no conda or mamba is found.
-  tools      HYPOINVERSE, HypoDD, PocketQuake, EQNet + PhaseNet+ weights, SKHASH  (from release v0.2)
-  pyfk       the PyFK synthetic-seismogram environment "sgtl-pyfk"               (from release v0.2)
-  mt         MTUQ moment-tensor inversion                                       (from release v0.2)
-  coulomb    Elastic_stresses_py Coulomb stress                                 (from release v0.2)
-  metadata   KS/KG station metadata (StationMetadata)                          (from release v0.2)
+  tools      HYPOINVERSE, HypoDD, PocketQuake, EQNet + PhaseNet+ weights, SKHASH
+  pyfk       the PyFK synthetic-seismogram environment "sgtl-pyfk"
+  mt         MTUQ moment-tensor inversion
+  coulomb    Elastic_stresses_py Coulomb stress
+  metadata   KS/KG station metadata (StationMetadata)
+  data       your STP files in ~/.sgtl and the course's waveform datasets from STP (needs tools)
+  All but env need the course environment first, e.g. bin/sgtl-install env tools metadata --apply
 
 Options:
   --apply          do it (without this, nothing changes)
@@ -37,6 +39,8 @@ Environment variables:
   SGTL_HOME        install folder (default: ~/sgtl)
   SGTL_CONDA       the conda or mamba program to use (default: found automatically)
   SGTL_ENV_FILE    environment file to use instead of environment.yml (for the mentor)
+  SGTL_ENV         tools, mt, coulomb, metadata, data: the course environment to use
+                   (default: $SGTL_HOME/envs/sgtl)
 
 Examples:
   bin/sgtl-install                    # dry run: see what would happen
@@ -150,7 +154,7 @@ placeholder_component() {
 }
 
 # ---------------------------------------------------------------------------------------------
-KNOWN_COMPONENTS=(env tools pyfk mt coulomb metadata)
+KNOWN_COMPONENTS=(env tools pyfk mt coulomb metadata data)
 
 component_file() { printf '%s/%s.sh' "$COMPONENT_DIR" "$1"; }
 
@@ -242,7 +246,7 @@ main() {
 
   say ""
   if [[ ${#PLACEHOLDERS[@]} -gt 0 ]]; then
-    say "Not available yet (nothing installed): ${PLACEHOLDERS[*]}  (from release v0.2)"
+    say "Not available yet (nothing installed): ${PLACEHOLDERS[*]}"
   fi
   if [[ $APPLY -eq 1 ]]; then
     say "Finished: ${components[*]}."

@@ -8,6 +8,13 @@ Subcommands:
 * ``sgtl diff M01``        has the module template changed since you copied it?
 * ``sgtl setup-ai``        show which tutor-rule files would be copied to ``~/.claude/``
   (``--apply`` copies them; existing files are never overwritten)
+* ``sgtl data list``       the STP waveform datasets, their sizes, and what you already have
+* ``sgtl data fetch NAME`` the download plan (``--apply`` downloads with your STP account)
+* ``sgtl data verify NAME`` file counts, damaged files and SHA-256 fingerprints of a dataset
+* ``sgtl pq check``        is your PocketQuake clone at the pinned version, are its tools there?
+* ``sgtl pq stage DATASET --slug NAME``  register a fetched dataset as a PocketQuake cluster
+* ``sgtl pq run NAME --from STAGE --through STAGE``  run PocketQuake stages (``--apply`` to start)
+* ``sgtl pq bootstrap NAME``  relocation errors by resampling (``--apply`` to start)
 """
 from __future__ import annotations
 
@@ -83,6 +90,94 @@ def _pygmt_version() -> Tuple[Optional[str], Optional[str]]:
         return None, f"{type(exc).__name__}: {str(exc).splitlines()[0][:160] if str(exc) else ''}"
 
 
+# A notebook loads numpy, PyTorch and PyGMT into one process. With mixed math libraries (MKL and its OpenMP
+# instead of the pinned OpenBLAS with GNU OpenMP, see environment.yml) such a process dies inside GMT ("double free
+# or corruption") the first time fig.plot gets x= and y= arrays. Doctor repeats those steps in a separate process,
+# so that a crash becomes a FAIL line instead of killing doctor. Each finished step prints "SGTL-STEP <name>".
+_STACK_TEST = r'''
+import os, sys, tempfile
+def step(name):
+    print("SGTL-STEP " + name, flush=True)
+import numpy as np
+a = np.random.default_rng(0).standard_normal((300, 300))
+assert np.isfinite(a @ a.T).all()
+step("numpy")
+try:
+    import torch
+except ImportError:
+    step("torch-missing")
+else:
+    torch.set_num_threads(1)
+    assert bool(torch.isfinite(torch.randn(64, 64) @ torch.randn(64, 64)).all())
+    assert np.isfinite(a @ a).all()
+    step("torch")
+try:
+    import pygmt
+except ImportError:
+    step("pygmt-missing")
+else:
+    fig = pygmt.Figure()
+    fig.basemap(region=[0, 10, 0, 10], projection="X4c", frame=True)
+    fig.plot(x=np.array([1.0, 5.0, 9.0]), y=np.array([2.0, 8.0, 3.0]), pen="1p")
+    step("pygmt")
+    with tempfile.TemporaryDirectory() as d:
+        fig.savefig(os.path.join(d, "doctor.png"))
+    step("pygmt-save")
+step("done")
+'''
+_STACK_STEPS = [("numpy", "a numpy matrix product"), ("torch", "a PyTorch matrix product"),
+                ("pygmt", "PyGMT fig.plot(x=..., y=...)"), ("pygmt-save", "saving the PyGMT figure")]
+_STACK_FIX = ("This happens when the environment mixes math libraries (MKL and its OpenMP instead of the pinned "
+              "OpenBLAS with GNU OpenMP). Fix: rebuild the course environment with its pinned libraries "
+              "(bin/sgtl-install env --apply --rebuild), then run sgtl doctor again")
+
+
+def _stack_check(timeout: float = 300.0) -> Tuple[str, str]:
+    """(status, detail) of numpy + PyTorch + PyGMT in one separate process; never raises."""
+    import signal
+
+    env = dict(os.environ)
+    env.pop("LD_LIBRARY_PATH", None)  # as in the course kernel (a set LD_LIBRARY_PATH has its own WARN line)
+    env.update(OMP_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1", MKL_NUM_THREADS="1", NUMEXPR_MAX_THREADS="1",
+               NUMPY_MADVISE_HUGEPAGE="0", MPLBACKEND="Agg")
+    try:
+        p = subprocess.run([sys.executable, "-I", "-c", _STACK_TEST], capture_output=True, text=True,
+                           errors="replace", timeout=timeout, env=env, stdin=subprocess.DEVNULL)
+    except subprocess.TimeoutExpired as exc:
+        out = exc.stdout.decode(errors="replace") if isinstance(exc.stdout, bytes) else (exc.stdout or "")
+        p = None
+    except OSError as exc:
+        return "WARN", f"could not start the test process ({exc})"
+    else:
+        out = p.stdout or ""
+    done = [ln.split()[1] for ln in out.splitlines() if ln.startswith("SGTL-STEP ") and len(ln.split()) > 1]
+    names = {d.replace("-missing", "") for d in done}
+    if p is not None and p.returncode == 0 and "done" in done:
+        parts = ["a numpy matrix product"]
+        if "torch" in done:
+            parts.append("a PyTorch matrix product")
+        if "pygmt-save" in done:
+            parts.append("PyGMT fig.plot(x=, y=) and savefig")
+        detail = ", ".join(parts) + " ran together in one process"
+        skipped = [n for n in ("torch", "pygmt") if f"{n}-missing" in done]
+        if skipped:
+            return "WARN", detail + f"; {' and '.join(skipped)} not installed, so not tested"
+        return "PASS", detail
+    stage = next((label for key, label in _STACK_STEPS if key not in names), "the end of the test")
+    if p is None:
+        return "FAIL", f"the test process hung during {stage} (no result in {timeout:.0f} s). {_STACK_FIX}"
+    if p.returncode < 0:
+        try:
+            how = f"crashed ({signal.Signals(-p.returncode).name})"
+        except ValueError:
+            how = f"crashed (signal {-p.returncode})"
+    else:
+        how = f"stopped with exit code {p.returncode}"
+    last = next((ln.strip() for ln in reversed((p.stderr or "").splitlines()) if ln.strip()), "")
+    hint = f" (last message: {last[:160]})" if last else ""
+    return "FAIL", f"the test process {how} during {stage}{hint}. {_STACK_FIX}"
+
+
 def doctor() -> int:
     results: List[Tuple[str, str]] = []
     add = results.append
@@ -119,6 +214,11 @@ def doctor() -> int:
                       "Start Python from the course environment with GMT_LIBRARY_PATH unset or pointing to it"))
         else:
             add(_line("PASS", "GMT/PyGMT", f"pygmt loads GMT {loaded} (this environment's GMT: {env_ver or 'unknown'})"))
+    try:
+        status, detail = _stack_check()
+    except Exception as exc:  # noqa: BLE001 - doctor always finishes
+        status, detail = "WARN", f"the test could not run ({type(exc).__name__})"
+    add(_line(status, "numpy + PyTorch + PyGMT in one process", detail))
     thread_vars = ["OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"]
     bad = []
     for v in thread_vars:
@@ -283,6 +383,94 @@ def setup_ai(apply: bool = False) -> int:
     return 0
 
 
+# ----------------------------------------------------------------------------- data / pq
+def _add_data_parser(sub) -> argparse.ArgumentParser:
+    p = sub.add_parser("data", help="STP waveform datasets: list, fetch (dry run unless --apply), verify",
+                       description="Waveform datasets from STP (data/manifests/stp_datasets.yaml). Files go to "
+                                   "~/sgtl/data/<dataset>/ (or $SGTL_DATA/<dataset>/). Your STP account is read from "
+                                   "~/.sgtl/credentials.env and the STP program from ~/.sgtl/stp-client.pl.")
+    ds = p.add_subparsers(dest="data_cmd")
+    ds.add_parser("list", help="every dataset, its size, and what you already have")
+    q = ds.add_parser("fetch", help="the download plan of a dataset; --apply downloads it",
+                      description="Without --apply: print the plan (stations, STP requests, size) and change nothing. "
+                                  "With --apply: download the events you do not have yet, through PocketQuake.")
+    q.add_argument("name", help="dataset name, e.g. sangju2019 (see: sgtl data list)")
+    q.add_argument("--apply", action="store_true", help="really download (without it: only the plan)")
+    q.add_argument("--large", action="store_true", help="confirm fetching a large dataset (several GB)")
+    q = ds.add_parser("verify", help="check a downloaded dataset (counts, damaged files, fingerprints)")
+    q.add_argument("name", help="dataset name")
+    q.add_argument("--write", action="store_true",
+                   help="record the SHA-256 fingerprints of the files you have now in MANIFEST.sha256")
+    return p
+
+
+def _add_pq_parser(sub) -> argparse.ArgumentParser:
+    p = sub.add_parser("pq", help="PocketQuake: check, stage, run, bootstrap (dry run unless --apply)",
+                       description="Helpers for your PocketQuake clone in ~/sgtl/PocketQuake. Heavy runs use at most "
+                                   "4 cores, nice 15, a memory cap, and one run per user at a time.")
+    ps = p.add_subparsers(dest="pq_cmd")
+    ps.add_parser("check", help="is the clone at the pinned version, and are its tools in place?")
+    q = ps.add_parser("stage", help="register a fetched dataset as a PocketQuake cluster (dry run unless --apply)")
+    q.add_argument("dataset", help="a fetched dataset, e.g. sangju2019")
+    q.add_argument("--slug", required=True, help="your name for the cluster: lower-case letters, digits, _")
+    q.add_argument("--region", help="name used in PocketQuake's file names (default: the slug, capitalized)")
+    q.add_argument("--apply", action="store_true", help="really write the cluster into your clone")
+    stages = " ".join(_pq_stages())
+    q = ps.add_parser("run", help="run PocketQuake stages of a cluster (dry run unless --apply)",
+                      description=f"Stages, in order: {stages}. Picks come from PhaseNet+.")
+    q.add_argument("slug", help="a staged cluster")
+    q.add_argument("--from", dest="stage_from", required=True, metavar="STAGE", help="first stage")
+    q.add_argument("--through", required=True, metavar="STAGE", help="last stage")
+    q.add_argument("--cores", type=int, default=1, help="CPU cores, 1 to 4 (default 1)")
+    q.add_argument("--mem-gb", type=float, default=32.0, help="memory cap per process in GB (default 32, at least 6)")
+    q.add_argument("--apply", action="store_true", help="really start the run")
+    q = ps.add_parser("bootstrap", help="relocation errors by resampling (dry run unless --apply)")
+    q.add_argument("slug", help="a staged cluster with a finished relocation")
+    q.add_argument("--branch", choices=["dtcc", "dtct"], default="dtcc", help="which relocation (default dtcc)")
+    q.add_argument("--n", type=int, default=1000, help="number of resampled HypoDD runs (default 1000)")
+    q.add_argument("--seed", type=int, default=0, help="random seed (default 0)")
+    q.add_argument("--cores", type=int, default=1, help="CPU cores, 1 to 4 (default 1)")
+    q.add_argument("--mem-gb", type=float, default=32.0, help="memory cap per process in GB (default 32, at least 6)")
+    q.add_argument("--apply", action="store_true", help="really start the bootstrap")
+    return p
+
+
+def _pq_stages() -> Tuple[str, ...]:
+    from .pq import STAGES
+
+    return STAGES
+
+
+def _data_command(args: argparse.Namespace, parser: argparse.ArgumentParser) -> int:
+    from . import datafetch
+
+    if args.data_cmd == "list":
+        return datafetch.list_datasets()
+    if args.data_cmd == "fetch":
+        return datafetch.fetch(args.name, apply=args.apply, large=args.large)
+    if args.data_cmd == "verify":
+        return datafetch.verify(args.name, write=args.write)
+    parser.print_help()
+    return 0
+
+
+def _pq_command(args: argparse.Namespace, parser: argparse.ArgumentParser) -> int:
+    from . import pq
+
+    if args.pq_cmd == "check":
+        return pq.check()
+    if args.pq_cmd == "stage":
+        return pq.stage(args.dataset, args.slug, region=args.region, apply=args.apply)
+    if args.pq_cmd == "run":
+        return pq.run(args.slug, args.stage_from, args.through, cores=args.cores, mem_gb=args.mem_gb,
+                      apply=args.apply)
+    if args.pq_cmd == "bootstrap":
+        return pq.bootstrap(args.slug, branch=args.branch, n=args.n, seed=args.seed, cores=args.cores,
+                            mem_gb=args.mem_gb, apply=args.apply)
+    parser.print_help()
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(prog="sgtl", description="SGTL earthquake source tutorial helper.")
     parser.add_argument("--version", action="version", version=f"sgtl-tutorial {__version__}")
@@ -295,6 +483,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("module")
     p = sub.add_parser("setup-ai", help="copy tutor rules into ~/.claude/ (dry run unless --apply)")
     p.add_argument("--apply", action="store_true", help="really copy (existing files are kept)")
+    data_parser = _add_data_parser(sub)
+    pq_parser = _add_pq_parser(sub)
     args = parser.parse_args(argv)
     try:
         if args.cmd == "doctor":
@@ -307,6 +497,10 @@ def main(argv: Optional[List[str]] = None) -> int:
             return diff(args.module)
         if args.cmd == "setup-ai":
             return setup_ai(apply=args.apply)
+        if args.cmd == "data":
+            return _data_command(args, data_parser)
+        if args.cmd == "pq":
+            return _pq_command(args, pq_parser)
     except RuntimeError as exc:  # e.g. repository not found
         print(f"sgtl: {exc}", file=sys.stderr)
         return 2

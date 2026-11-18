@@ -1,8 +1,9 @@
 # SGTL earthquake source tutorial — PyFK worker environment ("sgtl-pyfk").
 # PyFK (frequency-wavenumber synthetic seismograms) needs Python 3.9, so it lives in its own small
 # environment (about 0.5 GB). It writes Green's functions to files that the main "sgtl" environment reads.
-# Created by: bin/sgtl-install pyfk --apply   (component available from a later release; see install/README.md)
+# Created by: bin/sgtl-install pyfk --apply   (see install/README.md; it also runs a short check-up).
 # pyfk 0.3.0 comes from its author's conda channel (ziyixi); everything else from conda-forge.
+# scipy 1.13.1 is the last SciPy built for Python 3.9 (pinned so that every install is the same).
 name: sgtl-pyfk
 channels:
   - ziyixi
@@ -13,4 +14,4 @@ dependencies:
   - pyfk=0.3.0
   - obspy=1.4.2
   - numpy=1.26.4
-  - scipy
+  - scipy=1.13.1

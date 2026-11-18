@@ -31,7 +31,7 @@ env_clean_shell() {
     fi
   done
   # Shared-server manners: one thread per library, low priority, packages in ~/.local not used.
-  export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_MAX_THREADS=1
+  export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_MAX_THREADS=1 NUMBA_NUM_THREADS=1
   export NUMPY_MADVISE_HUGEPAGE=0 PYTHONNOUSERSITE=1
   if have nice; then NICE=(nice -n 10); else NICE=(env); fi
 }
@@ -137,7 +137,7 @@ env_update() {
 # Its "env" caps threads and makes GMT (used by PyGMT) and other programs come from this environment.
 env_write_kernel() {
   local prefix="$1" kdir="$1/share/jupyter/kernels/$ENV_KERNEL_NAME" user_k vars
-  vars=(OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_MAX_THREADS=1
+  vars=(OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_MAX_THREADS=1 NUMBA_NUM_THREADS=1
     NUMPY_MADVISE_HUGEPAGE=0 PYTHONNOUSERSITE=1 LD_LIBRARY_PATH=
     "SGTL_REPO=$REPO" "SGTL_HOME=$SGTL_HOME" "GMT_LIBRARY_PATH=$prefix/lib"
     "PATH=$prefix/bin:/usr/local/bin:/usr/bin:/bin")
