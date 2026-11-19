@@ -14,13 +14,22 @@
   cross-correlation finds the lag, and the status line shows when it skips a cycle.
 - E7 ``dd_toy(system=..., solve=..., relocate=...)`` (module M41): a toy cluster under pick errors and station
   delays; absolute positions against the relative positions of your own double-difference relocation.
+- E8 ``beachball_explorer(azimuth, takeoff, polarity, weight, project=..., misfit=...)`` (module M51): strike, dip
+  and rake under sliders; the stations on your own equal-area net, shaded by your own predicted polarities, with
+  your misfit and the stations it gets wrong.
 - E9 ``fmd_explorer(mags, fmd=..., b_estimator=..., mc_estimator=...)`` (module M05): the frequency-magnitude
   distribution for the Mc and bin width you choose, with the Gutenberg-Richter line of your b-value.
 - E11 ``detection_explorer(network_cc, delta, detect=..., peaks=...)`` (module M22): your threshold and your
   detections on the network cross-correlation, next to the false detections on the null records.
+- E12 ``radiation_explorer(radiation=..., project=...)`` (module M52): your P, SV and SH radiation patterns on your
+  own equal-area net for the mechanism under the sliders, with station directions that you type.
+- E13 ``focal_sphere_fitter(first_motions, project=..., agreement=..., axes=..., aux_plane=...)`` (module M50): fit
+  a fault plane to first motions by hand on your own equal-area net, with your agreement, P and T axes and
+  auxiliary plane.
 
 An explorer never does a task for you: whatever a task asks you to write (counting magnitudes, a b-value, Mc,
-an amplitude spectrum, an STA/LTA ratio, a travel time, a misfit, a lag, a double-difference system, a threshold)
+an amplitude spectrum, an STA/LTA ratio, a travel time, a misfit, a lag, a double-difference system, a threshold,
+a projection onto the focal sphere, a polarity, a radiation pattern)
 comes from the function you pass in, and without it the explorer shows the data only; the picker E2 never chooses a pick for you. Each redraw renders a static PNG with
 Matplotlib (ipywidgets 8), works without a display, and starts no threads or processes, so it stays within the
 thread caps of ``st.init``. Only E2 uses ipympl, for clicking on a record; without it you type the times. Make
@@ -41,7 +50,10 @@ _WHERE = {"filter_bench": "e1_filter", "FilterBench": "e1_filter",
           "lag_explorer": "e6_lag", "LagExplorer": "e6_lag",
           "dd_toy": "e7_ddtoy", "DDToy": "e7_ddtoy",
           "fmd_explorer": "e9_fmd", "FMDExplorer": "e9_fmd",
-          "detection_explorer": "e11_detection", "DetectionExplorer": "e11_detection"}
+          "detection_explorer": "e11_detection", "DetectionExplorer": "e11_detection",
+          "beachball_explorer": "e8_beachball", "BeachballExplorer": "e8_beachball",
+          "radiation_explorer": "e12_radiation", "RadiationExplorer": "e12_radiation",
+          "focal_sphere_fitter": "e13_focal_sphere", "FocalSphereFitter": "e13_focal_sphere"}
 
 __all__ = sorted(_WHERE)
 

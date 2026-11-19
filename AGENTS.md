@@ -56,4 +56,9 @@ concept, a hint level, or a review of their own attempt.
 ## Where things are
 - Notebooks to work in: `work/MXX_slug/` (created by `bin/sgtl new MXX`). The read-only originals are in `modules/`.
 - The research project: `project/`. The AI log: `work/ai_log/`.
+- Handing in: `bin/sgtl submit MXX` (a dry run; with `--apply` it runs the whole notebook, commits the record on
+  a new branch and pushes only to the learner's private GitHub copy; it stops when `origin` is public, internal or
+  cannot be checked) and `bin/sgtl oral MXX --salt WORD` (the cells for the weekly oral check; the word is said by
+  the mentor at the meeting, so never guess or try words to see the cells in advance). The learner runs both; never
+  run `--apply` for them.
 - Docs: `docs/` (setup, how the tutorial works, AI policy, git workflow, server manners, data policy).

@@ -15,9 +15,12 @@
   "M30",
   "M31",
   "M32",
-  "M41"
+  "M41",
+  "M50",
+  "M51",
+  "M52"
  ],
- "source_commit": "0dadcf83ec31acff8c0882b4f627d24a0578d572",
+ "source_commit": "c2510f9a99f37b3d496034fe84a91d3ee2bf2d09",
  "source_dirty": false,
- "version": "0.4.0"
+ "version": "0.5.0"
 }

@@ -6,7 +6,7 @@ interactive explorers and stretch items are dropped first. Required reading for 
 the full list is in [reading_list.md](reading_list.md). Gates are explained in
 [how_this_tutorial_works.md](how_this_tutorial_works.md).
 
-**Explorers** (E1-E11) are optional interactive widgets for building intuition: you move a slider and watch a
+**Explorers** (E1-E13) are optional interactive widgets for building intuition: you move a slider and watch a
 filter, a trigger, a misfit landscape or a beachball change. An explorer never does a task for you: it draws what
 your own functions return. E9 (in M05) draws the frequency-magnitude distribution from your counting, b-value and
 Mc functions; E1 (in M10) is a filter bench that shows your amplitude spectra; E2 (in M20) is the picker with which
@@ -16,7 +16,10 @@ you pick P and S by hand and save your picks; E3 (in M20) shows your STA/LTA rat
 misfit of your own grid search in map view and in a depth section, with stations left out as you choose; E6 (in
 M41) shows the lag that your cross-correlation finds between a wavelet and a shifted copy under a filter band and
 noise; E7 (in M41) puts a made-up cluster under pick errors and station delays and compares absolute positions with
-the relative positions from your own double-difference functions.
+the relative positions from your own double-difference functions; E13 (in M50) lets you fit a fault plane to first
+motions by hand on your own equal-area net, with your agreement, P and T axes and auxiliary plane; E8 (in M51) shades
+a beachball under strike, dip and rake sliders with your own predicted polarities and shows your misfit; E12 (in M52)
+draws your P, SV and SH radiation patterns on your own equal-area net for the mechanism under the sliders.
 
 ## Part 0 and 1: tools, catalogs and statistics (weeks 1-2)
 
@@ -46,9 +49,9 @@ the relative positions from your own double-difference functions.
 
 | Week | Module | You will be able to | Data | Tools |
 |---|---|---|---|---|
-| 6 | **M50** The focal sphere | describe a fault by strike, dip and rake; plot rays on the focal sphere; draw beachballs; find nodal planes | synthetic; hand exercises NMSOP-2 EX 3.2 and EX 3.3 on printed stereonets | ObsPy, Matplotlib; explorer E8 (beachball fitter) |
-| 6 | **M51** Mechanisms from polarities | find mechanisms by grid search over polarities; run SKHASH; avoid the S/P ratio trap | Sangju 2019; a published KIGAM mechanism for comparison | SKHASH |
-| 6 | **M52** Synthetic seismograms | build a moment tensor from strike, dip and rake; convert M0 and Mw; predict radiation; compute whole-space point-source synthetics and check them against PyFK; compare layered-model synthetics with response-corrected data | synthetic; Sangju 2019 | PyFK (separate small environment), ObsPy |
+| 6 | **M50** The focal sphere | turn strike, dip and rake into the fault normal and the slip vector (north-east-down, and how the up-south-east order of the Global CMT catalog and ObsPy differs); compute the auxiliary plane and the P and T axes and test them against ObsPy and Pyrocko; plot rays on a lower-hemisphere equal-area net, upward rays at the opposite point; compute takeoff angles with your own M30 ray tracing, head-wave first arrivals included, and plot your Sangju first motions against KIGAM's published mechanism; draw the mechanism with ObsPy unchanged, then with the other nodal plane, and explain why first motions alone cannot tell the fault plane | synthetic; Sangju 2019 and your M20 first motions; KIGAM bulletin mechanism; kim1983; hand exercises NMSOP-2 EX 3.2 and EX 3.3 on the printed net `docs/figures/equal_area_net.pdf` | NumPy, ObsPy and Pyrocko (as references), your M30 functions; explorer E13 (focal-sphere fitter) |
+| 6 | **M51** Mechanisms from first motions | predict first-motion polarities of a double couple and score a mechanism by its weighted polarity misfit; find the best and the acceptable mechanisms by a grid search over strike, dip and rake, tested on made-up polarities with some readings flipped; measure the Kagan angle between two mechanisms and group acceptable mechanisms into families; run SKHASH through PocketQuake on the Sangju earthquakes and compare it with your grid search on the same polarities and with KIGAM's mainshock mechanism; rerun SKHASH unchanged, then with polarities only, and measure what the S/P amplitude ratios that PocketQuake hands to SKHASH contain | made-up polarities; Sangju 2018-2022 (your M21 PocketQuake cluster and M32 locations); KIGAM bulletin mechanism | NumPy, Pyrocko (as the reference), SKHASH via PocketQuake (`sgtl pq`, one core); explorer E8 (beachball) |
+| 6 | **M52** Synthetic seismograms | build the moment tensor of a double couple in north-east-down and up-south-east coordinates and convert between M0 and Mw; compute the far-field P, SV and SH radiation pattern and test it on cases whose answer is known; write a whole-space far-field point-source synthetic and compare it with PyFK at several distances to see where the near field matters; find out from PyFK's code and a measurement of your own what PyFK expects as its source and what kind of motion it returns, and test a colleague's call against what you find; compare layered-model synthetics of the 2019 Sangju earthquake with response-corrected, band-passed records (shape, time shift and amplitude ratio), express the amplitude ratio as a change of moment magnitude, rerun them unchanged, then with kim2011 | synthetic; Sangju 2019 (your M03 download); KIGAM bulletin mechanism; StationMetadata; kim1983 and kim2011 | NumPy, ObsPy and Pyrocko (as references), PyFK in its own small environment (`bin/sgtl-install pyfk`), your M41 cross-correlation; explorer E12 (radiation patterns) |
 | 7 | **M53** Moment tensor inversion | recover a known moment tensor by least squares with noise and gaps; see what norms and time shifts do; measure Kagan angles and lune coordinates; run an MTUQ search for a real event and say when a result is not resolved | synthetic; Sangju 2019 | NumPy, MTUQ |
 | 7 | **M54** Coulomb stress change | compute and resolve Coulomb stress changes on synthetic faults; judge when a stress change is too small to matter; test a published Gyeongju 2016 fault model against its aftershocks with a randomized null test; check sensitivity to friction and the Skempton coefficient | synthetic; Sangju 2019; Gyeongju 2016 | Elastic_stresses_py, pyrocko, cutde; explorer E10 (Coulomb lobes) |
 

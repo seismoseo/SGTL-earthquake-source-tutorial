@@ -62,7 +62,10 @@ A **pull request** (PR) asks someone to review a branch before it is merged.
 1. When you start a module, make a branch for it: `git switch main`, then `git switch -c m04`.
 2. Work and commit on that branch. The first push: `git push -u origin m04`; after that, `git push`.
 3. When the module is ready (all core checks pass, Explain cells and AI log written, and the notebook runs from top
-   to bottom after Kernel → Restart Kernel and Run All Cells), open the PR:
+   to bottom after Kernel → Restart Kernel and Run All Cells), submit it with `bin/sgtl submit M04` (dry run) and
+   then `bin/sgtl submit M04 --apply`: it runs the notebook from top to bottom, commits the record on a new branch
+   `submit/M04-<UTC time>` and opens the PR for your mentor ([how_this_tutorial_works.md](how_this_tutorial_works.md)).
+   Or open the PR of your own branch by hand:
    ```bash
    gh pr create --base main --head m04 --title "M04 Earthquake catalogs"
    ```

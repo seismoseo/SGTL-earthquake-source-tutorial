@@ -187,8 +187,8 @@ radiation_pattern,radiation pattern,방사 패턴,How P-wave and S-wave amplitud
 sp_amplitude_ratio,S/P amplitude ratio,S/P 진폭비,"The ratio of S-wave to P-wave amplitude, which adds information to polarities when estimating mechanisms.",M51,0
 skhash,SKHASH,단층면해 결정 프로그램,"A Python program, successor of HASH, that finds focal mechanisms and their uncertainty from polarities and S/P ratios.",M21 M51,0
 kagan_angle,Kagan angle,카간 각,The smallest rotation that turns one double-couple mechanism into another; 0 degrees means identical.,M51 M53,0
-moment_tensor,moment tensor,모멘트 텐서,A symmetric 3-by-3 matrix that describes the forces of an earthquake treated as a point source.,M52 M53,0
-double_couple,double couple,"이중 우력, 더블 커플",The moment tensor of slip on a flat fault: two opposite pairs of forces with no net force or torque.,M52 M53,1
+moment_tensor,moment tensor,모멘트 텐서,A symmetric 3-by-3 matrix that describes the forces of an earthquake treated as a point source.,M50 M52 M53,0
+double_couple,double couple,"이중 우력, 더블 커플",The moment tensor of slip on a flat fault: two opposite pairs of forces with no net force or torque.,M50 M52 M53,1
 clvd,CLVD,보상 선형 벡터 쌍극자,Compensated linear vector dipole: a non-double-couple part of a moment tensor with no volume change.,M53,1
 isotropic_component,isotropic component,등방 성분,"The volume-change part of a moment tensor, as in an explosion or implosion.",M53,0
 lune,lune,룬 도표,"A part of a sphere (Tape and Tape 2012) on which every moment-tensor source type has a place, from explosion to double couple.",M53,1
@@ -288,7 +288,7 @@ record_section,record section,레코드 섹션(거리별 파형 배열도),"A fi
 peak_ground_velocity,peak ground velocity (PGV),최대 지반 속도,"The largest absolute ground velocity of a record, measured after the instrument response is removed.",M10,0
 subprocess,subprocess,하위 프로세스(서브프로세스),A new program started by a running program; it gets only the environment variables that it is handed.,M10,1
 cpu_time,CPU time,CPU 시간,"The time the processor cores spent on a program, added over all its threads; CPU time divided by wall-clock time is the number of busy cores.",M10,0
-checksum,checksum (SHA-256 fingerprint),체크섬,"A short fingerprint computed from every byte of a file, here with SHA-256: if even one byte changes, the fingerprint changes, so an unchanged fingerprint shows that the file is intact.",M03 M21,0
+checksum,checksum (SHA-256 fingerprint),체크섬,"A short fingerprint computed from every byte of a file, here with SHA-256: if even one byte changes, the fingerprint changes, so an unchanged fingerprint shows that the file is intact.",M03 M21 M50,0
 widget,widget,위젯,"A control in a notebook, such as a slider or a button, that runs code again when you move it; the course's explorers use widgets to redraw a figure.",M05 M10 M20 M30,0
 analytic_signal,analytic signal,해석 신호,"A record paired with a copy of itself in which every frequency is shifted by a quarter of a cycle; the size of the pair is the envelope.",M03,0
 butterworth_filter,Butterworth filter,버터워스 필터,"A common filter design that passes its band as evenly as possible and fades smoothly outside it; more corners make the fade steeper.",M10,0
@@ -413,3 +413,38 @@ depth_scan,depth scan,깊이 탐색 (고정 깊이 탐색),"Locating an earthqua
 phase_file,phase file,위상 파일 (도달 시각 파일),A text file that holds the picks of earthquakes in the fixed format that a location program reads.,M31,1
 error_correlation,error correlation,오차 상관 (상관 계수),"How strongly the errors of two estimated values go together, from -1 to 1: their covariance divided by the product of their standard errors; near -1 or 1 the data cannot tell the two apart.",M31,1
 cosine_similarity,cosine similarity,코사인 유사도,"The sum of the products of two equally long records divided by the product of their L2 norms: the correlation coefficient without removing their means first, 1 when one record is a positive multiple of the other.",M22,0
+fault_normal,fault normal,단층면 법선 벡터,"The unit vector perpendicular to the fault plane, pointing from the footwall into the hanging wall.",M51,1
+slip_vector,slip vector,미끄러짐 벡터,"The unit vector in the fault plane along which the hanging wall moves.",M51,1
+ray_direction,ray direction,파선 방향,"The unit vector along which a seismic ray leaves the source, set by the station's azimuth and the takeoff angle.",M51,1
+acceptable_mechanism,acceptable mechanism,허용 가능한 단층면해,"A mechanism whose misfit lies within a chosen tolerance of the best one; together they show how well the data fix the mechanism.",M51,1
+rotation_matrix,rotation matrix,회전 행렬,"A 3-by-3 matrix that turns one set of perpendicular axes into another without stretching them.",M51,0
+mechanism_family,mechanism family,단층면해 무리,"A group of acceptable mechanisms that lie close to each other and far from the other acceptable mechanisms.",M51,1
+mechanism_quality,mechanism quality,단층면해 품질 등급,"A grade from A (best) to D that HASH and SKHASH give a mechanism from the spread of its acceptable mechanisms and its misfit.",M51,1
+amplitude_window,amplitude window,진폭 측정 구간,"The stretch of record after a pick in which a program takes the largest amplitude of that phase.",M51,1
+hanging_wall,hanging wall,상반,"The block of rock above a dipping fault plane.",M50,0
+footwall,footwall,하반,"The block of rock below a dipping fault plane.",M50,0
+north_east_down,north-east-down coordinates (NED),북-동-아래 좌표계,"The coordinate order of Aki & Richards: x1 points north, x2 east and x3 down.",M50 M52,0
+up_south_east,up-south-east coordinates (USE),위-남-동 좌표계,"The coordinate order of the Global CMT catalog and of ObsPy's beachballs: r points up, theta south and phi east.",M50 M52 M53,0
+unit_vector,unit vector,단위 벡터,"A vector of length 1, which gives a direction only.",M50,0
+dot_product,dot product,"내적 (스칼라곱)","The sum of the products of the matching components of two vectors; it is zero when the vectors are perpendicular.",M50,0
+cross_product,cross product,"외적 (벡터곱)","A vector perpendicular to two given vectors, with a length equal to the area of the parallelogram they span.",M50,0
+trend,trend,"트렌드 (방위각)","The azimuth of a line, clockwise from north, of the end that points down.",M50 M51,1
+plunge,plunge,"플런지 (침강각)","The angle of a line below the horizontal, from 0 (horizontal) to 90 degrees (vertical).",M50 M51,1
+null_axis,null axis (B axis),"영축 (B축)","The line where the two nodal planes of a mechanism meet; it is perpendicular to the P and T axes.",M50 M51,1
+equal_area_projection,equal-area projection (Schmidt net),"등면적 투영 (슈미트망)","A way to draw a half sphere on a flat circle that keeps equal areas equal; seismologists draw focal mechanisms on it.",M50 M51,0
+equal_angle_projection,equal-angle projection (Wulff net),"등각 투영 (울프망)","A stereographic way to draw a half sphere on a flat circle; it keeps angles, but crowds the area near the centre.",M50,0
+compression,compression (first motion),"압축 (초동)","A P first motion that pushes the ground away from the source; on a vertical sensor it is up (U).",M50 M51,0
+dilatation,dilatation (first motion),"팽창 (초동)","A P first motion that pulls the ground towards the source; on a vertical sensor it is down (D).",M50 M51,0
+upgoing_ray,upgoing ray,상향 파선,"A ray that leaves the source upward (takeoff angle above 90 degrees), such as the direct wave to a nearby station.",M50,0
+antipode,opposite direction (antipode),"대척 방향 (대척점)","The direction pointing the other way through the centre of a sphere; an upgoing ray is drawn at its antipode on the lower half.",M50,1
+dyne_centimeter,dyne-centimetre (dyne-cm),다인-센티미터,"An older (CGS) unit of seismic moment: 1 N m is 10 million (1e7) dyne-cm. Hanks and Kanamori and PyFK use it.",M52,0
+sv_sh_waves,SV and SH waves,SV파와 SH파,"The two parts of an S wave's motion: SV moves in the vertical plane that holds the ray, SH moves horizontally, across that plane.",M52,0
+near_field,near field,근거리장,"The terms of a source's wavefield that decay faster than 1/r (as 1/r^2 and 1/r^4); they matter within a few wavelengths of the source and leave a permanent displacement.",M52,0
+whole_space,whole space,무한 매질 (전 공간),"A model of uniform rock that goes on forever in every direction, with no surface or layers; its seismograms have a formula.",M52,1
+free_surface,free surface,자유 표면,"The ground surface in a model Earth: the rock above it is air, so waves reflect there and the motion at the surface is amplified.",M52,0
+worker_environment,worker environment,작업용 환경,"A separate software environment that a notebook runs as another program (here PyFK's Python 3.9), exchanging only files with it.",M52,1
+wavenumber_step,wavenumber step,파수 간격,"The spacing of the horizontal wavenumbers that an FK program sums over; too coarse a step adds false arrivals, and PyFK sets it from the largest distance of a call.",M52,1
+quality_factor,quality factor (Q),품질 계수 (Q),"A number that says how little energy a wave loses per cycle in the rock; a large Q means little loss (attenuation).",M52,0
+numerical_integration,numerical integration,수치 적분,"Adding up sampled values times the time step (a running sum or the trapezoid rule) to turn, for example, a velocity record into displacement.",M52,0
+cuspid,cuspid,cuspid (SKHASH 지진 번호),"The whole number that PocketQuake gives an event in the files it writes for HYPOINVERSE, HypoDD and SKHASH; the cuspid column of mechanisms.csv links it to PocketQuake's event_id, and SKHASH's own tables call it event_id.",M51,1
+rotation_space,rotation space,회전 공간,"The set of all orientations that a double couple can take, with the Kagan angle as the distance between two of them; turning a mechanism further and further about one fixed axis moves it along a line in this space.",M51,1

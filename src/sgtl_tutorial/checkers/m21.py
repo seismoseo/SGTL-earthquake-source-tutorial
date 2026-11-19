@@ -13,7 +13,9 @@ Where the truth comes from (DESIGN.md section 1, rule 1):
 * M21-T3: construction (two made-up pick tables with known differences, keys in only one table, repeated keys).
 * M21-T4: construction for the reader (made-up PocketQuake pick folders), then the student's own run products:
   the copied pick folders, their SHA-256 fingerprints against the run log work/.sgtl/runs.jsonl that sgtl writes
-  for every run, and the probabilities inside the files.
+  for every run, and the probabilities inside the files. The student's per-file fingerprints of the first run and
+  the rerun are recomputed from the files (every pick file, every digest); whether the rerun is a real second run
+  is judged by the check itself (two copies of one folder, or bytes that only one logged run wrote, fail).
 * M21-T5: construction (pick tables whose first motions are known from how they were drawn).
 
 Failure categories are keys of ``checks/specs/M21.yaml``; the engine prints their fixed messages.
@@ -620,11 +622,12 @@ def check_T3(target: Any, ctx: Any) -> Outcome:
 
 
 # ===================================================================== M21-T4 PocketQuake pick files and runs
-T4_KEYS = {"reader", "slug", "first", "rerun", "changed", "min_prob_changed", "identical"}
+T4_KEYS = {"reader", "slug", "first", "rerun", "changed", "min_prob_changed", "fingerprints"}
 T4_COLUMNS = ("event_id", "station", "phase", "time", "probability")
 T4_PRIORITY = ("format", "reader-format", "event-id", "station-name", "time-type", "invented-column",
-               "other-files", "reader-values", "copies", "runs-missing", "not-run-products", "identical-claim",
-               "threshold", "no-change")
+               "other-files", "reader-values", "copies", "fingerprint-files", "fingerprint-claim", "runs-missing",
+               "not-run-products", "no-rerun", "threshold", "no-change")
+_HEX = set("0123456789abcdef")
 PQ_HEADER_FULL = "Event_ID,Network,Station,Phase,Time,Probability,Polarity,Amplitude"
 PQ_HEADER_PLAIN = "Event_ID,Network,Station,Phase,Time,Probability"
 
@@ -719,6 +722,16 @@ def _csv_rows(folder: Path) -> List[dict]:
     return out
 
 
+def _t4_prints_ok(value: Any) -> bool:
+    """The report's fingerprints: {"first": {name: 64 hex letters}, "rerun": {name: 64 hex letters}}, none empty."""
+    if not isinstance(value, dict) or set(value) != {"first", "rerun"}:
+        return False
+    return all(isinstance(per, dict) and per and
+               all(isinstance(k, str) and isinstance(v, str) and len(v) == 64 and set(v.lower()) <= _HEX
+                   for k, v in per.items())
+               for per in value.values())
+
+
 def _t4_artifacts(target: dict, ctx: Any, crit: dict) -> Tuple[int, Optional[str]]:
     """The student's own run products: returns (number of passed steps, category of the first failure)."""
     passed = 0
@@ -738,6 +751,14 @@ def _t4_artifacts(target: dict, ctx: Any, crit: dict) -> Tuple[int, Optional[str
             raise err
         if not _is_frame(got) or len(got) != len(_csv_rows(folder)):
             return passed, "copies"
+    passed += 1
+    for key in ("first", "rerun"):              # every pick file of the copy, each digest recomputed from its bytes
+        claim = target["fingerprints"][key]
+        files = {p.relative_to(folders[key]).as_posix(): p for p in sorted(folders[key].glob("*_picks.csv"))}
+        if set(claim) != set(files):
+            return passed, "fingerprint-files"
+        if any(claim[name].lower() != hashlib.sha256(p.read_bytes()).hexdigest() for name, p in files.items()):
+            return passed, "fingerprint-claim"
     passed += 1
     log = Path(ctx.repo) / "work" / ".sgtl" / "runs.jsonl"
     slug = target["slug"]
@@ -768,8 +789,10 @@ def _t4_artifacts(target: dict, ctx: Any, crit: dict) -> Tuple[int, Optional[str
     if any(p not in logged for p in prints.values()):
         return passed, "not-run-products"
     passed += 1
-    if bool(target["identical"]) != (prints["first"] == prints["rerun"]):
-        return passed, "identical-claim"
+    if folders["first"].resolve() == folders["rerun"].resolve():
+        return passed, "no-rerun"                     # one copy named for both runs
+    if prints["first"] == prints["rerun"] and logged.count(prints["first"]) < 2:
+        return passed, "no-rerun"                     # the same bytes twice, but only one run wrote them
     passed += 1
     default = float(crit.get("default_min_prob", 0.3))
     try:
@@ -790,7 +813,7 @@ def _t4_artifacts(target: dict, ctx: Any, crit: dict) -> Tuple[int, Optional[str
 def check_T4(target: Any, ctx: Any) -> Outcome:
     crit = dict(ctx.criteria)
     if not isinstance(target, dict) or set(target) != T4_KEYS or not callable(target.get("reader")) or \
-            isinstance(target.get("identical"), (str, bytes)) or target.get("identical") not in (True, False):
+            not _t4_prints_ok(target.get("fingerprints")):
         return Outcome(passed=False, n_cases=1, n_failed=1, category="format", message="", details={})
     rng = ctx.rng
     oks, cats, example = [], [], None
@@ -813,10 +836,11 @@ def check_T4(target: Any, ctx: Any) -> Outcome:
     if category is not None:
         return outcome_from_cases(np.array(oks), category=category, example=example)
     passed, cat = _t4_artifacts(target, ctx, crit)
-    steps = 6
+    steps = 7
     ok = np.array(oks + [True] * passed + [False] * (steps - passed if cat else 0), dtype=bool)
-    note = ("The check read your copied pick folders and compared their SHA-256 fingerprints with the ones sgtl "
-            "logged for your runs in work/.sgtl/runs.jsonl; it never prints the pick values.")
+    note = ("The check read your copied pick folders, recomputed the SHA-256 fingerprint of every pick file and "
+            "compared them with yours and with the ones sgtl logged for your runs in work/.sgtl/runs.jsonl; it never "
+            "prints the pick values or the fingerprints.")
     return outcome_from_cases(ok, category=cat, real_data=True, note=note)
 
 

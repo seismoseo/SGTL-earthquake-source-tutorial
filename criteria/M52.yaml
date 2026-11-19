@@ -1,0 +1,29 @@
+module: M52
+frozen: 2026-11-20
+tasks:
+  # 40 made-up faults (strike 0-360, dip 0-90 with the ends 0 and 90, rake -180-180 with 0, +-90 and 180, moments
+  # 1e9-1e20 N m), NED and USE; every element within rel_tol of M0 of pyrocko's tensor (MomentTensor.m() and
+  # m_up_south_east())
+  M52-T1: {trials: 40, rel_tol: 1.0e-6}
+  # 300 made-up values per direction (M0 1e6-1e23 N m, Mw -2 to 9.5), numbers and arrays; Mw within abs_tol_mw,
+  # M0 within rel_tol_m0 of the formula of Part 2 (truth by construction)
+  M52-T2: {trials: 300, abs_tol_mw: 1.0e-9, rel_tol_m0: 1.0e-9}
+  # 30 made-up faults, each at rays_per_fault rays: 6 in the nodal planes (P must be 0), the T and P axes (P +1,
+  # -1), random rays (P, SV, SH against ObsPy's far-field vectors projected on the ray, e_SV and e_SH of Part 3)
+  M52-T3: {trials: 30, rays_per_fault: 50, abs_tol: 1.0e-7}
+  # 20 made-up receivers (offsets 1-200 km in every direction), rocks (vp 3-8 km/s, vp/vs 1.6-2.0, rho 2000-3300),
+  # pulses (Hann, triangle, boxcar; 0.2-3 s), moments 1e10-1e18 N m; truth: far-field terms of eq. 4.29 with
+  # pyrocko's tensor and ObsPy's far-field vectors; every sample within rel_tol of the largest |u|
+  M52-T4: {trials: 20, rel_tol: 1.0e-6}
+  # 12 made-up cases (8 with one receiver, 4 with several), dt 0.01-0.1 s; the check's run stands in for PyFK (the
+  # same reading of a four-number source, samples of the same kind and unit) with made-up Green's functions;
+  # displacement within rel_tol of the largest |u| (smooth shapes 60 samples wide or more)
+  M52-T5: {trials: 12, rel_tol: 0.05}
+  # 10 made-up stations: records at 100 Hz built from made-up synthetics (dt 0.02 or 0.025 s) shifted by a lag and
+  # scaled by a factor per component, rotated to N, E with a random back azimuth (ObsPy's rotate_rt_ne); a ratio
+  # within ratio_rel_tol, a lag within lag_tol_s + one synthetic sample, cc at least cc_min (the check's own xcorr
+  # from ObsPy's correlate). The intern's xcorr must pass xcorr_trials made-up shifts within one sample. Then the
+  # intern's Sangju table, recomputed with the intern's function and xcorr on the intern's files within recompute_tol,
+  # for the first velocity model and for the changed one of R3; the R3 runs' SHA-256 fingerprints recomputed.
+  M52-T6: {trials: 10, ratio_rel_tol: 0.03, lag_tol_s: 0.02, cc_min: 0.97, xcorr_trials: 4, recompute_tol: 1.0e-6,
+           min_stations: 4, distance_tol_km: 0.5, azimuth_tol_deg: 1.0}

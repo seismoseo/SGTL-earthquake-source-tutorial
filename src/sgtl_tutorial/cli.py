@@ -15,6 +15,11 @@ Subcommands:
 * ``sgtl pq stage DATASET --slug NAME``  register a fetched dataset as a PocketQuake cluster
 * ``sgtl pq run NAME --from STAGE --through STAGE``  run PocketQuake stages (``--apply`` to start)
 * ``sgtl pq bootstrap NAME``  relocation errors by resampling (``--apply`` to start)
+* ``sgtl submit M04``      the plan for submitting a module (``--apply`` runs the work notebook from top to
+  bottom, commits the record on a new branch of your private copy and opens a pull request for the mentor;
+  it pushes only to a repository GitHub reports as private)
+* ``sgtl oral [M04] --salt WORD``  three of your passed task cells, picked by date and the word your mentor
+  says at the meeting (required), with two questions each
 """
 from __future__ import annotations
 
@@ -519,6 +524,20 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("module")
     p = sub.add_parser("setup-ai", help="copy tutor rules into ~/.claude/ (dry run unless --apply)")
     p.add_argument("--apply", action="store_true", help="really copy (existing files are kept)")
+    p = sub.add_parser("submit", help="run your work notebook of a module and send it for review "
+                                      "(dry run unless --apply)")
+    p.add_argument("module", help="module id, e.g. M04")
+    p.add_argument("--apply", action="store_true", help="really run, commit on a new branch, push, open the PR")
+    p.add_argument("--timeout", type=float, default=120, metavar="MIN", help="stop the run after MIN minutes "
+                   "(default 120)")
+    p.add_argument("--base", default="main", help="branch the pull request goes into (default main)")
+    p.add_argument("--kernel", help="Jupyter kernel to run with (default: the notebook's own, 'sgtl')")
+    p.add_argument("--no-pr", action="store_true", help="push the branch but do not open a pull request")
+    p = sub.add_parser("oral", help="pick three of your passed task cells for the weekly oral check")
+    p.add_argument("module", nargs="?", help="module id, e.g. M04 (default: all modules)")
+    p.add_argument("--date", help="the date that seeds the choice, YYYY-MM-DD (default: today)")
+    p.add_argument("--salt", metavar="WORD", help="required: a new word the mentor says at the meeting (at least "
+                   "6 characters; or SGTL_ORAL_SALT in the mentor's shell); only its fingerprint is logged")
     data_parser = _add_data_parser(sub)
     pq_parser = _add_pq_parser(sub)
     args = parser.parse_args(argv)
@@ -533,6 +552,15 @@ def main(argv: Optional[List[str]] = None) -> int:
             return diff(args.module)
         if args.cmd == "setup-ai":
             return setup_ai(apply=args.apply)
+        if args.cmd == "submit":
+            from .submit import submit
+
+            return submit(args.module, apply=args.apply, timeout_min=args.timeout, base=args.base,
+                          kernel=args.kernel, no_pr=args.no_pr)
+        if args.cmd == "oral":
+            from .oral import oral
+
+            return oral(args.module, date=args.date, salt=args.salt)
         if args.cmd == "data":
             return _data_command(args, data_parser)
         if args.cmd == "pq":

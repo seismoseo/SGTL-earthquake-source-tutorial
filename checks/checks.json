@@ -13,7 +13,10 @@
   "M30",
   "M31",
   "M32",
-  "M41"
+  "M41",
+  "M50",
+  "M51",
+  "M52"
  ],
  "schema": "sgtl-checks/1",
  "tasks": {
@@ -772,7 +775,7 @@
    "title": "From a probability curve to picks"
   },
   "M21-T2": {
-   "categories": "zb64:eNp1VdFuG0cM/BVCL5EB3bmtn+oEAVynRtA0gRGpKPJk7N1R1sJ7u9ddrhWh6L93uCvJCmy/SXfkcDjk8P6dDXlytjfCs0uafQs5kpjOMW1MojFEJtkYT8EzxbCldYhkKIkRGzwZP9CEQG7pE/OEKLdDPCMxCU0xdAVqsv0DWZ/swOXt1vohbNvZgmbAG41o6a8sOQKSJqCi9gcj5iaaUcNlU/L64PLo06H8otZekFhEFS6lonVWdm/r0zGDyCa4gUKXph39tboGMK/03aNxmdPieTck/F0Wp2jk89hxTIXzaFOy/r7RtpJSXwagPUcpvA31jk18RYOisg9FWutpd5S/FPKhGaCCllhp+xsGRh8yuvFBaA0IusCDcXIsTB8/HkgkCutS5fOfdNH+SiAgm3+yeWDKfuBI7xQXw3T48/783Yer1dXy99X78yTTHWh5F8xwvry6bumGpa/ql5TS03J1i+IRys7HMGRM+PNPF2cHynjE7jXOCryfZY6J3yS6Va2+sNCW7f1GEs2TsBkW9Ai9VdBfzkrVkIUO1KB+S1+zr0jsXGn4Fl3Sz5XZW7JFgR2tjXUkISwoIsHqhgnH0XrjLqmz/jzdi2swGTHOUWKbOvZouWnMNLldbcombiSa/iWTYHZJTSJk4BZt8pbgkmVLKkDJpT7HR0ZrPbzk2ZHHXidir50op7svZ3RvHzW8bEraiylNx6nY4waQ6eU9w9ZA54Bfpq5ZIWNT4fLcjWrll80YItahLjSUfFpG6nZPnkOO1wfV9yUti6I1FeloCEykQJR+yFk8qYGnZU/uRo3rWLaMCqgHDtokVKJ5F7B31vcuDzzUVdszalTL41gO6lSBh1A0wIXZ73CdQ0t/RyuFx0hqQNQM8aE9JM/1yvF3o76iT8t2efXHb2cLWscwPqG8qXeoTko2kZOemVe6183o2MHlmn+Mrrm4RU3kNUfs3VMndZJW29DstLFr4aEuVTltqJAqxQcdtgJX0Q5vyxoUrmQlsVvT5HKiAypcKuYStwHa1CjdZkQSXHYCtSCHixnrd0BfR+6xKeh/XpcLQDTEMFUO9TAkxPih2JJh5N0+qU5uGwPOZz2/R8GKjbTT8rYadWt2Pyyzru7+suWUDezq7IRxrmL97Bxmto+5Dl5Ni1NePw7Wy8lQ7nSed6dHXseuJYoa7ey//wEGx3sc",
+   "categories": "zb64:eNp1VdFuG0cM/BVCL5EB3bmpn+oEAQynRoA0gRGpKJoXY++Oshbe273ucq0IRf89w11JVmH7Tbojh8Mhh/fvbMiTs70Rnl3S7O+QI4npHNPGJBpDZJKN8RQ8UwxbWodIhpIYscGT8QNNCOSWPjNPiHI7xDMSk9AUQ1egJts/kPXJDlzebq0fwradLWgGvNGIlv7GkiMgaQIqan80Ym6iGTVcNiWvDy6PPh3KL2rtBYlFVOFSKlpnZfeuPh0ziGyCGyh0adrRn6trAPNK3z0alzktnndDwj9kcYpGPo8dx1Q4jzYl6+8bbSsp9WUA2nOUwttQ79jEVzQoKvtQpLWedkf5SyEfmgEqaImVtr9hYPQhoxsfhNaAoAs8GCfHwvTp04FEorAuVb78QRftbwQCsvknmwem7AeO9F5xMUyHPx/O33+8Wl0tf199OE8y3YGWd8EM58ur65ZuWPqqfkkpPS1Xtygeoex8DEPGhL/8cnF2oIxH7F7jrMD7WeaY+E2iW9XqKwtt2d5vJNE8CZthQY/QWwX99axUDVnoQA3qt/Qt+4rEzpWGb9Elva3M3pEtCuxobawjCWFBEQlWN0w4jtYbd0md9efpXlyDyYhxjhLb1LFHy01jpsntalM2cSPR9C+ZBLNLahIhA7dok7cElyxbUgFKLvU5PjJa6+Elz4489joRe+1EOd19PaN7+6jhZVPSXkxpOk7FHjeATC/vGbYGOgf8MnXNChmbCpfnblQrv2zGELEOdaGh5NMyUrd78hxyvD6ovi9pWRStqUhHQ2AiBaL0Q87iSQ08LXtyN2pcx7JlVEA9cNAmoRLNu4C9s753eeChrtqeUaNaHsdyUKcKPISiAS7MfofrHFr6K1opPEZSA6JmiA/tIXmuV45/GPUVfV62379fvT1b0DqG8QnlTb1DdVKyiZz0zLzSvW5Gxw4u1/xjdM3FLWoirzli7546qZO02oZmp41dCw91qcppQ4VUKT7osBW4inZ4W9agcCUrid2aJpcTHVDhUjGXuA3QpkbpNiOS4LITqAU5XMxYvwP6OnKPTUH/87pcAKIhhqlyqIchIcYPxZYMI+/2SXVy2xhwPuv5PQpWbKSdlrfVqFuz+98y6+ruL1tO2cCuzk4Y5yrWz85hZvuY6+DVtDjl9eNgvZwM5U7neXd65HXsWqKo0c7++wkSw3si",
    "forbidden": [
     "scipy.signal",
     "scipy.ndimage",
@@ -808,12 +811,12 @@
    "title": "Matching two sets of picks"
   },
   "M21-T4": {
-   "categories": "zb64:eNp1Vsuy3DQQ/ZWu2TCXsh2K1+KmWISEFJCq5MJcFqxuaSzZFiNLRo+ZuCj+ne6W/MiD1Xgsdev06dNH/ufQukmrcLiHw+OgoB1Ue4HWJSPBugheCQmzSx7i4BWu024Jk8ZdnTNS+QDHTvsQK9zrk60whbC9kncVOJ9DKYnyIPWSMyZvwVkF3t1gwiXOpy0eosYGfk/8BJgOWmVMANfBg/ARvgXRC22fgxLtQGBmGFOIMCAUDvnyiVKFpg1X6LRRHMonJdscKjioq7Kx1pIK/pPA8YsnhHYVJuF+4RXYNJ6xsgbeKDUxKBABonof4ciM/MRBv7yCm44DyDhPCkL0d/cgbM4ImFFjNrBiVBW+luUZRiSDUEnd6xhoU4jamLLMIDvnRxEJ4vT3EyIPucqzwk1StzEfq96LNpqZ676oORSeKwgm9RV8tisVjNo+Td6dn8obhqYlQtatMM+XZnHjumTbqB2G0xlZAUvXkZBJxCFUWzA8+qSo66+FCbmSda1ujdDjyvoWIx2STrIQPaXnyug07t499nicqCX0Kqtu6WrehDWyTqgK1gyVC+c5ElKfH46O5Ku0h9PPL+qvv/se47B0P3ltY7jLQC11Tcm6dSaNdgVa6BBSElUwOSO8jjPkbRAdowpwG1wooGEQV9QQqq6BtygGjy2/KEgTxucwlAn2IQREsWXUhYbtDRb5FYOzrs7dWmEtzaNib95hkXs1BNJZxkW63ROF6nB5j4qRzt+mkkbqwbUXFX9LCLiBk4q8Vdmr9s6OJOsrQhNno8q05qMe5jg4iymxJPz1uh9IrdgAtQxyqSPW+Fyj/mRqI7vOO8vTwHor7rJIrDByG0TkGV628URw1fdAI7Tr5sri6LC2yE0xru85q9/CG3hJ5rGoKpQzC3TRRXxmQhZtScd5ldSZk2ybXJXD/77m1n8iG4Nss2NkZUQqhR0Gc21ybuCdLa3L+7KayA8Csi+J7J2xsdvlv3R+PqveTGOPgI2jOC5KC0tBRbwSUbz21Ll13LIww2qHqJMo8uxPgwhoYVHjfqKC3EOctUGJ4qJJYVPsbVB2VwYPgkBRfTA0e9DZdAn0ya2aXfu83Btdhz+dd+Mu93E3QhjFt40gVVDfNXnuDictLiDzvJMI6pLgw8uvcwmL7NRNkWsIW3wvpLZFfXfJZP2tmkUCSC0rk4SGUCF/PY/JzfnLsyb00Txj6f0VnDXbLZfTZ01TDjFNZv6BrDRfG71GEvdHfRHyRYKNJKfnckqzalpYJVBeLjfbcodYFQlSszb4nLSJG79v8zoffiopFnkcaYrQasYJLeDNqTm9+PXHTCiVEUiZC5sb/TgoxMM24mEZp65M0xqMjk+OOefhKC6/N7uiZxrNj2+y6jOh/3dB0JNUnUhYONvsN5nsT25HPu9jBZbIXDdqraYPgKVunpNyPWwfJ+4c0G/+eHyJs6ceaUvuSpW/B9bUvERfGs3h3/8A28NlYg==",
+   "categories": "zb64:eNp1Vk1v3DYQ/SuDvdgutEo/0hzstkCQtGgRIHFr99BcDK5ErVhLpEpSXi+C/vfOB0lpN+nJa5Eczrx57w0/bRo3GR0217C57zU0vW4eoXHz0IJ1EbxWLRzd7CH2XuM67W5hMrirc0OrfYDLzvgQK9zrZ1thCGX3ur2qwHk5SkG0h9bkmHH2FpzV4N0BJlzieMbiJXqs4Y+ZfwGGg0YPQwDXwa3yEV6C2itjb0CrpqdkjjDOIUKPqfCRrx4oVKib8ASdGTQf5ZtmW28q2OgnbePWtFTwX5Qcf3jA1J7UMON+5TXYedxhZTW803ripEAFiPo5wiUj8jMf+u0tHEzsoY3HSUOI/uoalJWIgBENRgOrRl3h5zb9hhHBoKxaszcx0KYQzTCkZU6yM4ign7zBVJtBmZGyvXMjn2NIVztSyggsAXD36+vtt9+/oo30L2FwEWB3jBrLeePGaY5a0Ou8G8ueBL5AykX1KvSD2dWhVxTvEgHo9TMmrUO8vIKDNxgSTMQ+090cjerhGrHzJfzg9jcSm7nldSNZBALKH6k7nxXNrSstOim2FIacY4bgXekbExBaxwlxHvpZNXE48qpwNnMi9ipytddMD+wYptI5n5I65xHiEwz2LWNEReMxOuDwm5fAlSD7qI+okd1xwePstNTr/KgiFTn984CJB6HyTiMTWtNEacO6AowbkpgqCMO8r+CL0qtgNPZh8m73kL4w/9Yw3mRRCptm20TjMAJdI0rP6sa+Tyr2oTrj3CrHkps0he5KCTEcaWshhDCkS0iXtpx0BflGgoIwU4AAFz9kVf20dObiCqJjkDPr0ymM9Ool0RUGHSNWUcH/0pd7YSxF1+22ccM82sK8BJJqW8IQJjcoPHgE2Ua3czJw6F3QiVy9etLMjhreU4ko+EcN84Tn5RiaBDYoBIRziYg2QKxd3YFFfM3JWbeVNpa0cleJ7gfv4inRA+EreZFrrcWCtHGyB3Gh+xdPpk7duuZRx99nTLiGOy2Oou2T8c6OBP8TpqZ2i13wVbfH2DuLIbEk/OvNvicaI791tvFcB9NipesTushwETsjcdFCuUToyDOlfGNXE84ko4HQuwPq2w7H7Prcaix1GSsEDdUeotqT2AI6El1lyKgRjJ4Wi5QoC2Yk8UxQlVxSoapDgkkSdBuKw2HMtAV7SMfcISMQt7hpi9Js5yayw32wi6un6ZqllzhxoNhutY3Ngvt+zeFXwiw8Gh0WEZmWiMueo/rlOM2CafHFL9bElKCaCILkqro1MdsY9oqrYgM8s+wsnAH5xhNTtMEw5XG1GHINH2wir+wTPZFR4JTA25FuK0PmaS//0v1y13bx03UG7KnpxYHiwlJQE29VVL94olDxL5FmKM+BiughnjjhKERmED8YCjJWtTMDihQXhzksmj302q7KYCtQKKsT21gnLY+OMt6lF6XP+d3UddqfzutAVldMBE+xMhSxgvrOVF7lSYs5SXE8IsE2BTh9/HVupmGhD0Jrm+YBOnGDCu/mQfhXOIsAEFsKkqfyws4dnH98UYd9HF4w9f4OqM9FjhJeOE0x1DQNxx/v/ZyeTXuDIK6vukhDFRtJQ5DLSc3a0kKhQPqYX3Z5vFodKaW6NHg3m2E1n97LOl9+l0JkelzyE+FZjROa4Lu7+uPH198IoFRGIGZmNBf4ydQQh0XiIcupS2oqh8P1eiymd83a7hOfSZrnQ776wtHlmZTdVKyWfrW6UzMWzoPmOwH7s4cD33fOwHRS6kaubekBnOtmnaQBuTzO3S6g3/x5/wa1p+9pi3SlkvdwCc1L9NKuN//+B4IDctY=",
    "forbidden": [],
    "hints": {
-    "1": "Glossary: pocketquake_cluster, environment_variable, deterministic_computation, checksum. pandas read_csv takes dtype={'Event_ID': str}; pathlib's glob('*_picks.csv') lists only the pick files; obspy's UTCDateTime reads ISO text. For identical, hashlib.sha256(path.read_bytes()).hexdigest() fingerprints one file.",
-    "2": "zb64:eNo9UUFuwzAM+wpvbbcgD9h13YBehgHrzoWTKItQxw5kNV1+P9kudjEgipQo+hRwjzKkF4xRoBNByA0kDTwnLcDTZeH+mto+rRjZUwIHBDcTTJiZWQFy/YQ764S3lYJeTke4BKVfbZDU9dc8a27Q3dgbu3B4KD3lGLD/IDUnVzxj1+7s/aqNQ4NlcokaKNvK/ff59eiUzrmIY12biwNcGLBI7FzHnnVrCuAGA6N3Yghi8Bt4LFfVSya3Ej4f/Rbv/xksUcx4H+fFCT0E4YdkEQ6asDditymlQzGxkmzIKZWxGaoKsQjlFoqTOteqasyIvmAD91qD2+JN7Bu8hZoKJ5GqbW3/AFOEk3g=",
-    "3": "zb64:eNpVUMtOxDAMvO9XzJFHxQdU0BMcuPEHVdq6W2vTpDjeLivEv+OkXQlySOzxeJyxkBtI6gPsPI/sKTVA/WKJToSHduH+lJ76tKIUEUfkwhi9tVXggOBmQhRLm01F3KXJQVFx3u+dYpNwYZ3wtlLQ9v0VLkHpSyskdf2Jhk3gyCuhM6DOalTIPBSScgwVlsklqqA8271I7FzHnvWKUeIMG4+7RyzRO8kgjwWyHnzs2H1zEFqi6O47mYUGf3z/98qSFHIOcGG4gUIZmJ32E2LIC5H8VuiuumU52Awtn62R06b/LWXjZsefj1XR0knottK0Qf3kwpEGJFLlYDwebA3cO1/v3/35BTqEkYE="
+    "1": "Glossary: pocketquake_cluster, environment_variable, deterministic_computation, checksum. pandas read_csv takes dtype={'Event_ID': str}; pathlib's glob('*_picks.csv') lists only the pick files; obspy's UTCDateTime reads ISO text. hashlib.sha256(path.read_bytes()).hexdigest() fingerprints one file.",
+    "2": "zb64:eNpNUUFuwzAM+wpvbTcjD9h13YBehgLrzoUTK4sQ1w5stV1+P9kuhl0CiCJFmjkE3GNy+QVjTJCJkMg6Sgaes1Tg6bzwMOduyDeM7CmDA4K9EFRYmEUBssOEO8uEtxsFOR/2sBlCP2KQxQ5zuXUx6K/slV057OpOOAZsP0g0yYxnbLqNfj/bYmewTDaTgbBabr9Or3srdCpDHJttGXawwWFJsbc9e5bVVMA6BaO3SRHE4FfwWF/VXjLZG+H42Hd4/+tgiUmDjxy+KS2Jg5TIaUWpomqLebuTtKchLmv1e6CJ0jU0dFsjzrSSQ6/2klt5HDI7quzC27W8etpXzPEgrc81XpP+Ha9dZ9OmTCIarSoKWZurglz8/4XO3S/D3Kja",
+    "3": "zb64:eNplUU1LAzEQvfdXzNGP1YOgh2UNCAp6EzyKlOzuZDc0TeJk2lqk/91Jsj2ZQ0he3ryZ90KoR6R2BbI6Yx0mBdA+yoVnhKt1tMMm3Q5pD+URgoH8YIKTsgasB6+3CIHkqqoK6YPKh6KinVsqSTrBwfIML3v0vH57Bp2A8YcbSKyHDY5VYLJ7hF6ANqthIduxkNgG30CcdcIG2G5ljxR63Vtn+QiGwhakPVxcQwxOUwatKZDUwPuCXaoVYQzE1bcJBN0Q4lFlP5ICJZmJkHZeVUbxFcl6Tp+Z+LWE9NtV9wZQD/O/uM5pFe0Wuo/Xp5u7+4cMW07QH1niPpUO8Xst7dIiS+VXxLLbTU2R4JnwHHuq0DBrP+EICZmtF56RHamO2Z7nVac/XCadyw=="
    },
    "kind": "artifact",
    "module": "M21",
@@ -1270,20 +1273,20 @@
    "title": "Three locations of each earthquake"
   },
   "M32-T4": {
-   "categories": "zb64:eNp9VtuO40QQ/ZVSXpiVbIdZhMRGu0hoXxFCMAjxFHXsst2k3W36Mp4I8e/UxU4my7LSaCad7uo659Sp6vl714bZYtodYPc0IrQjtmdoQ3Ed+JAhoungEkqEvATQswdA044wlZThhGCgD67DCIvNIwSP0KQygfGdLkxsobcOwXo42+nx3Xff7GVX12+/fnzcN/BL8ZAZQJgv0KJzCUIPP5uY4Vswg7G+2VWww+AY6h+MyFmPCVK2zsFIEDjeRkDf1aGveZfomGjajDFVECJBnWxK1g/gcZEDJktWZLA9U2GgRN/nBIZ+oLN9jxF9iw18DNNsIkqEJmfKoeQvZoaHlGOTZmezBnWBfuXR5DdCqQ9xMvnKqi++zTZ41TdiLtETDmdpRRAf+I6jL9MJYyUojmb9e3oDucwOiSvLG3EOMX+IGIs/6kL4tFkrhS+Ez12EzRkvpKQrQ0UKxJQrkLAKbIc+29Y4uXIKHbojUfMDCvbrdt06Y6criVuYkGUnmSEiambOyEKTk9pVUnGUiE8cdZ9gqBvuYrb9ZCaE2dCOVeMIYA04XTIdpnrzh09wMtPPwBSxxUTsWfo2XuQGfEb+pPZNdF6b4YauYu2wo1RgyTOCKKIz2T6TUcLN06zfEm3O6JXRHh4kw4uZqGjX1ngvyTzR+179wbWtteDpzvuwfgksIMPOIUCajHNsVbLwatI+hgkeK/YzdjYHjiAw7Gwqj+RY26LGlxwNJ/lRItmkBJCtRyoHT27hPIKQk27dJBkuiivlBn4f0d9O2gQukGPIryyR5FihaXdp/K05hdzDT3SBKiC2q5Md/JX/ayfCaJLovERKA3zuQDXoObGYW5UFmkqTiVqJQBtx2+URtO1WkLRot8ZXgbdzk/UlbXe+gpfNyeHn8V17oLc6bniWbmikEdjVnxjrIALGsMBMSDcOSANx/KuYM1ab8UPk4SttYbJcV6nBunykUdBRRY5nncddh3MeeUXHuRYbKerB7DE28FtaHU4jqR2PLrSGhxEB9P+P/L5fRRNiW1M/1nMMXWmzGPcHfRjI83dvAtPc6OsDw4VjuRYm9Hqbbkxc5YwHgd9bttUcLXl9jTETe4CmMhFxYRioNbnLruHcGrMOvfXZinYYKa6nWa1jiOeIqBXkRu6ZrY0JnNDjm+rVrvdPZ0+NRylxEXsZvyrWko1SXxxsiiqXK29H84ciSI4lxPO+SUN2e8H7Z6K+u72PqjND3J7HtwL2NgJvz6a4wMyzu3x4igX1WRh4ML1O+lWSacPjgV8A4SedVD8bV/Rfg1/D9N+O0Haz/Dot5qL2W6uwFo1BlVRoviZnZ9L+Kar029Bbz3wMNHDpNeIpSpp1ze6ffwHKIAIq",
+   "categories": "zb64:eNp9Vttu4zYQ/ZWBX+IAttOk3UWbtAUW+9KHoii6KYo+GYw0slhTpEpSUYyi/75zoSQ73RQIEii8zDkzZ87wn1UVeotpdQ+rxxaharE6QhUGV4MPGSKaGk5hiJDHALr3HtBULXRDyvCEYKAJrsYIo80tBI+wS0MHxtf6YWIFjXUI1sPRdrffffv1jazq991Xt7c3O/ht8JAZQOhPUKFzCUIDv5qY4R2Yg7F+t9rACoNjqH8yImc9JkjZOgctQeDzNgL6ehuaLa8SHRNNlTGmDYRIUDubkvUH8DjKBpMlKjLYhqkwUKLvcwJDP1DbpsGIvsIdfAxdbyLKCQ3OlMOQ/zcyrFOOu9Q7m/VQHehXbk2+FkoN4cHYR+vztnLGdkzwU+iQEUnqz3YQJALAlWEQn376sL1795438ieDv0rwdMqYFO2QUYvVxNDNezjzc66laq1JrbNPu9Qavm9N1Ft8qe0BU15fwxgtXQk2X28kttxmCYw3DDMu17tweNC7RUgRK0WRAJ8xnlgR/yHNkNJc1QuyM7FIWqM45TtiJLkI/DoIIgGCL5Rxd5p5EmKfbI2SbNl+L5JEnwlKQ/cpqCknzEi1nJgn7eQ9epNccZb7iBvN7BFPWFPO5XRvKJkRncn2mcKGJc0seE5jRq8pv4G1IHgxXU/hp874XsAwnR+LPELsTOb0COt9xD5QUyzdV9sq65Xn/AlWKuLdQHLDYaNZ3GjyNq9ERei6UKPbk27p//flaNHf4KtsAx0aW1sxwTxEz93hLNelgTUre++H7onDyYcpf5+uIQ/EMD2UMnIsLSDjnG2lnlL/8AraGcGZ2KubSinK1lmMUg1Cd1HlS0HA+rxaltJzWSTK3cA3J7j6QoWurvVUmjtxbciQRKfvv+EWAodZ7efNlpIqc6q2mr90YXBQ/inaY0nmECB1xjnucPKp4kRC+lbCYG1ziFpULiP1iMQo3rfFlxwNB/lZTkou8IUrST0QvJMu1XRx0MkyJcJJcaW8gz9a9MtOm6j3uWwbyYfEKNCKlOT84sBCbv0LXaAZEPltkz34mf+5ItmipKhjpDDA++6p+A0HFllodahcXWei9lvgPp1Wec5Mq1RVbc3F3TXB077O+iFNd57By+bJ4ZfxiauLOdo8K3tCox6y+Dmrd/GjGEboCenEAWnqtX8P5kgeU6w6RJ6wYn8my3UbVWid9ySumiqyP+rQrWvsc8tftJ1rMZGi2ZU9xh38nlCBkLFU7d6FynB7E0D/NvLFhxm45MSHrbTfmXdfNri+F2bp8gJfk9istdtlLE/DWxfm14O8HGSYKesyXyC1YUyLUDkQdxOJanlGTJyoG82BXTLRJOLwtkOZYS1rUEtXbySc2IGw1OdMtIeWyDRZNETxORBZUlhePCXBYfQlH3lLm7Z9DPVQZWnkD8qHWF48hBj4JIeSJavyGTnU+TLdmFj1mVxZJtTijtMZ03FP0FMkSYYOYqZxOc5W8TY58U4mJ+rRecoeMg0vAif0+KZtad/L92JDRkQhcdRU+aKgitoqNYNbqiFcZt6OZhidoHSMIR5vdumQ3Y3g/StReZdqqq4Y4vQmvJvFpEpb3orSFabv3emHxzig1vbABn8e9Kq8XchUeDgKP3GW7bNxgz5H5A322iHUfgiygdGcVBilCqVoDGpIg3F0s+0p949RUz+N+rLnY6BnCA1sfjtQzurd6t/PW80J0g==",
    "forbidden": [
     "sgtl_tutorial",
     "difflib",
     "filecmp"
    ],
    "hints": {
-    "1": "Glossary: deterministic_computation, checksum, velocity_model. pathlib's read_text and str.splitlines give a file's lines without end-of-line characters; Path.rglob('*') lists the files of a folder tree; Path.relative_to and .as_posix give a relative path with /.",
-    "2": "zb64:eNplUctuxCAM/JU57kqrqmkvfdwr9bK/ULGJSVACRgYa5e9rWFRV6gXhsedh+AzYWab0BiEz4cZ5gXUbJZiEzaWcwFYvgdI7LAvom+RoAELxNxKUiMzIC2GjMCtfCa3iMGu7iiCble5gJeoAmfFuhNOVFYpGp5y6UZjOMGHCShQbpducRi4huzDDCnsMZ+wLSVM9MDlrSR7woQkrRyiy5At2s60KCJd56dGbaY9onajtyPG46OmjUb0a4nZkfYHd6TJ1LBlfE2rlQpeXEjqvZq3VwUXgTR6Xr41Hkx2HPxKr88PryzNS8d5oin8B6nsL2SbXCU+Pw/BL0Lb+je74A9a4meY=",
-    "3": "zb64:eNp9j71OAzEQhPs8xZSJOKIcNBBdLCHRQgMF3ck5r3PW+SeyTZQT4t1ZOwoNEtvtavabGWW0prhdgKeTokG3F8B2x1seCdZ4SggaJIcR2lgSVapDRDcJGI9ug/UaVRz8gSIs+UMecYtWXLiVfS7s+couXExXcAPGvQY+HWXKlUVeid9no/kfqkZN0DE4zGJbAiuF5YQbtA3ODeaVWEQ6hpgvxkaRz2aQtizF96uLZGU2p+KUR2Z0STrCfs5ck8vsAycfwtFQErUknSjOtXgJW5JpEzkja+bvauKCItsPo+Tyl3JO5mHsbRjYKfi0nIxrHx/ukT6dk0z7A2rAkrtN2/4neXn66J/f+7eV+AHKUYZR"
+    "1": "Glossary: deterministic_computation, checksum, velocity_model. pathlib's read_text and str.splitlines give a file's lines without end-of-line characters; Path.rglob('*') lists the files of a folder tree; Path.relative_to and .as_posix give a relative path with /; hashlib.sha256(path.read_bytes()).hexdigest() fingerprints one file.",
+    "2": "zb64:eNptkc1uxCAMhF9ljllpVTXtpT/3Sr3sK1RsYhKUBCMDG/H2NSTqqTcy+JsZh2+PnWWMHxAyI+6cZli3UoSJWF1MEWz14Cl+wrKAHiSlCfB5u5MgByRGmgkr+Ul5BdoX+0mvqwmSWegQK6gDZIYjCN2NVQpGp5ymkR8vMH7EQhQacsZ0A2efnJ9ghTf0F+wzSXMtGJ21JE/40oaVEQos6aoJtUMQ59PZvGWeDa0TTR04lJZ4qkKS/aF2reZChfTXlNYvGN1QaDXJPaguXsU6fLk2k8oWzoLNpGH+WXnQSfYRu1Ow+i9u69/fXhHzthlt9E+ZqAm22Z3Ay3Pf/wF6rc+k6/4CcH6diw==",
+    "3": "zb64:eNp9kDFPwzAQhff+ije2Iq2aIhBEwVIlBhZYyoCEUOQm58ZKYke2WzVC/HccuwEmPNm+d+99d5UUgkw2gz85ZwnyPQOyB/9yNaGViiy0APGyhpAtsSAV2iBvGKRCvsZqhSDW6kAGLamDq7FEyqJv8D6P3sPkPfqimYwTeLsX7b96bl3wIlWxn2YpfD+qgGohjO4wsGwErirMG1whTXBOMCzYzFCvjct+KUvdDxFUSGNdAkPmqP6i9UYqZ99H4ccF8DPvuZ/BUMudPBGcDlTBK0O+e9ouNze3I790FvvBkWUhjk5khrCosTj1fEUcOe4npsU1xHsctNMVtUVZcy+K1Y67si5aXXoGrey8kV16f3cNe+w67lMuAWGsEJPASzbrNP1P8rx9Kx5fi92CfQNzmJuN"
    },
    "kind": "artifact",
    "module": "M32",
-   "target": "func",
+   "target": "answer",
    "tier": "core",
    "title": "An unchanged rerun and a second velocity model"
   },
@@ -1424,6 +1427,408 @@
    "target": "answer",
    "tier": "core",
    "title": "Reruns, two bootstraps and a colleague's file"
+  },
+  "M50-T1": {
+   "categories": "zb64:eNptVcuO2zAM/BUihzbBOkG2e+lmT0UPPRUttrn0yNiKLUSWXD3iDYr+e0lRjvd1cyiKnBkOlb+L2jnfaItRhcUOFr9d8nBWdXQ+QKNC7fVBQewUeN12EY6YTARtAa2jqIf5PtAHBZZH50E9YT8YBQpDXFvnY7dOQ0UZkIZ1cIl+8xFgyLW/GXdAA1+/76HGiMa1VL+BH4fw8wIpqNUG9p2mXAwnGJ0/BYYgdXOLxo22gi8nDR/gUdcd+ibs4OlWcip4+pSh0McdcO5mUcGCgPYYmfWjiskTJ4iJUS8tn5gKgtHDCtwR4ujApn64AHqPl8Cx0OFAuXfVCkYdOzhqq0kFSjsoT91La+FJbLgvydUPziobQ8UUYodRdMuIpG9mcx2GxGBwmi4JeNjjSYZSDnOZkpF1TjGjpoyjc3FEY6hbdDnSoW21bSFHl7oUnZEBCd1rm2Q0tQvaqqlaQ3pUmQ3/YnmmkxdVqVPrRBUdC7O4TqTPG4+hZxYR+HAK7ki0uoM+kXIdnhUYZVuqdQvL3PZP4luemE3dQ+qvn/k0T4i5zYKvMhCPjUb71utHas/XiYah215hw+4s6RuZ/scAIXu/YV3IjjSGkrGjiD0rL1Ua1XqluKonDks7bEqagGDh1kG385SzlGWCXGD0Lot5YecXpQUqj4czehe1s+/K75XBqEm3MvHJAw+yyIyaZ0zOTF414kNVVnswSOM+eteLmtHrE8/dU3PqVxHIoEvxkdeMN5psAUuUygTo5n7LDWidOk8zLJxzpXVWyXKpK/fyphAtWkLCc7gAFSCmt5+3VyUJpFQoggiu5zRq4+rTqENBn9fvalXpQTjDJIq8Z5Np3tAMbjL8HOV2JfOGIRZsQm/EYVDN67WlG+zuZ7taOrYkoRW1dzlQpntxid5A3qH5itEiAIdkPrS20OMFytuc3ykRZu47KD8o2+g6GfQT69dERaD3uBacuV9mmC25PqNJ8lfxy/XqxRqLZ3k/2LjyKBX+bn5CUkiEjxHTVu09vajAa6OJdJlSxshmlhEuC+ZtlRHeb1fsEDJ8s5MnJttu+1ywskjXp/f6WOWKm8W//3wRcYI=",
+   "forbidden": [
+    "obspy.imaging",
+    "pyrocko",
+    "mtuq",
+    "mopad",
+    "beachball",
+    "functions",
+    "SKHASH",
+    "pipeline",
+    "pocketquake",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: strike, dip, rake, fault_normal, slip_vector, hanging_wall, north_east_down. Part 1 of the notebook draws the angles; Aki & Richards (2002) give both vectors in the section on the fault-plane geometry of a double couple (their figure of strike, dip and rake), Stein & Wysession (2003) in the section on focal mechanisms.",
+    "2": "zb64:eNplUUtOQzEMvIp3tKJUbCknYI/E2iRpYzW1I8ehoqfHea+vgrKLMh7Px28MZ9HYdmA5QTOlY4JImoKRMFADhCxKF2HDAp3J4MtBUUD7zcELnbrl1+kvUr1fcse8ji/sR3h5dqYDtXQ+pAaf38umLbwPmeI7CzlCPCF77GWMI6cdBGkrxWNag+zBhbAIH67LN9CI/6C93lyuxkNqlUaWBvzP/nrWZ9GTF+BZatKaOFLoBRVMJsrk4xXO5JmWFa5kVKzBXuXk2dUoYNkAchxYFWIHuwf80KGeMORrRQ9tCFre+GeziRHlzFBRnTKpeKjp36Mvvi1r8kvwoXhNK8cVIyG39awZcgpH8IPgzcys8tRk3GJu1IvPPr39AQU4vyQ=",
+    "3": "zb64:eNpdkM1qxDAMhO95ioFeEprDQk8t3ryLkriJiCMH/2zIPv06v10qMAKZ+WYkRdIZ7Sts9XMHlA+OB12i5QkkLRwNGiypt0ziq0yRsdIdkl3TW8dPK4EMonDAQzfBOlBA6DV2IujJYwz9KUz1gVysC30JTT4kSztLkam1rfbVxf8HPUgn+BPftxKTidKxdKiXzXUFZCrxRzLv+72zJu0mLS030ZBDsKjtmmbmBKctDiZyAeqOW4J5c4Q6YY31uVoPVBW4zjKyRA94lr+/a6Ws44dGTc2wQ9LLz5AldociDckjzBYSx2kBOUeLh/3F1wvZpodD"
+   },
+   "kind": "oracle",
+   "module": "M50",
+   "target": "func",
+   "tier": "core",
+   "title": "Fault normal and slip vectors"
+  },
+  "M50-T2": {
+   "categories": "zb64:eNpdVMuO2zAM/BUipwSwgxR9oLvHAr320PbSU6FEtC1Elgw9YqRF/70kJWuze4ojU8PhzNB/dxrHgBh3z7D75XMA5UaLEaz3V7DmihCUNsrFI3zHlIODegH2bjnW58Nx18Fu8GFWiYFqpYKUF4uwjykQUgfaLB3hXfEAfoA00V0YjDMJweX5jCGCaQ0Ek4v7aEbX+BUsoqkZDlQghmacEpxzIkgUfJhUlD9r8G4EBgAfwESYUcUcUMMQ/PxQgk4f4ed23ZTbosVLZW2tTcBLMt5B8uXc8lyLjyaZGwFO6OR8ovuGsFdlLcz+RqLlBfYmRbkiJBU4HJXc0351cPHz4h26dKjzuxHb7ItVTsjJxJ2MPPLVB3bC9sTU3n86bVp2UsF6vbx+OomITTJ5o85EE/p3n09MlaroSYhENWMv/SsbCGIyFoTC7E7HK5IjTMoVPT29DuC8VvaF/4JhIcXNJVsVHmV8BlbHcZLs5oJodSPJyUGJDYcmxFTgCjuZvW/OvE0LIflhgPOd52kBE361Ys4EeEVcmlLEirmI1M9VHUeqrCrojeGeftME7ve3DihYiZ6+Hh7dWLxxBPLUmm7DWhzSNs3kg/njXWKFVGjHpYfMV7r25aQNxyxpsuLZQwvS6f4qLhrjJZjzlvozWr8e4QvSxhbTAir9drNa7B2ulUsHs2xHKnORGOTXIDK9Dq94XPehg4ENFFFkD8kHCsUb6JZFPhLH92lSqVGvUaAUwqCyTbRPbHTZElnh/qZsLh+yH36ukYzygSgrbviLtKo7CLDhmJHWpFDVO8dMPLg3RyPcqfrDx76Iyh8rTohoxDtdjN+fOqrpSPwDh4sWXpcEl9QXA4qutPM+p+m4+/cfMc7j6A==",
+   "forbidden": [
+    "obspy.imaging",
+    "pyrocko",
+    "mtuq",
+    "mopad",
+    "beachball",
+    "functions",
+    "SKHASH",
+    "pipeline",
+    "pocketquake",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: nodal_plane, auxiliary_plane, fault_normal, slip_vector. Part 2 of the notebook says why two planes fit; Stein & Wysession (2003) and Shearer (2019) show the two nodal planes of a focal mechanism, and NMSOP-2 EX 3.2 constructs the second plane on a stereonet by hand.",
+    "2": "zb64:eNp1kUFOxDAMRa/iHTMSqoAdcIJZsOMCmcRtrcnYleO2gtPjJu0Gwa5Nnv///rkwrKKpvMGABjYisOg9ZAic6m/JNIH09XugBRmmHBhhJRvhS2aFfuZoJFypUG7w3MGn0+IjutNjKFWhJy3WNP2ErPy2a8Bx2JAN7+Aj3LAFxPUAJiE2mCc49Zvk1S1hwWiiPtk7iQnTuYOLqyQHqKUIPGSEK9qKvs8fSy+oRjHk9+ZvSu7tw69PkHBQRNeRSmbs7ainiTwUGEXpW9i2hEENTjx1QaMFfqkd7l3MOUMkjRnPzUhDs/kno++9R0mk2Do/EtdL7+CxPUx9ORr4iLZdeTBvKsp9Eka27geWnLRN",
+    "3": "zb64:eNpVkFFrhDAQhN/9FfOoIPRqoQ9i/SP3tGeiLnqbEOMd3K/vRq1tAyEQdr6dmUZKmBbHqb+ARly40wwSg2VmD9cjjhYDP6zAzyRW5/NIy4T3ImukUkLV/gGYtlTKCUWSC8C9/lbwjiUuMO4pba3Tfdpxc3Fss8awr/6bIRlmmyyosg/uvllZ/ZOCwcOGyB3NKlxi4Mke2l344vsax1/R6AK/nESN5imogw1aYl1YBlDoIkkCsOB6KfHxedFwgU7qD3cfVHWNfPUbK6FMVeANyspTiAJbf8hNBZqdLkgWDpcwHGwX2UnRZqlW3Kib9hV68zON1rg1ou9uRLHJn7FDsHb5BgGogl0="
+   },
+   "kind": "oracle",
+   "module": "M50",
+   "target": "func",
+   "tier": "core",
+   "title": "The auxiliary plane"
+  },
+  "M50-T3": {
+   "categories": "zb64:eNp9k8Fu2zAMhl+F8CkBnCBtlgHNTnuDYMtlp0Kx6ViILBoSFS0d9u6jJDtpsWE3SdQvfvxJ/apaPDtEX+2h+kHBgbJngx4M0QWMviA41Wpl/Rq+IQdnYRKsqxqqjtygOGmn4GIxvrJD29Ywvo4m2DMua1jwfMjz4XIPHAlGpZ0H6qDTVjOCDcMJ5UTf84gmST10jgbYABNsP28Es4Xy1PvIyyZjlcCqIXtFy5rsvbpZohzCgMoHh23Rc49wRce6UWYNR9mVu6B9jmVf4ISGYt735PQbWVZmL7nFCFDvzkD91IL+Mkfml4EsZkQf1Thiewc75IqOopvopgsF5Zjfk35I8IQcEW2GsMl/k6Vp640ev+TVoQj+c9ehMHmpPokyUvb5X6ZNDfjbM9lwDQ0Fy+gaQ80lao9r+FokyTplQb3pIXC/h/uNohYg7uuH+3mf+dK7MhqO82iUzjRMLmMGscWtehy0H3t0mDC/04AfemvxrFhfUaasJ0mYbR1JW4YwCqAt/iRAcdViLdk5wzpHUVRKJj8lxmyX4iL20FKUKe/Es3dcEHsxWc/hhoZR+iy55P2ZZCnNkFlAuFEQ81U7efQY5FxddGTPq6syofzJXNl9KHI0fQ4FUd0KWMoh7JJwNiv4II1OfZVfe3S3D7NdbF55kpZAp4JhiFqWLlW8gdMNekHay8hNbf+0g4WU+Py8W2bYwxx42pbI9mknf/xE8sjjA6yr338AnRCDDA==",
+   "forbidden": [
+    "obspy.imaging",
+    "pyrocko",
+    "mtuq",
+    "mopad",
+    "beachball",
+    "functions",
+    "SKHASH",
+    "pipeline",
+    "pocketquake",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: p_t_axes, null_axis, trend, plunge. Part 3 of the notebook draws the two axes between the nodal planes; Stein & Wysession (2003) give them from the normal and the slip, and the KIGAM bulletin prints them for every mechanism.",
+    "2": "zb64:eNo1kEFuxDAIRa/CMpFGkdplb9BFpS7mAq5NYhQbIptMpnP62qRZwn98PnwyHFJC/QB1K4JGBJaSXQLHwcqaaAOZm15XeJvgHpEK1D3DJsRaQcW4O7gn1WusIYHmGQuyxwv5PpEh0IMCws+vdRPyorEzuUfYmRQe6FVKHSf46j10Pv73zq0Q5GDLAtpWBGi21LK4F+W9mQ0+iV8Pqghzkdxv0ngD3iZXvDp+t4tid65qmY2AzRWt482kLe28nC9xvKSWF5McVkcp9BLW9qbB9OIrMV6mPZxZjdMfbxt8iA==",
+    "3": "zb64:eNpVkMFugzAQRO98xRxB4pCqUg/U9TfkwC0nJzawilkj2yRtvr4LVAm15MN6Z59nR3ENq7E7zRegOMTReBi2SJ4mEZTZpCveqqILEcp8U9IgRqmOsBTdJVNgXUO1u7JqioWoZqas//GXeRHeyDqL8w8oJ3jHfR70J0AdFGVMgVje50k3MtKJD9HpDZmj46fvDfmgcc4DQrfSZAMplgWcScIyMadFL55PhxrvH4dqI01+5t7pPYl773B2PtyRB4chRHoEzsbX6GIYV74Nd16puujpJnJzub4ylFsu0Ww2JZYj/v6pasmsfTXaZ6P6BfdZdCk="
+   },
+   "kind": "oracle",
+   "module": "M50",
+   "target": "func",
+   "tier": "core",
+   "title": "P and T axes"
+  },
+  "M50-T4": {
+   "categories": "zb64:eNp1VN3O0zAMfRVrN2yim7Y7GFeIF0CAhLg0rbtES+OSOPv5EO+Ok7TdNwkupkqOf845Pt7vFb7YIYlZHWH1g1OAka2XCB2DZwFnCawHMQSdDdSKZQ/cl0DA+5sIU/0ObnMpYRRA38F9jngOYpoSy4VTCdgIgyanQB20jtvz1UaCPvBQK46AeQgIXzF0sdSW5k47ReCKa+RoxV5IAeDNxt2qgVVLXihkTh9LhygB7cmI0rp6WAueifse9hsY0tRvpplLA80cPUkD632jqaUx/UrotuhPjhbFNCdTQQ+vXmEdFQHxKeBobNvA9+T6fpOTd/DNaL5gPIP+IvQcKrdaHghh/bU1g+2kFBzrC+SXhXYcjfav+M9E479yRhwpFNw6YkDJkL+QpKAa3Bq4b44gV4beMUqFwb7stSlxn4bxrh01EGdBIg4EjvxJ94d1JdaPSUr1IzV/y2A10fbB60mzjikWkxX4BfgOPnHyKqcAJ+VdJhqs+0DnHiZcODq+UgCDrl8gVmXEYPXv1YrJy52WbqtmVa6nAdPCs6nzDqyPtiO4Z7wBO5uqRLbwCnao9jIc7At70WbZaYu33j+ZawKrVU/OUoSdjYK+JThU57/y4HrKU3ZxRnCoPkzjSU/r9HB4ZUt4obqUqKi1aRrz6TxQ4U/WS8nYbNX+vyr23CqlquUOPjvNzWEey729/jtQnYSwOy4KH97tYas6Z+Lzrb/N0Q95sfV4J3EXJTxdFIAuPYd3qz9/AWMqlds=",
+   "forbidden": [
+    "matplotlib",
+    "mpl_toolkits",
+    "pyproj",
+    "cartopy",
+    "geopandas",
+    "pygmt",
+    "mplstereonet",
+    "obspy.imaging",
+    "pyrocko",
+    "mtuq",
+    "mopad",
+    "beachball",
+    "functions",
+    "SKHASH",
+    "pipeline",
+    "pocketquake",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: focal_sphere, lower_hemisphere_projection, equal_area_projection, equal_angle_projection, stereonet. Part 4 of the notebook and the blank net of the course; NMSOP-2 EX 3.2 and EX 3.3 plot rays on such a net by hand, and Aki & Richards (2002) give the radius of both nets in the section on the focal sphere.",
+    "2": "zb64:eNp9kLFSw0AMRH9ly2QImaSDMFRU9PyAxpY5DcnpIskx4etR7NDS6U67b1b7XjGp9X7AIOaBk14YfGG7YmwTWQ+jK0Ih4dDW1CUYq6Av1mHA/mmHR8gG9COnMQoebl/rLT4Ko6MGHRA5eitsjEmiSMWfW1DIQRVkTKmjwKfp5LMO+yR36itZv8yMTqw7MrTOr0aNbREa9TI67F+awc9jbvot3oqqMyzJcF2UN2RMCi+pcXjk1ZyGYwKzg9Xzbo1X7OfDKtq4OJpKDaS9l3TULqGQJV8vxl1Ipr1XcG/oAKbsWRzfG1S1jJbzdfsLanmGcA==",
+    "3": "zb64:eNpNUNFuwyAMfM9X3GOrUSl7WyfGv7gJWax2IcOkbfL1s9NmGxIgzneHz54daAmw9f4B+ELnmLoONLRa4K+p9CBBd0lUQDnTLKHy0/iQbCqDcWPlMuiUrhHH+sE42OXZaK9vNQ7g4BSgxRA9Xww2TpcySp8kVj7/mm/uLU/qb1W0LA2kpxwRvye6iKoiGhqfoPloqLWZvDvWe+jP2vLdYQ7/TCNJWVMOKSt1pFwESYNjTDxoqdhXhYYmIru/WSyh+mQNeKLmbF66d/6uofwc9vrYhiVrJ2lQNc3uOTokbTbfWOIPaHpv1A=="
+   },
+   "kind": "synthetic",
+   "module": "M50",
+   "target": "func",
+   "tier": "core",
+   "title": "The lower-hemisphere equal-area projection"
+  },
+  "M50-T5": {
+   "categories": "zb64:eNp1VE1v2zAM/StELk2AOEhQDNgC7LbbsKJYCgw7FYxN20JkSdCHPW/Yfx8l2anTdjdLJM33Hp/4Z1W2qBqqCqFM8KsjrH7qYKEOqvRCK5jC4FuCTlckweNZEggPAzpoRE9qBz+0vQBnG4lCAVqLo+PECymore44ewvaxgyEUptxt9rCqqLGErlrT24kyYHU+gJSXAgsVgKV28F38sEqmApSca1thwnvFESopUYPdepDUAnnUZXEv604eCi+gAqdGTM60HWi5LAjkKQa36ZKVC/x+Q+5odK+KLXqybIcrzGjJSildgTrQfiWNThMaDdwDh64eIqT0qFpd/CVyECLsheqSUiE8mR7lDOyCMKgZXx8D0F5Ia/3kjk5mDrhWXOHA3Sx8tfzpUtwTYuOrjAfkwqnJVw3oDFUHSFlwt3jHQTHsd6k3On2NN9mEZy3KJrWF4zitQY1WwJhzuAJ8hDS8JPOnMiz8DqfPEZzsW9aYigSR7KO1ejj2Oqa75QHZ4iY5cz5TMz5yF1U9Y4+C9F8yy7ICvFHFGQL7FRWaoxoK2Gp9M9e8OC56tv9PjHz2hQJR5H6XsndtonedGATwTjX8co/y5TIxfr4a+Spt7Eo/nYHTxyLT0LX9VQickE+LBgMSRWWUxJL4hYCHmOb2y7xkDosdRaJ7/qkSMo7flI4bMEJtRYb+AwG+k3iHMyAtirY0l6UKN8zdUfoguVO10nmIpiL/sPrbV2lB3VTyYg0GybPI08unrmsxvLqkbcaJN9z4tzzTH4gXjSf9sm4h4/7eVHAmg/HF0sGk3kPVqum4LcW8vY56Y6WpFM8Coi84yZDMaf4iONmmUQPLvBrdVIY3lBPdkyxPInzyGZW/LZwxnzYw6VjXGSmfTTTywGMfeIuXfDiNof7DzdL7zdZXcxr6XZcEWDGveY19oAPmxfevCF6Wii4nR8Gm4H1mW3XaOa/ECsGLO1Wf/8BB34fxw==",
+   "forbidden": [
+    "obspy.taup",
+    "pyrocko",
+    "functions",
+    "SKHASH",
+    "pipeline",
+    "pocketquake",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: takeoff_angle, ray_parameter, snells_law, shooting_method, upgoing_ray. Your direct_time of M30 already finds the ray parameter by shooting; NMSOP-2 EX 3.3 computes takeoff angles by hand, and Shearer (2019) relates the ray parameter to the angle in the chapter on ray theory.",
+    "2": "zb64:eNpNkMFuhDAMRH9ljqxEaateqpX6AT1Ue9n7yiUGog1J5ARY/r4moGqlHBLHnnmeb48liElndNYb5IEhtCKS0MiZBRGhK2VjhdtcfvNAGY68SdDL43Yfa1DCGiY52m7ZjrxN/ny8wQROqH5t0g8bPPTEU4Pr4eWYZm3YPJIqtAzrn1+OVpYay8CiNesr8r1jdBLG0jazZNuSO+FLaTfjQywym52+4KrKbvq0Sb+hTbFWrzKT6c6h61D9q5uw+IXEPNnYhPdPXYt7YR0frZ/SblLIGlw8YwxKu2xhBfScEc87lAuxBFPCyqKru5cSVjvJzDXM9dU8mj/nDY6k",
+    "3": "zb64:eNpdkMFuwyAQRO/+ijm2kiul6qWqKH/Qb6jWeImRXUAscZu/75I0SCmCA2jnzQxmGbFb/K23d8DUJbg1sghoSjujLgxJp+IYIYLJLdjozMWOMJKZZyR/GcoLyf+ZweyfV7HtBneiy9idhyhCdbmnuummIOxqSBG6m6LQGZkKfXFVxinWsPX3jeKsDSp+GueBGhUfL4fHwVRaOXlvO/n59YAnmJmPhVluyag4CZHbNaO3GI5B/2Qit17legzBb0mtfCoajTEHqRQdj6ComBYnKbF8awH7CxJFdRo="
+   },
+   "kind": "oracle",
+   "module": "M50",
+   "target": "func",
+   "tier": "core",
+   "title": "Takeoff angles from your ray tracing"
+  },
+  "M50-T6": {
+   "categories": "zb64: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",
+   "forbidden": [
+    "obspy.imaging",
+    "pyrocko",
+    "mtuq",
+    "mopad",
+    "beachball",
+    "functions",
+    "SKHASH",
+    "pipeline",
+    "pocketquake",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: radiation_pattern, compression, dilatation, first_arrival, head_wave, takeoff_angle, azimuth. Part 6 of the notebook explains the sign of the P wave; Stein & Wysession (2003) and Shearer (2019) give the P radiation pattern of a double couple; NMSOP-2 EX 3.2 plots first motions on a net by hand.",
+    "2": "zb64:eNpdkUFPwzAMhf/Ku7FJ1QTitl4REgdOaGfkpclqliaVk64avx4n7RjiEim238vzl7eAOUqX9nBRkHsLNwWTOYYGx4l9B0umh9AVlECYAmdcrMk6vQlRct/oRMoNujiHLZzEAZwTMp1tdA4UOtA3D1OZLMX6iCoH8rWZPI+ITnvpjKem1kaxHZuMA+beyiLRCA8JI4mak4/h9N/oXqyWPV0WYaJBDz6FtlwDTBzUxWLm3NcB4y0JHEvKGGLZPe3wuuLIdPR2jxg0QZwxWkHKVIZK6GucBCObs8r9anmASl/aSsFEhcuBsk1KiFUZjP3LZAFWbZIexra6MivxucQnEb7YtGbb1LH358ffP0rbdg25wC4Ye8pVvHTG6Ek4199Tec1qO822thfQZZsSqv6/0FK4J7s9t8PHDWrFctfwaZLlqhw8OCj1cPqaPt2w+wE/5toO",
+    "3": "zb64:eNqVUstu2zAQvOsr5iYbUP0BBiugaICgCOIGKNJrsKZWFhs+VC5lww3y7yXl+HHpoXuihqOdmV2qSMcW51p/BtTkTcKedQpR0MfgkOiVQ9+DfAf6Y9yUhgbBM2I4YOQISZRM8G2lxOx8e9tuoWaFFZQP0ZFtl0jGsdxciDVjhj/qU/5dPeMwcGSMQUwye27AVhh3WaGPpGexi2EZKFNDjzQwtGWK6E2UBBcKUTJOCfx7IjtTxsidOfdYbGhTxDx8TrSsVKKt5fYmQR8imPSQhU4xcTBpwDMyfteuswEdQuyMp8TSNlCdyUSvs+mPYRXw5OhAe26bCv9dyiQ576G0G4OlaNJxPl/zVEJ+92t66d3F/ltNu8js2Kd6jdVq1aCeM+Yv9fXHT4w0O6xHvyvQ0+b+Chn9KgUshzxU+w/ztWM9kDfiCpnw8O3+yyNGS55LGwlT1EXvLcu/Z8CFju3FzXmjJ+C9SmUb1zdZ0sfJz6v7vpWnIzRbWza0yA+Vuk5Qh62Mx5fMKm4LcU5Y3sQ8tyEPAOV2+RfobN1d"
+   },
+   "kind": "artifact",
+   "module": "M50",
+   "target": "answer",
+   "tier": "core",
+   "title": "First motions of the Sangju mainshock on the focal sphere"
+  },
+  "M51-T1": {
+   "categories": "zb64:eNqlVU2P00AM/StWT6lIqxYJCXqFPXCoQLAS4mgSJxl1MhPNR7NdxH/Hnkn6BcuFU5OMx37v2c/9ucBn1cfQrSprjmSCsmaxg8V3Gx0MjmpVBaphsBqdCoo8oCNwqu0CNNYBGhs64t+cZQ2PHc0voDz0hD5yGqi0rQ6j8gSNsz0Y60K3A76bH6Gy/WANAwDbpM8OT5LAK1MEPJBtmiUH+WJKvixTFKcPV3dvouVljl4vSlhUHZqW6pUyQwxnlk00ldCG6Rg41QwCHcPwoAKM6KFVrNAavll3AIm3gwjCKvCLoXGKzqVsNJcSvfIN52A6LBcgS4Cp5A5qdVQ1pVo+9j1XHymJOwHgmz2GquMDH1DuePhxmuMlCrWe7ngoEEzsf3A/ksgbCBa25VR0IFexRthSVoPbx6kF4xcK0RkOCXHQBEWGW176v9zNFBi7MirQXKeQGYDt6kMmXybxjqgjST1uv4jKHJZX2SChHE75inB4xSBX25RsA/TE4uiTiMqBtkYNg0YzofYdDnQW1pGPmol3eMwijs6aFlLQGj4xljMCKDJkfyHD/RC4ExU09RXGDv0dl0n/NewvSVnyM3cvTDSZlqd5fykiiRIeKPbl8q4Kf5rL8+W5wxNT1SYrPhzJnf70YnKHULbDYL20ZDZOnh9D2YyfAftBqxB5zPjGaygcrMEs00+9hFExXpNuNshiih971lyA1nnQtBrgSFWwCWVAf4D9m83qcbtjz1B1yFEMV44Jqzs3mylXkZxeJs+WUNvRZKKTYf9zA01Z+L3VTP2jUBKFBK3guzm/WU3JKxIikEZ0NZN1QVWodzyOsoOCw1RPAkp4t4HOOvVs2Uy6hO3bzSUiDiV4e8724lqTR95m6rJqbvGLLtFkX1N9v0jSdvFAaTKmqeFFoA5M/EH0n9fGHJmarOQhZdxdL5Bkm2mB/GPr5E1Vv7x9Eubkv1UyjRfUX21Pf++indnkhmbjKvH8iFICz/vyah9HH3k0ZSD9tIdD52xsu/xn8CSjfg5+zw2SRSuQ2a71evHrN6mlbI0=",
+   "forbidden": [
+    "pyrocko",
+    "obspy.imaging",
+    "mtuq",
+    "mopad",
+    "beachball",
+    "functions",
+    "pipeline",
+    "pocketquake",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: polarity, radiation_pattern, fault_normal, slip_vector, ray_direction, takeoff_angle, misfit_function. Your fault_vectors of module M50 (pasted in Part 0) gives n and d; Part 0 gives the ray and the P amplitude, Part 1 the misfit; Aki & Richards (2002) box 4.4 and Shearer (2019) section 9.2 derive them.",
+    "2": "zb64:eNplULtOxEAM/BWXd9IpBSV0FEh0FPyAL7ubWOyuI9tJCF+PN1GkE5S25+GZ9worS9BnsFkq2BgB65CjAlVjEAyEVTt4nSmH/ZxwzgaVpWB27LHUTBMssTcWSMIF1IS+4g2C7xtIsE0nXHDzizieuAIniNiPzsF93gXIFPCHymzjQXMBTun4Di7ub+PNeWpuwmu9dvDpyh+AZcpkc/AgmesAuLuRwhMYFQ922d35zHD9u25Zri/7A0pDbdT28yQxUG8xwMQZhWw7HAtpIjtROpfikDXSMBqsY5T4yG7xAqUURY+Y7cZ3jbLs2VthCwVXuG//9Tp48341LlG8+xL7EStpUS82BODqkb/9D2Wnoueby7TBXRhD7z3pAwNwQKpqZ+fa/QKAyruk",
+    "3": "zb64:eNplkc1Ow0AMhO95ijk2UgQS3NCSdzGJt2s1+6Ndhxaeng1Nm1B8tOz5ZmwTYvY09R1MmST1AN7eAfOKIfoUAwctYBpcB5ujR9EsJ+4wSuqQ6cQ4ZBqFQmmrRp0HXaQgcYbnwVGQ4huT6WtR3tV/yLJSlFRiWFn0LX5WBwojtKKitTtaY8inSXQeud+rvuCCBYgnrNm2xi3iWoe7xVJnVnhpG5MyjzIoj3+UjTpGkWNAtNjgjfFSrGj/GK/Mfpk8sxyd4uw4M+7K9YLWci7XqClOlEXrlZ4f9vrmKJ+MDxpOO/nF/A1bX7f5ba9PuAfDWdTFWbF454tm+n3QD+0FnrQ="
+   },
+   "kind": "oracle",
+   "module": "M51",
+   "target": "func",
+   "tier": "core",
+   "title": "The polarities a mechanism predicts, and its misfit"
+  },
+  "M51-T2": {
+   "categories": "zb64:eNp9VE1v00AQ/SujnBLhWIFKCJpj4dQblAMntLYn8Spej9mPVBHivzMzaztJm3KJnNm38/Hem/2zMHWNQ8Rm7WzY2bi4h8VPSh6m+K8ch6PpEgYwHqGnCLFFyCcBaKd/pxvgsG5Nb4MLYHs9CsYhkG/Ql4sCFjvj1ztPbh19iu1cssIQLy9LLYaCQHNB0+A6DZeY2JoIg6cm1VxZQAN1xttoudmlw8aaHh7Nnn9Nv++4y4qOqMDOOhtXJTy0WB80sve2YViTs54oQTSHDA7OdJ32p0MXMwlcbM/xPBd5Z5TCbxiT55IQ08BFlzJaoQP+mhJMdBUvqV7dZyamy0qvR+Y9uQo9jxWitwcsoLFDAZ5bXF3l5psZek4NMr/35iTZQmsG7umxgLuVjvtS65tgZuoL6dhC/j7TorCgVIlae3vEXqkQKoWIJ5HtLNdJdN6lvo6WuEg4jKKNhc8nFaV4ZTbVZnTaA/XRmzreQ2YiwKbgT2Q2yrJkKjp6hruPm60wFMaTDxcI9lAk+LyBZU+Cgc1qq0QGWL//tIF3r7AcLeGrqdvzNEB9zSIIgXhEz2z1o1jolANufS2yvGFwsEGnk2vPNra3fMaH8/QFb9CVzON9WcEcKeFHyLqM26o+vsWvV39io33qYkqT38nHN1e5Os3en5vcWR/i9hKlg+DvZLqpZohspPEd0EqTiqro0gigYpsHLr7SfmR3tR2hVRKd07Mb/c2FVBnEhtNkHCDGeaWXecgNaMOTSP/patowjvR5zfRLd62Ep+lVGNNxhSVv3HAq+TFwnLUhDOMs1PEMbJRXDysEnCXM/tHSZ3s8txRm5RjIUjoKWaDqYvKhS6w0dcxlRuTHSbdgO55eXxlfL75iOm6eXw8UZ4ufy8Xff5rZHVs=",
+   "forbidden": [
+    "pyrocko",
+    "obspy.imaging",
+    "mtuq",
+    "mopad",
+    "beachball",
+    "functions",
+    "pipeline",
+    "pocketquake",
+    "scipy.optimize",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: grid_search, acceptable_mechanism, misfit_function, nodal_plane. Part 2 explains why every mechanism appears twice on the grid; Hardebeck & Shearer (2002) describe the acceptable set of HASH.",
+    "2": "zb64:eNo9kMGOwyAMRH9ljq2U9gN2j3va+/4AIU5iFXCE3Ub5+zVE7QEJPJ43I34LdqmTfiGHB8HWdioREqspZEYoS6J+a+KPFKsh2oAoeeTSLRlcTBBSglrlB90m3m61AytvzX45BcTVeVwWaJKd1K6DB0xY+EXdf8ZkBIOU6H7psZl1ZsP8LNFYCi7+CDHS5h1DreHQ6x1/vjg6E6zdNHP1x9kAO9vap5o9p22dzO8+PFk0Qanb6UX1+FhX0U8FF71blkZ+523p6YmSBqjURhmP93qPDf4tYXRSk+///qKF4Q==",
+    "3": "zb64:eNp9kbFygzAMhnee4h+TK0PvuvWcLJ37BLkMShCgi8GcJULp0xfjkimtF1uyrP/XZ6cW5cZ6LOEqGdY9UkoAeD8AzlqGtZEZkfqGFaFGyn2E3iJd7Vi4JkqV6p+ttQffOc5YlAbPJbIk1IeJ1UB9hSSJmtSWxG+nnbY0MD7xhbd94e7kx+zquUYnWovtVi+4Bj92fRqGvqUbrS1hi0Ko6xJD8BTF5hITS9Pa/vR6Lpz85X8boZa4eB2CiknoNwjakfdpiNXeguLGPPyLYuugmMTa/A7ukA96kjNeYMEfEya6+BkaonGFy5xLikbujAtdb08lErjMIIYJAlIQbFy4p599iKRgq1Ksph/XOdz/AJhNnTM="
+   },
+   "kind": "synthetic",
+   "module": "M51",
+   "target": "func",
+   "tier": "core",
+   "title": "A grid search over strike, dip and rake"
+  },
+  "M51-T3": {
+   "categories": "zb64:eNp9U7GO2zAM/RXCUwskxiXd0ql3Y5dDm6UjbdO2EEkMJOp8RtF/LyU7uSQFOlkm9R4fH6nfFcbZOZJg2uoA1S9OAdAPlqAP7MBRO6I30cEOhG9+99CZvqcQl3sy0i1sny/vajhq+DsO6NekiXAtV1cbqHoODiVX/kGSggf2SmG8EQKfXEPhULjvSDx0NASiWCg8b1fO+aEDrWYxDBSUQtG7/dMFuCmkJRnljlzjISNr+AYdp0ZDLaezfizzKRZcRKfd9qLECCPaHop0bDgJGInwuoEjcIBnwHcTtYMwA1oLfdb2pqYZ9hG4X9ioZd+pb4VVTyei85JxCsoCAwuKYtZ+O7Tbs0VPD/02JBPR4uHHpKZgRDQ6GRmLuh6TFSgEpd61pf9gML0ba1D7WHBqrWeBpxqeWa90FNtgGvrguvPuoF93xrDkizu5cLYnzyIz5UShXoYasDPo478D1eGvuRrWlbldhimwH7ZvaBMV8E9262JqD1q/5DMJwoRz3gu59JJdW0eSYkIL0ZqzVnkZqT2V8HEDrzfCr+ZdxrOq1INMN28lwjRyzDLipCszc4KT5wk+Pcxp9Zps/1XlRX0jJzVQswN10Mzw5bq+uQTmRRLTZqHl6jbrXYb7ua7+/AWwnFeU",
+   "forbidden": [
+    "pyrocko",
+    "obspy.imaging",
+    "mtuq",
+    "mopad",
+    "beachball",
+    "functions",
+    "pipeline",
+    "pocketquake",
+    "scipy.spatial.transform",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: kagan_angle, p_t_axes, double_couple, rotation_matrix. Part 3 explains the rotation and the four versions; Kagan (1991) and Tape & Tape (2012) give the theory.",
+    "2": "zb64:eNpNUctOAzEM/JU5bkXfFRcQh3LjgFSh3pG76+1GZOMSZ2n79zjZgnqIomRm7Bn7LeAssdEntBLBVHfoue4oOO1xGJxvkDpGS4NPCBJ78gigMH6rdyf8cJ1M26C6yhBH6uf4qZAW74/LKXYUE5aTaZHtQRenqAIe0EwW+h1Ttb5hu39sdoeVjq94MekFu2echpTZPUiLqhY/9KG0I2yMs0FPKbrLHHuDoyRKToJxyYRDNGobqWes4EKS22MN6/xhXbYrpEhBT6JsSV3Piu16Wly4pHYfPWcyxboWrSpj12zSGVaTxXoyxxaNDAefnQ0nuxqxEkES8myPjHPH5uYs2XGpeDG8zeNUdwyoCB35tlgFHWSMa8fFxgalMnLLDoxfgudqd3PYWpowbjSDRR3ZOtNVp/hivslto541/ZHavMOST8e8kYsJl3K5ho9WQ+e/PZ298g==",
+    "3": "zb64:eNplj0uKwzAQRPc+RS0tbCXEy6CIkBOE4Ato5LYt4t9Ims/xp2XPgMn0qqiGelWq9WYknY9ke4HtzhdA2Xn4GKeAusS9xE2XqHFBPqFAI47h3UdU/No8ufdu7NX4xj1TD43XW8NX6Mo8CURvprDMgRqN6/5XCZ21swcZ27M/uEXDTcgL7lCIMgkJmYRk51ewFOcskXhC0C/kXDHNEuYWD3y52MPFgL+t0Y0UsIEkuNoRVabM1A2k/40w3jIgV4PxHYWIRCvxpCVyyeAagjzhcOCYrHOfhDdjn/uI1HCNTpsa6jxR0D8/3me1"
+   },
+   "kind": "oracle",
+   "module": "M51",
+   "target": "func",
+   "tier": "core",
+   "title": "The Kagan angle between two mechanisms"
+  },
+  "M51-T4": {
+   "categories": "zb64:eNp1VM2O0zAQfpVRLuxK2Qque1uB4A6HFSfkbSaNaTwT2U5DhHh3ZsZOmxXLpUpqe75f53dzRMoYm0donqB3wY/ruwS9jylDwOPgyKcAdz4nKDvvwScgzpAH3O3gHkZeUE/51PsMLjCdZBMntO0rZvAEroIc4OPAuobuONTR8LLW0y0QXsofEyefPROwvTo6jXhoWmgE2ZPy/s5zLFM9JjhFXqCPHIRceJEZmevTAZ52hH+yp3SlA0zyswxIINxt0OLzIISD+/XDQFWiar6aVEmLNTj2rYmULY7WDa+ypBN2D56mOd/YznQ0UXX5tZlJtRYjktJZnMjyF6QDPHM8g57jSTgWBJ4pp+to2udDs1kgtHbDRZSZvgWx5Q7ZnUW3Gr9CxCD2eonwZtlbjtyKAXeKWJ8LKfGe741kzzE40/8V8xy1B5OjToR9ctl9ji6gjTfWRx7nIOGkHP0ZW+j81EJ0+nith/jcQRpcRCknyTGvrnXSz1b8QdAWTFh7sbZleC+K8uZKcc/OKK8vYvAtXy2AjcUyFVaeoRdRFlV43DVh68Xr+tsNMgQjeY2nUK4RkUi7+E7yl2b/Ny+FXlBOWQfgTjobXamP9fy9VvxD8TkLccV61iYnjdKNb2WZKpF/iLewS1Fomk77GhSZYbPFCm2YS5Sb/nBx41ywv7GEWV5BMWy93P3FqU6XNwM0qWrfnGahmkY/pdKkaqReqc3pyue2svssHZo/fwFIra6j",
+   "forbidden": [
+    "sklearn",
+    "scipy.cluster",
+    "scipy.spatial",
+    "pyrocko",
+    "functions",
+    "pipeline",
+    "pocketquake",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: acceptable_mechanism, mechanism_family, kagan_angle, rotation_space. Part 4 describes the rule step by step; SKHASH (Skoumal et al. 2024) reports a second solution when its family holds more than a fifth of the acceptable mechanisms.",
+    "2": "zb64:eNpNUUFuwzAM+wpva4CgD2hfMOwBOw5qrCRCYjuznGTZ6ye7Q9ubLFIURb8H7DE5vWBZM/LIWKJKlhgUsQfNMzx3IwVRr5AAwiyaYTOc2OF2wIv2knEiaKbbzNCYMibmRaughCJdB0A+hgH8vdKszRmfoxi/kKqoKELMYL/k4wLJil6S9TnkdBS0MDt7cbrWuicvc0V4Y6MUFTP1cIxd8mimPf18URhsl930FMHpgwaymyrUp+grONVmv4au5IAjrqDEGGTj0L6OS+jm1bFrrtiTZFMPjBR3nO6EN7VIkkzcwsnSItHEtsz9R9a+3qDyy/dGqYy/ibvnW3ph9TdbaO6fv9FUqcQ+bvyq9LijpHH+A2XirQc=",
+    "3": "zb64:eNpNUEFuhDAMvPOKObYSUu8rNpet+o3KBAMWJEGJWUpfXwLsbq1IluPxzNjVyK0anHG5AtUUkqgEn5BCVG5Qr3CSWtESSake2RRLLyOjOoYlwQcFu0nXS5F5Kmv+M7YSkyK02PEHoiUn42pOBN85rpggfsdgEe0xUEf+zbHtYUvseXpHdYWjn2/yXTayc8WwmJda0igDl2hkKhFpYJBvzg2yCWvKDSS/nIvTxuPnA352NcfcyoLkJbl0yjxPtcs8fYZZHzRFJ3dGTXY47OQp7RmbwQTaHj5J6SuS42PF3LRhnN127U0yl7fgNZJV8wdkeYCM"
+   },
+   "kind": "synthetic",
+   "module": "M51",
+   "target": "func",
+   "tier": "core",
+   "title": "Families of acceptable mechanisms"
+  },
+  "M51-T5": {
+   "categories": "zb64:eNqNV9tu20YQ/ZWBXyKhJG3HSOvY6INhNHWRpglqF0WfhBW5Irciuezu0opS9N97ZpYXyXaKvljSXmbPnDlz8d8neaXaUhepabs+nFzRyR+2d+S3lfLVqrO1ciYY7Wk4R6HSFNS61mQC7ZSn0jzqNqPfrduSbUlRbrt9dpLQCb7gJtt8wKW80vkWm31dUGsDbUxbUKPZrvGNz3L/mGC7Dc7Wq42pdRY+B1I49PG3h1PbB0Zj2o3lk2Ra2jPQja0L7TK6xaOCbVdZYNua5vzt5cWwTXZDF9k7m6v6Ax4kZ8oKpjcBW3zH9W0iL7Ev8MtTp0IlPmg4F8SHtfYRzlaVql1FhqjpsYonC8JJtyc5z+8Juvv3dzf3dzTQuI/EJbTVezC5joDjDVPwpWM6aMH7ee877Oa27puWwMDWxyDs7FIgbpRLN842aYTEWN9ZB6iD6VCpMCIpnSrw9A3xBWpUu6c5xkkELY5OSMh4wgvxQrTyyoNvieb+Za1ABrbV5IMKBt/haMXELZjZoLbabjaAVzIVvKS+mKYPVSJueVO2TIVEYeBt8NNAgK5zpg1pXivTsKczYytfqddvvmW8LC+2dX93k/LSc2afy6eB/EXT4ijfZg2+8kAf4NLOhIrYz9qss+GlBdRf6c+FKcHYYkk7YMVRE5bXYiAq3uk8Gued6Ih1jZpzTbV+ByGKktYaCVSYPMQH9WeVhzrqBKLxz7lOJpJWjfEbExLE2BQrr5XLQamIlRaDs/ynb3OOil8m5Ou+TAYOEnpGJQ4E3a0KjUPB1jhh2tVOc/IkopLkOBfm5NiaUjXX9HLKKKfFRf9/8yCSNuJm3j5CXWOOTRscVMlm3VkXIAKqLSsGyey9sA9l7nBGealUDVIh7TvKFe8unvEYqUMmHRC6zOjXvo2R9fThzXn6cJ7Ez9fiqXy9IFwFGl5A5KOaJpiSj4yJ15tj1OKqPJw+qrqP1fPeNrO77wWVZI8XKkexD0trHXZaty+lshdAfPZgCT/3YodVis8iKm8xpjrjOw7HNb3/6cebD9jqaoVAvL68PL18e/odhBTLaQPffWXzbcxo0MoJMpfGY3MxueFFCgqcLfpcF1NucLwm5hIu1AO1g2hiitnBXT49FLrYosSVWKQGJUcKWMyFFeqk5AtqCTvj419PiiBsDBECQeznQbWHJKLidhzYJ5p0OvSunV3s2zQ6Oef/09IU65cYswc6r23J/RcWUI2cRbGSenpQFceroGeHbnya+TLUp3wh+9Pbtl4etMmhMb7QCYWhgRxdmCiuqadbh2tRlC5uObvjIhm5WJlCgt6OxV8ujamVxuIxeT71xbH2fXPO+Zaex843toJuNTUCASd0RFOS1N580fIOu5oijh6cHI8dKH0tjx3k+zzX3m/6GmuYB1ZzjNn3key8BiJw8jUqYxkQkEGVLCBn+7LCr6z7K2NLIj3VdfX++wfX64P54vABJFGrkN3oJFyMxQuvQ4ADfhbIVHYPmxtrY2xjeBCWhuFJGhct+NZU0+J1lHzQe5wPnLO4A8MYsbwpYjLcsin0HvQ4ORqLVmEeccDT2zO4g/SwiNr5GcGM09pfiyFpn2f4SmfZRcztQQopezpPmMNwwItzIfvlh4fs/uHmapo0+Nwqt4AFhMNu9vPH2+z27uYaDUSgaZRTxwJCZkb8Hk1XZBwr6jB0pFhkleLdCcfRPBKBTG+ruTxmY2EZmvxYuoeTs2FaOK1ilcWshsiuwSttatOtxqeEy0+M+A1J4vrlFXGZGK2CvAHONIwUqG075QpC3QkGwk2GvJze5cLFne1cPI4BT0sV9H8M9cwfAg9LLuYxoEVZfzqYC3mm9lrSjKMA8LVWXB5nXS7GxSvML1Naj+PLwUGEc++X2czx/emn+HSlHlkD0+3ohkMLf9oK488pV5+7xUGUmxwhhf9S9pHzIXuGqspu9r5XNVLPdD4OgXyV9wGJz6iv9BM/DrXZyT//Atv5pq4=",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: skhash, cuspid, takeoff_angle, mechanism_quality, kagan_angle, checksum, run_log. Part 5 prints SKHASH's own line on its takeoff convention; Skoumal et al. (2024) describe SKHASH's inputs and outputs.",
+    "2": "zb64:eNpNj0FrwzAMhf/Ku62FkB+wnXoYdBTGIL0HYSuxaWIHS67p6I+fmxAY6CLpPb1PXwElJivvkJsjcf0SJ0pePQtuzItAHeMHKRbBQWJOhqGJbL8cUVwUxnPZTY8nvIAUE5MoZh/6wn502sBkFYhSb6KtByK+P69tdz010JyCoLucT935rcbRjeMwwIcqolBrnBhDivNKYmMJhZLFnZN6Q1NTFRalplfinQOHl1b8GI7beqXYp798/IDEpGxbXB0HDDGByTjwnYMi5YBHfRVj8hbClOqqeHXbdPYyeMWQg1EfQ4OZlhXOZFmqoYK/uu1W7VfnzMZR8DJLa+S+UZs4L1l5VV9o3L+Vf1l7SPsHlFaZcg==",
+    "3": "zb64:eNpNkk9r4zAQxe/9FO+2Meiw9LLZkAoKLVtoYQvpbVmMYo2twbFkpHFM/+x3XzmOSYQO1sjze/OenVpnkiv7cDCRhSltbpDXNoYxaZzX5i5XXjHVEGqII4jZHwgji8NXv7S/f0HfoWNfjsSNEz2zkhjh4PWFlStlFSxh6CEBLAmJquAtbFi6xLQU6vqqa/f8dL97+pZwvlKQIXqyYJ8hxufd5KHqGLrTjDaMfjTR4khRuDKHmdzwkbA3VTuTJy06kpeSrcJ5VgXzwd0gTl3EFpNYJW58oTCbnI4fVOjcG6KQvYnU54c5xzpEkKkcTgpZa7unJHry00S2ZSITK7faTgnUYYiowmHofMq03dvja/nw+Evh7ffLRb3sONUsxZ/vf+ecWtMYX6bTd9TnqD5nR2CrNzi9sJqF1VWKSSK3pGC5V4jZpS7+XSNbbkynl/SvKMs/0Bn2yYWqzdjV7XqtsP6p8KMo/gPhbb3M"
+   },
+   "kind": "tool_reference",
+   "module": "M51",
+   "target": "answer",
+   "tier": "core",
+   "title": "Your grid search on the Sangju polarities, next to SKHASH and KIGAM"
+  },
+  "M51-T6": {
+   "categories": "zb64:eNqNVm2L5EQQ/ivFIjgLk1n0UPQOPxyCeIjr4h6In4bepJO0k3Tnujs7N4j//Z6qysvM3Ip+m3RX18tTz1M1f9+UrfGNrQrnhzHfvKabP8MYKQ37bJ46S9M1GdJvl+loEjXu2fod/RHigYKnMgzOpt3Nlm70Jzt63/JzWx5wPXYV+ZCpdr6i3rJXl/q0K9PzFtc+x9Dta9fZXf6YycAo4/W7e+KzRJshdGprP+xLk00XGv1O2WQX/OSJH5p+4A+qQxQntYspUxz9LTlPJ64ut9HiInSVjWlHP4bhJKbHNqDEg+u/+v67V9M9hZpe7X4Kpel+Rd4UXdMiwzrjyho+GL0UboFIlsIPpjF+f3S5DWPep4H6ERnAd0UwiicSU3Z8kd+X6QoZXJssNijfRJcBbBF8d3rZ2nQpUGvSlg72hJY9ndCtpMH2rlJ0fKAAj1FSRjcaG4fofC7Kzries39Lz6YbLYO1Btin1nz9zbfkkrSRc3r8+W3BRyjjKhG85MCKH8Pbg1pW0apj6OU5eHJCDU+nbNMbPRGuRFuqfeLDfsoTEBWDKw+c4GPoEb14oOx6WJmIxsXgG9CxtR5MnTjBWFA+BuKHifMMHlDi1G5pTFaCWhM7wCrdkATl/g1zEq3SSjkOVa6ubbS+xHeghCx9pYwH0XqzSsf4dAQ3pOdPFulUroRowAayH02ZO+UaepRWmW2El/XoS878Frzuxmar3NgCEzR8e8aCvbBgc85jGkxuE15+3rTNeQ5L7HPfQo0r97dy+BmXZ2cLxwRFIbSrPifDrUAkXgrhVVpaCFup+he+RLCmm7o5M2w6erL5aNHYM7GE49KvKbT/Ly3NM+XCAx8k09tLLy+qTerwoRC8lmarN/atOE4zRcpgtun3ljCLRP9LQOG9ClxisDGGGo9a9gNCZ7uj30fNCIxumEpKOyHklmFqIeB5RKu+WVZn6kNJYKshb480dKa0Uxm5QJRiiKEaS6Hub35tiNJqwW+awZP0j5ryar1mnea0ZaCq3DWL86HJyc2Uq4L4tJXL81CY9whCFFrZArbmJYGmhypKZuEsLc4s2ZwBzOuzfs/d1y6JNnkCPN49UORhgRXzBRYHVzqzYNpKUj1k9S/EUF/IZbvEWK2w2nRXyd28qmjz7v7ufy2022WKXPEGKZquU0AUrQiYVVnT0ALDkwCzjH8PHfG+PstF3rLlirGMoypY7XZrnpXILJiBO6nCAVa0WZXzonOAJhOHhxwIu090b+7BH0zRmdQypkFLjGdDD6wSTIJHGdiaGnpd9C4ltPPyL0UdRt1maSxLm1I9olO8pPcrb7k9M0vLDkiKHojzvNulJnd37H/3V0Izr7UGaMPYIPm8Gz7sRJJcixmG7vTD+zha7Tf/D7oIgMHjGRasHh7hUkUaiuSadWhc7i5vG+DwbJWu8x3LTb4FDD3qnR/19GE9lQiy/67nq34uCCy7ZlmYQiP8nTvpHJoEPmmbw4xpNB3qcANIe7B2YCeiF67PyRP20Q8Y8/98ArZuntY=",
+   "forbidden": [],
+   "hints": {
+    "1": "Glossary: sp_amplitude_ratio, amplitude_window, s_minus_p_time, deterministic_computation, checksum, kagan_angle. Part 6 explains the amplitude windows and the S-P time; M41 part 7 made copies and fingerprints the same way.",
+    "2": "zb64:eNpVkUtuwzAMRK/CXRPATff1vkA3QYAeIGBk2lYtiwJJJ/Dtq0+LthsDHI1nnqj3CA+WQV9B09XwFggMF1KwmYBQgic1uADG4b/0Acm7BXgEupPs5Rut2tTQPMcOdLuZoLMatsJByXEc9NhV2yf72GqEdAsGxnX6eLmA8EPhgBBotGqEhShp0x/eZt6s9iugwhnPxx6UxU7wxvKdmfLcgWyxzhlqog4cp73OI4eBpIPRx4kkic/wK7kZo9dVT07vfc4of2+xqBMNlboG4IQ+9tB04JjjySwn1b7W0i6ZMmetb+dwQ7f0RYnZtCaUslE3t+09acYR/QNS1ltpq1xoyuWzhPZzlDigeMtv8swx7L+mnTeBJaPGa8YMdPoCdCywfA==",
+    "3": "zb64:eNplkGFuwjAMhf9zivdvmxQuULGeYdIOUAXqFo80iWwXhBB3X0LZQOL9cp6Tz87T3JnfBmpWKNrk1mGjLW5qPotDXgKTGr5gPFHt/1vfi4VMAjpSNIdIdkpycFDzxikuWEmnP+gd66eMQIOtfxJH6nFi20OxRgZHKO1S7BVeoWXBMqTT9oYa+UjY+t1hQVX4bXLH/etwV19LLd0Tp9RJjPqVUC5Fg4cueo+j3Anz6GB7IcKQQk+i9UgsmGi395F1wsBxJMnC0dSt8KqDH33s6ufSbJ3mBpdlX3DfNkv7fTOwlDRljm/6gNekcwpe2ErY6xTD+an5cb3+AjsDjvs="
+   },
+   "kind": "tool_reference",
+   "module": "M51",
+   "target": "answer",
+   "tier": "core",
+   "title": "An unchanged rerun, the S/P ratios, and polarities only"
+  },
+  "M52-T1": {
+   "categories": "zb64:eNqFVE1P20AQ/SujXBKkYCGVU3qiNEc4gGjVE1rssb2Kd8fszhKHqv+9M7tOKOXAAQXNzsd7b97496LBLiDGxQYWvygFYPSRQoSBaAcmgm2BewTjuwEj7NEzWM8E0XoJNlCT5HiY21TgkxsPy/junc0OIZjGGh83EvEvGDi35V6qjs1bGyJXizUsWgrOsGK6Q05BOsEXmOQvdwcTgjkAtVLhLSO0AxmO6zwvGBsRfpgh4TYECiC9pLwNxiGQzBSKvfGwvN1+X4K8LR/ut8syVXNOQpSEoxwmCAPb9QxPieGQE7TwXYInruBhBBvBWZ8iNLQvKkRK3L/FPQXuN/ICOKBTTWvB1KHK1nnY9ygvk6l5EJoelapl0XFPYCZVarCjaH3dY73LOlJohBjNu9IUJtpAGtdl9BrQHLVVlud+pnr1mTLgUuQPqn4tErTJ12zJQ8hrwkaULoJofS6SkC/NUQszBAmcx4NzyMHW/zlPRZJ3OL1XcPM4PmcVbx6fxyy0sowK+yjfyoit0jhgzlOtRhPYYzjbiEmGAZ4EA4yDqdXEVv5XWV+UT0YUazPghxvozUuZVTY/GmYUM6oDNLoP5DvZ2CtWsBVLH05wZBHfaILL6lLpyCUkr5gkfHOxEUUHtqOs9ukA7uLRO1hJyi24M0FVY/Ex+bz7esYntvgMngLREfgOioKNJFJpi2LTgnuVKfQkmpWGa92ZBufSqHZgceyUo3qzVmQq8hnoKdhX8iwRM9l4JnYkN2p/NHV/mp+zj2IIuqudzfzurFg+NHK12fIihf5mshnfeV5O/i7dk/sH1BsD/cLAXr4EGefsm/lcFHGKScDFcis/KeipBEpdX1hOxqlh5uRroRLk4t6EO2lYLf78BZ2YyVI=",
+   "forbidden": [
+    "pyrocko",
+    "mtuq",
+    "obspy.imaging",
+    "instaseis",
+    "mopad",
+    "pyfk",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: moment_tensor, double_couple, north_east_down, up_south_east. Part 1 lists the six elements (Aki and Richards 2002, Box 4.4); Jost and Herrmann (1989) compare the frames. numpy.radians turns degrees into radians.",
+    "2": "zb64:eNpNUEFOwzAQ/MocWylUreiJ3hBF4sIFcUauva0t2d7I65Dk96wDAQ6WpZmd2Zl9yRi5OHmA5fxJpaJ6gsm3SILKKMYFk+WkdOqHSgstYcLr+QkUKVGuAr7ikSccd0eVOqQh1tDHuQ0nXGak/UdOJ/TRWPoGQ4aBzClRLcHiHpM+U4qZsclcqu9ARmoHx2Pe7vDMBe9v5w5jCT8pqi9EDYSZNKw6tkyboUcQpJAHWcQdhIfq/8B/9g1s/3aJbb32XhvecmtFxvq1JkbPovTI60IbB0egydiqZTkTrjH0PTkdCNJBM/+eQq9gkIy2nZrxvsNhWXp3UCEurAklOJLdF0rzinE=",
+    "3": "zb64:eNo9UNFqwzAMfO9X3AeEUWifShbGWB+3l7Hn4SZKYlrLRbKX5O8np8sMQnC60+lctyO1V/TiAjUATkAt1GclOF7S6HnAJSd8nN8M6PD1eW52tePhRlr46zs9m0qT+CtV6Py9grgrwbP1zjtWk6ifQTcKxKkIV8lrnHF8OhZiZp8Uscf73qbJB1IjhP03BxMzdf9mm98BMw5wIm6poEsIZAe0Zh0nBUdJYwVymuyiOHGzG/wP4eIs7N8Sq3VxhSjorSybQSkLN3h5zEovAJJYjHvUlT+NJLQxR6cPz2y5NebNF5P4lIhLOvu9X1HNb1I="
+   },
+   "kind": "oracle",
+   "module": "M52",
+   "target": "func",
+   "tier": "core",
+   "title": "A moment tensor from strike, dip and rake"
+  },
+  "M52-T2": {
+   "categories": "zb64:eNptVFtr2zAU/isfeZnTOZrdrg1L6dMYG4yWsRvsaZzEiiMiS0aXembsv+9IzqWFviSWdXS+25H/zsi1sZMm+NkKs4/qUUL+oU3QI6yRsFt0A8g06Krfplth2EmDtQ07WAcjVdhJB3ISLR81JRwpL/GTdJQfnLNOzErMNtb4QCYkiF82OjymfZ/PbbTlA+sYGGuL9YhKVFdXiEYFn+Gp5cfYSBSELTNjXH5di/oSyqCzifxc4Ad3YTI4YqWiL+QCLku8E3UJYwM/VNcoPpHZ+yzqMxnqrFOvGMqpVhnSqCuxTJ2b0cjFpptnBYfFSwIOtJfcoZHOn0mheCtuli8oma8y0611XdR0JopAe256X6UeD+gE6vQH5VHL5ZHQ7XOZrA1rqa1pPYLN9UV9wy958UzC5N1JwcFKRto6O9mV+mrbkuNUM2rsvWLjGzuYFe4H3KG4fHM1L7iorhLPRYKfl/A2re7YO1xcML64TuWv8+4Ezlop5/9VhugMOEttKSQT+Nkr02oJE7t1GidOhtKiH9lhR+ORnKeOf3bUy+mcmbZLDMyYA8YDPWQ4QwxCesFET4JP9nsWafcgjmqL0UZEL5vc/3DsbILA9ydBTfFM4otMT+QFG5Aop5iVeeQZkMk8Qm8HOQ1rlVk5G00jm5eG6LAlkG9gno6o9eQRe7PoreKMnPRRh9upmu8nX9J8H5OI3nFFhhk4z3YxNU9Y33gan2Ll/RQ8YWBvw45jYL7pfhyufMKPPrITXqveswtuzC/509D1Wvpj0XueHMeDJGb//gP2+2oH",
+   "forbidden": [
+    "pyrocko",
+    "mtuq",
+    "obspy.imaging",
+    "instaseis",
+    "mopad",
+    "pyfk",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: seismic_moment, moment_magnitude, dyne_centimeter. Part 2 gives the formula (Hanks and Kanamori 1979; the IASPEI standard in Bormann and Dewey 2014).",
+    "2": "zb64:eNo1jz1uwzAMha/yxhQoDHusD1AgQ+aOBePQthCJdEkpqm9fxUU2Enjf+zkLqtrNRxjPxRl5ZUwUI4pEdgf/0pTjDhUG2VISS0ZwLOHB0uHTNCH135JG5KoND80NOuMUdRn65xUyUpDi+OiGtxdSR7jGx3+gU2LwT6EcVDCr4dK/o65hWo8gB2HTyva0G/oOX2r3VglS0ra3XkZ708jtUONK070Rc1TKzYXlCAmylfaSH1saeWXr/gC1sljR",
+    "3": "zb64:eNpdjzELwkAMhff+ijcqiOionN0cXd1TSdvD66Xkrrb+e3MUEQxkCMn7Xp7jhR45vCGRawBnwCn5xLhTmPiqKoq554hGcg8bIvvcs4KU0fkXx7pyS5H+6nwxih2te7wKCZRAaINQNqnS22Qy5fpfdpvRqgwoSHODOx6QBYU2ymy+0mKTZODc+9gh+4ETFoxhSjjtj9u6KqZo6PH8Yq3d17o1pkVFnIaGdQcOFrXA158+S8dTQA=="
+   },
+   "kind": "synthetic",
+   "module": "M52",
+   "target": "func",
+   "tier": "core",
+   "title": "Moment and magnitude, both ways"
+  },
+  "M52-T3": {
+   "categories": "zb64:eNqVlE1v2zAMhv8KkVODxUF7XIEdhl16DNqiwC4rWJuOhMiiQclx02H/fRTlpts6DNgliCmRevjy4/uqo70QpdU1rL7yJDBiziQxQWA+ACbwPSQeCDDuAyWYKWbwMTMkH9XYQct6KcISaAtfOB5JMmAI0Pvj2VNdBDuPMW1XG1j1LAPm8u4t5Uk0FuRpDAQXMm5A0rH8uPU1ZKdxoQ+MOYF6QZyGJ5K0WU70czwBiuApAfdqJeUZpwzJ4UjmUk83C1P0mYwhcofhnPruNXnwCSJneCFh4AgWOTvMEHyJrajmCWPAqMCFSa9/uDI9mqviUyju7XsH+ExprcI4ag92sCtQwxRQYSTlazPe6fOiKbYYS7QnAvF7l0sBdguRQSfXJL+PZ+zbb3c34DBZkFk47qGcb0HN6jZy8rmUwVeozgu12SuiGmbnW2dmfPHDlB3shecEF23g9jD7RJCIIvTCA+ATH0kLQo8a+RNcNKUDRuc31gL253JdEbP4A73vqY5NKCv37HN9uV7ewr2jV1msjp8P3vS7VUSULsGkNL+iDoRpEuoq3VuoTWGBpvw+1l5Lx3eSPfxdsof/kCzjgbjva39X4UychyKOTcWbMPXzLJhJ59clXmTJrtFUctPxHCvvjONI3e+8pkWpNYpmWm9sYRke5RlecVk6kj/GyMIuwP+c9feJzaTvvdd6GmetCpRR963Ogg7B+cyx+BeOGcMWbor7ZZFVq4PW0SXPDXw049tVS3BgKUXGWI5H1kWTlpcsA6tVc8Qw1ZV1VzZT/TRZai1tQmc81Zldhpl1UpftMKVJn0vBj7qu7uVkRnrGoayf5Y5uMcVtc9kyVOKdE61N1hR36HEKubbyL4mUfbFd/fgJDP7YEQ==",
+   "forbidden": [
+    "pyrocko",
+    "mtuq",
+    "obspy.imaging",
+    "instaseis",
+    "mopad",
+    "pyfk",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: radiation_pattern, takeoff_angle, azimuth, sv_sh_waves, nodal_plane, p_t_axes. Part 3 gives the unit vectors and the tensor route; Aki and Richards (2002) eq. 4.89 give the three formulas.",
+    "2": "zb64:eNo9UE1PwzAM/SvvuEklYhIHPsSNSXAYl0lwRFnjrlbbpDgpUf89ntE4RLafX/ye/RZRk4T8COLSk6AKF4Km+oQIeZkyUgf6drhz9w+oygNj00majBdSjdVLwA9J4daP2wZzz7hBLsIDNQg8w8cA8QOBo8bAPuYnJMFp4THYnPf9CwrFrKDqFZ8H7NBpdbjFM3aNkcSvqtMWhc9+mrzNNbc14ahKok1OMcP8sfXVTfNHvBiwf+7gLDagr+PHtTKSAq9XwOHzsq4X1bUz+HgeKetKyVRnSWFpSwaNNFEsOK3/6SYu07w64qg3RE/jnLfuFy3bff8=",
+    "3": "zb64:eNp1jsEKwjAQRO/9ijkqBFG8acxJoRdFELzKqqkNtYlkU0G/3qS1ehADmzBh5u1IowTkrTQK7ZktABmo0q4oQPYMepq6CSWMhaezIcsqkxeqa3on+tCAo8Xg5BgRJ9DJdLcy/ZuhmkenPuz2aWt8cwXixN6SD5hmcv2lfsgP13gE4goTBG3ZeRRx1mMsMBHYrJaxkr+pn+C75ggJO+p1rADp+a6SqSvzx1J+LPmPJbuYu8aRTlW/Mc4g1RAdXXSEoUBxdRS47Wyb+qg9vwALJWYk"
+   },
+   "kind": "oracle",
+   "module": "M52",
+   "target": "func",
+   "tier": "core",
+   "title": "P, SV and SH radiation patterns"
+  },
+  "M52-T4": {
+   "categories": "zb64:eNplVE1v2zAM/StELos320m3W3ocBnSHbUUzbNilhWrTtlBZMiQqXjDsv4+UnDTtLoZE8+Px8VF/Vs2gbI9tpe0UabWD1S8XPXTRNqSdheU3OIvgOtAUIHmC8l4dQw0/nX/iv2BxPtlWJaxa7TFlOKe8hdGllM7DUQz7k2Fy2nJeGhBm72wPszrWyf+AAZQRU6/GUcG6826EwNENAjngGqgP6AsgPbLv3f3tNefNIXf3+x+AD/x5J+cbOd/U8JmxOk9DhSpQ1brZliBf0IGRBE2cMLXQOT+qRMkdUvQWFNg4TsfcprARBjUhrD+UYNCu6SEUhZg7bTUhdMYpCrtcrQQpB8q2uVirw2RUgyNaYkZhTCVHHYK2fTWrA0rhb5l1YYZmB2IOgnPxgzVzSdoei13yeZk0MxrieEpxC4R+TBjkuk/XXNdJSGUdVV4Rnmc2RRO44sB1c7LU8JIuB8FaQSCcCuDIARkPK+aVi+Ss4TsbOuWrTqNpX2LtnDFuzoDFeQdftstIw5qgAr85FCUzSUmBPlor7XNvCX6YkBU8uRn9hdycSEyNk9EUWxGSF+gdPPIEGUhDLoEl6L3UnjUNuUnJVsMn1QyJcWGy1Qfd8hpwrLg08fG8DjLNFLJj3U2Dgrdv4QN3xBBKeES6MOwXtB5Vy/jPWC9AdsqYhDLBYZJIWdY6K+TVeixswsImNrx5oAJcbXyZg/2zrpjKy3rLWFnHrHVgBp5zJ9Jl+fJP5ho2S1+qozRe7tzrnnOLkPbJQdq8llEVQlbPgVbSbkuWRvfQ8maU8P7iXNf1f+nY13EfhldLkxCNB2WiIhk0GwRlEkIGs06rWPPDgX6S90cSpb7e5JGkRkrYgosUeHZFIiLyZoYzD5cafKWPJCYZ8dV2u5VHQ3KkIvIsRKMgBtY3khcimYjlOHFUwMZZlkMeQHmij52SHMS4YWh+cHJ+6jcjvyAseL58XQaWhlEJAZjg7nmRIF8TzjwsmYGoIcuYmZcFcc9vRgxRGQhGT6eHmgbvYp91jr9Fd2fnj86S562oV3//AeZUETM=",
+   "forbidden": [
+    "pyrocko",
+    "mtuq",
+    "obspy.imaging",
+    "instaseis",
+    "mopad",
+    "pyfk",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: far_field, geometric_spreading, source_time_function, whole_space, takeoff_angle. Part 4 gives the formula (Aki and Richards 2002, the far-field terms of eq. 4.29). numpy.interp(x, xp, fp, left=0.0, right=0.0) evaluates a sampled function between and beyond its samples.",
+    "2": "zb64:eNpVkM1KA0EQhF+ljgksixhPBi+e9CAEI4KXyJjp7DaZP3p6d1mf3tmJBrw03VD1VdHPAVMUm++hPSGeTpkUHOBJhTI6HssUmGCrYAisGOmoUdAZ780WJ4n+sleFmjMVTHF0jrAycjzGXMBgzbBxCkhGtFkyLHVClNdXuvlmP2hfXWrC7WIjkxVxJEGIov26xUccpMTkMza//WpuX1iFrUoScovHgZ0Ffe7fK74sT81FyJ5qoeVIg8uEbHxylJtrEZ1iaefMTPYiyZi4FAuDT3PLoWSkFm89BezwgNfD7u8DFb4g/tlheWRbrq8ZqzskhvQRxqXeHDaQdYM9HJ9p4qKtSV+k5lpnX/xSns4x5C384JSTmxfYy00VGWvbH69xoBA=",
+    "3": "zb64:eNpVkMFqwzAMhu99iv/YbBktbKeS5bzLYFDYcUWt1dg0sYOstNuefrabUiYwkoU+/ZIaaWs0HQ0DtZht8wo0PftOLcgbGCd8UBc8whFqObljZK3hPAZW4dguGqUTp3zuRr9umNS2pQ/5rueYySKSGcOdcIFkzPUSz1dn21n8J0wCIeMoy+5GUmXxCehJGR+5ukTbGxDBZ+qnlDMgxVLxBFlRP1qqyg5zZs9KVY01wqTRGW4XnTsz9nQ44W6b9N7XeMAyTTVivs43bvJYYfmC0UFsQBH5eoZUwCPKNuDd9jN90kY5fLuz2/9sHueKpqEoQsIlwgdRW4MpphObcPF/rLB/Wg=="
+   },
+   "kind": "oracle",
+   "module": "M52",
+   "target": "func",
+   "tier": "core",
+   "title": "Far-field displacement of a point source"
+  },
+  "M52-T5": {
+   "categories": "zb64:eNqVVU1vG0cM/SuELrUBS7CBAgV0LdBLEiNIe8nJoHe52oHmYzMfVpWi/72PHDlSbQdIDlpoRxzy8b1H6p/VKNk9cXVPstrS6nNqmbKU5iu5QnUWqi4InaMoTZRb/KVQ4bB4KRv6IFxaFuIdu0iHmSvtXRw1MqTqUvz/BeIsNz24VDpqxYnzenLiRxpdWTwPEiRWTVC57OnXzeqGVhMPNeX13e3tN6SX0ZYXVyZ6PBJTj9YUuLChv9DJqa/QUPZRCFiDVBxuyae0p7ZYvy26+qpJDf54/OMdToY0SseTcuCqWD5JbTmiaG0Ipqv29YZaxqdea6bYwgJIOfOx6PvkEwPuwdXZKpaZlwteeyAYAoUDe6/HJH+jH3+kFAfpN5m8K4Z0UipQ5FFyMWSBd2iijWdJtQs7ecHSkKABg+pO19bwTC4jcU+o+U2iggdKwxQxVQvLbjdXemLfcAVU1xk/hqRabOj3FBatZG5Q5lAqLK0CwJRTIHB8VcRPm4dwe90bslCr1ZNAHY6XzKsypwYtYG0HP2eGKlDdea+uvMIREqDCE5iT6y0iT6VRdDxGWQ+BDvp+mAX57inAOD7FHeSxjlEDj0wHPlJOLY4burMwUHEnvz0nMdDgDSYHZPkO5DlhAFycNPU932/ok7AeqAuG5rnKQ+bRsY7Uw8K1So7fJfgs5AuHdGMt2UWVkS8VvBDaEGM2UFrG9WkKXm6ImctbBj5Fg6IIxz4nOe+JH9oQW+tHVUSF0B3yQ7vi5EXRZHLZTf+65ri7bOXka5ulMUm394AZPFKp2e2xqka3GGeZ97Y1NLkVLp34DJlKh3llhQVjNd7oQOTRbir/wP9NAbWX7LJIue7QKuf6pivOmCyGwNytPs7yds4sja7qdamyvJ3KlVcTIV8ae6rpmTBdXzCGZJji1Xxs6L3uSVSf06GLgUb1N1WwFQAd60Of0EPGlKzNWsb1n0n/RV5NqIUpHWwjZH48rZgUzVK2kouiLN4tSP7vf38jWZM=",
+   "forbidden": [
+    "sgtl_tutorial",
+    "pyrocko",
+    "mtuq",
+    "pyfk"
+   ],
+   "hints": {
+    "1": "Glossary: frequency_wavenumber, worker_environment, dyne_centimeter. Read PyFK's SourceModel.calculate_radiation_pattern: what does it compute from source_mechanism[0] for a list of four numbers? Then measure: plot the run's z at the 80-km receiver next to your far-field displacement of task 4 for the same source, and next to what you get from it by a time derivative (numpy.gradient) and by a running sum (numpy.cumsum times the time step). The comparison, not a docstring, tells you what the samples are.",
+    "2": "zb64:eNo1z71uwzAMRtFX+cYEMNyfMWuHokO3bkURMDbjEJHIgKSTuk9fxUBGiVfC4XuxCPJlB50ruwxU9qLJk1OKaY8Pxc18jB3yxDiKR97TAzsk1rtqlTVRaVLJeWTYEYvN/hhs1kNSnPG67fFGpcBnhenAuEme8P156xDpcuYOo1w6OJ35p8dX+z6oXgoHyBmT26wjrlxskFwgiqE+NduDzGAaTq11WmDXhkypDCqm04ot1Pz02+gbuitU2iDmunaBMffRwRyEdLrwn8nYssLb7v5cm+4qbcXDgpfnZxxbWTmdo/8HfH91Cw==",
+    "3": "zb64:eNo1jcEKwjAQRO/9ijkq5CAeJeYP/AIRSZNtu6RJSpJW69ebFl1YGGZ35skc52RIYZvLFbhD3l6IHfzpGbxAl6LHWp9QdHY4K4FcEjsSsDwJJO0Ij0Z+qhQo1S1qL0pzOMhf+7HpeSG02ridU7eLCaTNsKH+YVUPsuYChx559tBjrKoMhFHnAv3mrFDYU4bcOJYXtmTRrpDGY6IEr753e0HB"
+   },
+   "kind": "synthetic",
+   "module": "M52",
+   "target": "func",
+   "tier": "core",
+   "title": "Displacement from PyFK, for a moment in N m"
+  },
+  "M52-T6": {
+   "categories": "zb64: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",
+   "forbidden": [
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: radial_transverse, back_azimuth, cross_correlation, lag, amplitude_ratio, bandpass_filter. ObsPy: Stream.copy, Stream.rotate('NE->RT', back_azimuth=...), Trace.filter, Trace.times(reftime=...); numpy.interp puts one record on the times of another.",
+    "2": "zb64:eNptUD1Pw0AM/StvoxUhTCwgJiQkxECFOrFETs5tT73cRWe3af49TkJUJFhyit/z+/BbRJ+yk0c0qRugB0bmxiYFclJShldowleBzwLbAhQdavvcdSRiYInXlMHUHEyh7VLkqGjpyMbERy2bAdtMDSPtJnUZoj3qG/iI9l6wGqenaDbG2FBWPKzRez3AcVDCM5xW8sd3FqOW0dNQYvtb+kagvmVbyozalm9xnFSezFQ5dymMzUaFnQ82YPfTGilaWQPaOcL1HqaZ+rjo7mxpAlP2ex9LvDN3S6QuGMVH8c7C+ehSX0mJFwoBF5PKq+sNZrhY3JffMWthV7xUgfaVrKf2x9HCq1jmLNa/TzhTOLG1cv48mo3+gfKeDaZaUjjpEn+moh7+J10TTbzyG/5cvjw=",
+    "3": "zb64:eNptkbtuwzAMRfd8Bbe+FGRPXU1Bli5FkalFYdASYwuxJEOS8yjy8aX8CFqgBjQYIs8hr4pASsL0rV8ACuW7C/g9+CryxZJPEXzCRBpOJjWQGoIK1QHw29g+NXNRhU4vO4yRtFzsfQBC1WSc7bwjlyQYBx8C3gXs1ousK+LFyZt3F1BRFr9dtq93ESLarqWYu+wqCtDUJgSdyvivcQAmYylfZ2BVRnga6uGRVQMNXG8rCnEq9w7qYLQc/BwEW2/jsjdR6Hw7bO5d8jDSn3PngaiTWTMquTgaTRyQ0/5UzvwWawFKjfy9CTFBOnk4YttzD696Vj6Ee47hMwO/BEwTzb95egEWzyWjyvgwcQMm46c1WRJqYvL1T+9VwurX3U1xlYvaHKcXzNFn3gYTbgNaEryIpvP8TDy8b3vrOBYlYBhBAAdZjgP8AMg8tRI="
+   },
+   "kind": "artifact",
+   "module": "M52",
+   "target": "func",
+   "tier": "core",
+   "title": "A synthetic against a record"
   }
  }
 }

@@ -275,12 +275,13 @@ your mentor. Never commit PDFs to your repository.
 - Bormann, Baumbach & Wendt (2012). Determination of fault-plane solutions by hand (NMSOP-2 EX 3.2). [doi:10.2312/GFZ.NMSOP-2_EX_3.2](https://doi.org/10.2312/GFZ.NMSOP-2_EX_3.2) `bormann2012_ex3_2`
 - Bormann (2012). Take-off angle calculations (NMSOP-2 EX 3.3). [doi:10.2312/GFZ.NMSOP-2_EX_3.3](https://doi.org/10.2312/GFZ.NMSOP-2_EX_3.3) `bormann2012_ex3_3`
 - Bormann, Wendt & Di Giacomo (2013). Seismic Sources and Source Parameters (NMSOP-2 Chapter 3). [doi:10.2312/GFZ.NMSOP-2_ch3](https://doi.org/10.2312/GFZ.NMSOP-2_ch3) `bormann2013`
+- Jost & Herrmann (1989). A student's guide to and review of moment tensors. [doi:10.1785/gssrl.60.2.37](https://doi.org/10.1785/gssrl.60.2.37) `jost1989`
 - Park et al. (2007). Focal mechanisms of recent earthquakes in the southern Korean Peninsula. [doi:10.1111/j.1365-246X.2007.03321.x](https://doi.org/10.1111/j.1365-246X.2007.03321.x) `park2007`
 - SERC (Carleton College), NAGT workshop material (n.d.). Focal mechanism primer. <https://serc.carleton.edu/files/NAGTWorkshops/structure04/Focal_mechanism_primer.pdf> *(partly verified)* `serc_focal_primer`
 - Shearer (2019). Introduction to Seismology (3rd ed.). [doi:10.1017/9781316877111](https://doi.org/10.1017/9781316877111) `shearer2019`
 - Stein & Wysession (2003). An Introduction to Seismology, Earthquakes, and Earth Structure. no DOI or link `stein2003`
 
-## M51 · Focal mechanisms from polarities
+## M51 · Mechanisms from first motions: polarity misfit, grid search, Kagan angle and SKHASH
 
 - Hardebeck & Shearer (2002). A new method for determining first-motion focal mechanisms. [doi:10.1785/0120010200](https://doi.org/10.1785/0120010200) *(verified; Crossref lists only the first author)* `hardebeck2002`
 - Hardebeck & Shearer (2003). Using S/P amplitude ratios to constrain the focal mechanisms of small earthquakes. [doi:10.1785/0120020236](https://doi.org/10.1785/0120020236) *(verified; Crossref lists only the first author)* `hardebeck2003`
@@ -297,9 +298,10 @@ your mentor. Never commit PDFs to your repository.
 - Vavryčuk (2014). Iterative joint inversion for stress and fault orientations from focal mechanisms. [doi:10.1093/gji/ggu224](https://doi.org/10.1093/gji/ggu224) `vavrycuk2014`
 - Zhu, Song, Wang & Münchmeyer (2025). Towards end-to-end earthquake monitoring using a multitask deep learning model. [doi:10.48550/arXiv.2506.06939](https://doi.org/10.48550/arXiv.2506.06939) `zhu2025_phasenetplus`
 
-## M52 · Synthetic seismograms
+## M52 · Synthetic seismograms: moment tensors, radiation, whole-space and layered-Earth synthetics
 
 - Aki & Richards (2002). Quantitative Seismology (2nd ed.). <https://www.ldeo.columbia.edu/~richards/Aki_Richards.html> `aki2002`
+- Berteussen (1977). Moho depth determinations based on spectral-ratio analysis of NORSAR long-period P waves. [doi:10.1016/0031-9201(77)90006-1](https://doi.org/10.1016/0031-9201(77)90006-1) `berteussen1977`
 - Bormann, Wendt & Di Giacomo (2013). Seismic Sources and Source Parameters (NMSOP-2 Chapter 3). [doi:10.2312/GFZ.NMSOP-2_ch3](https://doi.org/10.2312/GFZ.NMSOP-2_ch3) `bormann2013`
 - Hanks & Kanamori (1979). A moment magnitude scale. [doi:10.1029/JB084iB05p02348](https://doi.org/10.1029/JB084iB05p02348) `hanks1979`
 - Jost & Herrmann (1989). A student's guide to and review of moment tensors. [doi:10.1785/gssrl.60.2.37](https://doi.org/10.1785/gssrl.60.2.37) `jost1989`
@@ -395,6 +397,7 @@ your mentor. Never commit PDFs to your repository.
 - `beauce2018` Beaucé, Frank & Romanenko (2018). Fast Matched Filter (FMF): an efficient seismic matched-filter search for both CPU and GPU architectures. *Seismological Research Letters 89(1):165-172*. [doi:10.1785/0220170181](https://doi.org/10.1785/0220170181). Status: V (verified). Online 2017.
 - `beeler2000` Beeler, Simpson, Hickman & Lockner (2000). Pore fluid pressure, apparent friction, and Coulomb failure. *Journal of Geophysical Research 105(B11):25533-25542*. [doi:10.1029/2000JB900119](https://doi.org/10.1029/2000JB900119). Status: V (verified).
 - `bender1983` Bender (1983). Maximum likelihood estimation of b values for magnitude grouped data. *Bulletin of the Seismological Society of America 73(3):831-851*. [doi:10.1785/BSSA0730030831](https://doi.org/10.1785/BSSA0730030831). Status: V (verified).
+- `berteussen1977` Berteussen (1977). Moho depth determinations based on spectral-ratio analysis of NORSAR long-period P waves. *Physics of the Earth and Planetary Interiors 15(1):13-27*. [doi:10.1016/0031-9201(77)90006-1](https://doi.org/10.1016/0031-9201(77)90006-1). Status: V (verified). Checked in Crossref on 2026-11-20 (author, title, journal, volume, issue, pages, year). The usual source cited for the straight-line rule density = 0.77 + 0.32 Vp (g/cm3, Vp in km/s) that gives layers of a speed-only model a density.
 - `beyreuther2010` Beyreuther et al. (2010). ObsPy: a Python toolbox for seismology. *Seismological Research Letters 81(3):530-533*. [doi:10.1785/gssrl.81.3.530](https://doi.org/10.1785/gssrl.81.3.530). Status: V (verified).
 - `bormann2012` Bormann (ed.) (2012). New Manual of Seismological Observatory Practice 2 (NMSOP-2). *IASPEI; GFZ German Research Centre for Geosciences*. [doi:10.2312/GFZ.NMSOP-2](https://doi.org/10.2312/GFZ.NMSOP-2). Status: V (verified). Checked in DataCite.
 - `bormann2012_ex11_1` Bormann & Wendt (2012). Estimating the epicenters of local and regional seismic sources, using the circle and chord method (NMSOP-2 EX 11.1). *NMSOP-2*. [doi:10.2312/GFZ.NMSOP-2_EX_11.1](https://doi.org/10.2312/GFZ.NMSOP-2_EX_11.1). Status: V (verified). A hand exercise (EX 11.1) in the New Manual of Seismological Observatory Practice, 2nd edition. Checked in DataCite, whose record names the co-author "Siegfried, Wendt" with the given and family names swapped: he is Siegfried Wendt.

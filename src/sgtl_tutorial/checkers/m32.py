@@ -15,9 +15,12 @@ Where the truth comes from (DESIGN.md section 1, rule 1):
 * M32-T3: construction (made-up locations with known offsets in time, position and depth, written in two time
   zones); epicentral distances from pyproj.Geod. Then the student's kim1983 summary against the shipped KMA
   catalog: loose properties only (every event finds a partner, offsets inside wide bounds).
-* M32-T4: construction for the line comparison (made-up text files with known changed and extra lines); then the
-  student's report (given as report=...): the two copies of the location folder (fingerprints against the run log),
-  their byte comparison, and the model table against the two summary files of the first copy (events paired by ID
+* M32-T4: the answer holds the student's line comparison and the report. The comparison is screened by the AST
+  guard (the spec's forbidden list; the engine screens only a function target) and run on made-up text files with
+  known changed and extra lines; then the report: the two copies of the location folder (their .sum and .arc files
+  against the run log), the student's per-file SHA-256 of both copies recomputed from every file (whether the rerun
+  is a real second run is judged by the check itself: two copies of one folder, or result files whose bytes only one
+  logged run wrote, fail), and the model table against the two summary files of the first copy (events paired by ID
   number, pyproj distances).
 * M32-T5: construction (made-up residual tables whose station means and standard deviations are fixed exactly by
   design, plus readings of weight 0, 0.05 and 0.10 that must be left out); then the student's own archive files
@@ -798,7 +801,7 @@ def check_T3(target: Any, ctx: Any) -> Outcome:
 
 
 # ============================================================================ M32-T4 rerun and second model
-T4_KEYS = {"slug", "first", "rerun", "identical", "model_change"}
+T4_KEYS = {"differ", "slug", "first", "rerun", "fingerprints", "model_change"}
 T4_PRIORITY = ("format", "line-numbers", "eol", "missing-extra", "wrong-values")
 _WORDS = ("depth", "station", "residual", "weight", "model", "origin", "phase", "layer", "trial", "gap")
 
@@ -878,6 +881,14 @@ def _t4_real(target: dict, ctx: Any, crit: dict) -> Tuple[int, Optional[str]]:
             return passed, "copies"
         roots[key] = root
     passed += 1
+    for key, root in roots.items():               # every file of the copy, each digest recomputed from its bytes
+        claim = target["fingerprints"][key]
+        files = _t4_files(root)
+        if set(claim) != set(files):
+            return passed, "fingerprint-files"
+        if any(claim[rel].lower() != _digest(path) for rel, path in files.items()):
+            return passed, "fingerprint-claim"
+    passed += 1
     slug = target["slug"]
     runs = _location_runs(_log_records(ctx.repo), str(slug)) if isinstance(slug, str) else []
     logged = {}
@@ -893,16 +904,16 @@ def _t4_real(target: dict, ctx: Any, crit: dict) -> Tuple[int, Optional[str]]:
                 if _digest(p) not in logged.get(f"1.HypoInv/{model}/{p.name}", set()):
                     return passed, "not-run-products"
     passed += 1
-    claim = target["identical"]
-    files = _t4_files(roots["first"])
-    if not isinstance(claim, dict) or set(map(str, claim)) != set(files):
-        return passed, "identical-keys"
-    twins = _t4_files(roots["rerun"])
-    for rel, p in files.items():
-        same = rel in twins and p.read_bytes() == twins[rel].read_bytes()
-        value = claim.get(rel)
-        if not isinstance(value, (bool, np.bool_)) or bool(value) != same:
-            return passed, "identical-claim"
+    if roots["first"].resolve() == roots["rerun"].resolve():
+        return passed, "no-rerun"                     # one copy named for both runs
+    results = {f"{m}/{p.name}": _digest(p) for m in MODELS
+               for p in list((roots["first"] / m).glob("*.sum")) + list((roots["first"] / m).glob("*.arc"))}
+    same = all((roots["rerun"] / rel).is_file() and _digest(roots["rerun"] / rel) == digest
+               for rel, digest in results.items())
+    writers = {rel: sum(1 for obj in runs if (obj.get("products") or {}).get(f"1.HypoInv/{rel}") == digest)
+               for rel, digest in results.items()}
+    if same and min(writers.values()) < 2:
+        return passed, "no-rerun"                     # the same result bytes twice, but only one run wrote them
     passed += 1
     table = target["model_change"]
     a = _summary(sorted((roots["first"] / MODELS[0]).glob("*.sum"))[0])
@@ -930,10 +941,40 @@ def _t4_real(target: dict, ctx: Any, crit: dict) -> Tuple[int, Optional[str]]:
     return passed, None
 
 
+def _t4_prints_ok(value: Any) -> bool:
+    """The report's fingerprints: {"first": {path: 64 hex letters}, "rerun": {path: 64 hex letters}}, none empty."""
+    if not isinstance(value, dict) or set(value) != {"first", "rerun"}:
+        return False
+    return all(isinstance(per, dict) and per and
+               all(isinstance(k, str) and isinstance(v, str) and len(v) == 64 and set(v.lower()) <= _HEX
+                   for k, v in per.items())
+               for per in value.values())
+
+
+def _t4_guard(func: Any, ctx: Any) -> Optional[Outcome]:
+    """The task's library rule for the line comparison inside the answer (the engine screens only a function)."""
+    from .. import astguard
+    from ..checks import DEFAULT_MESSAGES
+
+    rules = list((ctx.spec or {}).get("forbidden") or [])
+    rep = astguard.check_function(func, rules) if rules else None
+    if rep is None or rep.ok:
+        return None
+    if rep.category == "runtime-name":
+        return Outcome(False, 0, 0, "runtime-name", DEFAULT_MESSAGES["runtime-name"],
+                       details={"found": list(rep.runtime)})
+    msg = DEFAULT_MESSAGES["forbidden-import"].replace("{rules}", ", ".join(rep.violations))
+    return Outcome(False, 0, 0, "forbidden-import", msg + " (found in differ)", details={"found": rep.offending})
+
+
 def check_T4(target: Any, ctx: Any) -> Outcome:
     crit = dict(ctx.criteria)
-    if not callable(target):
+    if not isinstance(target, dict) or set(target) != T4_KEYS or not callable(target.get("differ")) or \
+            not _t4_prints_ok(target.get("fingerprints")):
         return Outcome(passed=False, n_cases=1, n_failed=1, category="format", message="", details={})
+    refused = _t4_guard(target["differ"], ctx)
+    if refused is not None:
+        return refused
     rng = ctx.rng
     oks, cats, example = [], [], None
     with tempfile.TemporaryDirectory(prefix="sgtl-m32-t4-") as tmp:
@@ -942,7 +983,7 @@ def check_T4(target: Any, ctx: Any) -> Outcome:
             pa, pb = Path(tmp) / f"a_{k}.txt", Path(tmp) / f"b_{k}.txt"
             pa.write_text(case["a"], encoding="utf-8")
             pb.write_text(case["b"], encoding="utf-8")
-            got, err = _call(target, str(pa), str(pb))
+            got, err = _call(target["differ"], str(pa), str(pb))
             if err is not None:
                 raise err
             cat = _t4_judge(got, case)
@@ -957,14 +998,12 @@ def check_T4(target: Any, ctx: Any) -> Outcome:
     category = _first(cats, T4_PRIORITY)
     if category is not None:
         return outcome_from_cases(np.array(oks), category=category, example=example)
-    report = ctx.get("report")
-    if not isinstance(report, dict) or set(report) != T4_KEYS:
-        return outcome_from_cases(np.array(oks + [False]), category="format")
-    passed, cat = _t4_real(report, ctx, crit)
-    steps = 5
+    passed, cat = _t4_real(target, ctx, crit)
+    steps = 6
     ok = np.array(oks + [True] * passed + [False] * (steps - passed if cat else 0), dtype=bool)
-    note = ("The check compared your two copies with the fingerprints your runs logged and with each other byte for "
-            "byte, and your model table with the two summary files of your first copy; it never prints them.")
+    note = ("The check recomputed the SHA-256 fingerprints of every file of your two copies, compared them with yours "
+            "and the result files with the fingerprints your runs logged, and your model table with the two summary "
+            "files of your first copy; it never prints them.")
     return outcome_from_cases(ok, category=cat, real_data=True, note=note)
 
 

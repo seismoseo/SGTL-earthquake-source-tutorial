@@ -70,6 +70,35 @@ Every prediction, check, hint and reroll is appended to `work/.sgtl/progress.jso
 `st.progress()` shows a table of your tasks. Your mentor reads this record to plan the course with you. AI help
 goes in `work/ai_log/` ([ai_policy.md](ai_policy.md)).
 
+## Submitting a module: `sgtl submit`
+
+When a module is ready (all core checks pass, Explain cells and AI log written), save the notebook in JupyterLab
+and run:
+
+```bash
+bin/sgtl submit M04            # dry run: checks your copy and prints the plan; nothing runs
+bin/sgtl submit M04 --apply    # runs it, records it and opens a pull request for your mentor
+```
+
+With `--apply` the command runs your work notebook `work/M04_.../M04_....ipynb` from the first cell to the last
+with **papermill** (a program that runs a notebook without a browser, like Kernel → Restart Kernel and Run All
+Cells). It runs in your account on one core with the same thread limits as the course kernel, at low priority, and
+stops after 120 minutes (`--timeout MIN` changes that). Your notebook file is not changed: the run writes an
+executed copy, a run log and `submission.json` into `work/submissions/M04/<UTC time>/`. `submission.json` lists
+what ran and when, and the **SHA-256 fingerprints** (a 64-character code that changes if a single byte of a file
+changes) of your notebook, of the executed copy and of the files the run wrote, including the products that
+`sgtl pq` logged in `work/.sgtl/runs.jsonl`.
+
+If every cell ran, these files and your notebook, AI log and logs go into one commit on a new branch
+`submit/M04-<UTC time>`, which is pushed to your private copy; then a pull request asks your mentor for a review.
+Your current branch and the files in your folder stay as they are. If a cell stops with an error or the time limit
+is reached, nothing is committed or pushed: read the run log, fix the notebook and submit again. The checks run
+again during a submission and are logged as usual; your mentor counts them apart from your own attempts.
+`sgtl submit` pushes only to a private copy: before anything runs it reads every address that `origin` pushes to
+and stops unless each one is a GitHub repository that GitHub itself reports as private (it asks with `gh`, so
+`gh auth status` must show you logged in). It also stops if any address is the public course repository, in any
+form of the address (make your private copy first, [git_workflow.md](git_workflow.md)).
+
 ## Gates and the B-path
 
 At the end of each week there is a **gate** (G0 to G6, then the frozen project plan in week 8 and the final
@@ -87,7 +116,19 @@ the plan is adjusted to the hours you actually needed; stretch items are dropped
 
 ## The weekly oral check: "explain this cell"
 
-Once a week your mentor picks a cell from your work (a `bin/sgtl oral` command that picks one at random is coming
-later) and you explain it
-without notes for about 15 minutes: what each line does, why it is there, and what would change if an input
-changed. If you can explain your own code, you are learning, whoever helped you. Write code you can explain.
+Once a week your mentor picks cells from your work and you explain them without notes for about 15 minutes: what
+each line does, why it is there, and what would change if an input changed. If you can explain your own code, you
+are learning, whoever helped you. Write code you can explain.
+
+At the meeting you or your mentor run:
+
+```bash
+bin/sgtl oral M04 --salt WORD      # or bin/sgtl oral --salt WORD for all modules
+```
+
+`WORD` is a new word your mentor says at the meeting (at least 6 characters; the mentor may instead set
+`SGTL_ORAL_SALT` in their own shell). Without it nothing is picked, so nobody can know the cells before the
+meeting. It picks three code cells of tasks whose check you have passed, at random but seeded by the date, your
+name and the word (the same three give the same cells); only a fingerprint of the word is logged. It prints each cell with
+line numbers and two questions: what one line does, and what would change if one detail were different. It only
+reads your notebooks; it never runs them. The choice is added to `work/.sgtl/oral.jsonl`: commit it with your work.

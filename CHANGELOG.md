@@ -4,6 +4,77 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v0.5.0 — the focal sphere, mechanisms from first motions and synthetic seismograms
+
+**After updating, install the PyFK environment once** (module M52 needs it): `bin/sgtl-install pyfk` (dry run: the
+plan), then `bin/sgtl-install pyfk --apply` (about a minute). It makes the small Python 3.9 environment
+`~/sgtl/envs/sgtl-pyfk` in which PyFK runs; it is not a Jupyter kernel, and the course environment is unchanged.
+Module M51 runs SKHASH from the course tools that you installed for v0.4.0 (`bin/sgtl-install tools`);
+`bin/sgtl pq check` shows whether they are in place. Then restart the Jupyter kernel "SGTL (Python 3.12)" so that it
+loads the new version of the course package. There is nothing new to fetch: the three new modules use your Sangju
+download of M03.
+
+### Added
+- Module M50 (the focal sphere): strike, dip and rake turned into the fault normal and the slip vector in
+  north-east-down coordinates, and how the up-south-east order of the Global CMT catalog and ObsPy differs; the
+  auxiliary plane and the P and T axes, tested against ObsPy and Pyrocko; rays on a lower-hemisphere equal-area net,
+  with upward rays at the opposite point; takeoff angles from your own ray tracing of M30, first arrivals that are
+  head waves included; your Sangju first motions of M20 on the net next to KIGAM's published mechanism; and ObsPy's
+  beachball drawn unchanged, then with the other nodal plane. Before you code, you solve two hand exercises of the
+  NMSOP-2 manual on a printed net: `docs/figures/equal_area_net.pdf` (print it on A4 at 100 %, without scaling).
+- Module M51 (mechanisms from first motions): the polarities that a mechanism predicts and a weighted polarity
+  misfit; a grid search over strike, dip and rake that returns the best and the acceptable mechanisms, tested on
+  made-up polarities with some readings flipped; the Kagan angle between two mechanisms; families of acceptable
+  mechanisms; SKHASH run through `sgtl pq` (a dry run first) on the PocketQuake cluster of your M21 picks, next to
+  your grid search on the same polarities and to KIGAM's mechanism of the mainshock; and an unchanged rerun, then
+  polarities only, with a measurement of what the S/P amplitude ratios that PocketQuake hands to SKHASH contain.
+  Its SKHASH runs use one core and up to about 9 GB of memory for a few minutes each.
+- Module M52 (synthetic seismograms): the moment tensor of a double couple in north-east-down and up-south-east
+  coordinates; seismic moment M0 and moment magnitude Mw both ways; the P, SV and SH radiation patterns; a
+  far-field synthetic in a whole space, compared with PyFK at several distances; a colleague's PyFK call to predict,
+  measure and test against PyFK's code; and PyFK synthetics of the 2019 Sangju mainshock from KIGAM's mechanism next
+  to your response-corrected, band-passed records (shape, time shift and amplitude ratio, also as a change of moment
+  magnitude), rerun unchanged, then with velocity model kim2011. The notebook runs PyFK in its own environment through the course package
+  (`sgtl_tutorial.pyfk_runner`): plain numbers go in, plain files come back, each checked by its SHA-256
+  fingerprint. It runs on one core.
+- All three are delivered unexecuted; start them with `bin/sgtl new M50` and so on, in order. M50 reads your M20
+  first motions and uses your M30 and M31 results; M51 starts from your M21 PocketQuake cluster and your M32
+  locations and asks you to paste your `fault_vectors` of M50 into its notebook; M52 asks you to paste your
+  `equal_area` of M50 and your `xcorr_lag` of M41 into its notebook. When something a module reads is missing, it
+  stops with a message that says what to finish first.
+- Three optional explorers: E13 in M50 (`st.widgets.focal_sphere_fitter`) lets you fit a fault plane to first
+  motions by hand, with your own net, agreement, P and T axes and auxiliary plane; E8 in M51
+  (`st.widgets.beachball_explorer`) shades a beachball under strike, dip and rake sliders with your own predicted
+  polarities and shows your misfit and the stations it gets wrong; E12 in M52 (`st.widgets.radiation_explorer`)
+  draws your P, SV and SH radiation patterns for the mechanism under the sliders. All three place points with your
+  `equal_area` of M50 (pass it as `project=`); as before, an explorer never does a task for you.
+- `bin/sgtl submit MXX`: hands in a finished module. It is a dry run by default; with `--apply` it runs your work
+  notebook from the first cell to the last (one core, low priority, at most 120 minutes), records the run with the
+  SHA-256 fingerprints of what it wrote, commits it on a new branch of your private copy and opens a pull request
+  for your mentor. It pushes only to a private copy: it stops before the run unless every address that `origin`
+  pushes to is a GitHub repository that GitHub reports as private (it asks with `gh`, so log in with
+  `gh auth login` first), and it never pushes to the public course repository, however its address is written.
+  Your own branch and files stay as they are, and a run that fails commits nothing. Details:
+  [docs/how_this_tutorial_works.md](docs/how_this_tutorial_works.md).
+- `bin/sgtl oral [MXX] --salt WORD`: picks three code cells of tasks you have passed for the weekly oral check
+  ("explain this cell"), seeded by the date, your name and a word your mentor says at the meeting (required, at
+  least 6 characters, so nobody can know the cells in advance), and logs the choice in `work/.sgtl/oral.jsonl`
+  with a fingerprint of the word.
+- Glossary terms for M50, M51 and M52.
+
+### Changed
+- Two report values are now checked from file fingerprints: M21 task 4 and M32 task 4 take `fingerprints` (the
+  SHA-256 of every file of the first run and of the rerun) in place of `identical`, and the check works out itself
+  which files are the same. M32 task 4 is now checked with `st.check("M32-T4", answer=rerun_report)`, with your
+  function under `differ`. If you have already started M21 or M32, `bin/sgtl diff M21` and `bin/sgtl diff M32` show
+  the change.
+- M21: the examples in task 2's Contract and in two check messages now use a made-up station code and a made-up
+  event id.
+- The course map in `README.md` and `docs/curriculum.md` now describes M50, M51 and M52 as they are, and the list of
+  explorers names E8, E12 and E13. `docs/git_workflow.md` and `docs/how_this_tutorial_works.md` describe
+  `sgtl submit` and `sgtl oral`.
+- "How to cite" in `README.md` names version 0.5.0.
+
 ## v0.4.0 — locating earthquakes, HYPOINVERSE, relative relocation and detection
 
 **After updating, there is nothing new to install** if you set up v0.3.0: the new modules use the course tools
