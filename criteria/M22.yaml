@@ -1,0 +1,28 @@
+module: M22
+frozen: 2026-11-19
+tasks:
+  # made-up triggers whose events are known by construction (chains of overlapping triggers, stations that trigger
+  # twice, gaps exactly at the extension, noise triggers, events at too few stations), plus oracle_cases made-up
+  # records (one box per station and event) compared with ObsPy's coincidence_trigger; ObsPy's subset events (events
+  # that start inside an earlier one) are dropped first. Starts and ends within abs_tol_s, station sets exactly.
+  M22-T1: {trials: 200, oracle_cases: 8, abs_tol_s: 1.0e-9}
+  # made-up records (500-20000 samples, templates of 10-400 samples, copies at known samples, offsets up to 1000
+  # times the noise, flat stretches, float32, int32 and list inputs) compared value by value with ObsPy's
+  # correlate_template(normalize="full", demean=True); noise-free copies give exactly 1 (or -1)
+  M22-T2: {trials: 30, abs_tol: 1.0e-6}
+  # made-up network cross-correlations (bumps of known height and place on smooth noise, offsets, a few huge values,
+  # pure noise), compared with scipy.stats.median_abs_deviation and scipy.signal.find_peaks; min_gap_s is always a
+  # whole number of samples plus one half, so that no comparison sits on the edge
+  M22-T3: {trials: 60, abs_tol: 1.0e-9}
+  # made-up windows: channels scaled by known factors (some with shapes that differ from the template's at the same
+  # L2 norm), offsets, flat channels; the magnitude is known by construction
+  M22-T4: {trials: 80, abs_tol: 1.0e-6}
+  # the student's files and records; the student's three functions must pass cases made-up cases of tasks 2-4
+  # again. The check recomputes every network cross-correlation with ObsPy's correlate_template on the student's
+  # prepared records and templates: arrays within cc_tol, median, MAD and threshold within threshold_tol, detection
+  # times within time_tol_s and their values within cc_tol, magnitudes within magnitude_tol, the null count exactly;
+  # template windows within half a sample of pick - pre_s, at least min_stations stations per template
+  M22-T5: {cases: 2, cc_tol: 1.0e-4, threshold_tol: 1.0e-4, time_tol_s: 0.011, magnitude_tol: 0.01, min_stations: 3}
+  # made-up picks of known events (jittered arrivals, missing picks, stray picks, events at too few stations, picks
+  # exactly at the edge of the window); the events are known by construction
+  M22-T6: {trials: 150, abs_tol: 1.0e-9}

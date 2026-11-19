@@ -1,0 +1,43 @@
+module: M31
+frozen: 2026-11-19
+tasks:
+  # 6 made-up networks (6-12 stations, 3 to all with S) on 17 x 13 x 9 grids (distinct sizes, so an axis swap shows),
+  # alternately a half-space and a crust whose speed grows linearly with depth (times from formulas). Half with
+  # exact picks from a grid node (that node must be the best, at RMS 0), half with picks carrying noise_s of noise
+  # (at the true node the RMS and origin time are the standard deviation and mean of that noise). At random_nodes
+  # random nodes RMS and origin time against SciPy's minimize_scalar over the origin time. rms_tol_s covers rounding
+  # only: the slips the categories name (no origin time, median, hypocentral distance, all P) cost 0.01 s or more.
+  M31-T1: {trials: 6, noise_s: 0.05, random_nodes: 15, rms_tol_s: 1.0e-6}
+  # 8 cases on made-up networks of 8-12 stations: exact picks (half-space and gradient; one start 12 km away at 1 km
+  # depth) must reach the true hypocenter within tol_km and tol_s; noisy picks (noise_s) must end where SciPy's
+  # least_squares ends (depth >= 0); one step with damping (lstsq on [G; damping I] with the exact Jacobian) within
+  # 1 m; one undamped step that wants to leave the ground must halve the depth. The final Jacobian within
+  # jacobian_tol (s/km) of the exact derivatives (complex step): central differences with h = 0.01 km are good to
+  # about 1e-6 s/km here.
+  M31-T2: {noise_s: 0.05, damping: 0.3, tol_km: 0.005, tol_s: 0.0005, jacobian_tol: 2.0e-4}
+  # 8 made-up Jacobians (6-20 rows) and pick errors 0.02-0.3 s against SciPy's curve_fit (absolute_sigma) within
+  # rel_tol; then mc_draws relocations of a made-up earthquake (12 stations, half-space) with the student's own
+  # geiger and mc_sigma_s pick errors: the scatter within mc_rel_tol of the student's standard errors (the standard
+  # error of a standard deviation from 300 draws is about 4 %, so 20 % is about 5 of them) and the depth-origin
+  # time correlation within mc_corr_tol (about 3-5 of its own standard errors).
+  M31-T3: {trials: 8, rel_tol: 1.0e-6, mc_draws: 300, mc_sigma_s: 0.05, mc_rel_tol: 0.2, mc_corr_tol: 0.15}
+  # The student's location of the Sangju mainshock from their own picks and travel-time table. Consistency within
+  # rounding (origin_tol_s, frame_tol_km, rms_tol_s), the best origin time within best_t0_tol_s, no point probe_km
+  # away better by more than probe_slack_s; loose limits around the KMA catalog location (public): epicenter within
+  # epicenter_km, depth between depth_min_km and depth_max_km, origin time within origin_window_s; standard errors
+  # positive and below se_max_km and se_max_s. Loose on purpose: the check catches broken locations, it never grades
+  # the values.
+  M31-T4: {origin_tol_s: 0.002, frame_tol_km: 0.05, rms_tol_s: 1.0e-4, best_t0_tol_s: 0.003, probe_km: 0.25,
+           probe_slack_s: 5.0e-4, epicenter_km: 10.0, depth_min_km: 2.0, depth_max_km: 30.0, origin_window_s: 3.0,
+           se_max_km: 10.0, se_max_s: 2.0}
+  # 4 made-up networks (half-space and gradient; exact and noisy picks), 9 fixed depths every 1.5 km within 6 km of
+  # the true depth (the true depth among them for exact picks; farther away, with residuals of a second, Gauss-Newton
+  # converges slowly and a 1-m step no longer means 1 m from the minimum). Every row against SciPy's least_squares
+  # with the depth held fixed, started from that row; with exact picks the true depth must give RMS 0.
+  M31-T5: {noise_s: 0.05, tol_km: 0.003, tol_s: 0.0005, rms_tol_s: 1.0e-5}
+  # 3 made-up pick tables (invented codes and dates; one with times on the edge of a second and a minute) read back
+  # from the columns of the Contract (times within 5 ms: rounding to 0.01 s); then HYPOINVERSE on a made-up
+  # earthquake in a one-layer half-space (6.00 / 3.47 km/s, 10 stations, exact picks) from the student's lines: the
+  # epicenter within hyp_epi_km, the depth within hyp_depth_km and the origin time within hyp_time_s of the truth
+  # (rounding the picks to 0.01 s moves it by a few tens of metres).
+  M31-T6: {trials: 3, hyp_epi_km: 0.15, hyp_depth_km: 0.3, hyp_time_s: 0.03}

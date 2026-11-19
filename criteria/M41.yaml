@@ -1,0 +1,36 @@
+module: M41
+frozen: 2026-11-19
+tasks:
+  # 12 made-up pick tables: 3-6 events with text ids, 3-7 stations, P and S, 55 % or 80 % of the picks kept, rows
+  # shuffled under an odd index, extra columns; min_obs 1 in every fourth case, else the middle of the pair counts
+  # (so that pairs with exactly min_obs and with fewer occur). Differential times from the made-up travel times.
+  M41-T1: {trials: 12, tol_s: 1.0e-9}
+  # 24 made-up window pairs: Ricker, Gabor and smooth bursts at dt 0.005, 0.01 or 0.02 s (8 to 33 samples per
+  # period), offsets and scaling, true shifts of fractions of a sample, one case in six with the shift outside the
+  # search window, one with an inverted copy, one with 15 % noise. Correlation values against ObsPy's correlate
+  # (naive normalization) within cc_tol; the lag against the vertex of numpy.polyfit through the three samples
+  # around the peak within lag_tol_s; on noise-free cases also within truth_tol_samples of the true shift (the
+  # parabola's own bias stays below 0.05 samples for these shapes; a whole-sample lag errs up to 0.5 samples).
+  M41-T2: {trials: 24, cc_tol: 1.0e-9, lag_tol_s: 1.0e-9, truth_tol_samples: 0.1}
+  # 10 made-up clusters (3-7 events within about 1 km, 6-18 km deep) and 4-11 stations at 4-70 km, some above sea
+  # level; 15-39 observations of random pairs (both orders), stations and phases. G against central differences
+  # (step 1e-4 km) within deriv_tol s/km, d within d_tol_s; G times the known step (about 50 m, 10 ms) must give d
+  # within the second-order bound |step|^2 / (v R) of every row.
+  M41-T3: {trials: 10, deriv_tol: 1.0e-6, d_tol_s: 1.0e-9}
+  # 10 made-up systems (3-6 events, 8-12 observations per event): exact data of a change with zero mean shift and
+  # damp 1e-6 (the change must come back), noisy data with damp 0, 0.05 and 0.5, and exact data of a change with a
+  # mean shift and damp 0.01. Against the null-space solution within rel_tol of its largest value; the four mean
+  # shifts must be zero within the same tolerance.
+  M41-T4: {trials: 10, rel_tol: 1.0e-6}
+  # 6 made-up clusters (4-7 events within about 1 km, 7-12 stations at 5-60 km), exact differential times from known
+  # positions and origin shifts, start positions 0.1-0.35 km off with zero mean, 6-8 rounds, damp 0, 1e-4 or 1e-3;
+  # every third case has weights, with a fifth of the rows at weight 0 holding times 0.2-0.6 s wrong. The check
+  # hands in its own system (central differences) and solver (null space). Positions within pos_tol_km, origin
+  # shifts within shift_tol_s, the last RMS below rms_tol_s (correct code reaches 1e-13 km and 1e-14 s).
+  M41-T5: {trials: 6, pos_tol_km: 1.0e-5, shift_tol_s: 1.0e-6, rms_tol_s: 1.0e-7}
+  # 8 made-up run logs and product files (newest writer, an identical rerun, a later failed run, a later run of
+  # another stage, a file restored from an old copy, a file edited after the last run, a run of another cluster, a
+  # half-written line); then the student's copies against the fingerprints logged in work/.sgtl/runs.jsonl (two
+  # identical relocation copies need two logged dt.cc runs that wrote them) and the first line of the two bootstrap
+  # tables (same n, seeds at least n apart).
+  M41-T6: {trials: 8}

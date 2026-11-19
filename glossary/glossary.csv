@@ -342,3 +342,74 @@ reduced_travel_time,reduced travel time,환산 주시,"Travel time minus distanc
 taup,TauP,TauP,"A widely used program (also inside ObsPy as obspy.taup) that computes travel times and ray paths in a layered spherical Earth model.",M30,0
 earth_flattening,Earth-flattening transformation,지구 평탄화 변환,"A change of depths and speeds that makes travel times in flat layers equal to those in a spherical Earth, and back.",M30,1
 first_arrival,first arrival,최초 도달파 (초동),"The wave that reaches a station first, whichever path it took: the direct wave near the source, a head wave beyond a crossover distance; the onset a picker marks.",M30,1
+json_lines,JSON Lines,JSON 줄 형식,"A text file with one JSON object per line, so that a program can add a record by appending one line.",M32,1
+summary_file,summary file (HYPOINVERSE),요약 파일 (HYPOINVERSE),"HYPOINVERSE's output with one line per earthquake: origin time, hypocenter, number of readings, gap, RMS residual and errors.",M32,1
+archive_file,archive file (HYPOINVERSE),아카이브 파일 (HYPOINVERSE),"HYPOINVERSE's output with, for each earthquake, a header line and one line per station holding the residuals and the weights it used.",M32,1
+fixed_width_format,fixed-width format,고정 폭 형식,"A text format in which every value sits in fixed character columns instead of being separated by commas or blanks.",M32,0
+implied_decimal_point,implied decimal point,생략된 소수점,"A decimal point that is not written in a number but fixed by the format: in the format F4.2 the text 1234 means 12.34.",M32,1
+pick_weight_code,weight code,가중치 코드,"A number from 0 (full weight) to 4 (no weight) attached to a pick that tells a locator how much to trust it.",M32,1
+distance_weighting,distance weighting,거리 가중,"Giving readings at distant stations less weight in a location, down to none beyond a chosen distance.",M32,0
+residual_weighting,residual weighting,잔차 가중,"Giving readings with large travel-time residuals less weight, down to none, so that a wrong pick cannot pull a location.",M32,0
+trial_depth,trial depth,시작 깊이,"The depth at which an iterative locator starts its search for each earthquake.",M32,1
+location_errors,location errors (ERH and ERZ),위치 오차 (ERH와 ERZ),"HYPOINVERSE's horizontal (ERH) and vertical (ERZ) location errors in km, taken from the error ellipsoid of the final solution.",M32,1
+location_quality,location quality,진원 결정 품질 등급,"A letter from A (best) to D that sums up how well a location fits and how well the stations surround it; the numbers behind it say more.",M32,1
+nearest_station_distance,distance to the nearest station (DMIN),최근접 관측소 거리 (DMIN),"The epicentral distance of the closest station with a reading; a depth is best fixed when a station lies closer than about the depth itself.",M32,1
+station_delay,station delay (station correction),관측소 보정값,"A constant time added to the predicted travel time at one station, standing for what the velocity model leaves out near that station.",M32,1
+phase_misidentification,phase misidentification,위상 오인,"A pick that labels an arrival with the wrong phase, for example an S wave picked as P.",M32,1
+continuous_record,continuous record,연속 기록,"A record that runs without a break for hours or days, instead of a short piece cut around a known earthquake.",M22,0
+earthquake_detection,earthquake detection,지진 검출,"Deciding from records that an earthquake happened, and when, without being told beforehand.",M22,0
+network_coincidence,network coincidence,관측망 동시 트리거,"Declaring an event only when several stations trigger at about the same time, so that noise at one station is not taken for an earthquake.",M22,1
+coincidence_extension,coincidence extension,동시 트리거 연장 시간,Extra time after an event's triggers have ended during which a trigger at another station still joins the same event.,M22,1
+template_waveform,template,템플릿 (기준 파형),"A short piece of a known earthquake's record on one channel, compared with a long record to find events that look like it.",M22,0
+correlation_coefficient,correlation coefficient,상관 계수,"A number from -1 to 1 that says how alike two equally long pieces of record are in shape, whatever their sizes: 1 for the same shape, 0 for no likeness, -1 for the same shape upside down.",M22,0
+normalized_cross_correlation,normalized cross-correlation,정규화 교차상관,"The correlation coefficient of a template with every piece of a longer record of the same length, one value per shift.",M22,0
+matched_filter,matched filter,정합 필터,A detector that slides a known signal along a record and measures how well each piece fits it; template matching is one.,M22,0
+moveout,moveout,무브아웃 (도달 시각 차),"How much later a wave arrives at one station than at another, because it travels farther or more slowly.",M22,1
+network_cross_correlation,network cross-correlation,관측망 합산 상관,"The average of the correlation coefficients of all channels after each is shifted back by its moveout, so that one earthquake lines up on every channel.",M22,1
+detection_threshold,detection threshold,검출 문턱값,The value a detector's output must reach for an event to be declared.,M22,0
+standard_deviation,standard deviation,표준 편차,The square root of the mean squared distance of values from their mean: a measure of scatter that a few large values can pull far up.,M22,0
+false_detection,false detection,오검출,"A declared event that is not an earthquake: noise, a glitch or a chance likeness.",M22,0
+false_alarm_rate,false-alarm rate,오경보율,How many false detections a detector makes per hour on records that hold no event.,M22,0
+self_detection,self-detection,자기 검출,"A template finding its own earthquake; it matches perfectly by construction, so it tests the bookkeeping, not the detector.",M22,1
+null_test,null test,귀무 검정 (널 테스트),"Running a method on data in which the effect cannot be present (for example records reversed in time), to see how often it finds something anyway.",M22,1
+relative_magnitude,relative magnitude,상대 규모,A magnitude found by comparing an event's amplitudes with those of a reference event of known magnitude on the same channels.,M22,0
+amplitude_ratio,amplitude ratio,진폭비,The size of one record divided by the size of another on the same channel; one magnitude unit is a ratio of 10.,M22,0
+l2_norm,L2 norm,L2 노름,The square root of the sum of the squared samples of a record: its overall size.,M22,0
+back_projected_origin_time,back-projected origin time,역투영 발생 시각,A pick time minus the predicted travel time from a source to its station: the origin time that pick points to.,M22,1
+association_window,association window,연관 시간 창,How far apart the back-projected origin times of picks may lie and still belong to one event.,M22,1
+event_pair,event pair,사건 쌍,Two earthquakes whose arrival times at the same stations are compared; double-difference relocation works on many such pairs at once.,M41,0
+ph2dt,ph2dt,ph2dt (차분 주시 생성 프로그램),The program of the HypoDD package that pairs nearby earthquakes and writes their catalog differential times (the file dt.ct) from a phase file.,M41,1
+outlier,outlier,이상값,"An observation far outside what the others and the physics allow, usually a mistake such as a pick on another wave; programs remove such values by a rule.",M41,0
+cc_differential_time,cross-correlation differential time,상호상관 차분 주시,A differential time measured by sliding the waveforms of two earthquakes at one station against each other and taking the shift at which they are most alike; for similar waveforms it is good to about a millisecond.,M41,1
+lag,lag,지연 시간(시간 이동),"The time by which one signal is shifted against another; in cross-correlation, the shift at which the two match best.",M41,0
+sub_sample_precision,sub-sample precision,표본 간격보다 세밀한 정밀도,"Measuring a time more finely than the sampling interval, for example to a millisecond from records sampled every 10 ms, by interpolating between samples.",M41,1
+parabolic_interpolation,parabolic interpolation,포물선 보간,Fitting a parabola through a peak sample and its two neighbors and taking the top of the parabola as the position of the peak between samples.,M41,0
+wavelet,wavelet,웨이블릿(짧은 파형),"A short wave shape, a few oscillations long; the Ricker wavelet, the second derivative of a bell curve, is a common test signal.",M41,1
+partial_derivative,partial derivative,편미분,"How much a quantity changes when one of its inputs changes a little and all others stay fixed; here, how a travel time changes when the source moves a little east, north or down.",M41,0
+straight_ray,straight ray,직선 파선,"A ray that runs along the straight line from the source to the station, as it does in a medium with the same speed everywhere.",M41,1
+singular_value,singular value,특이값,One of the numbers that say how strongly a matrix stretches the directions of its input; a zero or tiny singular value marks a combination of unknowns that the data cannot resolve.,M41,0
+null_space,null space,영공간,"The changes of the unknowns that do not change the predicted data at all, so that the data cannot decide anything about them.",M41,0
+cluster_centroid,cluster centroid,클러스터 중심,The mean position of the earthquakes of a cluster.,M41,1
+damped_least_squares,damped least squares,감쇠 최소제곱법,"Least squares with a penalty on the size of the solution (the damping squared times its squared length), which keeps an unstable inversion from making huge changes.",M41,0
+mean_shift_constraint,mean-shift constraint,평균 이동 구속 조건,"Extra equations that keep the mean change of all events' positions and origin times at zero, so that the cluster as a whole stays where it started.",M41,1
+svd,singular value decomposition (SVD),특이값 분해,"Writing a matrix as a rotation, a stretching by its singular values and another rotation; HypoDD solves small clusters with it.",M41,0
+lsqr,LSQR,LSQR (반복 최소제곱 해법),"An iterative method for large least-squares problems (Paige & Saunders 1982); HypoDD uses it, with damping, for large clusters.",M41,1
+linearization,linearization,선형화,"Replacing a curved relation by its straight tangent near the current values, so that a small change can be found by solving linear equations.",M41,0
+iteration,iteration,반복 계산,"Repeating a calculation, each time starting from the result of the round before, until the result stops changing.",M41,0
+observation_weight,observation weight,관측 가중치,"A number that says how much one observation counts in a fit; its row of the equations is multiplied by it, so a weight of 0 removes the observation.",M41,0
+run_log,run log,실행 기록,"A file to which every run of a program adds one line saying what ran, when, whether it worked and which files it wrote; sgtl keeps one in work/.sgtl/runs.jsonl.",M41,0
+return_code,return code (exit status),종료 코드,"The number a program gives back when it ends: 0 means it worked, anything else that it stopped with a problem or never started.",M41,0
+modification_time,modification time,수정 시각,"The time at which a file's contents were last written, kept by the file system.",M41,0
+stale_file,stale file,오래된 결과 파일,"A result file left over from an earlier run that a later run did not replace, for example because that run failed; reading it as the new result is a common mistake.",M41,1
+bootstrap_replica,bootstrap replica,부트스트랩 반복 표본,One rerun of an analysis on a data set drawn with replacement from the original data; the spread of many replicas measures the uncertainty.,M41,1
+percentile,percentile,백분위수,The value below which a given percentage of a set of values lies; the 2.5th and 97.5th percentiles enclose the middle 95 %.,M41,0
+local_coordinates,local coordinates,국지 좌표계,"Distances east and north of a chosen reference point in kilometres, with depth counted down from the surface; used instead of latitude and longitude over a small region.",M31,1
+finite_difference,finite difference,유한 차분,An approximate derivative: the change of a function over a small step divided by the length of the step.,M31,0
+normal_equations,normal equations,정규 방정식,The square system G^T G m = G^T d whose solution m is the least-squares fit of G m to the data d.,M31,0
+stopping_rule,stopping rule,종료 조건 (수렴 판정),"The test that ends an iteration, for example a step shorter than a set length or a largest number of steps.",M31,1
+airquake,airquake,공중 지진 (에어퀘이크),"A trial hypocenter above the Earth's surface, produced by a location step; locators prevent it, for example by halving the depth instead.",M31,1
+travel_time_table,travel-time table,주시표,"Travel times computed once on a grid of distances and depths and interpolated afterwards, so that a locator does not trace rays for every trial point.",M31,0
+depth_scan,depth scan,깊이 탐색 (고정 깊이 탐색),"Locating an earthquake again with its depth held at each of a series of values, to see how the misfit and the other unknowns change with depth.",M31,1
+phase_file,phase file,위상 파일 (도달 시각 파일),A text file that holds the picks of earthquakes in the fixed format that a location program reads.,M31,1
+error_correlation,error correlation,오차 상관 (상관 계수),"How strongly the errors of two estimated values go together, from -1 to 1: their covariance divided by the product of their standard errors; near -1 or 1 the data cannot tell the two apart.",M31,1
+cosine_similarity,cosine similarity,코사인 유사도,"The sum of the products of two equally long records divided by the product of their L2 norms: the correlation coefficient without removing their means first, 1 when one record is a positive multiple of the other.",M22,0

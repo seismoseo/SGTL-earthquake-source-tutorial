@@ -4,6 +4,64 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v0.4.0 — locating earthquakes, HYPOINVERSE, relative relocation and detection
+
+**After updating, there is nothing new to install** if you set up v0.3.0: the new modules use the course tools
+(`bin/sgtl-install tools`: PocketQuake, HYPOINVERSE and HypoDD) and the PhaseNet weights
+(`bin/sgtl-install seisbench`), and the course environment is unchanged. `bin/sgtl pq check` shows whether the tools
+are in place (HYPOINVERSE, ph2dt and hypoDD among them) and `bin/sgtl doctor` whether the weights are; then restart
+the Jupyter kernel "SGTL (Python 3.12)" so that it loads the new version of the course package. For module M22
+only, fetch the three hours of records `sangju2019_hours` with your STP account:
+`bin/sgtl data fetch sangju2019_hours` (dry run: the plan), then the same command with `--apply`.
+
+### Added
+- Module M31 (locating an earthquake): a grid search over the hypocenter and Geiger's method (damped least squares
+  with the Jacobian of the travel times), both tested on a made-up earthquake whose position you know; the
+  covariance matrix, the standard errors and the correlation of depth and origin time, confirmed with a Monte
+  Carlo test of your own locator; the Sangju mainshock of 21 July 2019 located from your own M20 picks with the
+  first arrivals of your M30 functions (never the Moho head waves Pn and Sn), next to the KMA catalog; a depth
+  scan of the 2018 Sangju earthquake with and without the station nearest to it; and phase lines that you write
+  for HYPOINVERSE, which you run with the commands of PocketQuake's location stage (printed next to PocketQuake's
+  own), rerun unchanged, and then run with one setting changed.
+- Module M32 (HYPOINVERSE through PocketQuake): PocketQuake's location stage run through `sgtl pq` (a dry run
+  first) on the cluster of your M21 picks, and the SHA-256 fingerprints of the run log that show which files a run
+  wrote; HYPOINVERSE's archive file read by its fixed columns, checked against its summary file; its locations
+  matched with the KMA catalog and with your M31 location; an unchanged rerun, then velocity model kim2011 in
+  place of kim1983; and stations whose residuals are early or late, and what a station delay can and cannot hold.
+- Module M41 (relative relocation): catalog differential times for pairs of earthquakes, checked against HypoDD's
+  file `dt.ct`; the lag between two waveforms by cross-correlation, to a fraction of a sample, and your
+  differential times on the Sangju records next to PocketQuake's; the double-difference system G m = d, solved
+  with damping and a fixed centroid and iterated to convergence; the Sangju earthquakes relocated with your own
+  functions, each phase only at the stations inside its crossover distance for the deepest earthquake above the
+  boundary at 15 km (from your M30 functions), and with HypoDD through PocketQuake; an unchanged rerun, a bootstrap of HypoDD's result with two
+  seeds, and how to tell from the run log which run wrote a result file. Its PocketQuake runs use 3 cores (never
+  more than 4 on the shared server); the longest, the cross-correlation stage, takes about 8 minutes.
+- Module M22 (detecting earthquakes, a stretch module): network coincidence of per-station triggers, a normalized
+  cross-correlation, a detection threshold from the median absolute deviation (MAD), a relative magnitude from
+  amplitude ratios, template matching on the three hours `sangju2019_hours` with a null test, and an associator
+  that groups the picks of a pretrained PhaseNet into earthquakes (an unchanged rerun, then one setting changed).
+  It runs on one core. Its practice records with known answers come from the new course module
+  `sgtl_tutorial.synth_detect`.
+- All four are delivered unexecuted; start them with `bin/sgtl new M31` and so on. Do them in order: M31 reads your
+  M20 picks and your M30 travel-time functions; M32 locates the PocketQuake cluster of your M21 picks and reads
+  your M31 results; M41 starts from the locations of M32 and uses your M30 travel-time functions. M22 reads your M20 picks and uses your M21 and M30
+  functions. When something a module reads is missing, it stops with a message that says what to finish or fetch
+  first.
+- Four optional explorers: E5 in M31 (`st.widgets.misfit_explorer`) draws the misfit of your own grid search in map
+  view and in a depth section, with stations left out as you choose, and your Wadati line; E6 in M41
+  (`st.widgets.lag_explorer`) makes a wavelet and a shifted copy under a filter band and noise, and shows the lag
+  that your cross-correlation finds next to the true shift; E7 in M41 (`st.widgets.dd_toy`) puts a made-up cluster
+  under pick errors and station delays and shows absolute positions next to the relative positions from your own
+  double-difference functions; E11 in M22 (`st.widgets.detection_explorer`) shows your threshold and detections on
+  the network cross-correlation next to the peaks on the null records. As before, an explorer never does a task
+  for you.
+- Glossary terms and references for M22, M31, M32 and M41.
+
+### Changed
+- The course map in `README.md` and `docs/curriculum.md` now describe M22, M31, M32 and M41 as they are, and the
+  list of explorers names E5, E6, E7 and E11.
+- "How to cite" in `README.md` names version 0.4.0.
+
 ## v0.3.0 — picking arrivals, deep-learning pickers and travel times
 
 **After updating, update the course environment and add the PhaseNet weights once:**

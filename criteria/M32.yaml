@@ -1,0 +1,41 @@
+module: M32
+frozen: 2026-11-19
+tasks:
+  # 8 made-up run logs (2-4 matching runs, one of them without products, failed runs, another cluster whose name
+  # contains the slug, runs that end before or start after the stage; from the third log on a 'pq bootstrap' line,
+  # from the fifth an empty line and half a JSON line). Then the student's own log: the reader's rows for the cluster
+  # and the stage hypoinverse must equal the log's; the student's fingerprints must name every .sum, .arc and .prt file
+  # now in the cluster and equal their SHA-256 recomputed by the check, and the .sum and .arc ones must equal the last
+  # value logged for each path (changed in the Phase 4 review: the report gives the fingerprints, no longer a typed
+  # files_match boolean; the .prt files are not logged, so they must be hashed from the files).
+  M32-T1: {trials: 8}
+  # 10 made-up archive files of 2-4 earthquakes and 3-9 station lines each (case 0 with blanks between all fields;
+  # the others with touching fields: residuals beyond +-1 s, weights above 1, distances of 100-999 km, emergence
+  # angles, combined P and S lines, five-letter codes touching the network). Values within half a unit of the last
+  # implied digit. Then the student's kim1983 and kim2011 archive files against the summary files of the same run:
+  # the same ID numbers; per earthquake the count of weights above 0.1 within num_tol of NUM (a weight printed as
+  # 0.10 may have been 0.104 inside HYPOINVERSE), and sqrt(sum (w r)^2 / sum w^2) within rms_tol_s of RMS (both are
+  # rounded to 0.01 in the files; the reference run agrees to 0.005 s for all 12 events).
+  M32-T2: {trials: 10, num_tol: 1, rms_tol_s: 0.011}
+  # 12 made-up pairs of tables (5-10 earthquakes at least 20 windows apart; partners within 0.85 windows; second
+  # candidates farther in time; decoys; near misses 1.05-1.6 windows away; other in Asia/Seoul, +09:00, UTC or -05:00;
+  # ref in Asia/Seoul for every third case); the first case is run again with naive ref times (a ValueError is
+  # required). Distances against pyproj.Geod (WGS84) within dist_rel_tol (a sphere of 6371 km differs by < 0.4 %).
+  # Then the student's kim1983 summary against the KMA subset 'sangju2019' (27 events) with real_max_dt_s: every
+  # earthquake needs a partner within real_dt_s, real_dist_km and real_depth_km (loose on purpose: KMA rounds to
+  # 0.01 deg, whole km and whole seconds; the reference run's largest offsets are well inside).
+  M32-T3: {trials: 12, max_dt_s: 5.0, dt_tol_s: 1.0e-3, depth_tol_km: 1.0e-3, dist_rel_tol: 0.005,
+           dist_abs_tol_km: 0.005, sequence: sangju2019, real_max_dt_s: 5.0, real_dt_s: 3.0, real_dist_km: 5.0,
+           real_depth_km: 15.0}
+  # 8 made-up pairs of text files (equal files, changed lines, extra lines in either file, a file without its final
+  # newline). Then the report: two copies with one .sum and .arc per model, at least min_runs successful location runs
+  # of the cluster in the run log, every .sum and .arc of both copies among the logged fingerprints of its path,
+  # identical for every file of the first copy, and model_change against the two summary files of the first copy
+  # (paired by ID number) within table_tol (depths and seconds have 2 decimals in the files).
+  M32-T4: {trials: 8, min_runs: 2, table_tol: 0.006}
+  # 10 made-up tables: 4-9 stations, P and S, n used readings per group from min_events - 2 to min_events + 5, means
+  # set at 0, 0.2-1.6 or 2.6-9 standard errors (never near the boundary of 2), residuals rescaled to the exact mean and
+  # sample SD; plus readings of weight 0 (3-11 s), 0.05 and exactly 0.10; min_events 3-5. Then the student's two archive
+  # files through the student's reader with real_min_events: rows with n >= real_min_events, finite standard errors,
+  # every |mean_s| <= real_max_abs_mean_s (the left-out readings reach 3-11 s), labels by the rule.
+  M32-T5: {trials: 10, tol_s: 1.0e-6, real_min_events: 4, real_max_abs_mean_s: 1.0}

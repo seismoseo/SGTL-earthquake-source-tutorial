@@ -28,7 +28,8 @@
 # mb_per_request and requests_per_second come from the same test fetches: 373 MB in 2736 requests
 # (Sangju, 279 s) and 307 MB in 2088 requests (Suncheon 2019, 116 s), records of 500 s; the plan scales the
 # size with the record length (sangju2019_hours, records of 10800 s: 104 MB in 68 requests, 23 s, on
-# 2026-11-19). One request = one station and one band. STP is slower when it is busy.
+# 2026-11-19; gokseong2018: 358 MB in 2772 requests, 326 s, 2026-11-19). One request = one station and one
+# band. STP is slower when it is busy.
 schema_version: 1
 status: active
 catalog: data/catalogs/kma_catalog.csv
@@ -61,6 +62,7 @@ datasets:
     station_radius_km: 50
     window_s: [-3600, 7200]
     bands: [HH, EL]
+    # stations = stations asked for (34 within 50 km; sets the size estimate); 8 of them have records for these hours
     expected: {stations: 34, basis: test fetch, files_per_event: {HH: [10, 20], EL: [6, 12]}}
     events:
       - {event_id: "2019009762", origin_utc: "2019-07-21T02:04:18Z", latitude: 36.5, longitude: 128.1, depth_km: 14.0, ml: 3.9}
@@ -90,7 +92,7 @@ datasets:
     station_radius_km: 100
     window_s: [-30, 470]
     bands: [HH, HG, EL]
-    expected: {stations: 132, basis: estimate, files_per_event: {HH: [41, 95], HG: [91, 271], EL: [16, 36]}}
+    expected: {stations: 132, basis: test fetch, files_per_event: {HH: [39, 75], HG: [121, 227], EL: [16, 32]}}
     events:
       - {event_id: "2018000094", origin_utc: "2018-03-08T14:16:47Z", latitude: 35.3, longitude: 127.33, depth_km: 15.0, ml: 2.0}
       - {event_id: "2018000095", origin_utc: "2018-03-08T14:38:41Z", latitude: 35.31, longitude: 127.32, depth_km: 17.0, ml: 2.0}

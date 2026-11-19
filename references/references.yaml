@@ -1975,3 +1975,124 @@
   status: "V"
   used_in: [M30]
   note: Checked in Crossref on 2026-11-19 (author, title, journal, volume, pages; Crossref gives 2009-09-15, the online date, as its issue date). Why flat-layer and spherical travel times differ slightly, and how to convert one into the other.
+
+- key: lee1975
+  authors: Lee & Lahr
+  year: 1975
+  title: 'HYPO71 (revised): a computer program for determining hypocenter, magnitude, and first motion pattern of local earthquakes'
+  venue: U.S. Geological Survey Open-File Report 75-311
+  doi: 10.3133/ofr75311
+  url: null
+  status: "V"
+  used_in: [M32]
+  note: Checked in Crossref on 2026-11-19 (authors, title, series, year; Crossref's title lacks the closing parenthesis). HYPOINVERSE's travel times in homogeneous layers (its CRH model) use HYPO71's algorithm (Klein 2002; source routine HYTRH).
+
+- key: kissling1994
+  authors: Kissling, Ellsworth, Eberhart-Phillips & Kradolfer
+  year: 1994
+  title: Initial reference models in local earthquake tomography
+  venue: 'Journal of Geophysical Research: Solid Earth 99(B10):19635-19646'
+  doi: 10.1029/93JB03138
+  url: null
+  status: "V"
+  used_in: [M32]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). The minimum one-dimensional model with station corrections (VELEST); why station delays come from many earthquakes around the network.
+
+- key: schaff2014
+  authors: Schaff & Richards
+  year: 2014
+  title: Improvements in magnitude precision, using the statistics of relative amplitudes measured by cross correlation
+  venue: Geophysical Journal International 197(1):335-350
+  doi: 10.1093/gji/ggt433
+  url: null
+  status: "V"
+  used_in: [M22]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages; Crossref gives 2014-01-22, the online date, as its issue date). Cross-correlation gives the least-squares relative amplitude, which is biased when the waveforms of two events differ; the log of the ratio of their L2 norms removes that bias (M22 Part 4).
+
+- key: deichmann1992
+  authors: Deichmann & Garcia-Fernandez
+  year: 1992
+  title: Rupture geometry from high-precision relative hypocentre locations of microearthquake clusters
+  venue: Geophysical Journal International 110(3):501-517
+  doi: 10.1111/j.1365-246X.1992.tb02088.x
+  url: null
+  status: "V"
+  used_in: [M41]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). Cross-correlation delays refined below one sample for relative locations.
+
+- key: paige1982
+  authors: Paige & Saunders
+  year: 1982
+  title: 'LSQR: an algorithm for sparse linear equations and sparse least squares'
+  venue: ACM Transactions on Mathematical Software 8(1):43-71
+  doi: 10.1145/355984.355989
+  url: null
+  status: "V"
+  used_in: [M41]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). The LSQR solver that HypoDD uses for large clusters.
+
+- key: efron1986
+  authors: Efron & Tibshirani
+  year: 1986
+  title: Bootstrap methods for standard errors, confidence intervals, and other measures of statistical accuracy
+  venue: Statistical Science 1(1):54-75
+  doi: 10.1214/ss/1177013815
+  url: null
+  status: "V"
+  used_in: [M41]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). A readable introduction to the bootstrap and its percentile intervals.
+
+- key: geiger1910
+  authors: Geiger
+  year: 1910
+  title: Herdbestimmung bei Erdbeben aus den Ankunftszeiten
+  venue: Nachrichten von der Königlichen Gesellschaft der Wissenschaften zu Göttingen, Mathematisch-Physikalische Klasse 1910:331-349
+  doi: null
+  url: null
+  status: "P"
+  used_in: [M31]
+  note: No DOI; not in Crossref (searched 2026-11-19). Details from the standard citation; an English translation appeared as 'Probability method for the determination of earthquake epicenters from the arrival time only' (Bulletin of St. Louis University 8, 1912). The origin of Geiger's method.
+
+- key: levenberg1944
+  authors: Levenberg
+  year: 1944
+  title: A method for the solution of certain non-linear problems in least squares
+  venue: Quarterly of Applied Mathematics 2(2):164-168
+  doi: 10.1090/qam/10666
+  url: null
+  status: "V"
+  used_in: [M31]
+  note: Checked in Crossref on 2026-11-19 (author, title, journal, volume, issue, pages, year). Damped least squares.
+
+- key: marquardt1963
+  authors: Marquardt
+  year: 1963
+  title: An algorithm for least-squares estimation of nonlinear parameters
+  venue: Journal of the Society for Industrial and Applied Mathematics 11(2):431-441
+  doi: 10.1137/0111030
+  url: null
+  status: "V"
+  used_in: [M31]
+  note: Checked in Crossref on 2026-11-19 (author, title, journal, volume, issue, pages, year). Damped least squares (the Levenberg-Marquardt method).
+
+- key: thurber1985
+  authors: Thurber
+  year: 1985
+  title: 'Nonlinear earthquake location: theory and examples'
+  venue: Bulletin of the Seismological Society of America 75(3):779-790
+  doi: 10.1785/BSSA0750030779
+  url: null
+  status: "V"
+  used_in: [M31]
+  note: Checked in Crossref on 2026-11-19 (author, title, journal, volume, issue, pages, year). Why linearized location works near the minimum and when it does not.
+
+- key: gomberg1990
+  authors: Gomberg, Shedlock & Roecker
+  year: 1990
+  title: The effect of S-wave arrival times on the accuracy of hypocenter estimation
+  venue: Bulletin of the Seismological Society of America 80(6A):1605-1628
+  doi: 10.1785/BSSA08006A1605
+  url: null
+  status: "V"
+  used_in: [M31]
+  note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). How near stations and S picks fix the depth.
