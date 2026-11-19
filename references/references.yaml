@@ -928,7 +928,7 @@
   doi: 10.1785/gssrl.60.2.37
   url: null
   status: "V"
-  used_in: [M52, M53]
+  used_in: [M50, M52, M53]
   note: Good first read on moment tensors.
 
 - key: hanks1979
@@ -2096,3 +2096,14 @@
   status: "V"
   used_in: [M31]
   note: Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). How near stations and S picks fix the depth.
+
+- key: berteussen1977
+  authors: Berteussen
+  year: 1977
+  title: Moho depth determinations based on spectral-ratio analysis of NORSAR long-period P waves
+  venue: Physics of the Earth and Planetary Interiors 15(1):13-27
+  doi: 10.1016/0031-9201(77)90006-1
+  url: null
+  status: "V"
+  used_in: [M52]
+  note: Checked in Crossref on 2026-11-20 (author, title, journal, volume, issue, pages, year). The usual source cited for the straight-line rule density = 0.77 + 0.32 Vp (g/cm3, Vp in km/s) that gives layers of a speed-only model a density.

@@ -1,0 +1,35 @@
+module: M50
+frozen: 2026-11-20
+tasks:
+  # Five fault types by hand (vertical left-lateral, thrust, normal, right-lateral, oblique) and 40 random planes
+  # (dip 5-85, rake -179.5..179.5). Pyrocko's moment tensor must equal n d^T + d n^T to tol (unit moment); ObsPy's
+  # strike_dip must give back the plane from the normal; the normal must point up.
+  M50-T1: {random_cases: 40, tol: 1.0e-6}
+  # Four planes by hand and 40 random planes whose auxiliary plane has a dip of 3-87 degrees and a rake that is not
+  # within 2 degrees of 0 or 180 (away from the planes that have two names); ObsPy's aux_plane to tol_deg.
+  M50-T2: {random_cases: 40, tol_deg: 0.01}
+  # Five fault types and 40 random planes; ObsPy's mt2axes to tol_deg. An axis with a plunge below flat_plunge_deg
+  # may point either way (trend or trend + 180); an axis within flat_plunge_deg of vertical has no trend.
+  M50-T3: {random_cases: 40, tol_deg: 0.01, flat_plunge_deg: 0.5}
+  # Centre, rim (to 1e-6), azimuth (1e-6 degrees) and the opposite of upward rays (tol) on random_rays rays each;
+  # equal areas: of area_directions random directions on the lower half of the sphere, the share with a takeoff
+  # up to 10, 25, ..., 85 degrees against r squared. One standard deviation of that share is at most 0.0011 for
+  # 200 000 directions, so area_tol is about 5 of them; an equal-angle net misses by 0.03-0.08 there.
+  M50-T4: {random_rays: 200, area_directions: 200000, area_tol: 0.006, tol: 1.0e-9}
+  # 4 one-layer models (straight-line geometry), 3 two-layer models with the source below the boundary (Fermat by
+  # brute force; one with a slower lower layer) and kim1983, kim2011 and a random four-layer model through TauP on
+  # an Earth-flattened copy. TauP's takeoff angle on the flattened copy agrees with the flat-layer geometry to
+  # 0.03 degrees or better out to 140 km (measured on one-layer models at 5, 14 and 25 km depth).
+  M50-T5: {tol_formula_deg: 0.01, tol_taup_deg: 0.1}
+  # The polarity function: 10 made-up tables of 8-20 rays (no ray within nodal_margin of a nodal plane, as a
+  # fraction of the largest P amplitude), planted disagreements and question marks, the last table without one
+  # clear first motion. The files: at least min_polarities clear first motions, the epicentre within
+  # epicenter_window_deg of the KMA epicentre (KMA reports 0.1 degree), station coordinates within station_tol_deg
+  # of data/stations/stations.csv, distances and azimuths against ObsPy, direct takeoffs against TauP and head-wave
+  # takeoffs against a critical angle of the model to takeoff_tol_deg, a station labelled with the wrong wave only
+  # when TauP's direct and refracted times differ by more than first_arrival_margin_s, predicted polarities against
+  # Pyrocko's tensor (rays within nodal_margin of a nodal plane are not judged), a PNG of at least
+  # figure_min_bytes.
+  M50-T6: {tables: 10, nodal_margin: 0.05, min_polarities: 5, epicenter_window_deg: 0.2, station_tol_deg: 0.02,
+           distance_tol_km: 0.1, azimuth_tol_deg: 0.2, takeoff_tol_deg: 0.2, first_arrival_margin_s: 0.05,
+           figure_min_bytes: 5000}

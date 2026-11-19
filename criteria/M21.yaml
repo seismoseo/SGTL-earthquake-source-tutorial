@@ -14,9 +14,11 @@ tasks:
            window_s: [-2.0, 40.0], strong_prob: 0.5, prob_tol: 1.0e-6}
   # 40 pairs of made-up pick tables (with and without event_id), then 3 tables that hold one key twice
   M21-T3: {trials: 40, diff_tol_s: 1.0e-6}
-  # 6 made-up PocketQuake pick folders for the reader; then the student's three copies: fingerprints among the
-  # logged picks fingerprints of at least min_runs successful runs of the cluster that include the picking stage;
-  # every probability of the first run and the rerun at least default_min_prob (PocketQuake's PNPLUS_MIN_PROB)
+  # 6 made-up PocketQuake pick folders for the reader; then the student's three copies: the student's per-file
+  # SHA-256 of the first and rerun copies recomputed from every pick file; fingerprints among the logged picks
+  # fingerprints of at least min_runs successful runs of the cluster that include the picking stage; the rerun a
+  # folder of its own whose bytes (if equal to the first run's) at least two runs logged; every probability of the
+  # first run and the rerun at least default_min_prob (PocketQuake's PNPLUS_MIN_PROB)
   M21-T4: {trials: 6, min_runs: 3, default_min_prob: 0.3}
   # 40 made-up pick tables (polarities on both sides of and exactly at +-min_weight, probabilities on both sides
   # of min_prob, NaN polarities, S picks), then 3 tables without a polarity column (see the category missing-column)

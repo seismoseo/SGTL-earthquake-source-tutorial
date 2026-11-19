@@ -27,11 +27,13 @@ tasks:
   M32-T3: {trials: 12, max_dt_s: 5.0, dt_tol_s: 1.0e-3, depth_tol_km: 1.0e-3, dist_rel_tol: 0.005,
            dist_abs_tol_km: 0.005, sequence: sangju2019, real_max_dt_s: 5.0, real_dt_s: 3.0, real_dist_km: 5.0,
            real_depth_km: 15.0}
-  # 8 made-up pairs of text files (equal files, changed lines, extra lines in either file, a file without its final
-  # newline). Then the report: two copies with one .sum and .arc per model, at least min_runs successful location runs
-  # of the cluster in the run log, every .sum and .arc of both copies among the logged fingerprints of its path,
-  # identical for every file of the first copy, and model_change against the two summary files of the first copy
-  # (paired by ID number) within table_tol (depths and seconds have 2 decimals in the files).
+  # The answer's differ under the forbidden list, then 8 made-up pairs of text files (equal files, changed lines,
+  # extra lines in either file, a file without its final newline). Then the report: two copies with one .sum and .arc
+  # per model, the student's SHA-256 of every file of both copies recomputed from the files, at least min_runs
+  # successful location runs of the cluster in the run log, every .sum and .arc of both copies among the logged
+  # fingerprints of its path, the rerun a folder of its own whose .sum and .arc bytes (if equal to the first copy's)
+  # at least two runs logged, and model_change against the two summary files of the first copy (paired by ID number)
+  # within table_tol (depths and seconds have 2 decimals in the files).
   M32-T4: {trials: 8, min_runs: 2, table_tol: 0.006}
   # 10 made-up tables: 4-9 stations, P and S, n used readings per group from min_events - 2 to min_events + 5, means
   # set at 0, 0.2-1.6 or 2.6-9 standard errors (never near the boundary of 2), residuals rescaled to the exact mean and

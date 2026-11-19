@@ -86,9 +86,9 @@ About 35-40 hours per week. Times are estimates; the plan is adjusted after week
 | 4 | M31 Earthquake location | Grid search and Geiger's method tested on a made-up earthquake; standard errors and a Monte Carlo test; the Sangju mainshock from your picks next to KMA; a depth scan; phase lines for HYPOINVERSE (explorer E5) |
 | 4 | M32 HYPOINVERSE via PocketQuake | A production locator run through `sgtl pq` and its run log; its archive file read column by column; its locations next to KMA's and yours; a rerun, a second velocity model and station delays |
 | 5 | M41 Relative relocation | Catalog and cross-correlation differential times, the double-difference system with damping and a fixed centroid, your own relocation next to HypoDD via PocketQuake; a rerun and a bootstrap with two seeds (explorers E6, E7) |
-| 6 | M50 The focal sphere | Strike, dip and rake, nodal planes and beachballs, by hand first |
-| 6 | M51 Mechanisms from polarities | Grid search over mechanisms, SKHASH, and the S/P amplitude trap |
-| 6 | M52 Synthetic seismograms | Moment tensors, M0 and Mw, radiation patterns, point-source synthetics checked against PyFK |
+| 6 | M50 The focal sphere | Strike, dip and rake as fault-normal and slip vectors, the auxiliary plane and P and T axes, rays on an equal-area net, takeoff angles from your ray tracing, your Sangju first motions next to KIGAM's mechanism; by hand first (explorer E13) |
+| 6 | M51 Mechanisms from first motions | Polarity misfit, a grid search over mechanisms, the Kagan angle and families of acceptable mechanisms; SKHASH via PocketQuake, a rerun and the S/P amplitude ratios (explorer E8) |
+| 6 | M52 Synthetic seismograms | Moment tensors, M0 and Mw, radiation patterns, whole-space synthetics checked against PyFK, and PyFK synthetics of the Sangju earthquake next to the records (explorer E12) |
 | 7 | M53 Moment tensor inversion | Least squares on synthetics, norms and time shifts, Kagan angle, the lune; MTUQ on a real event |
 | 7 | M54 Coulomb stress change | Stress changes from synthetic faults; when they can and cannot be seen (Gyeongju 2016) |
 | 8 | M60 Full run and project plan | The whole chain on a new sequence; planning your research project |
@@ -123,6 +123,6 @@ fairly: [docs/server_manners.md](docs/server_manners.md). Data rules: [docs/data
 ## How to cite
 
 Use [CITATION.cff](CITATION.cff); on GitHub, the "Cite this repository" button gives APA and BibTeX. For example:
-Seo, M. (2026). *SGTL earthquake source tutorial* (version 0.4.0). Seismology, Geophysics, Tectonophysics
+Seo, M. (2026). *SGTL earthquake source tutorial* (version 0.5.0). Seismology, Geophysics, Tectonophysics
 Laboratory, Seoul National University. <https://github.com/seismoseo/SGTL-earthquake-source-tutorial>.
 People who helped are listed in [AUTHORS.md](AUTHORS.md).

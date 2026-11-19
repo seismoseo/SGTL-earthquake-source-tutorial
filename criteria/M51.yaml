@@ -1,0 +1,31 @@
+module: M51
+frozen: 2026-11-20
+tasks:
+  # 16 made-up cases: one mechanism (numbers) or 3-6 mechanisms (1-D arrays); 8-40 rays with azimuths 0-360 deg and
+  # takeoff angles 0-180 deg (up and down), none within 5 % of the largest amplitude of a nodal plane; 0-30 % of the
+  # polarities flipped; weights 1 or 0.1-1. Predicted polarities against the sign of the ray-projected moment tensor
+  # of Pyrocko (exact); misfits within misfit_tol.
+  M51-T1: {trials: 16, misfit_tol: 1.0e-9}
+  # 12 made-up mechanisms (dip 10-89 deg), 30-60 stations with takeoff angles 20-160 deg, 0-10 % of the polarities
+  # flipped, weights 1 or 0.3-1; grid steps 10, 15, 18 and 30 deg in the first four cases, then 10; tol 0, 0.05 or
+  # 0.1. The check hands in its own misfit function and records what it is asked. Correct code: median Kagan angle
+  # between the best mechanisms and the truths 7-16 deg over 150 draws of 12 cases (at 10 deg steps); the limit
+  # leaves room for the coarse steps.
+  M51-T2: {trials: 12, steps: [10.0, 15.0, 18.0, 30.0], tols: [0.0, 0.05, 0.1], misfit_tol: 1.0e-9,
+           kagan_median_max_deg: 20.0}
+  # 30 pairs: random, one mechanism with its other nodal plane, nearby pairs (a few degrees), identical; against
+  # pyrocko.moment_tensor.kagan_angle within tol_deg, in both orders.
+  M51-T3: {trials: 30, tol_deg: 1.0e-3}
+  # 12 made-up sets: 2-3 groups (members turned at most 0.45 max_angle from the group's first mechanism, groups at
+  # least 2.4 max_angle apart; max_angle 15-30 deg), one tie case in four, one chain case in four (0, 0.7 and
+  # 1.4 max_angle about one axis; max_angle 20-40 deg). The check hands in Pyrocko's Kagan angle.
+  M51-T4: {trials: 12}
+  # 8 made-up SKHASH polarity tables (1-3 events, 4-11 stations, polarities below, at and above min_weight, S/P rows
+  # without polarity); then the student's run: the grid step at most max_step_deg; for events graded A by SKHASH
+  # with at least skhash_agree_min_pol polarities, the student's best mechanism within skhash_agree_deg (Kagan) of
+  # SKHASH's. Reference run (2026-11-20): the two such events of the Sangju download agree well inside the limit.
+  M51-T5: {trials: 8, max_step_deg: 10.0, skhash_agree_deg: 30.0, skhash_agree_min_pol: 50}
+  # 8 made-up S/P tables with picks (stations without picks; a second, later P pick at some stations); then the
+  # three copied runs, their fingerprints in the run log, the one changed setting, and the reported Kagan angles
+  # between the first and the polarities-only run against Pyrocko's (within 0.05 deg).
+  M51-T6: {trials: 8}
