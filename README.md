@@ -81,11 +81,11 @@ About 35-40 hours per week. Times are estimates; the plan is adjusted after week
 | 2 | M10 Seismograms | SAC headers and time, filters and spectra, removing the response checked on two instruments, rotation, S-P distances and record sections, thread limits |
 | 3 | M20 Picking arrivals | STA/LTA triggers and onset times; how filters move automatic picks; P and S picks by hand with uncertainties and polarities (picker E2) |
 | 3 | M21 Deep-learning pickers | Picks from probability curves; two pretrained PhaseNet models against your picks; PocketQuake's picking stage, rerun and changed; first motions |
-| 3 | M22 Detection (stretch) | Finding small earthquakes in continuous data |
+| 3 | M22 Detection (stretch) | Network coincidence, template matching with a threshold from the MAD and a null test, relative magnitudes, and an associator for PhaseNet picks, on three hours of records (explorer E11) |
 | 3 | M30 Travel times in a layered crust | Direct-wave times in layered models (head waves only as an idea), the Wadati diagram from your picks, residuals of two velocity models, TauP |
-| 4 | M31 Earthquake location | Grid search, Geiger's method and location uncertainty |
-| 4 | M32 HYPOINVERSE via PocketQuake | Running a production locator and comparing it with yours |
-| 5 | M41 Relative relocation | Differential times, cross-correlation, the double-difference system, bootstrap; HypoDD via PocketQuake |
+| 4 | M31 Earthquake location | Grid search and Geiger's method tested on a made-up earthquake; standard errors and a Monte Carlo test; the Sangju mainshock from your picks next to KMA; a depth scan; phase lines for HYPOINVERSE (explorer E5) |
+| 4 | M32 HYPOINVERSE via PocketQuake | A production locator run through `sgtl pq` and its run log; its archive file read column by column; its locations next to KMA's and yours; a rerun, a second velocity model and station delays |
+| 5 | M41 Relative relocation | Catalog and cross-correlation differential times, the double-difference system with damping and a fixed centroid, your own relocation next to HypoDD via PocketQuake; a rerun and a bootstrap with two seeds (explorers E6, E7) |
 | 6 | M50 The focal sphere | Strike, dip and rake, nodal planes and beachballs, by hand first |
 | 6 | M51 Mechanisms from polarities | Grid search over mechanisms, SKHASH, and the S/P amplitude trap |
 | 6 | M52 Synthetic seismograms | Moment tensors, M0 and Mw, radiation patterns, point-source synthetics checked against PyFK |
@@ -123,6 +123,6 @@ fairly: [docs/server_manners.md](docs/server_manners.md). Data rules: [docs/data
 ## How to cite
 
 Use [CITATION.cff](CITATION.cff); on GitHub, the "Cite this repository" button gives APA and BibTeX. For example:
-Seo, M. (2026). *SGTL earthquake source tutorial* (version 0.3.0). Seismology, Geophysics, Tectonophysics
+Seo, M. (2026). *SGTL earthquake source tutorial* (version 0.4.0). Seismology, Geophysics, Tectonophysics
 Laboratory, Seoul National University. <https://github.com/seismoseo/SGTL-earthquake-source-tutorial>.
 People who helped are listed in [AUTHORS.md](AUTHORS.md).
