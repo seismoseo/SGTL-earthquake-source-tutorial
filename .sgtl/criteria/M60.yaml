@@ -1,0 +1,34 @@
+module: M60
+frozen: 2026-11-20
+tasks:
+  # 20 made-up dataset folders (2-4 events, Korean clock times in 2005-2025, some between 00:00 and 09:00 on the
+  # first day of a month or a year), each built with one known problem or none: every one of the 16 kinds once,
+  # then random kinds. Stations with one or two bands and horizontal-only stations; pick tables with usable, weak,
+  # uncertain and S rows, and polarities exactly at the limits. The limits below are the Contract's defaults.
+  M60-T1: {trials: 20, min_stations: 8, min_polarities: 8, min_weight: 0.3, min_prob: 0.5}
+  # 4 made-up pick folders for read_picks (one empty file, one file that is not a .csv) and 4 made-up dataset folders
+  # for a re-test of the preflight; then the reported data and pick checks against the student's preflight run again
+  # on the same inputs (the memory row is not compared: free memory changes from minute to minute), the combined
+  # fingerprint of the pick files against the run log, and the run log for every stage.
+  M60-T2: {retest: 4}
+  # 10 made-up sets of the four tool files (4-8 events; 0-1 not relocated, maybe one without a bootstrap row, 1-2
+  # without a mechanism, one with two); values compared to 1e-6 (relative 1e-9). Then the four copies against their
+  # fingerprints in the run log and the saved table against the function on the copies (relative 1e-9).
+  M60-T3: {trials: 10}
+  # 8 made-up pairs of summary files: moves of 0-3 km (pyproj on a sphere of radius 6371 km), depths and times of
+  # known size, one time across a minute, one event in the first file only, one in the second only. Distances to
+  # 1e-5 km, depths and times to 1e-6. Then the three copied folders, their fingerprints in the run log, and the
+  # phase files column by column (weight codes in columns 17 and 50, 1-based).
+  M60-T4: {trials: 8, tol_km: 1.0e-5}
+  # 10 made-up sets of 5-9 events and 14-23 dated stations (two radii from 8-60 km; stations 0.15-0.6 km inside or
+  # outside a radius, started on the day of an event, the day after, or never dated; one event just after New Year
+  # UTC; years before, between and after the events). Counts compared exactly with pyproj on a sphere. Then the
+  # student's function again on the subset and the dated list, the two saved files, the course's dry-run plan and
+  # the national list counted by the check.
+  M60-T5: {trials: 10}
+  # 29 made-up project folders, each built with one known problem or none (all 29 kinds once; 9 kinds added in the
+  # Phase 6 review: placeholder text, words per entry and answer, places in the paper, thresholds with units, the
+  # mentor sign-off). Then the student's own project folder: fingerprints, reference keys, the audit again (every
+  # row PASS), at least min_source claims of the required source, and the content rules read by the check itself
+  # (with the questions of the template). A word: a piece between spaces with at least two letters.
+  M60-T6: {trials: 29, min_claims: 6, min_numbers: 3, min_words: 4, min_answer_words: 12, source: kwak2022, min_source: 4}

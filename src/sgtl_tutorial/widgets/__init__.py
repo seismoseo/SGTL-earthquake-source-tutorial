@@ -19,6 +19,9 @@
   your misfit and the stations it gets wrong.
 - E9 ``fmd_explorer(mags, fmd=..., b_estimator=..., mc_estimator=...)`` (module M05): the frequency-magnitude
   distribution for the Mc and bin width you choose, with the Gutenberg-Richter line of your b-value.
+- E10 ``coulomb_explorer(resolve=..., stress=..., source=..., receiver=...)`` (module M54): a map of your own
+  shear, normal and Coulomb stress changes around a slipping rectangle, for the source rake and slip, the receiver
+  fault, friction and Skempton coefficient under the sliders.
 - E11 ``detection_explorer(network_cc, delta, detect=..., peaks=...)`` (module M22): your threshold and your
   detections on the network cross-correlation, next to the false detections on the null records.
 - E12 ``radiation_explorer(radiation=..., project=...)`` (module M52): your P, SV and SH radiation patterns on your
@@ -26,10 +29,14 @@
 - E13 ``focal_sphere_fitter(first_motions, project=..., agreement=..., axes=..., aux_plane=...)`` (module M50): fit
   a fault plane to first motions by hand on your own equal-area net, with your agreement, P and T axes and
   auxiliary plane.
+- E14 ``mt_norm_explorer(misfit_budget, moment_tensor, kagan_angle, kernels=..., ...)`` (module M53): a toy
+  moment-tensor grid search under one station's wrong gain, the misfit norm and leaving that station out; each
+  station's share of the misfit from your own budget, and the Kagan angle of the best mechanism from your own.
 
 An explorer never does a task for you: whatever a task asks you to write (counting magnitudes, a b-value, Mc,
 an amplitude spectrum, an STA/LTA ratio, a travel time, a misfit, a lag, a double-difference system, a threshold,
-a projection onto the focal sphere, a polarity, a radiation pattern)
+a projection onto the focal sphere, a polarity, a radiation pattern, a misfit budget, a moment tensor, a stress
+change)
 comes from the function you pass in, and without it the explorer shows the data only; the picker E2 never chooses a pick for you. Each redraw renders a static PNG with
 Matplotlib (ipywidgets 8), works without a display, and starts no threads or processes, so it stays within the
 thread caps of ``st.init``. Only E2 uses ipympl, for clicking on a record; without it you type the times. Make
@@ -53,7 +60,9 @@ _WHERE = {"filter_bench": "e1_filter", "FilterBench": "e1_filter",
           "detection_explorer": "e11_detection", "DetectionExplorer": "e11_detection",
           "beachball_explorer": "e8_beachball", "BeachballExplorer": "e8_beachball",
           "radiation_explorer": "e12_radiation", "RadiationExplorer": "e12_radiation",
-          "focal_sphere_fitter": "e13_focal_sphere", "FocalSphereFitter": "e13_focal_sphere"}
+          "focal_sphere_fitter": "e13_focal_sphere", "FocalSphereFitter": "e13_focal_sphere",
+          "coulomb_explorer": "e10_coulomb", "CoulombExplorer": "e10_coulomb",
+          "mt_norm_explorer": "e14_mt_norms", "MTNormExplorer": "e14_mt_norms"}
 
 __all__ = sorted(_WHERE)
 

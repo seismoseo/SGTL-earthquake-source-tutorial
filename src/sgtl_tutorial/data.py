@@ -49,7 +49,7 @@ def root() -> Path:
 
 def repo_path(*parts: str) -> Path:
     """A path inside the cloned repository, e.g. ``repo_path("data", "catalogs")``."""
-    return _paths.repo_root().joinpath(*parts)
+    return _paths.course_path(*parts)
 
 
 def _read_yaml(path: Path):

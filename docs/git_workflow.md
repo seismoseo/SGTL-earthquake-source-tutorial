@@ -35,12 +35,14 @@ mentor's GitHub user name. Keep the repository private for the whole course and 
 
 ```bash
 git status                                   # what changed?
-git add work/M04_catalogs/ work/ai_log/M04.md
+git add work/M04_earthquake_catalogs/ work/ai_log/M04.md work/.sgtl/
 git commit -m "M04: select_sequence passes; Explain T2 written"
 git push
 ```
 
-Commit at least once a day, with a message that says what you did. If a notebook grows near 2 MB, clear large
+The last path includes the prediction, check and run records your mentor needs. Check `git diff --cached --stat`
+before committing; keep waveform files and credentials out of the staged files. Commit at least once a day, with a
+message that says what you did. If a notebook grows near 2 MB, clear large
 outputs (Edit → Clear Outputs of a cell) before you commit.
 
 ## Get tutorial updates
@@ -59,19 +61,28 @@ If it reports a conflict, stop and ask your mentor. If the changelog says so, ru
 
 A **pull request** (PR) asks someone to review a branch before it is merged.
 
-1. When you start a module, make a branch for it: `git switch main`, then `git switch -c m04`.
+1. Save your current work and commit it before changing branches. When you start a module, run `git switch main`,
+   `git pull --ff-only`, then `git switch -c m04` (use your module's id). These commands belong in the terminal.
 2. Work and commit on that branch. The first push: `git push -u origin m04`; after that, `git push`.
-3. When the module is ready (all core checks pass, Explain cells and AI log written, and the notebook runs from top
-   to bottom after Kernel → Restart Kernel and Run All Cells), submit it with `bin/sgtl submit M04` (dry run) and
-   then `bin/sgtl submit M04 --apply`: it runs the notebook from top to bottom, commits the record on a new branch
-   `submit/M04-<UTC time>` and opens the PR for your mentor ([how_this_tutorial_works.md](how_this_tutorial_works.md)).
-   Or open the PR of your own branch by hand:
-   ```bash
-   gh pr create --base main --head m04 --title "M04 Earthquake catalogs"
-   ```
-   In the description, list what you finished, what you skipped and any question you have.
-4. Your mentor comments on lines. Answer with new commits on the same branch and `git push`; the PR updates itself.
-5. After approval, merge: `gh pr merge --merge`, then `git switch main` and `git pull`.
+3. When all core checks pass and Explain cells and the AI log are written, save the notebook. Run
+   `bin/sgtl submit M04` (dry run), then `bin/sgtl submit M04 --apply`. It executes core work on a clean kernel;
+   use `--include-optional` as well to include stretch/research work (required for M22). Every selected check must
+   pass in that run. It commits the record on a **new** branch `submit/M04-<UTC time>` and opens a PR for your mentor
+   ([how_this_tutorial_works.md](how_this_tutorial_works.md)). Your working branch is still `m04`.
+4. Read the comments in the PR link it prints. Edit your work notebook, save and commit your revisions on `m04`,
+   then submit again to make a new run record and PR. Link the earlier PR in the new one; your mentor can close the
+   superseded PR. A later push to `m04` does not update a PR whose branch is `submit/M04-...`.
+5. After approval, merge the approved PR on GitHub (or `gh pr merge <PR-number> --merge`). Commit any remaining local
+   work, then `git switch main` and `git pull --ff-only` before starting the next module.
+
+If your mentor requests a manual review instead, open your working branch directly:
+
+```bash
+gh pr create --base main --head m04 --title "M04 Earthquake catalogs"
+```
+
+List what you finished, what you skipped and your questions. New commits and pushes to `m04` update this manual PR.
+It has no automatic submission-run record, so agree with your mentor how to provide the execution evidence.
 
 ## Never
 

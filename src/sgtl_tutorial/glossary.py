@@ -1,6 +1,7 @@
 """Glossary of technical terms (English, Korean, plain definition).
 
-The table is ``glossary/glossary.csv`` with columns ``key,english,korean,definition,modules,review_flag``.
+The table is ``docs/resources/glossary/glossary.csv`` (``glossary/glossary.csv`` in older copies) with
+columns ``key,english,korean,definition,modules,review_flag``.
 """
 from __future__ import annotations
 
@@ -17,7 +18,7 @@ _CACHE: Dict[Tuple[str, int], Dict[str, dict]] = {}
 
 
 def _path() -> Path:
-    return _paths.repo_root() / "glossary" / "glossary.csv"
+    return _paths.course_path("glossary", "glossary.csv")
 
 
 def entries() -> Dict[str, dict]:

@@ -44,4 +44,5 @@ inside the repository.
 ## Citing data
 
 Name your data sources in every report and figure caption: KMA (catalog, KS network), KIGAM (KG network), USGS ComCat,
-ISC, and StationMetadata (Ahn, Kang & Jung, 2024). The reference keys are in `references/references.yaml`.
+ISC, and StationMetadata (Ahn, Kang & Jung, 2024). The reference keys are in
+`docs/resources/references/references.yaml`; use the [reading list](reading_list.md) for the readable version.

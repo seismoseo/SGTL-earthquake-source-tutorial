@@ -3,7 +3,7 @@
 The **code** in this repository (the `sgtl_tutorial` package, `bin/`, `install/`, the code cells of the notebooks)
 is under the MIT License; see [LICENSE](LICENSE).
 
-The **text and figures** (notebook text, `docs/`, `glossary/`, this README and the other Markdown files, and
+The **text and figures** (notebook text, `docs/`, this README and the other Markdown files, and
 figures made by the tutorial from synthetic or public data) are under the
 **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
 Legal code: <https://creativecommons.org/licenses/by/4.0/legalcode>.

@@ -1,0 +1,4 @@
+# Optional documentation build only; use a separate environment, not the course kernel.
+mkdocs==1.6.1
+mkdocs-material==9.8.2
+mkdocs-jupyter==0.27.0

@@ -26,7 +26,7 @@ are never changed.
 
 Steps: check that you are on main with no uncommitted changes; git fetch upstream; show the new
 entries of CHANGELOG.md; check the tutorial's own files against .sgtl/MANIFEST.sha256;
-git merge --no-edit upstream/main; chmod a-w modules/*/*.ipynb; git push origin main.
+git merge --no-edit upstream/main; chmod a-w docs/notebooks/*/*.ipynb; git push origin main.
 
 Options:
   --apply                   do it (without this, nothing changes except the download, see below)
@@ -106,7 +106,7 @@ check_manifest() {
 lock_notebooks() {
   local nbs=()
   shopt -s nullglob
-  nbs=(modules/*/*.ipynb)
+  nbs=(docs/notebooks/*/*.ipynb modules/*/*.ipynb)
   shopt -u nullglob
   if [[ ${#nbs[@]} -gt 0 ]]; then
     run chmod a-w "${nbs[@]}"

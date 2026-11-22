@@ -33,10 +33,12 @@ JupyterLab link.
 | `sgtl-lab` says the port is taken | Your old JupyterLab may still run, or another user has that port. See `bin/sgtl-lab --help`. |
 | JupyterLab asks for a token | Use the full link with `?token=...` that `sgtl-lab` printed. |
 | Kernel "SGTL (Python 3.12)" is missing | Run `bin/sgtl doctor`; if it says so, `bin/sgtl-install --apply` again. |
-| "Kernel restarting" or the kernel dies | Usually the memory cap. Load less data, delete big variables (`del x`), restart the kernel. |
+| "Kernel restarting" or the kernel dies | Run `bin/sgtl doctor` in the server terminal. A failed numpy/PyTorch/PyGMT stack check points to incompatible math libraries; follow its rebuild advice with your mentor. Otherwise check the memory cap, load less data and restart the kernel. |
 | Everything is slow | Check `uptime` and `free -g` ([server_manners.md](server_manners.md)); shut down kernels you are not using. |
 | PyGMT error about the GMT library or version | You are not using the SGTL kernel. Switch kernel; `bin/sgtl doctor` reports the GMT version. |
 | Warning that Helvetica is missing | Harmless: the house style falls back to a similar font. |
+| `NameError` after opening a later module | Run the parameters and setup cells first. If the message names an earlier function, copy your checked definition, its constants and helpers into the marked paste cell and run it; another notebook's kernel does not share variables. |
+| A file from an earlier module is missing | Check the [module handoff table](how_this_tutorial_works.md#before-each-module), finish the named earlier task and save its output. If you chose a different output name, update the next module's parameters cell. |
 
 ## Checks
 
@@ -46,6 +48,8 @@ JupyterLab link.
 | `NOT STARTED` | Your function still raises `NotImplementedError`. |
 | FAIL with category `forbidden-import` | Your function uses a library this task forbids. Write the method yourself. |
 | FAIL with another category | Read the fixed message, test your function on a case you can work out by hand, then ask for the next hint level. |
+| Submission says no core tasks were selected | M22 is optional throughout. Use `bin/sgtl submit M22 --include-optional` to inspect its plan, then add `--apply` when it is ready. |
+| Submission stops because a selected check did not pass | Read this run's log and check outputs. Earlier PASS records do not replace the current run; save the notebook after fixing the selected task and submit again. |
 
 ## Git
 

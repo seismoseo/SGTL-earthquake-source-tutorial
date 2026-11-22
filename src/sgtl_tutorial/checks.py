@@ -227,7 +227,7 @@ def _hint_text(spec: dict, level: int) -> str:
 def load_specs(repo: Optional[Path] = None) -> Dict[str, dict]:
     """Task specs: ``checks/specs/*.yaml`` when present (instructor), else ``checks/checks.json``."""
     repo = Path(repo or _paths.repo_root())
-    spec_dir = repo / "checks" / "specs"
+    spec_dir = _paths.course_path("checks", "specs", repo=repo)
     files = sorted(spec_dir.glob("*.yaml")) if spec_dir.is_dir() else []
     if files:
         key = _signature("yaml", files)
@@ -240,7 +240,7 @@ def load_specs(repo: Optional[Path] = None) -> Dict[str, dict]:
                     tasks[str(tid)] = _normalize_spec(str(tid), spec, module)
             _CACHE[key] = tasks
         return _CACHE[key]
-    cj = repo / "checks" / "checks.json"
+    cj = _paths.course_path("checks", "checks.json", repo=repo)
     if not cj.is_file():
         return {}
     key = _signature("json", [cj])
@@ -253,7 +253,8 @@ def load_specs(repo: Optional[Path] = None) -> Dict[str, dict]:
 def load_criteria(repo: Optional[Path] = None) -> Dict[str, dict]:
     """Frozen pass criteria from ``criteria/*.yaml``: ``{task_id: {...}}``."""
     repo = Path(repo or _paths.repo_root())
-    files = sorted((repo / "criteria").glob("*.yaml")) if (repo / "criteria").is_dir() else []
+    folder = _paths.course_path("criteria", repo=repo)
+    files = sorted(folder.glob("*.yaml")) if folder.is_dir() else []
     key = _signature("criteria", files)
     if key not in _CACHE:
         out: Dict[str, dict] = {}

@@ -21,10 +21,36 @@ __all__ = [
     "PROJECT_NAME",
     "find_repo",
     "repo_root",
+    "course_path",
     "data_root",
     "progress_path",
     "short_path",
 ]
+
+
+def course_path(*parts: str, repo: Optional[Path] = None) -> Path:
+    """Find a course asset in the student layout, with the instructor/older release path as fallback."""
+    root = Path(repo) if repo is not None else repo_root()
+    relative = Path(*parts)
+    name = relative.as_posix()
+    for previous, current in (
+        ("checks", ".sgtl/checks"),
+        ("criteria", ".sgtl/criteria"),
+        ("glossary", "docs/resources/glossary"),
+        ("references", "docs/resources/references"),
+        ("templates/project", "docs/templates/project"),
+    ):
+        if name == previous or name.startswith(previous + "/"):
+            mapped = root / (current + name[len(previous):])
+            if mapped.exists():
+                return mapped
+            break
+    legacy = root / relative
+    if not legacy.exists() and (name == "templates/project" or name.startswith("templates/project/")):
+        overlay = root / "student_overlay" / relative
+        if overlay.exists():
+            return overlay
+    return legacy
 
 
 def _project_name(pyproject: Path) -> Optional[str]:

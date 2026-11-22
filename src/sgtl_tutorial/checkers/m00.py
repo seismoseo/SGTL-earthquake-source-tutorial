@@ -27,6 +27,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from . import Outcome, outcome_from_cases
+from ..submit import github_slug
 
 __all__ = ["check_T1", "check_T2", "check_T3", "check_T4", "check_T5"]
 
@@ -108,10 +109,9 @@ def _own_repo(repo: Path) -> bool:
 
 
 def _github_slug(url: str) -> Optional[str]:
-    """'owner/name' (lower case) for an https or ssh GitHub address, else None."""
-    m = re.match(r"^\s*(?:https?://(?:[^@/\s]+@)?github\.com/|ssh://git@github\.com/|git@github\.com:)"
-                 r"([^/\s]+)/([^/\s]+?)(?:\.git)?/?\s*$", str(url), re.I)
-    return f"{m.group(1)}/{m.group(2)}".lower() if m else None
+    """'owner/name' (lower case) for a GitHub address in any form git accepts, else None (the parser of submit)."""
+    slug = github_slug(str(url or ""))
+    return slug.lower() if slug else None
 
 
 def _is_public(url: Optional[str]) -> bool:

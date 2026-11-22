@@ -4,6 +4,7 @@ Subcommands:
 
 * ``sgtl doctor``          check this environment; every line is PASS, WARN or FAIL
 * ``sgtl new M01``         copy the module notebook into ``work/`` once (never overwrites)
+* ``sgtl new project``     copy the research-project templates into ``project/`` (never overwrites; module M60)
 * ``sgtl status``          your progress table
 * ``sgtl diff M01``        has the module template changed since you copied it?
 * ``sgtl setup-ai``        show which tutor-rule files would be copied to ``~/.claude/``
@@ -15,8 +16,9 @@ Subcommands:
 * ``sgtl pq stage DATASET --slug NAME``  register a fetched dataset as a PocketQuake cluster
 * ``sgtl pq run NAME --from STAGE --through STAGE``  run PocketQuake stages (``--apply`` to start)
 * ``sgtl pq bootstrap NAME``  relocation errors by resampling (``--apply`` to start)
-* ``sgtl submit M04``      the plan for submitting a module (``--apply`` runs the work notebook from top to
-  bottom, commits the record on a new branch of your private copy and opens a pull request for the mentor;
+* ``sgtl submit M04``      the plan for submitting a module (``--apply`` runs core tasks in notebook order;
+  ``--include-optional`` adds stretch/research tasks), commits the record on a new branch of your private
+  copy and opens a pull request for the mentor;
   it pushes only to a repository GitHub reports as private)
 * ``sgtl oral [M04] --salt WORD``  three of your passed task cells, picked by date and the word your mentor
   says at the meeting (required), with two questions each
@@ -324,19 +326,65 @@ def doctor() -> int:
 
 # ----------------------------------------------------------------------------- new / diff / status
 def _template(repo: Path, mid: str) -> Optional[Path]:
-    cands = sorted(repo.glob(f"modules/{mid}_*/{mid}_*.ipynb"))
-    return cands[0] if cands else None
+    for folder in ("docs/notebooks", "modules"):  # keep older private copies usable after an update
+        cands = sorted(repo.glob(f"{folder}/{mid}_*/{mid}_*.ipynb"))
+        if cands:
+            return cands[0]
+    return None
+
+
+PROJECT_TEMPLATES = ("templates", "project")     # in the repository; copied once into project/ (module M60)
+
+
+def new_project() -> int:
+    """``sgtl new project``: copy the project templates into ``project/``; a file that exists is never touched."""
+    repo = _paths.repo_root()
+    src = _paths.course_path(*PROJECT_TEMPLATES, repo=repo)
+    files = sorted(p for p in src.rglob("*") if p.is_file()) if src.is_dir() else []
+    if not files:
+        print("No project templates under docs/templates/project/ (is this release older than module M60?).")
+        return 1
+    dest = repo / "project"
+    record_path = dest / ".sgtl" / "templates.json"
+    try:
+        record = json.loads(record_path.read_text(encoding="utf-8")) if record_path.is_file() else {}
+    except ValueError:
+        record = {}
+    created = 0
+    for tpl in files:
+        rel = tpl.relative_to(src).as_posix()
+        out = dest / rel
+        if out.exists():
+            print(f"kept     {_rel(out, repo)}  (exists; sgtl never overwrites your project files)")
+            continue
+        out.parent.mkdir(parents=True, exist_ok=True)
+        text = tpl.read_text(encoding="utf-8").replace("{{date}}", now_iso()[:10])
+        out.write_text(text, encoding="utf-8")
+        record[rel] = {"template_sha": _sha256(tpl), "copied_sha": _sha256(out), "copied_at": now_iso(),
+                       "release_at_copy": release_version(repo)}
+        created += 1
+        print(f"created  {_rel(out, repo)}  (copy of {_rel(tpl, repo)})")
+    if created:
+        record_path.parent.mkdir(parents=True, exist_ok=True)
+        record_path.write_text(json.dumps(record, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        print(f"Next: read {_rel(dest / 'README.md', repo)}, then write your plan in "
+              f"{_rel(dest / 'ANALYSIS_PLAN.md', repo)} (module M60, task 6).")
+    else:
+        print("Nothing to copy: every template file is already in project/.")
+    return 0 if created else 1
 
 
 def new(mid: str) -> int:
+    if mid.strip().lower() == "project":
+        return new_project()
     mid = mid.upper()
     if not MODULE_RE.match(mid):
-        print("Module ids look like M01.")
+        print("Module ids look like M01 (or: sgtl new project).")
         return 2
     repo = _paths.repo_root()
     tpl = _template(repo, mid)
     if tpl is None:
-        print(f"No notebook for {mid} under modules/ (is this module released yet?).")
+        print(f"No notebook for {mid} under docs/notebooks/ (is this module released yet?).")
         return 1
     dest = repo / "work" / tpl.parent.name / tpl.name
     if dest.exists():
@@ -348,6 +396,9 @@ def new(mid: str) -> int:
     meta = nb.setdefault("metadata", {}).setdefault("sgtl", {})
     meta.update({"template_sha": sha, "template_path": _rel(tpl, repo), "copied_at": now_iso(),
                  "release_at_copy": release_version(repo)})
+    from .notebooks import relocate_links
+
+    relocate_links(nb, "../../")
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(json.dumps(nb, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"created  {_rel(dest, repo)}  (copy of {_rel(tpl, repo)}, template sha256 {sha[:12]})")
@@ -517,8 +568,9 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--version", action="version", version=f"sgtl-tutorial {__version__}")
     sub = parser.add_subparsers(dest="cmd")
     sub.add_parser("doctor", help="check this environment (PASS/WARN/FAIL lines)")
-    p = sub.add_parser("new", help="copy a module notebook into work/ (never overwrites)")
-    p.add_argument("module", help="module id, e.g. M01")
+    p = sub.add_parser("new", help="copy a module notebook into work/, or the project templates into project/ "
+                                   "(never overwrites)")
+    p.add_argument("module", help="module id, e.g. M01, or the word project")
     sub.add_parser("status", help="show your progress table")
     p = sub.add_parser("diff", help="has the module template changed since you copied it?")
     p.add_argument("module")
@@ -533,6 +585,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("--base", default="main", help="branch the pull request goes into (default main)")
     p.add_argument("--kernel", help="Jupyter kernel to run with (default: the notebook's own, 'sgtl')")
     p.add_argument("--no-pr", action="store_true", help="push the branch but do not open a pull request")
+    p.add_argument("--include-optional", action="store_true", help="also run stretch and research task blocks "
+                   "(default: core tasks only)")
     p = sub.add_parser("oral", help="pick three of your passed task cells for the weekly oral check")
     p.add_argument("module", nargs="?", help="module id, e.g. M04 (default: all modules)")
     p.add_argument("--date", help="the date that seeds the choice, YYYY-MM-DD (default: today)")
@@ -556,7 +610,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             from .submit import submit
 
             return submit(args.module, apply=args.apply, timeout_min=args.timeout, base=args.base,
-                          kernel=args.kernel, no_pr=args.no_pr)
+                          kernel=args.kernel, no_pr=args.no_pr, include_optional=args.include_optional)
         if args.cmd == "oral":
             from .oral import oral
 

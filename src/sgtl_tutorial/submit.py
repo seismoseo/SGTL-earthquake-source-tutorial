@@ -3,13 +3,15 @@
 Plain words:
 
 * Without ``--apply`` nothing runs and nothing changes: the command checks your copy and prints the plan.
-* With ``--apply`` it runs ``work/MXX_slug/MXX_slug.ipynb`` from the first cell to the last with papermill (a
+* With ``--apply`` it runs the core tasks in ``work/MXX_slug/MXX_slug.ipynb`` in order with papermill (a
   program that runs a notebook without a browser), on one core with the thread limits of the course kernel,
   at low priority (nice) and with a time limit. The file you edit is never changed: the run writes an executed
   copy under ``work/submissions/MXX/<UTC time>/`` together with a run log and ``submission.json`` (what ran,
   when, the SHA-256 fingerprints of your notebook, of the executed copy and of the products the run wrote,
-  read from ``work/.sgtl/runs.jsonl``).
-* If every cell ran, it records these files as one commit on a new branch ``submit/MXX-<UTC time>``, pushes
+  read from ``work/.sgtl/runs.jsonl``). Stretch and research task blocks are skipped unless
+  ``--include-optional`` is given; the record lists them explicitly.
+* If every selected cell ran and each selected task logged PASS in this run, it records these files as one
+  commit on a new branch ``submit/MXX-<UTC time>``, pushes
   that branch to YOUR private copy (``origin``) and opens a pull request there with the mentor as reviewer.
   Your current branch and the files in your folder stay as they are.
 * It pushes only to a PRIVATE repository on GitHub. It stops before anything runs when any address of
@@ -23,6 +25,7 @@ Copyright (c) 2026 Minseong Seo (SGTL, Seoul National University). MIT License.
 """
 from __future__ import annotations
 
+import copy
 import datetime as _dt
 import hashlib
 import json
@@ -52,6 +55,7 @@ NICE = 10
 IMAGE_TYPES = ("image/png", "image/jpeg", "image/gif", "image/svg+xml", "application/pdf")
 TEXT_LIMIT = 20000  # characters kept per output when an executed copy must be made smaller
 MODULE_RE = re.compile(r"^M\d{2}$")
+TASK_TITLE = re.compile(r"^###\s+(M\d\d-T\d+)\b", re.M)
 GITHUB_HOSTS = ("github.com", "www.github.com", "ssh.github.com")
 GH_TIMEOUT_S = 60
 _SCHEME_RE = re.compile(r"^([A-Za-z][A-Za-z0-9+.-]*)://(.*)$", re.S)
@@ -314,6 +318,57 @@ def _committable(path: Path) -> Optional[str]:
 
 
 # ----------------------------------------------------------------------------- the run
+def prepare_notebook(repo: Path, mid: str, notebook: Dict[str, Any], *,
+                     include_optional: bool = False) -> Tuple[Dict[str, Any], List[str], List[str]]:
+    """Fresh execution copy and selected/skipped tasks, using the released specs for task tiers.
+
+    A skipped block includes its helper and plotting cells through the next task heading. This prevents
+    follow-up cells from calling an unfinished optional function. Selected cells cannot retain skip tags or
+    old execution outputs. The original notebook is never edited.
+    """
+    try:
+        specs = json.loads(_paths.course_path("checks", "checks.json", repo=repo).read_text(encoding="utf-8"))["tasks"]
+        tasks = {tid: spec for tid, spec in specs.items() if tid.startswith(mid + "-")}
+        if not tasks or any(spec.get("tier") not in {"core", "stretch", "research"} for spec in tasks.values()):
+            raise ValueError("missing tasks or invalid task tiers")
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
+        raise ValueError(f"Cannot read the released task tiers for {mid} from .sgtl/checks/checks.json. "
+                         "Update the tutorial with bin/update-from-upstream, then try again.") from exc
+    selected = sorted(tid for tid, spec in tasks.items() if include_optional or spec["tier"] == "core")
+    skipped = sorted(set(tasks) - set(selected))
+    if not selected:
+        raise ValueError(f"{mid} contains only optional tasks. To submit this module, use "
+                         f"sgtl submit {mid} --include-optional (then add --apply).")
+    result = copy.deepcopy(notebook)
+    task, seen = None, set()
+    for index, cell in enumerate(result.get("cells", [])):
+        metadata = cell.setdefault("metadata", {})
+        tags = metadata.get("tags") or []
+        source = cell.get("source", "")
+        source = "".join(source) if isinstance(source, list) else str(source)
+        if cell.get("cell_type") == "markdown" and "task" in tags:
+            match = TASK_TITLE.search(source)
+            task = match.group(1) if match else None
+            if task not in tasks or task in seen:
+                raise ValueError(f"Task heading in cell {index} is missing, repeated or unknown. "
+                                 "Compare your notebook with its module template (sgtl diff " + mid + ").")
+            seen.add(task)
+        if cell.get("cell_type") == "code":
+            tags = [tag for tag in tags if tag != "skip-execution"]
+            if task in skipped:
+                tags.append("skip-execution")
+            metadata["tags"] = tags
+            cell.update(outputs=[], execution_count=None)
+    missing = sorted(set(selected) - seen)
+    if missing:
+        raise ValueError("Selected task headings are missing: " + ", ".join(missing) +
+                         f". Restore the task blocks from the module template (sgtl diff {mid}).")
+    result.setdefault("metadata", {})["sgtl_submission"] = {
+        "selected_tasks": selected, "skipped_tasks": skipped, "include_optional": include_optional,
+    }
+    return result, selected, skipped
+
+
 def papermill_command(nb: Path, out: Path, cwd: Path, kernel: Optional[str]) -> List[str]:
     cmd = [sys.executable, "-m", "papermill", str(nb), str(out), "--cwd", str(cwd), "--log-output",
            "--no-progress-bar"]
@@ -479,6 +534,7 @@ def _pr_body(mid: str, stamp: str, record: Dict[str, Any], files: Sequence[str])
              f"- products logged in work/.sgtl/runs.jsonl during the run: {len(record['products'])}",
              f"- checks during the run: " + (", ".join(f"{t} {v}" for t, v in sorted(record['checks'].items()))
                                               or "none"),
+             "- skipped optional tasks: " + (", ".join(record.get("skipped_tasks", [])) or "none"),
              "", "Files in this commit:", ""]
     lines += [f"- `{f}`" for f in files]
     lines += ["", "Write below what you finished, what you skipped and any question you have."]
@@ -491,7 +547,7 @@ def _say(ok: bool, text: str) -> None:
 
 
 def submit(mid: str, *, apply: bool = False, timeout_min: float = DEFAULT_TIMEOUT_MIN, base: str = "main",
-           kernel: Optional[str] = None, no_pr: bool = False) -> int:
+           kernel: Optional[str] = None, no_pr: bool = False, include_optional: bool = False) -> int:
     mid = mid.upper()
     if not MODULE_RE.match(mid):
         print("Module ids look like M04.")
@@ -522,9 +578,16 @@ def submit(mid: str, *, apply: bool = False, timeout_min: float = DEFAULT_TIMEOU
         print("This copy has no commit yet; commit your work first (docs/git_workflow.md).")
         return 1
     try:
-        meta = json.loads(nb.read_text(encoding="utf-8")).get("metadata", {})
+        notebook = json.loads(nb.read_text(encoding="utf-8"))
+        meta = notebook.get("metadata", {})
     except ValueError:
         print(f"{_rel(nb, repo)} is not valid notebook JSON; open it in JupyterLab and save it again.")
+        return 1
+    try:
+        prepared, selected_tasks, skipped_tasks = prepare_notebook(repo, mid, notebook,
+                                                                  include_optional=include_optional)
+    except ValueError as exc:
+        print(str(exc))
         return 1
     kernel = kernel or (meta.get("kernelspec") or {}).get("name") or "sgtl"
     stamp = _utc_stamp()
@@ -537,6 +600,9 @@ def submit(mid: str, *, apply: bool = False, timeout_min: float = DEFAULT_TIMEOU
     _say(True, f"notebook  {_rel(nb, repo)}  (sha256 {_sha256(nb)[:12]}; the file on disk: save it first)")
     _say(True, f"run       papermill with kernel '{kernel}', 1 core (thread limits 1), nice {NICE}, "
                f"stops after {timeout_min:g} min")
+    _say(True, "tasks     " + ", ".join(selected_tasks) + " (every selected check must PASS in this run)")
+    if skipped_tasks:
+        _say(True, "skip      " + ", ".join(skipped_tasks) + " (optional; add --include-optional to run them)")
     _say(True, f"results   {_rel(out_dir, repo)}/  (executed copy, run.log, submission.json)")
     _say(True, f"branch    {branch}  (from your current commit; your branch and files stay as they are)")
     where = ", ".join(f"github.com/{t}, private" for _, t in targets) or "nowhere: see the problems below"
@@ -557,6 +623,8 @@ def submit(mid: str, *, apply: bool = False, timeout_min: float = DEFAULT_TIMEOU
 
     # The run.
     out_dir.mkdir(parents=True, exist_ok=False)
+    run_input = out_dir / f"{nb.stem}.input.ipynb"
+    run_input.write_text(json.dumps(prepared, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     executed = out_dir / f"{nb.stem}.executed.ipynb"
     log_path = out_dir / "run.log"
     progress = _paths.progress_path(repo)
@@ -566,7 +634,7 @@ def submit(mid: str, *, apply: bool = False, timeout_min: float = DEFAULT_TIMEOU
     nb_sha = _sha256(nb)
     started = _utc_iso()
     print(f"Running {_rel(nb, repo)} ... (full output: {_rel(log_path, repo)})")
-    rc, seconds, timed_out = run_notebook(papermill_command(nb, executed, nb.parent, kernel), log_path,
+    rc, seconds, timed_out = run_notebook(papermill_command(run_input, executed, nb.parent, kernel), log_path,
                                           timeout_min * 60)
     ended = _utc_iso()
     summary = executed_summary(executed) if executed.is_file() else {"readable": False}
@@ -574,8 +642,7 @@ def submit(mid: str, *, apply: bool = False, timeout_min: float = DEFAULT_TIMEOU
     checks: Dict[str, str] = {}
     for ev in events:
         if ev.get("event") == "check" and isinstance(ev.get("task"), str):
-            if checks.get(ev["task"]) != "PASS":
-                checks[ev["task"]] = str(ev.get("status"))
+            checks[ev["task"]] = str(ev.get("status"))
     run_recs = _records_after(runs, r0)
     products: Dict[str, str] = {}
     for rec in run_recs:
@@ -590,6 +657,8 @@ def submit(mid: str, *, apply: bool = False, timeout_min: float = DEFAULT_TIMEOU
         "started": started, "ended": ended, "seconds": round(seconds, 1), "returncode": rc,
         "timed_out": timed_out, "timeout_min": timeout_min, "kernel": kernel, "cores": 1, "nice": NICE,
         "notebook": _rel(nb, repo), "notebook_sha256": nb_sha,
+        "input_notebook": _rel(run_input, repo), "input_sha256": _sha256(run_input),
+        "selected_tasks": selected_tasks, "skipped_tasks": skipped_tasks, "include_optional": include_optional,
         "template_sha": (meta.get("sgtl") or {}).get("template_sha"),
         "executed_notebook": _rel(executed, repo) if executed.is_file() else None,
         "executed_sha256": _sha256(executed) if executed.is_file() else None,
@@ -606,6 +675,13 @@ def submit(mid: str, *, apply: bool = False, timeout_min: float = DEFAULT_TIMEOU
             if summary.get("first_error") else f"papermill stopped with exit code {rc}")
         print(f"The notebook did not run to the end: {why}. Nothing was committed or pushed.")
         print(f"Read {_rel(log_path, repo)} and the executed copy, fix your notebook, save it and submit again.")
+        return 1
+    unfinished = [tid for tid in selected_tasks if checks.get(tid) != "PASS"]
+    if unfinished:
+        print("Selected checks did not all PASS in this run: " +
+              ", ".join(f"{tid} ({checks.get(tid, 'no check recorded')})" for tid in unfinished) +
+              ". Nothing was committed or pushed.")
+        print("Run and keep each selected task's check cell, finish it, save the notebook and submit again.")
         return 1
     print(f"Ran {summary['ran']} of {summary['code_cells']} code cells in {seconds:.0f} s; "
           f"{len(products)} product fingerprint(s) from work/.sgtl/runs.jsonl.")
@@ -626,7 +702,7 @@ def submit(mid: str, *, apply: bool = False, timeout_min: float = DEFAULT_TIMEOU
         return 1
 
     # The commit on a new branch.
-    cands = [nb, out_dir / "submission.json", log_path, executed, repo / "work" / "ai_log" / f"{mid}.md",
+    cands = [nb, out_dir / "submission.json", log_path, run_input, executed, repo / "work" / "ai_log" / f"{mid}.md",
              progress, runs] + [repo / rel for rel in changed]
     files, skipped = [], []
     for p in cands:

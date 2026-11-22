@@ -90,6 +90,7 @@ from elastic_stresses_py.PyCoulomb import configure_calc, run_dc3d
 from elastic_stresses_py.PyCoulomb.inputs_object import io_intxt
 from elastic_stresses_py.PyCoulomb.inputs_object.input_obj import Input_object
 from pyrocko.modelling import okada_ext
+from pyrocko.modelling.okada import OkadaSource
 
 names = ("elastic_stresses_py", "numpy", "cutde", "tectonic-utils", "pyrocko")
 print("versions: python %s, " % sys.version.split()[0] + ", ".join("%s %s" % (n, md.version(n)) for n in names))
@@ -98,9 +99,10 @@ if np.__version__ != sys.argv[1]:
     problems.append("NumPy is %s, not %s" % (np.__version__, sys.argv[1]))
 
 # Elastic_stresses_py, with lines in its input-file format. Source_Patch: strike rake dip length_km width_km lon lat
-# depth_km slip_m (the point is the top corner where the patch starts). Receiver: the same without slip.
+# depth_km slip_m. Receiver: the same without slip.
 lon0, lat0, shear_mod, lame1 = 127.5, 36.0, 30e9, 30e9
-patch = io_intxt.get_source_patch("Source_Patch: 30 180 80 2.0 2.0 127.5 36.0 1.0 0.1", lon0, lat0)
+rake_deg, slip_m = 180.0, 0.1
+patch = io_intxt.get_source_patch("Source_Patch: 30 %g 80 2.0 2.0 127.5 36.0 1.0 %g" % (rake_deg, slip_m), lon0, lat0)
 target = io_intxt.get_receiver_fault("Receiver: 30 180 80 0.2 0.2 127.53 36.01 2.0", lon0, lat0)
 inputs = Input_object(PR1=0.25, FRIC=0.4, depth=0, start_gridx=-5, finish_gridx=5, start_gridy=-5, finish_gridy=5,
                       xinc=1, yinc=1, minlon=127.4, maxlon=127.6, zerolon=lon0, minlat=35.9, maxlat=36.1,
@@ -111,15 +113,21 @@ with contextlib.redirect_stdout(io.StringIO()):
 esp_strain = np.asarray(out.eij[0])  # axes east, north, up
 esp_coulomb = float(out.coulomb[0])  # kPa
 
-# pyrocko: Okada (1992) for the same rectangle, at the receiver's centre (axes north, east, down; metres).
+# pyrocko: Okada (1992) for the same rectangle, at the receiver's centre (axes north, east, down; metres). The
+# rectangle is placed by the centre that Elastic_stresses_py computes for it; pyrocko's own OkadaSource turns the
+# rake and slip into its dislocations.
 east_km, north_km, depth_km = target.get_fault_center()
-rect = np.array([[patch.ystart * 1e3, patch.xstart * 1e3, patch.top * 1e3, patch.strike, patch.dipangle,
-                  0.0, patch.L * 1e3, -patch.W * 1e3, 0.0]])
-disl = np.array([[-patch.rtlat, patch.reverse, patch.tensile]])  # left-lateral, up-dip, opening (m)
+c_east, c_north, c_depth = patch.get_fault_center()
+len_m, wid_m = patch.L * 1e3, patch.W * 1e3
+src = OkadaSource(lat=0.0, lon=0.0, north_shift=c_north * 1e3, east_shift=c_east * 1e3, depth=c_depth * 1e3,
+                  strike=patch.strike, dip=patch.dipangle, rake=rake_deg, slip=slip_m, opening=0.0,
+                  al1=-len_m / 2, al2=len_m / 2, aw1=-wid_m / 2, aw2=wid_m / 2)
 where = np.array([[north_km * 1e3, east_km * 1e3, depth_km * 1e3]])
-grad = okada_ext.okada(rect, disl, where, lame1, shear_mod, nthreads=1, rotate_sdn=0)[0, 3:].reshape(3, 3)
-swap = np.array([[0.0, 1.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, -1.0]])  # north-east-down -> east-north-up
-pyr_strain = swap @ (0.5 * (grad + grad.T)) @ swap.T
+grad = okada_ext.okada(src.source_patch()[None, :], src.source_disloc()[None, :], where, lame1, shear_mod,
+                       nthreads=1, rotate_sdn=0)[0, 3:].reshape(3, 3)
+ned = 0.5 * (grad + grad.T)
+order, sign = [1, 0, 2], np.array([1.0, 1.0, -1.0])  # rows and columns east, north, up
+pyr_strain = ned[np.ix_(order, order)] * np.outer(sign, sign)
 diff = np.abs(esp_strain - pyr_strain).max() / np.abs(pyr_strain).max()
 
 seconds = time.time() - t_start

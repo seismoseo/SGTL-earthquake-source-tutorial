@@ -1,0 +1,26 @@
+# Decision criteria of your project. Write them BEFORE you look at any result, then freeze this file:
+#   1. fill every null below (whole sentences; a threshold is a number and its unit) and set `frozen` to today's date;
+#   2. ask your mentor to read ANALYSIS_PLAN.md and this file and to write the sign-off line of the plan
+#      ("Mentor sign-off: name, YYYY-MM-DD", on or before `frozen`);
+#   3. compute the MD5 checksum of this file (md5sum project/criteria.yaml);
+#   4. write the checksum into ANALYSIS_PLAN.md (line "MD5 checksum of criteria.yaml at the freeze") and into
+#      LABBOOK.md, and commit all three files together.
+# After the freeze, change this file only together with a dated amendment in ANALYSIS_PLAN.md.
+project: suncheon
+author: null
+frozen: null              # YYYY-MM-DD
+hypotheses:
+  H1:
+    statement: null       # what you test, in one sentence
+    test: null            # the method
+    events: null          # which events (a rule, not a list chosen after looking)
+    metric: null          # the number the test gives, with its unit
+    threshold: null       # the value that decides: a number, then its unit
+    decision: null        # "support H1 if ...; reject H1 if ...; otherwise undecided"
+  H2:
+    statement: null
+    test: null
+    events: null
+    metric: null
+    threshold: null
+    decision: null

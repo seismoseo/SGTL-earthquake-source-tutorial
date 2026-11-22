@@ -6,7 +6,7 @@
 
 The course is a series of **modules** (M00, M01, ... M60; see [curriculum.md](curriculum.md)). Each module is
 one Jupyter notebook. `bin/sgtl new MXX` copies it once into `work/MXX_slug/`; you work only in that copy. The
-originals in `modules/` belong to the tutorial and are replaced by updates.
+originals in `docs/notebooks/` belong to the tutorial and are replaced by updates.
 
 Every notebook starts the same way. The header lists the goals, the expected time and what to read first. Then:
 
@@ -21,6 +21,47 @@ parameter changed, and explain the difference. Some steps are done **by hand fir
 NMSOP-2 EX 11.1 before M30, and the fault-plane exercises EX 3.2 and EX 3.3 on printed stereonets before M50.
 NMSOP-2 is the *New Manual of Seismological Observatory Practice*, 2nd edition (Bormann, 2012), a free online
 handbook for seismologists; EX 11.1 is its exercise 11.1 (see [reading_list.md](reading_list.md)).
+
+## Before each module
+
+Follow the [curriculum](curriculum.md), rather than sorting module numbers. Start with M00 → M01 → M02 → M04,
+then M05 → M03 → M10. In week 3, finish M20 → M21 → M30 before the optional M22. Read the next notebook's header
+before starting its first task: it names the modules, readings and data you need.
+
+The first-day installer installs the environment only. Run the commands below in a **server terminal**, from
+`~/sgtl/tutorial`. The commands in the table are dry runs: read their plans, then repeat with `--apply` when you
+are ready. Installation and downloads can take several minutes; do one at a time.
+
+| Before | Extra preparation | How to check |
+|---|---|---|
+| M03 real-data work | `bin/sgtl-install tools metadata`; then put your personal STP client and credentials in `~/.sgtl/` exactly as M03 Part 1 shows; `bin/sgtl data fetch sangju2019` | `bin/sgtl pq check` and `bin/sgtl data verify sangju2019` |
+| M21 | `bin/sgtl-install seisbench` (two pretrained PhaseNet models); keep the tools installed for M03 | `bin/sgtl doctor` reports the PhaseNet weights |
+| Optional M22 | `bin/sgtl data fetch sangju2019_hours` | `bin/sgtl data verify sangju2019_hours` |
+| M52 | `bin/sgtl-install pyfk` (its separate worker environment) | the notebook's PyFK environment check |
+| M53 | `bin/sgtl-install mt`; finish M52 and M51 first | the notebook's imports and prerequisite-file checks |
+| M54 | `bin/sgtl-install coulomb`; internet access for the public Gyeongju mechanisms on the first run | the notebook's tool checks; later reruns use its saved mechanism file |
+| M60 | `bin/sgtl data fetch gokseong2018`; `bin/sgtl new project` copies templates immediately | `bin/sgtl data verify gokseong2018`; `project/README.md` exists |
+| Project, after the plan is approved | `bin/sgtl data fetch suncheon_area`; inspect the size before repeating with `--apply --large` | `bin/sgtl data verify suncheon_area` |
+
+`bin/sgtl doctor`, `bin/sgtl pq check` and `bin/sgtl data verify ...` only inspect your installation or files;
+they do not need `--apply`. A data fetch that reports STOP needs the stated prerequisite fixed first. Do not
+replace a missing download or an earlier result by an invented file just to reach the next cell.
+
+Keep the names and folder structure that `sgtl new` creates. Later modules reuse these products:
+
+| Produced by | Keep available | Used later |
+|---|---|---|
+| M20, task 5 | your saved `work/picks/M20_manual_picks.csv` | M21, M22, M30, M31, M50 and M53 |
+| M21, then M32 | your PocketQuake cluster `sangju_m21`, its picks, locations and run log | M41 and M51 |
+| M31, task 6 | `work/M31_location/results/M31_hypoinverse_runs.csv` | M32 and M50 |
+| M51, task 5 | `work/M51_first_motions/results/M51_skhash_first/mechanisms.csv` | M53 |
+| M60 | `project/inventory/`, your own claims table, signed plan, criteria and lab book | the research project and final report |
+
+A notebook that asks you to paste an earlier function means **your own checked function**, with its required
+imports, constants and helpers. Copy its definition into the marked cell and run that cell in the new notebook;
+variables in another notebook's kernel are not shared. Keep that cell so a kernel restart can reproduce the work.
+If a default file path or cluster name differs from yours, change the value in the parameters cell. Do not rename
+the original template or edit its check cells.
 
 ## Tiers
 
@@ -77,21 +118,25 @@ and run:
 
 ```bash
 bin/sgtl submit M04            # dry run: checks your copy and prints the plan; nothing runs
-bin/sgtl submit M04 --apply    # runs it, records it and opens a pull request for your mentor
+bin/sgtl submit M04 --apply    # runs core work, records it and opens a pull request for your mentor
+bin/sgtl submit M04 --include-optional    # also select stretch/research work; add --apply after reading the plan
 ```
 
-With `--apply` the command runs your work notebook `work/M04_.../M04_....ipynb` from the first cell to the last
-with **papermill** (a program that runs a notebook without a browser, like Kernel → Restart Kernel and Run All
-Cells). It runs in your account on one core with the same thread limits as the course kernel, at low priority, and
+With `--apply` the command runs a copy of your work notebook `work/M04_.../M04_....ipynb` in cell order with
+**papermill** (a program that runs a notebook without a browser). It selects core work by default and skips optional
+task blocks in the execution copy, so unfinished stretch work does not stop a core submission. Use
+`--include-optional` to execute stretch and research work too; M22 has no core tasks and requires this flag.
+The selected checks must all record PASS during this run; an old PASS or a skipped core check is not enough.
+It runs in your account on one core with the same thread limits as the course kernel, at low priority, and
 stops after 120 minutes (`--timeout MIN` changes that). Your notebook file is not changed: the run writes an
 executed copy, a run log and `submission.json` into `work/submissions/M04/<UTC time>/`. `submission.json` lists
 what ran and when, and the **SHA-256 fingerprints** (a 64-character code that changes if a single byte of a file
 changes) of your notebook, of the executed copy and of the files the run wrote, including the products that
 `sgtl pq` logged in `work/.sgtl/runs.jsonl`.
 
-If every cell ran, these files and your notebook, AI log and logs go into one commit on a new branch
+If the selected work ran and its checks passed, these files and your notebook, AI log and logs go into one commit on a new branch
 `submit/M04-<UTC time>`, which is pushed to your private copy; then a pull request asks your mentor for a review.
-Your current branch and the files in your folder stay as they are. If a cell stops with an error or the time limit
+Your current branch and the files in your folder stay as they are. If a selected cell errors, a selected check fails or the time limit
 is reached, nothing is committed or pushed: read the run log, fix the notebook and submit again. The checks run
 again during a submission and are logged as usual; your mentor counts them apart from your own attempts.
 `sgtl submit` pushes only to a private copy: before anything runs it reads every address that `origin` pushes to

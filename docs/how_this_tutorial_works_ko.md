@@ -6,7 +6,7 @@ English: [how_this_tutorial_works.md](how_this_tutorial_works.md)
 
 과정은 여러 **모듈**(M00, M01, ... M60, [curriculum.md](curriculum.md) 참고)로 이루어져 있고, 모듈 하나가 Jupyter
 노트북 하나입니다. `bin/sgtl new MXX`를 실행하면 노트북이 `work/MXX_slug/`에 한 번 복사되며, 작업은 이 복사본에서만
-합니다. `modules/`에 있는 원본은 튜토리얼 소유이며 업데이트 때 바뀝니다.
+합니다. `docs/notebooks/`에 있는 원본은 튜토리얼 소유이며 업데이트 때 바뀝니다.
 
 모든 노트북은 같은 방식으로 시작합니다. 머리말에는 목표, 예상 시간, 먼저 읽을 자료가 있습니다. 그다음은
 
@@ -21,6 +21,38 @@ English: [how_this_tutorial_works.md](how_this_tutorial_works.md)
 스테레오넷으로 EX 3.2와 EX 3.3(단층면해 연습)을 풉니다. NMSOP-2는 무료로 공개된 지진 관측 실무 지침서
 『New Manual of Seismological Observatory Practice』 제2판(Bormann, 2012)이고, EX 11.1은 그 안의 연습 문제 11.1입니다
 ([reading_list.md](reading_list.md) 참고).
+
+## 모듈을 시작하기 전에
+
+모듈 번호순이 아니라 [교육 과정](curriculum.md)의 순서를 따르세요. M00 → M01 → M02 → M04, 그다음
+M05 → M03 → M10 순서입니다. 3주차에는 M20 → M21 → M30을 끝낸 뒤 선택 과제인 M22를 합니다. 다음
+노트북의 머리말에서 선수 모듈, 읽을 자료와 필요한 자료를 먼저 확인하세요.
+
+첫날에는 환경만 설치합니다. 다음 명령은 `~/sgtl/tutorial`에서 **서버 터미널**에 입력합니다. 표의 설치·내려받기
+명령은 드라이 런이므로 계획을 읽은 뒤 준비되면 `--apply`를 붙여 반복하세요. 한 번에 하나씩 진행합니다.
+
+| 시작 전 | 추가 준비 | 확인 방법 |
+|---|---|---|
+| M03 실제 자료 | `bin/sgtl-install tools metadata`; M03 1부대로 개인 STP 클라이언트와 자격 증명을 `~/.sgtl/`에 둔 뒤 `bin/sgtl data fetch sangju2019` | `bin/sgtl pq check`, `bin/sgtl data verify sangju2019` |
+| M21 | `bin/sgtl-install seisbench` (PhaseNet 모델 두 개) | `bin/sgtl doctor`의 가중치 항목 |
+| 선택 과제 M22 | `bin/sgtl data fetch sangju2019_hours` | `bin/sgtl data verify sangju2019_hours` |
+| M52 | `bin/sgtl-install pyfk` (별도 작업 환경) | 노트북의 PyFK 환경 점검 |
+| M53 | `bin/sgtl-install mt`; M52와 M51을 먼저 마침 | 노트북의 가져오기와 선수 결과 파일 점검 |
+| M54 | `bin/sgtl-install coulomb`; 첫 실행에는 공개 경주 메커니즘을 받을 인터넷 연결 | 노트북의 도구 점검, 이후에는 저장된 메커니즘 파일 사용 |
+| M60 | `bin/sgtl data fetch gokseong2018`; `bin/sgtl new project`는 템플릿을 즉시 복사함 | `bin/sgtl data verify gokseong2018`, `project/README.md` 확인 |
+| 연구 계획 승인 뒤 | `bin/sgtl data fetch suncheon_area`; 크기를 확인한 뒤 `--apply --large`로 반복 | `bin/sgtl data verify suncheon_area` |
+
+`doctor`, `pq check`, `data verify`는 읽기 전용이므로 `--apply`가 필요 없습니다. 내려받기에서 STOP이 나오면 먼저
+표시된 선행 조건을 해결하세요. 없는 자료나 이전 결과를 임의로 만들어 다음 셀로 넘어가지 마세요.
+
+뒤 모듈은 앞 모듈의 파일을 다시 씁니다. M20의 `work/picks/M20_manual_picks.csv`, M21과 M32의
+`sangju_m21` 클러스터와 실행 기록, M31의 `work/M31_location/results/M31_hypoinverse_runs.csv`,
+M51의 `work/M51_first_motions/results/M51_skhash_first/mechanisms.csv`를 유지하세요. M60의 자료 목록은
+`project/inventory/`에 남고, 직접 쓴 주장 표·서명된 계획·판단 기준·실험 기록은 연구 과제로 이어집니다.
+
+이전 함수를 붙여 넣으라는 셀에는 **내가 점검을 통과한 함수**와 그 함수가 쓰는 가져오기·상수·도우미를 복사한 뒤
+실행합니다. 다른 노트북의 변수는 새 커널에 전달되지 않습니다. 커널을 다시 시작해도 실행되도록 그 셀을 남겨 두세요.
+내 파일 경로나 클러스터 이름이 기본값과 다르면 parameters 셀의 값만 바꿉니다. 원본 템플릿과 점검 셀은 바꾸지 않습니다.
 
 ## 과제 단계(tier)
 
@@ -76,20 +108,24 @@ PASS는 이 사례들에서 내 함수가 기준과 일치한다는 뜻입니다
 
 ```bash
 bin/sgtl submit M04            # 시험 실행: 내 사본을 점검하고 계획만 보여 줌. 아무것도 실행하지 않음
-bin/sgtl submit M04 --apply    # 실제로 실행하고 기록한 뒤 멘토에게 풀 리퀘스트를 엶
+bin/sgtl submit M04 --apply    # 핵심 과제를 실행하고 기록한 뒤 멘토에게 풀 리퀘스트를 엶
+bin/sgtl submit M04 --include-optional    # 심화·연구 과제도 선택함. 계획을 읽은 뒤 --apply 추가
 ```
 
-`--apply`를 붙이면 내 작업 노트북 `work/M04_.../M04_....ipynb`를 첫 셀부터 마지막 셀까지 **papermill**(브라우저 없이
-노트북을 실행하는 프로그램, Kernel → Restart Kernel and Run All Cells와 같은 일을 함)로 실행합니다. 내 계정에서
+`--apply`를 붙이면 내 작업 노트북 `work/M04_.../M04_....ipynb`의 사본을 셀 순서대로 **papermill**(브라우저 없이
+노트북을 실행하는 프로그램)로 실행합니다. 기본값은 핵심 과제이며, 실행 사본에서 선택 과제 블록을 건너뛰므로 미완성
+심화 과제가 핵심 과제 제출을 막지 않습니다. 심화·연구 과제도 실행하려면 `--include-optional`을 붙입니다. M22에는
+핵심 과제가 없으므로 이 옵션이 필요합니다. 선택된 점검은 이번 실행에서 모두 PASS여야 합니다. 예전 PASS나 건너뛴
+핵심 점검으로는 제출할 수 없습니다. 내 계정에서
 코어 하나, 강의 커널과 같은 스레드 제한, 낮은 우선순위로 실행하며 120분이 지나면 멈춥니다(`--timeout 분`으로 바꿀 수
 있음). 내 노트북 파일은 바뀌지 않습니다. 실행 결과는 `work/submissions/M04/<UTC 시각>/`에 실행된 사본, 실행 기록,
 `submission.json`으로 저장됩니다. `submission.json`에는 무엇이 언제 실행되었는지와 내 노트북, 실행된 사본, 실행이
 만든 파일(`sgtl pq`가 `work/.sgtl/runs.jsonl`에 기록한 결과물 포함)의 **SHA-256 지문**(파일이 1바이트만 바뀌어도
 달라지는 64자 코드)이 들어 있습니다.
 
-모든 셀이 실행되면 이 파일들과 내 노트북, AI 기록, 기록 파일을 새 브랜치 `submit/M04-<UTC 시각>`의 커밋 하나로
+선택된 작업이 실행되고 점검을 통과하면 이 파일들과 내 노트북, AI 기록, 기록 파일을 새 브랜치 `submit/M04-<UTC 시각>`의 커밋 하나로
 묶어 내 비공개 사본에 올리고, 풀 리퀘스트로 멘토에게 검토를 요청합니다. 지금 쓰는 브랜치와 폴더의 파일은 그대로
-둡니다. 셀 하나라도 오류로 멈추거나 시간 제한에 걸리면 아무것도 커밋하거나 올리지 않습니다. 실행 기록을 읽고
+둡니다. 선택한 셀이 오류로 멈추거나 점검에 실패하거나 시간 제한에 걸리면 아무것도 커밋하거나 올리지 않습니다. 실행 기록을 읽고
 노트북을 고친 뒤 다시 제출하세요. 제출 중에도 점검이 다시 실행되어 평소처럼 기록되지만, 멘토는 이것을 내 시도
 횟수와 따로 셉니다. `sgtl submit`은 비공개 사본에만 올립니다. 무엇이든 실행하기 전에 `origin`이 올리는 주소를 모두 읽고, 그 하나하나가
 GitHub가 직접 비공개(private)라고 알려 주는 GitHub 저장소가 아니면 멈춥니다(`gh`로 묻기 때문에 `gh auth status`에

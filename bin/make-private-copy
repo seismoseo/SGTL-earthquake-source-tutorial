@@ -36,7 +36,7 @@ What it does (with --apply):
   gh api -X PUT repos/LOGIN/NAME/collaborators/seismoseo -f permission=push
                                                     invites the mentor (seismoseo)
   git config core.hooksPath .githooks               turns on the tutorial's pre-commit check
-  chmod a-w modules/*/*.ipynb                       makes the original notebooks read-only
+  chmod a-w docs/notebooks/*/*.ipynb                makes the original notebooks read-only
 
 Options:
   --name NAME     name of the new repository (default: sgtl-tutorial-<your GitHub login>)
@@ -91,7 +91,7 @@ find_gh() {
 lock_notebooks() {
   local nbs=()
   shopt -s nullglob
-  nbs=(modules/*/*.ipynb)
+  nbs=(docs/notebooks/*/*.ipynb modules/*/*.ipynb)
   shopt -u nullglob
   if [[ ${#nbs[@]} -gt 0 ]]; then
     run chmod a-w "${nbs[@]}"

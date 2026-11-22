@@ -26,7 +26,8 @@ ssh <your_id>@<server>
 - 처음 접속하면 `Are you sure you want to continue connecting (yes/no)?`라고 묻습니다. 화면의 지문(fingerprint)을
   멘토가 확인해 준 경우에만 `yes`를 입력하세요.
 - 비밀번호를 입력하고 Enter를 누릅니다. **입력하는 동안 화면에 아무것도 나타나지 않는 것이 정상**입니다.
-- 프롬프트가 `<your_id>@...$`처럼 바뀌면 접속된 것입니다. 접속을 끝낼 때는 `exit`를 입력합니다.
+- 프롬프트가 `<your_id>@...$`처럼 바뀌면 접속된 것입니다. 다음 단계에서도 이 서버 터미널을 계속 사용하세요.
+  `exit`는 접속을 끝낼 때만 입력합니다. 접속이 끝난 뒤 입력하는 명령은 노트북 PC에서 실행됩니다.
 
 ## 3. 비밀번호 바꾸기
 
@@ -55,7 +56,7 @@ cd ~/sgtl/tutorial
 ls
 ```
 
-`README.md`, `bin`, `docs`, `modules` 등이 보여야 합니다. `~`는 홈 폴더를 뜻하며, 이 과정의 모든 파일은 `~/sgtl/`
+`README.md`, `bin`, `docs` 등이 보여야 합니다. `~`는 홈 폴더를 뜻하며, 이 과정의 모든 파일은 `~/sgtl/`
 아래에 둡니다.
 
 ## 6. 과정 소프트웨어 설치하기
@@ -66,14 +67,18 @@ bin/sgtl-install --apply    # 실제로 설치함. 시간이 걸립니다(보통
 ```
 
 먼저 드라이 런 출력을 읽어 보세요. 모든 것은 `~/sgtl/` 아래에 설치되며 관리자 권한은 필요 없습니다. 마지막에
-Jupyter 커널 **SGTL (Python 3.12)**이 만들어집니다. 설치 프로그램이 마지막에 출력하는 안내(새 터미널에서 과정 환경을
-쓰는 방법)를 따른 뒤, 아래 명령으로 전체를 점검합니다.
+Jupyter 커널 **SGTL (Python 3.12)**이 만들어집니다. 이 터미널에서 과정 프로그램을 찾을 수 있도록 검색 경로를
+설정한 뒤 환경을 점검합니다.
 
 ```bash
+export PATH="${SGTL_HOME:-$HOME/sgtl}/envs/sgtl/bin:$PATH"
 bin/sgtl doctor
 ```
 
-모든 줄이 OK여야 합니다. 그렇지 않으면 [troubleshooting.md](troubleshooting.md)를 보세요.
+출력은 **PASS**, **WARN**, **FAIL**로 나옵니다. FAIL은 해결한 뒤 진행하세요. 이 단계에서 자료 폴더, SeisBench
+가중치와 Git 훅에 관한 경고는 정상입니다. 뒤 단계에서 설치하거나 켭니다. 대체 글꼴 경고도 허용됩니다. 다른 경고는
+멘토와 함께 읽으세요([troubleshooting.md](troubleshooting.md)). 기본 설치는 환경만 설치합니다. 추가 도구와 자료를
+언제 준비하는지는 [모듈 시작 전 안내](how_this_tutorial_works_ko.md)를 보세요.
 
 ## 7. 서버를 GitHub 계정과 연결하기
 
@@ -92,7 +97,7 @@ Settings → Emails에서 확인).
 
 ```bash
 git config --global user.name "Your Name"
-git config --global user.email "<github_id>@users.noreply.github.com"
+git config --global user.email "<GitHub Settings에 표시된 정확한 no-reply 주소>"
 ```
 
 튜토리얼의 비공개 사본을 만드는 과정은 M00 모듈에서 합니다([git_workflow.md](git_workflow.md)).
@@ -138,8 +143,9 @@ bin/sgtl new M00
 M00 주피터 노트북을 `work/M00_.../`에 한 번만 복사합니다. 설치 프로그램과 달리 드라이 런 없이 바로 실행되지만,
 파일을 복사하기만 하고 이미 있는 작업은 절대 덮어쓰지 않습니다. JupyterLab 파일
 탐색기에서 `work/M00_*/M00_*.ipynb`를 엽니다. 오른쪽 위의 커널 이름이 **SGTL (Python 3.12)**인지 확인하세요
-(아니면 Kernel → Change Kernel). 처음 두 셀을 Shift+Enter로 실행합니다. 두 번째 셀은 환경과 서버 사용 한도를
-짧게 보고합니다. 그다음 주피터 노트북을 차례대로 읽어 나가면 됩니다.
+(아니면 Kernel → Change Kernel). 먼저 "Parameters"라고 적힌 첫 **코드** 셀을, 그다음
+`import sgtl_tutorial as st`로 시작하는 setup 코드 셀을 Shift+Enter로 실행합니다. setup 셀이 환경과 서버 사용
+한도를 짧게 보고합니다. 제목과 안내문은 텍스트 셀이므로 코드 셀 수에 넣지 않습니다. 그다음 노트북을 차례대로 읽습니다.
 
 ## SGTL 커널
 
@@ -149,7 +155,8 @@ M00 주피터 노트북을 `work/M00_.../`에 한 번만 복사합니다. 설치
 
 ## 매일 할 일
 
-1. 서버에 접속하고(2단계) 터널을 엽니다(9단계).
+1. 서버에 접속합니다(2단계). 새 서버 터미널마다 `cd ~/sgtl/tutorial`과 6단계의 `export PATH=...` 명령을
+   실행한 뒤 터널을 엽니다(9단계).
 2. 링크가 열리지 않으면 `bin/sgtl-lab status`로 상태를 확인한 뒤 `bin/sgtl-lab start --apply`로 JupyterLab을
    다시 시작합니다.
 3. 하루에 한 번 이상 작업을 커밋합니다([git_workflow.md](git_workflow.md)).

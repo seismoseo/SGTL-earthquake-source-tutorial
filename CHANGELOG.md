@@ -4,6 +4,89 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v1.0.0 — 2026-11-23 · complete course and research-project handoff
+
+The first complete release contains all 20 modules, from M00 through M60, and the research-project templates.
+The M53, M54 and M60 additions described below are included in this release; v0.6.0 was an unreleased development
+version. Students updating from v0.5.0 should follow the component and dataset instructions below, then restart
+their kernel. A fresh installation follows [docs/setup.md](docs/setup.md).
+
+- A shorter home page links directly to every lesson in teaching order. The first-day route, help, notebook
+  index and project guide are under `docs/`; lessons are now in `docs/notebooks/`. Your existing `work/` copies
+  stay in place. `bin/sgtl new` supports both the new layout and older course copies.
+- Checker metadata and frozen criteria now live under `.sgtl/`; glossary and reference sources are grouped
+  under `docs/resources/`, and project templates under `docs/templates/project/`.
+- Submission runs core tasks by default. Add `--include-optional` to include stretch and research tasks (required
+  for the optional M22 module). Every selected task must produce a fresh PASS during the submission run; the
+  original notebook is preserved.
+- The setup and Git guides now spell out installation stages, data and earlier-file requirements, progress-log
+  commits and the difference between a submission branch and your working branch.
+- An optional documentation build provides lesson navigation without executing notebooks. Use the separate
+  documentation environment described in `docs/requirements.txt`; the course environment does not need it.
+- Fixed Python 3.10 release-config parsing and synchronization of executable script permissions.
+
+### New modules included in v1.0.0
+
+**After updating, install two course components and fetch one more dataset, each once:**
+- MTUQ, for module M53: `bin/sgtl-install mt` (dry run: the plan), then `bin/sgtl-install mt --apply`. M53 also
+  runs PyFK in the small environment that you installed for v0.5.0 (`bin/sgtl-install pyfk --apply`).
+- Elastic_stresses_py, for module M54: `bin/sgtl-install coulomb`, then `bin/sgtl-install coulomb --apply`. The
+  first run of M54's Part 6 asks the USGS and ISC earthquake services for the Gyeongju mechanisms over the internet
+  and keeps their answers in a file, so a rerun needs no network.
+- The Gokseong records, for module M60: `bin/sgtl data fetch gokseong2018` (dry run: the plan), then the same with
+  `--apply` (about 340 MB with your own STP account: seven earthquakes of 8 March 2018 UTC), then
+  `bin/sgtl data verify gokseong2018`.
+
+`bin/sgtl doctor` and `bin/sgtl pq check` show whether everything is in place. Then restart the Jupyter kernel
+"SGTL (Python 3.12)" so that it loads the new version of the course package.
+
+### Added
+- Module M53 (moment-tensor inversion): a weighted least-squares inversion for a moment tensor with data gaps and a
+  deviatoric constraint, tested over many noise draws on a made-up network; a misfit budget under the L2, L1 and
+  hybrid norms that shows which traces write the answer; the best time shift within a bound; lune coordinates and
+  the double-couple planes of a tensor; an amplitude check of the PyFK Green's functions against the Sangju
+  records, then your least-squares tensor of the Sangju mainshock; and MTUQ run for the same earthquake with
+  windows from your own picks: once, again unchanged, then with another misfit norm, compared with KIGAM's
+  mechanism, your SKHASH result of M51 and your least squares, and judged by stated rules.
+  MTUQ runs on one core, without MPI.
+- Module M54 (Coulomb stress transfer): a stress change resolved onto a receiver fault (shear, normal stress, pore
+  pressure and the Coulomb change) with the definitions of Elastic_stresses_py; one rectangular fault written in
+  that program's input format and in pyrocko's Okada code, which use different reference points and argument
+  orders, and the stress of the two compared; fault size and slip from the moment and a stress drop next to an
+  empirical scaling relation; a rotation test for the share of aftershocks in areas where the Coulomb change is
+  positive; and the 2016 Gyeongju foreshock and mainshock in Elastic_stresses_py with the KMA aftershocks, run
+  again unchanged, then with another friction. Part 7 asks, with numbers, whether the method can be used for the
+  small Suncheon earthquakes.
+- Module M60 (a full run and your project plan): a preflight check that you write and test on made-up folders; the
+  whole chain (staging, picking, location, relocation and mechanisms) through `bin/sgtl pq` on the Gokseong
+  earthquakes, each heavy step after a dry run and a passed preflight (about 15 minutes on 3 cores; never more
+  than 4 cores on the shared server); one table of results with the uncertainty of every location and the quality
+  of every mechanism; an unchanged rerun and one changed setting; and the start of your research project on the
+  Suncheon earthquakes: a data inventory, testable claims from the published Suncheon study, and an analysis plan
+  with frozen criteria.
+- All three are delivered unexecuted; start them with `bin/sgtl new M53` and so on. M53 reads your Sangju
+  download of M03, your manual picks of M20 (task 5) and your SKHASH run of M51 (task 5), and asks you to paste
+  your `moment_tensor` and `magnitude_moment` of M52 and your `kagan_angle` of M51 into its notebook; M54 asks for
+  your `fault_vectors` of M50 and your `magnitude_moment` of M52; M60 asks for your `EARTH_RADIUS_KM`,
+  `haversine_km` and `kst_to_utc_id` of M01. When something a module reads is missing, it stops with a message that
+  says what to finish first.
+- `bin/sgtl new project`: copies the research-project templates of `templates/project/` (README, analysis plan,
+  criteria, claims table, lab book, report and talk outline) into `project/`. It never overwrites a file that is
+  already there, and it records the SHA-256 fingerprint of each copied template in `project/.sgtl/templates.json`.
+  M60 task 6 starts from this folder.
+- Two optional explorers: E14 in M53 (`st.widgets.mt_norm_explorer`) runs a small moment-tensor grid search on
+  made-up records while you change one station's gain, the misfit norm or leave that station out, and shows each
+  station's share of the misfit with your own budget function; E10 in M54 (`st.widgets.coulomb_explorer`) maps
+  your own shear, normal and Coulomb stress changes around a slipping rectangle for the rake, slip, receiver fault,
+  friction and Skempton coefficient under the sliders. As before, an explorer never does a task for you.
+- Glossary terms and references for M53, M54 and M60.
+
+### Changed
+- M00 task 4 now accepts a remote address of the form `ssh://git@ssh.github.com:443/owner/name.git` (ssh over
+  port 443, for networks that block port 22). It reads addresses with the same code as `bin/sgtl submit`.
+- The course map in `README.md` and `docs/curriculum.md` now describes M53, M54 and M60 as they are, and the list of
+  explorers names E10 and E14.
+
 ## v0.5.0 — the focal sphere, mechanisms from first motions and synthetic seismograms
 
 **After updating, install the PyFK environment once** (module M52 needs it): `bin/sgtl-install pyfk` (dry run: the

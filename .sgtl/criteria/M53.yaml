@@ -1,0 +1,30 @@
+module: M53
+frozen: 2026-11-20
+tasks:
+  # 30 made-up kernels (30-240 rows, sizes 1e-17-1e-15 per N m), tensors 1e12-1e16 N m, noise 2-20 % of the record's
+  # spread, sigma as one number or one per row, gaps (NaN) in half of the cases, deviatoric in 2 of 5, and kernels
+  # blind to a change of volume in 1 of 5 (deviatoric only); m and cov within rel_tol of the largest |element| of
+  # numpy's lstsq/pinv on the weighted rows (scipy's null_space for the trace-free subspace). Then `draws` noise draws
+  # of one network: mean chi-square within chi2_tol of 6, correlations of the errors within corr_tol of cov's.
+  M53-T1: {trials: 30, rel_tol: 1.0e-6, draws: 300, chi2_tol: 1.0, corr_tol: 0.2}
+  # 40 made-up sets of 1-8 traces, 20-300 samples, dt 0.01-1 s; every sample of a row has the same |residual|, so
+  # each norm's term is known (truth by construction); then a wrong norm name
+  M53-T2: {trials: 40, rel_tol: 1.0e-9}
+  # 9 exact shifted copies inside the bound, 6 beyond it (the edge), 3 wrap-around traps, 4 ties (exact integer
+  # triangles; an empty synthetic), random_trials random traces against SciPy's correlate (L2); shifts within
+  # shift_tol_samples of a sample
+  M53-T3: {random_trials: 12, shift_tol_samples: 0.01}
+  # 60 made-up tensors: double couples, CLVD mixtures, tensors with a change of volume (|delta| < 70), eigenvalues
+  # from chosen lune coordinates, eigenvectors of a pyrocko double couple (dip 12-85); values within rel_tol of
+  # sqrt(2) M0, angles within abs_tol_deg
+  M53-T4: {trials: 60, rel_tol: 1.0e-6, abs_tol_deg: 0.01}
+  # 30 made-up networks (5-13 stations, one or two off by 0.7-1.6 powers of ten, NaN/zero/negative entries);
+  # deviations within abs_tol. Then the intern's Sangju files (at least min_stations in the amplitude file); planes
+  # and Kagan angles recomputed with the intern's functions within recompute_tol_deg
+  M53-T5: {trials: 30, abs_tol: 1.0e-9, min_stations: 4, recompute_tol_deg: 0.01}
+  # 200 made-up sets of numbers placed on chosen sides of the rules (every 7th exactly at a threshold), half with the
+  # course's rules, half with other rules. Then the intern's MTUQ files; spread and Kagan angles recomputed with the
+  # intern's kagan_angle within recompute_tol_deg; the course's rules below (equal to RULES in the notebook)
+  M53-T6: {trials: 200, accept_tol: 0.02, recompute_tol: 1.0e-6, recompute_tol_deg: 0.01,
+           rules: {min_stations: 4, min_n_eff: 3.0, max_share: 0.5, good_n_eff: 6.0, good_share: 0.3,
+                   max_spread_deg: 30.0, max_kagan_lsq_deg: 30.0}}

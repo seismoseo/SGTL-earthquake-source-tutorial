@@ -26,7 +26,8 @@ ssh <your_id>@<server>
 - The first time, ssh asks `Are you sure you want to continue connecting (yes/no)?`. Type `yes` only if your
   mentor has confirmed the fingerprint shown on screen.
 - Type your password and press Enter. **Nothing appears while you type**; that is normal.
-- You are in when the prompt changes to something like `<your_id>@...$`. Type `exit` to log out.
+- You are in when the prompt changes to something like `<your_id>@...$`. Keep this server terminal open for the
+  following steps. Type `exit` only when you want to log out; commands after logging out run on your laptop.
 
 ## 3. Change your password
 
@@ -55,7 +56,7 @@ cd ~/sgtl/tutorial
 ls
 ```
 
-You should see `README.md`, `bin`, `docs`, `modules` and more. `~` means your home folder; everything for the
+You should see `README.md`, `bin`, `docs` and more. `~` means your home folder; everything for the
 course lives under `~/sgtl/`.
 
 ## 6. Install the course software
@@ -66,14 +67,19 @@ bin/sgtl-install --apply    # does it; this takes a while (often 10-30 minutes)
 ```
 
 Read the dry-run output first. The install puts everything under `~/sgtl/` and needs no administrator rights.
-At the end it creates the Jupyter kernel **SGTL (Python 3.12)**. Follow the last lines it prints (they say how
-to use the course environment in new terminals), then check everything:
+At the end it creates the Jupyter kernel **SGTL (Python 3.12)**. Put the course programs on this terminal's search
+path, then check the environment:
 
 ```bash
+export PATH="${SGTL_HOME:-$HOME/sgtl}/envs/sgtl/bin:$PATH"
 bin/sgtl doctor
 ```
 
-Each line should say OK. If not, see [troubleshooting.md](troubleshooting.md).
+The output uses **PASS**, **WARN** and **FAIL**. Fix any FAIL before continuing. At this stage, warnings about the
+data folder, SeisBench weights and Git hooks are expected: later steps install or enable them. A font fallback is
+also allowed. Read every other warning with your mentor ([troubleshooting.md](troubleshooting.md)). The default
+installer installs only the environment; the extra tools and datasets are added when their modules need them
+([how_this_tutorial_works.md](how_this_tutorial_works.md#before-each-module)).
 
 ## 7. Connect the server to your GitHub account
 
@@ -92,7 +98,7 @@ Set your name for commits. Use GitHub's private no-reply address so your real em
 
 ```bash
 git config --global user.name "Your Name"
-git config --global user.email "<github_id>@users.noreply.github.com"
+git config --global user.email "<your exact no-reply address from GitHub Settings>"
 ```
 
 Making your private copy of the tutorial is part of module M00 ([git_workflow.md](git_workflow.md)).
@@ -138,8 +144,10 @@ bin/sgtl new M00
 This copies the M00 notebook into `work/M00_.../` once. Unlike the installer it has no dry run and acts at once,
 because it only copies files and never overwrites your work. In JupyterLab's file
 browser, open `work/M00_*/M00_*.ipynb`. Check the kernel name at the top right: it must be
-**SGTL (Python 3.12)** (if not: Kernel → Change Kernel). Run the first two cells with Shift+Enter. The second
-cell prints a short report on your environment and the server limits. Then read on in the notebook.
+**SGTL (Python 3.12)** (if not: Kernel → Change Kernel). Run the first **code** cell, labeled "Parameters", then
+the setup code cell starting with `import sgtl_tutorial as st`, using Shift+Enter. The setup prints a short
+environment and server-limit report. Title and instruction cells are text, so do not count them as code cells.
+Then read on in the notebook.
 
 ## The SGTL kernel
 
@@ -149,7 +157,8 @@ ask your mentor if something is missing. If the kernel is missing from the list,
 
 ## Every day after this
 
-1. Log in to the server (step 2) and open the tunnel (step 9).
+1. Log in to the server (step 2). Run `cd ~/sgtl/tutorial` and the `export PATH=...` command from step 6 in each
+   new server terminal, then open the tunnel (step 9).
 2. If the link does not work, check with `bin/sgtl-lab status`, then start JupyterLab again with
    `bin/sgtl-lab start --apply`.
 3. Commit your work at least once a day ([git_workflow.md](git_workflow.md)).

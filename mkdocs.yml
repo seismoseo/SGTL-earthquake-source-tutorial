@@ -1,0 +1,98 @@
+site_name: SGTL earthquake source tutorial
+site_description: A guided course from your first earthquake catalog to a research project.
+site_author: Minseong Seo (SGTL, Seoul National University)
+repo_name: seismoseo/SGTL-earthquake-source-tutorial
+repo_url: https://github.com/seismoseo/SGTL-earthquake-source-tutorial
+edit_uri: ""
+docs_dir: docs
+site_dir: site
+hooks:
+  - docs/_site_hooks.py
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+
+nav:
+  - Start here: index.md
+  - Set up:
+      - Setup in English: setup.md
+      - 한국어 설치 안내: setup_ko.md
+  - Lessons:
+      - Lesson guide: notebooks/README.md
+      - Week 1:
+          - M00 · Start here: notebooks/M00_start_here/M00_start_here.ipynb
+          - M01 · Python and catalogs: notebooks/M01_python_catalogs/M01_python_catalogs.ipynb
+          - M02 · Figures and maps: notebooks/M02_figures_maps/M02_figures_maps.ipynb
+          - M04 · Earthquake catalogs: notebooks/M04_earthquake_catalogs/M04_earthquake_catalogs.ipynb
+      - Week 2:
+          - M05 · Statistical seismology: notebooks/M05_statistical_seismology/M05_statistical_seismology.ipynb
+          - M03 · Getting seismic data: notebooks/M03_getting_data/M03_getting_data.ipynb
+          - M10 · Seismograms: notebooks/M10_seismograms/M10_seismograms.ipynb
+      - Week 3:
+          - M20 · Picking arrivals: notebooks/M20_picking/M20_picking.ipynb
+          - M21 · Deep-learning pickers: notebooks/M21_dl_pickers/M21_dl_pickers.ipynb
+          - M30 · Travel times: notebooks/M30_travel_times/M30_travel_times.ipynb
+          - M22 · Detection (optional): notebooks/M22_detection/M22_detection.ipynb
+      - Weeks 4–5:
+          - M31 · Earthquake location: notebooks/M31_location/M31_location.ipynb
+          - M32 · HYPOINVERSE: notebooks/M32_hypoinverse/M32_hypoinverse.ipynb
+          - M41 · Relative relocation: notebooks/M41_relative_relocation/M41_relative_relocation.ipynb
+      - Week 6:
+          - M50 · The focal sphere: notebooks/M50_focal_sphere/M50_focal_sphere.ipynb
+          - M51 · First-motion mechanisms: notebooks/M51_first_motions/M51_first_motions.ipynb
+          - M52 · Synthetic seismograms: notebooks/M52_synthetics/M52_synthetics.ipynb
+      - Week 7:
+          - M53 · Moment tensor inversion: notebooks/M53_mt_inversion/M53_mt_inversion.ipynb
+          - M54 · Coulomb stress: notebooks/M54_coulomb/M54_coulomb.ipynb
+      - Week 8:
+          - M60 · Full run and project plan: notebooks/M60_full_run/M60_full_run.ipynb
+  - Your project: project.md
+  - Working through the course:
+      - How the course works: how_this_tutorial_works.md
+      - 한국어 진행 안내: how_this_tutorial_works_ko.md
+      - Save and submit work: git_workflow.md
+      - Full curriculum: curriculum.md
+      - AI as a tutor: ai_policy.md
+      - 한국어 AI 사용 규칙: ai_policy_ko.md
+      - Sharing the server: server_manners.md
+      - Data policy: data_policy.md
+  - Help and reference:
+      - Troubleshooting: troubleshooting.md
+      - Glossary: glossary.md
+      - Reading list: reading_list.md
+      - AI-use log template: templates/ai_log_template.md
+      - Credits and licenses: credits.md
+
+plugins:
+  - search
+  - mkdocs-jupyter:
+      execute: false
+      include: ["notebooks/**/*.ipynb"]
+      include_source: true
+      ignore_h1_titles: true
+
+exclude_docs: |
+  !/templates/
+  !/templates/**
+  requirements.txt
+  _site_hooks.py
+  **/*_solution.ipynb
+  **/__pycache__/**
+
+markdown_extensions:
+  - tables
+  - admonition
+  - toc:
+      permalink: true
+
+extra:
+  generator: false
+
+validation:
+  links:
+    anchors: warn
+    unrecognized_links: warn

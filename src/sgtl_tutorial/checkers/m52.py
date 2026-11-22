@@ -544,8 +544,8 @@ def _t4_judge(got: Any, case: dict, rel: float) -> Optional[str]:
     _, _, resid_m = _fit_two(g, p_m, s_m)
     if resid_m < 1e-2:
         return "moment-not-rate"
-    for flip in (np.diag([1.0, 1.0, -1.0]), np.array([[0.0, 1.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, 1.0]]),
-                 np.array([[0.0, 1.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, -1.0]])):
+    down, swap = np.diag([1.0, 1.0, -1.0]), np.eye(3)[[1, 0, 2]]
+    for flip in (down, swap, down @ swap):
         if np.all(np.abs(flip @ g - truth) <= max(rel, 1e-3) * peak):
             return "direction"
     for delays in ((0.0, 0.0), (r / (case["vs"] * 1000.0), r / (case["vp"] * 1000.0))):

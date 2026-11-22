@@ -1,0 +1,31 @@
+module: M54
+frozen: 2026-11-20
+tasks:
+  # 40 made-up stress tensors (entries 1e2-1e7 Pa; every fourth case a stack of 2-5 tensors) on made-up receivers
+  # (strike 0-360, dip 0-90 with the ends, rake -180-180), friction 0-0.85, Skempton 0 or 0.05-0.9; shear, effective
+  # normal and Coulomb within rel_tol of the largest |stress| (in kPa) of Elastic_stresses_py's get_coulomb_stresses
+  M54-T1: {trials: 40, rel_tol: 1.0e-9}
+  # 30 made-up rectangles (strike 0-360, dip 5-89.99, rake -180-180, length 0.5-30 km, width 0.5-20 km, slip 1 mm-5 m,
+  # centres in 124.5-131 E, 33-38.8 N, tops below the surface); the line read back by Elastic_stresses_py's reader:
+  # angles within angle_tol_deg, length and width within size_rel_tol, slip within slip_rel_tol, the centre within
+  # centre_tol_km + centre_rel_tol x (length + width) / 2 in map view and depth_tol_km in depth
+  M54-T2: {trials: 30, angle_tol_deg: 1.0e-5, size_rel_tol: 1.0e-5, slip_rel_tol: 1.0e-5, centre_tol_km: 0.005,
+           centre_rel_tol: 0.004, depth_tol_km: 1.0e-4}
+  # 16 made-up rectangles (length 0.5-20 km, width 0.5-15 km, top 0.3-10 km, dip 10-88, slip 3 mm-3 m; lambda and
+  # mu 15-45 GPa), 12 points each, at least a quarter of the fault size away from its plane; stress within rel_tol
+  # of the largest |stress| of the case from Elastic_stresses_py (cutde strain, its Hooke's law)
+  M54-T3: {trials: 16, rel_tol: 1.0e-5}
+  # 200 made-up cracks (radius 30 m - 30 km, stress drop 0.1-100 MPa, mu 20-45 GPa), numbers and arrays; side and
+  # slip within rel_tol of the values the crack was built from
+  M54-T4: {trials: 200, rel_tol: 1.0e-9}
+  # 12 made-up maps that depend only on the compass direction from a centre (2-4 positive sectors, one left-out
+  # sector and a left-out disc), 30-120 points, 40-160 rotations; every fraction and the p-value within abs_tol
+  M54-T5: {trials: 12, abs_tol: 1.0e-12}
+  # read_stresses on 3 files written by Elastic_stresses_py's writer; coulomb_change on 8 cases of T1,
+  # rotation_test on 3 cases of T5 and okada_stress on 3 cases of T3; dcfs_at against the intern's own okada_stress
+  # and coulomb_change at the run's points and 40 made-up points around them (1e-6); then the intern's Gyeongju
+  # runs: fingerprints recomputed, the rerun identical, the changed run differing only in friction; the intern's
+  # pyrocko-based Coulomb change against the one from the first run's stress file within esp_pyrocko_rel of the
+  # largest |value|; at least min_points points, min_rows sensitivity rows (2 receivers, 3 frictions) and
+  # min_rotations rotations, all recomputed
+  M54-T6: {esp_pyrocko_rel: 1.0e-3, min_points: 20, min_rows: 6, min_rotations: 100}
