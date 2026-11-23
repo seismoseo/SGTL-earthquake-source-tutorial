@@ -29,7 +29,7 @@ SeismoStats (ETH Zurich, Swiss Seismological Service), Elastic_stresses_py and c
 
 ## Cite this course
 
-Seo, M. (2026). *SGTL earthquake source tutorial* (version 1.0.0). Seismology, Geophysics, Tectonophysics Laboratory, Seoul National University.
+Seo, M. (2026). *SGTL earthquake source tutorial* (version 1.1.0). Seismology, Geophysics, Tectonophysics Laboratory, Seoul National University.
 
 Use [CITATION.cff](https://github.com/seismoseo/SGTL-earthquake-source-tutorial/blob/main/CITATION.cff) or GitHub’s
 “Cite this repository” button. Contributors are listed in

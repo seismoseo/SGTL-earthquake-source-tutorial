@@ -45,6 +45,7 @@ import json
 import math
 import os
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -98,7 +99,7 @@ _SAC_NAME = re.compile(r"^(\d{14})\.([^.]+)\.([^.]+)\.([^.]+)\.sac$")
 # ----------------------------------------------------------------------------- datasets
 @dataclass(frozen=True)
 class Event:
-    """One earthquake of a dataset (values copied from the shipped KMA catalog; times in UTC)."""
+    """One earthquake request (teaching values from KMA; research provenance lives in its manifest)."""
 
     event_id: str
     origin_utc: _dt.datetime
@@ -171,47 +172,96 @@ def _parse_utc(text: str) -> _dt.datetime:
     return _dt.datetime(y, mo, d, h, mi, s, tzinfo=UTC) + _dt.timedelta(seconds=float(m.group(7) or 0))
 
 
-def _manifest(repo: Optional[Path] = None) -> dict:
+def _manifest(repo: Optional[Path] = None, manifest: Optional[Path] = None) -> dict:
     import yaml
 
     repo = repo or _paths.repo_root()
-    path = Path(repo).joinpath(*MANIFEST)
-    with open(path, encoding="utf-8") as fh:
-        doc = yaml.safe_load(fh) or {}
+    path = Path(manifest).resolve() if manifest is not None else Path(repo).joinpath(*MANIFEST)
+    try:
+        with open(path, encoding="utf-8") as fh:
+            doc = yaml.safe_load(fh) or {}
+    except yaml.YAMLError as exc:
+        raise RuntimeError(f"Cannot read request YAML {path}: {exc}") from exc
+    if not isinstance(doc, dict) or not isinstance(doc.get("datasets", {}), dict):
+        raise RuntimeError("Request YAML must be a mapping with a datasets mapping; compare the project scaffold.")
     if doc.get("schema_version") != 1:
-        raise RuntimeError(f"{'/'.join(MANIFEST)} has schema_version {doc.get('schema_version')!r}; this sgtl "
+        raise RuntimeError(f"{path} has schema_version {doc.get('schema_version')!r}; this sgtl "
                            "reads version 1. Update your copy of the tutorial (bin/update-from-upstream).")
     if doc.get("status") != "active":
-        raise RuntimeError(f"{'/'.join(MANIFEST)} is not active yet (status {doc.get('status')!r}).")
+        raise RuntimeError(f"{path} is not active yet (status {doc.get('status')!r}). "
+                           "Freeze the research plan and request manifest before changing status to active.")
+    if manifest is not None:
+        default = Path(repo).joinpath(*MANIFEST)
+        with default.open(encoding="utf-8") as fh:
+            shipped = (yaml.safe_load(fh) or {}).get("datasets", {})
+        overlap = set(doc.get("datasets") or {}) & set(shipped)
+        if overlap:
+            raise RuntimeError("Custom dataset names must differ from the teaching datasets: " + ", ".join(sorted(overlap)))
     return doc
 
 
 def _dataset_from(name: str, spec: dict) -> Dataset:
+    if not isinstance(name, str) or not re.fullmatch(r"[a-z][a-z0-9_]*", name):
+        raise ValueError("Dataset names must start with a lower-case letter and contain only letters, digits or _.")
+    if not isinstance(spec, dict):
+        raise ValueError(f"Dataset {name} must be a mapping; compare the project request scaffold.")
+    for key in ("networks", "bands"):
+        values = spec.get(key, ["HH", "HG", "EL"] if key == "bands" else None)
+        if not isinstance(values, (list, tuple)) or not values or any(not isinstance(v, str) for v in values):
+            raise ValueError(f"{key} must be a nonempty YAML list, for example networks: [KS, KG].")
+    if not isinstance(spec.get("events"), list) or not spec["events"]:
+        raise ValueError(f"Dataset {name} must list at least one event mapping.")
     events = []
-    for ev in spec.get("events") or []:
+    for ev in spec["events"]:
+        if (not isinstance(ev, dict) or ev.get("event_id") is None
+                or not str(ev["event_id"]).strip() or isinstance(ev["event_id"], (bool, list, dict))):
+            raise ValueError("Every event needs a nonempty published or explicitly namespaced event_id.")
         depth = ev.get("depth_km")
-        events.append(Event(event_id=str(ev["event_id"]), origin_utc=_parse_utc(ev["origin_utc"]),
-                            latitude=float(ev["latitude"]), longitude=float(ev["longitude"]),
-                            depth_km=None if depth is None else float(depth), ml=float(ev["ml"])))
-    if not events:
-        raise RuntimeError(f"dataset {name} lists no events")
-    window = tuple(float(v) for v in spec["window_s"])
-    return Dataset(name=name, title=str(spec.get("title", name)), sequence=spec.get("sequence"),
+        try:
+            events.append(Event(event_id=str(ev["event_id"]), origin_utc=_parse_utc(ev["origin_utc"]),
+                                latitude=float(ev["latitude"]), longitude=float(ev["longitude"]),
+                                depth_km=None if depth is None else float(depth), ml=float(ev["ml"])))
+        except (TypeError, KeyError) as exc:
+            raise ValueError("Every event needs origin_utc, numeric latitude/longitude/ml and optional depth_km.") from exc
+    if not isinstance(spec.get("window_s"), (list, tuple)):
+        raise ValueError("Request window must have two finite increasing seconds in a YAML list.")
+    try:
+        window = tuple(float(v) for v in spec["window_s"])
+        radius = float(spec["station_radius_km"])
+    except (TypeError, KeyError) as exc:
+        raise ValueError("Request window and station_radius_km must contain numbers.") from exc
+    if len(window) != 2:
+        raise ValueError("Request window must have two finite increasing seconds.")
+    result = Dataset(name=name, title=str(spec.get("title", name)), sequence=spec.get("sequence"),
                    use=str(spec.get("use", "module")), large=bool(spec.get("large", False)),
-                   networks=tuple(spec["networks"]), radius_km=float(spec["station_radius_km"]),
+                   networks=tuple(spec["networks"]), radius_km=radius,
                    window_s=(window[0], window[1]), bands=tuple(spec.get("bands") or ("HH", "HG", "EL")),
                    expected=dict(spec.get("expected") or {}), events=tuple(events))
+    if (len(window) != 2 or not all(math.isfinite(v) for v in window) or window[0] >= window[1]
+            or not math.isfinite(result.radius_km) or result.radius_km <= 0):
+        raise ValueError("Request window must have two finite increasing seconds and station radius must be positive.")
+    if (not result.networks or not result.bands
+            or any(not re.fullmatch(r"[A-Z0-9]{1,3}", n) for n in result.networks)
+            or any(not re.fullmatch(r"[A-Z0-9]{2}", b) for b in result.bands)):
+        raise ValueError("Use network codes of 1–3 uppercase letters/digits and sensor bands of two letters/digits.")
+    if len({ev.folder for ev in events}) != len(events):
+        raise ValueError("Requests must have distinct UTC origin seconds; otherwise their waveform folders collide.")
+    for ev in events:
+        if (not -90 <= ev.latitude <= 90 or not -180 <= ev.longitude <= 180 or not math.isfinite(ev.ml)
+                or (ev.depth_km is not None and (not math.isfinite(ev.depth_km) or ev.depth_km < 0))):
+            raise ValueError("Event coordinates, magnitude and optional nonnegative depth must be finite and valid.")
+    return result
 
 
-def datasets(repo: Optional[Path] = None) -> Dict[str, Dataset]:
+def datasets(repo: Optional[Path] = None, *, manifest: Optional[Path] = None) -> Dict[str, Dataset]:
     """Every dataset of the manifest, by name."""
-    doc = _manifest(repo)
+    doc = _manifest(repo, manifest)
     return {name: _dataset_from(name, spec) for name, spec in (doc.get("datasets") or {}).items()}
 
 
-def dataset(name: str, repo: Optional[Path] = None) -> Dataset:
+def dataset(name: str, repo: Optional[Path] = None, *, manifest: Optional[Path] = None) -> Dataset:
     """One dataset by name; a plain-language error lists the names when it does not exist."""
-    all_ds = datasets(repo)
+    all_ds = datasets(repo, manifest=manifest)
     if name not in all_ds:
         raise RuntimeError(f"There is no dataset called {name!r}. Datasets: {', '.join(all_ds)} "
                            "(see: sgtl data list).")
@@ -312,6 +362,7 @@ def _write_checksums(path: Path, entries: Dict[str, str]) -> None:
 
 def _tracked_files(folder: Path, event_dirs: Optional[Iterable[str]] = None) -> List[Path]:
     files = [folder / "event_catalog" / "event_catalog.csv"]
+    files += [folder / "request_definition.json"]
     files += sorted((folder / "station_table").glob("*_station.csv"))
     sac = _sac_root(folder)
     dirs = [sac / e for e in event_dirs] if event_dirs is not None else sorted(p for p in sac.glob("*") if p.is_dir())
@@ -698,15 +749,15 @@ def _mark(folder: Path, events: Iterable[Event], running: bool) -> None:
 
 
 # ----------------------------------------------------------------------------- sgtl data list
-def list_datasets() -> int:
+def list_datasets(*, manifest: Optional[Path] = None) -> int:
     repo = _paths.repo_root()
-    meta = _manifest(repo)
+    meta = _manifest(repo, manifest)
     mb_per, _ = _rates(meta)
     root = _paths.data_root()
-    print(f"Datasets in {'/'.join(MANIFEST)}; files go to {_paths.short_path(root)}/<dataset>/")
+    print(f"Datasets in {manifest or '/'.join(MANIFEST)}; files go to {_paths.short_path(root)}/<dataset>/")
     print(f"{'dataset':<15}{'use':<9}{'events':>6}{'stations':>10}{'size':>13}   on this computer")
-    for name, ds in datasets(repo).items():
-        size = len(ds.events) * len(ds.bands) * ds.expected_stations * mb_per
+    for name, ds in datasets(repo, manifest=manifest).items():
+        size = len(ds.events) * len(ds.bands) * ds.expected_stations * mb_per * (ds.window_s[1] - ds.window_s[0]) / 500.0
         folder = root / name
         states = [event_state(folder, e) for e in ds.events]
         have, part = states.count("present"), states.count("partial")
@@ -718,7 +769,8 @@ def list_datasets() -> int:
         print(f"{name:<15}{ds.use:<9}{len(ds.events):>6}{ds.expected_stations:>10}{'about ' + _fmt_mb(size):>13}"
               f"   {here}{note}")
     print("Sizes and station counts are estimates from the maintainers' test downloads (see the manifest).")
-    print("See the plan for one dataset (nothing is downloaded):  sgtl data fetch <dataset>")
+    print("See the plan for one dataset (nothing is downloaded):  sgtl data fetch <dataset>" +
+          (f" --manifest {shlex.quote(str(manifest))}" if manifest else ""))
     return 0
 
 
@@ -772,17 +824,35 @@ def _summary(plan: Plan) -> None:
     print(f"{total} SAC files, {_fmt_mb(size / 1e6)} in {_paths.short_path(_sac_root(plan.folder))}")
 
 
-def fetch(name: str, apply: bool = False, large: bool = False) -> int:
+def _custom_request_record(ds: Dataset, folder: Path, *, write: bool = False) -> None:
+    """Bind a private research folder to its exact requests; changing windows needs a new dataset name."""
+    path = folder / "request_definition.json"
+    definition = json.loads(json.dumps(asdict(ds), default=str))
+    if path.exists():
+        if json.loads(path.read_text(encoding="utf-8")) != definition:
+            raise RuntimeError("Research request definition changed. Use a new dataset name/folder to preserve the old data.")
+    elif folder.exists() and any(folder.iterdir()):
+        raise RuntimeError("Research folder has data without a request definition. Use a new dataset name/folder.")
+    elif write:
+        folder.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(definition, indent=2) + "\n", encoding="utf-8")
+
+
+def fetch(name: str, apply: bool = False, large: bool = False, *, manifest: Optional[Path] = None) -> int:
     """``sgtl data fetch NAME [--apply] [--large]``: the plan, and with ``--apply`` the download."""
     repo = _paths.repo_root()
-    meta = _manifest(repo)
-    ds = dataset(name, repo)
+    meta = _manifest(repo, manifest)
+    ds = dataset(name, repo, manifest=manifest)
     folder = dataset_folder(name)
+    manifest_flag = f" --manifest {shlex.quote(str(manifest))}" if manifest else ""
+    if manifest is not None:
+        _custom_request_record(ds, folder)
     plan = make_plan(ds, folder)
     mb_per, rps = _rates(meta)
+    request_mb = mb_per * (ds.window_s[1] - ds.window_s[0]) / 500.0
     _print_plan(plan, meta)
     if not plan.pending:
-        print(f"Nothing to fetch: all {len(ds.events)} events are here. Check them with:  sgtl data verify {name}")
+        print(f"Nothing to fetch: all {len(ds.events)} events are here. Check them with:  sgtl data verify {name}{manifest_flag}")
         return 0
 
     problems = []
@@ -794,7 +864,7 @@ def fetch(name: str, apply: bool = False, large: bool = False) -> int:
             problems.append(what)
 
     if ds.large:
-        status(large, "Size", f"this dataset is large (about {_fmt_mb(plan.total_requests * mb_per)})"
+        status(large, "Size", f"this dataset is large (about {_fmt_mb(plan.total_requests * request_mb)})"
                + ("" if large else "; add --large to confirm"))
     creds, msg = _read_credentials()
     status(creds is not None, "STP account", msg)
@@ -805,7 +875,7 @@ def fetch(name: str, apply: bool = False, large: bool = False) -> int:
     clone, msg = _check_pocketquake()
     status(clone is not None, "PocketQuake", msg)
     free = _free_mb(folder)
-    need = plan.total_requests * mb_per * 1.2 + 500
+    need = plan.total_requests * request_mb * 1.2 + 500
     if free is not None:
         status(free >= need, "Disk space", f"{_fmt_mb(free)} free in {_paths.short_path(_paths.data_root())}"
                + ("" if free >= need else f"; about {_fmt_mb(need)} is needed"))
@@ -824,7 +894,7 @@ def fetch(name: str, apply: bool = False, large: bool = False) -> int:
     print(f"  record SHA-256 fingerprints in {CHECKSUM_FILE}")
     if not apply:
         extra = " --large" if ds.large else ""
-        print(f"Dry run: nothing was downloaded. To do it:  sgtl data fetch {name} --apply{extra}")
+        print(f"Dry run: nothing was downloaded. To do it:  sgtl data fetch {name}{manifest_flag} --apply{extra}")
         if problems:
             print(f"Fix the STOP lines first ({', '.join(problems)}).")
         return 1 if problems else 0
@@ -834,6 +904,8 @@ def fetch(name: str, apply: bool = False, large: bool = False) -> int:
     assert creds is not None and client is not None and clone is not None
 
     print()
+    if manifest is not None:
+        _custom_request_record(ds, folder, write=True)
     (folder / "stp_download" / "SAC").mkdir(parents=True, exist_ok=True)
     catalog = folder / "event_catalog" / "event_catalog.csv"
     if _write_if_changed(catalog, kst_catalog_csv(ds.events)):
@@ -872,16 +944,19 @@ def fetch(name: str, apply: bool = False, large: bool = False) -> int:
         print(f"session {i} finished; fingerprints of {n_files} files recorded in {CHECKSUM_FILE}")
     _write_full_batch(clone, ds, folder, catalog)
     _summary(make_plan(ds, folder))
-    print(f"Next, check the files:  sgtl data verify {name}")
+    print(f"Next, check the files:  sgtl data verify {name}{manifest_flag}")
     return 0
 
 
 # ----------------------------------------------------------------------------- sgtl data verify
-def verify(name: str, write: bool = False) -> int:
+def verify(name: str, write: bool = False, *, manifest: Optional[Path] = None) -> int:
     """``sgtl data verify NAME [--write]``: counts, damaged files and SHA-256 fingerprints."""
     repo = _paths.repo_root()
-    ds = dataset(name, repo)
+    ds = dataset(name, repo, manifest=manifest)
     folder = dataset_folder(name)
+    fetch_command = f"sgtl data fetch {name}" + (f" --manifest {shlex.quote(str(manifest))}" if manifest else "")
+    if manifest is not None:
+        _custom_request_record(ds, folder)
     results: List[str] = []
 
     def line(status: str, what: str, text: str) -> None:
@@ -890,18 +965,18 @@ def verify(name: str, write: bool = False) -> int:
 
     print(f"Dataset {name} in {_paths.short_path(folder)}")
     if not folder.is_dir():
-        line("FAIL", "Folder", f"missing. Fetch the dataset first:  sgtl data fetch {name} --apply")
+        line("FAIL", "Folder", f"missing. Fetch the dataset first:  {fetch_command} --apply")
         return 1
     catalog = folder / "event_catalog" / "event_catalog.csv"
     if not catalog.is_file():
-        line("FAIL", "Event catalog", f"missing; run:  sgtl data fetch {name} --apply")
+        line("FAIL", "Event catalog", f"missing; run:  {fetch_command} --apply")
     elif catalog.read_text(encoding="utf-8") != kst_catalog_csv(ds.events):
-        line("FAIL", "Event catalog", f"differs from the manifest; run:  sgtl data fetch {name} --apply")
+        line("FAIL", "Event catalog", f"differs from the manifest; run:  {fetch_command} --apply")
     else:
         line("PASS", "Event catalog", f"{len(ds.events)} events, as in the manifest")
     rows = _station_rows(folder, ds.networks)
     if rows is None:
-        line("FAIL", "Station lists", f"missing for {', '.join(ds.networks)}; run:  sgtl data fetch {name} --apply")
+        line("FAIL", "Station lists", f"missing for {', '.join(ds.networks)}; run:  {fetch_command} --apply")
     else:
         line("PASS", "Station lists", ", ".join(f"{n} {sum(1 for r in rows if r[0] == n)}" for n in ds.networks))
 
@@ -912,10 +987,10 @@ def verify(name: str, write: bool = False) -> int:
         state = event_state(folder, ev)
         d = _sac_root(folder) / ev.folder
         if state == "missing":
-            line("FAIL", ev.folder, f"not fetched yet; run:  sgtl data fetch {name} --apply")
+            line("FAIL", ev.folder, f"not fetched yet; run:  {fetch_command} --apply")
             continue
         if state == "partial":
-            line("FAIL", ev.folder, f"its download stopped before the end; run:  sgtl data fetch {name} --apply")
+            line("FAIL", ev.folder, f"its download stopped before the end; run:  {fetch_command} --apply")
             continue
         parts, bad = [], False
         for band in ds.bands:
@@ -942,7 +1017,7 @@ def verify(name: str, write: bool = False) -> int:
         line("WARN", "No files", f"{len(no_data)} event(s) have no SAC file at all (STP may hold no data for that "
              f"time): {', '.join(no_data[:5])}" + (" ..." if len(no_data) > 5 else ""))
     if broken:
-        line("FAIL", "Damaged files", f"{len(broken)}; delete them and fetch again:  sgtl data fetch {name} --apply "
+        line("FAIL", "Damaged files", f"{len(broken)}; delete them and fetch again:  {fetch_command} --apply "
              f"(first: {broken[0]})")
     else:
         line("PASS", "SAC files", f"{n_files} files ({_fmt_mb(n_bytes / 1e6)}), none empty or cut short")
@@ -973,7 +1048,7 @@ def verify(name: str, write: bool = False) -> int:
                  "add them with --write")
     elif not write:
         line("WARN", "Fingerprints", f"no {CHECKSUM_FILE} yet. Record the files you have now:  "
-             f"sgtl data verify {name} --write")
+             f"sgtl data verify {name}" + (f" --manifest {shlex.quote(str(manifest))}" if manifest else "") + " --write")
     if write:
         entries = {p.relative_to(folder).as_posix(): _sha256(p) for p in _tracked_files(folder)}
         _write_checksums(path, entries)

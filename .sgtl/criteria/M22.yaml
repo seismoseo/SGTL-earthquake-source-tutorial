@@ -1,5 +1,5 @@
 module: M22
-frozen: 2026-11-19
+frozen: 2026-11-23
 tasks:
   # made-up triggers whose events are known by construction (chains of overlapping triggers, stations that trigger
   # twice, gaps exactly at the extension, noise triggers, events at too few stations), plus oracle_cases made-up
@@ -26,3 +26,8 @@ tasks:
   # made-up picks of known events (jittered arrivals, missing picks, stray picks, events at too few stations, picks
   # exactly at the edge of the window); the events are known by construction
   M22-T6: {trials: 150, abs_tol: 1.0e-9}
+  # Fixed-anchor banks built with known membership, winners and support IDs, plus boundary/tie/chain probes.
+  # The artifact part reruns the student's own verified merger on their raw T5 CSV, then checks the saved
+  # candidate file, exact source-file hashes, disjoint guarded rehearsal windows and exposure. Written protocol
+  # entries are checked for presence and length; their scientific adequacy requires mentor review.
+  M22-T7: {trials: 100, abs_tol: 1.0e-9, min_plan_words: 12}

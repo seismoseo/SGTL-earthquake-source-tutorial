@@ -1,0 +1,1 @@
+window_id,region_id,start_utc,end_utc,split,station_channel_rule,requested_seconds,usable_seconds,gap_mask_sha256,request_manifest_sha256,exclude_reason

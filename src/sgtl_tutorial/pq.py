@@ -44,6 +44,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+import shlex
 from typing import Dict, List, Optional, Sequence, Tuple, Union
 
 from . import _paths
@@ -287,12 +288,16 @@ def _clean_env(extra: Optional[Dict[str, str]] = None) -> Dict[str, str]:
     return env
 
 
-def stage(dataset_name: str, slug: str, region: Optional[str] = None, apply: bool = False) -> int:
+def stage(dataset_name: str, slug: str, region: Optional[str] = None, apply: bool = False,
+          *, manifest: Optional[Path] = None) -> int:
     """``sgtl pq stage DATASET --slug SLUG [--region NAME] [--apply]``."""
     from . import datafetch
 
-    ds = datafetch.dataset(dataset_name)
+    ds = datafetch.dataset(dataset_name, manifest=manifest)
     folder = datafetch.dataset_folder(dataset_name)
+    if manifest is not None:
+        datafetch._custom_request_record(ds, folder)
+    manifest_flag = f" --manifest {shlex.quote(str(manifest))}" if manifest else ""
     region = region or (slug[:1].upper() + slug[1:])
     if not SLUG_RE.match(slug):
         print(f"The slug {slug!r} is not usable: 2-40 characters, lower-case letters, digits and _, starting "
@@ -316,9 +321,9 @@ def stage(dataset_name: str, slug: str, region: Optional[str] = None, apply: boo
     states = {e.folder: datafetch.event_state(folder, e) for e in ds.events}
     n_present = sum(1 for s in states.values() if s == "present")
     if not catalog.is_file() or n_present == 0:
-        problems.append(f"dataset {dataset_name} is not fetched yet; run: sgtl data fetch {dataset_name} --apply")
+        problems.append(f"dataset {dataset_name} is not fetched yet; run: sgtl data fetch {dataset_name}{manifest_flag} --apply")
     elif any(not (folder / "station_table" / f"{n}_station.csv").is_file() for n in ds.networks):
-        problems.append(f"the station lists of {dataset_name} are missing; run: sgtl data fetch {dataset_name} --apply")
+        problems.append(f"the station lists of {dataset_name} are missing; run: sgtl data fetch {dataset_name}{manifest_flag} --apply")
     src_root = str(folder.resolve())
     if any(c in src_root for c in "\"'\\\n"):
         problems.append(f"the data folder {_paths.short_path(src_root)} contains a quote or backslash, which a "
@@ -344,7 +349,7 @@ def stage(dataset_name: str, slug: str, region: Optional[str] = None, apply: boo
         print("Cannot stage:\n" + "\n".join(f"  - {p}" for p in problems))
         return 1
     if not apply:
-        print(f"Dry run: nothing was changed. To do it:  sgtl pq stage {dataset_name} --slug {slug} --apply")
+        print(f"Dry run: nothing was changed. To do it:  sgtl pq stage {dataset_name}{manifest_flag} --slug {slug} --apply")
         return 0
     args = {"pocketquake": str(clone_dir()), "pipeline_dir": str(pdir), "slug": slug, "region": region,
             "catalog_csv": str(catalog), "epicenter": list(epicenter), "region_bounds": list(bounds),
@@ -373,7 +378,7 @@ def stage(dataset_name: str, slug: str, region: Optional[str] = None, apply: boo
     if not ok:
         print("The check did not give what was expected. Tell the mentor (friction issue).")
         return 1
-    print(f"Next (a dry run first):  sgtl pq run {slug} --from stations --through dtct --cores 2")
+    print(f"Next (a dry run first):  sgtl pq run {slug} --from stations --through dtct --cores 2 --mem-gb 8")
     return 0
 
 

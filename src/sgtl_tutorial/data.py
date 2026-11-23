@@ -32,6 +32,7 @@ __all__ = [
     "kma_catalog",
     "sequences",
     "sequence",
+    "project_definition",
     "stations",
     "velocity_models",
     "velocity_model",
@@ -95,6 +96,18 @@ def kma_catalog() -> pd.DataFrame:
 def sequences() -> Dict[str, dict]:
     """Named earthquake sequences from ``data/manifests/sequences.yaml``."""
     return dict(_read_yaml(repo_path("data", "manifests", "sequences.yaml")))
+
+
+def project_definition(name: str) -> dict:
+    """Public starting context for a research project, without selecting its research sample.
+
+    ``project_definition('sangju')`` includes the public 2026 event anchor and the frozen teaching
+    catalog's coverage limit. Region, controls and search windows must be chosen in the project plan.
+    This does not update ``kma_catalog()`` or return a relocated/detected event catalog.
+    """
+    if name != "sangju":
+        raise KeyError(f"Unknown project {name!r}. Known projects: sangju.")
+    return _read_yaml(repo_path("data", "manifests", "sangju_project.yaml"))
 
 
 def _distance_km(lat0: float, lon0: float, lat: np.ndarray, lon: np.ndarray) -> np.ndarray:

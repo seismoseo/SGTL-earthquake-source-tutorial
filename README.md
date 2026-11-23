@@ -2,7 +2,7 @@
 
 Learn to work with earthquake catalogs and seismic records, then locate earthquakes and study their sources.
 This course is for a new intern: each notebook explains the idea, gives you a small method to write, and checks
-your work before you use real Korean data. **Version 1.0.0 · 20 lessons · about 8 weeks, followed by a project.**
+your work before you use real Korean data. **Version 1.1.0 · 20 lessons · about 8 weeks, followed by two required research tracks.**
 
 ## Start here
 
@@ -32,7 +32,7 @@ Follow the order in this table; module numbers are labels. [Full lesson guide](d
 | 3 | [M20 · Picking arrivals](docs/notebooks/M20_picking/M20_picking.ipynb) | mark when P and S waves arrive |
 | 3 | [M21 · Deep-learning pickers](docs/notebooks/M21_dl_pickers/M21_dl_pickers.ipynb) | compare automatic picks with your own |
 | 3 | [M30 · Travel times](docs/notebooks/M30_travel_times/M30_travel_times.ipynb) | predict how long a wave takes to reach a station |
-| 3, optional | [M22 · Detection](docs/notebooks/M22_detection/M22_detection.ipynb) | find earthquakes in a longer record; take after M30 |
+| 3–4 | [M22 · Detection and template matching](docs/notebooks/M22_detection/M22_detection.ipynb) | validate detection and template matching after M30; required for both projects |
 | 4 | [M31 · Earthquake location](docs/notebooks/M31_location/M31_location.ipynb) | estimate an earthquake's position and uncertainty |
 | 4 | [M32 · A production locator](docs/notebooks/M32_hypoinverse/M32_hypoinverse.ipynb) | run HYPOINVERSE through PocketQuake and audit its results |
 | 5 | [M41 · Relative relocation](docs/notebooks/M41_relative_relocation/M41_relative_relocation.ipynb) | resolve the relative positions of nearby earthquakes |
@@ -42,7 +42,7 @@ Follow the order in this table; module numbers are labels. [Full lesson guide](d
 | 7 | [M53 · Moment tensor inversion](docs/notebooks/M53_mt_inversion/M53_mt_inversion.ipynb) | fit source models and judge what the records resolve |
 | 7 | [M54 · Coulomb stress](docs/notebooks/M54_coulomb/M54_coulomb.ipynb) | test stress changes and their limits |
 | 8 | [M60 · Full run and project plan](docs/notebooks/M60_full_run/M60_full_run.ipynb) | analyze a new sequence and prepare your research plan |
-| 9–13 | [Your Suncheon project](docs/project.md) | investigate depths, fault geometry and mechanisms; present your findings |
+| 9–16 | [Suncheon](docs/project.md) and [independent Sangju](docs/sangju_project.md) · both required | test depths, geometry, activity and detector limits; write two reports and a joint comparison |
 
 ## When you need help
 

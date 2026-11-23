@@ -862,7 +862,7 @@
    "kind": "oracle",
    "module": "M22",
    "target": "func",
-   "tier": "stretch",
+   "tier": "core",
    "title": "Network coincidence"
   },
   "M22-T2": {
@@ -912,7 +912,7 @@
    "kind": "oracle",
    "module": "M22",
    "target": "func",
-   "tier": "stretch",
+   "tier": "core",
    "title": "A normalized cross-correlation"
   },
   "M22-T3": {
@@ -938,7 +938,7 @@
    "kind": "oracle",
    "module": "M22",
    "target": "func",
-   "tier": "stretch",
+   "tier": "core",
    "title": "A threshold from the MAD"
   },
   "M22-T4": {
@@ -954,7 +954,7 @@
    "kind": "synthetic",
    "module": "M22",
    "target": "func",
-   "tier": "stretch",
+   "tier": "core",
    "title": "A relative magnitude"
   },
   "M22-T5": {
@@ -968,7 +968,7 @@
    "kind": "artifact",
    "module": "M22",
    "target": "answer",
-   "tier": "stretch",
+   "tier": "core",
    "title": "Template matching on three hours"
   },
   "M22-T6": {
@@ -989,8 +989,27 @@
    "kind": "synthetic",
    "module": "M22",
    "target": "func",
-   "tier": "stretch",
+   "tier": "core",
    "title": "An associator"
+  },
+  "M22-T7": {
+   "categories": "zb64:eNp9Vk2P2zYQ/SuDvbQFZCNNkRwC9BBsW/QDSIvsJkVPBi2OJGYpUiWp1RpF/3vfDGXZmwC9WeRwPt57M+N/bo6cyy63MfHNG7q5H5gST4kzh2KKe2RymUIsVHAz8njkRIsrg34Prh/wnCy33iS2pH729BvzRK5kikug4kZu6g2ZYKnwOHlTmH75gUrsGY7S/qahmxa3zuJm1zmv2fwV50TbMd3efbzOJs5lmgvFjk5i98jJdQ5JjJx6ZBmDWs0hxTlYnN+/otGUFhlfKphSLLGN/qt8laE6gE2wcWkoJi3lw/2tlpLVBO8eOZjQMtmoGZk+Mdc6BuOCC/1WQY8MJhyQZzgypAbET4XhSXzXUHu6jeMEHIlRy+kLtNUNEmWTvBPYtZqGlsG1A+ViTpk698T2nEXo2e5cAEhbKis266W6VQPyLpc93cWESijwogdaauIi6YppMssGYQdc5MzM1oGPZJzXuPw0xTxXNf1UbTJyN9OuA0Bg37SDYJEYeNvckBxcFOQhud2gfBo/Q3Iz0uC/Z+MVqcQDys/4qpgBDjsnCBVsW/fohOfjib57/eLFnv5I8RO3eL6mVJ0ZnyOOWj9bKR5hnCXoy2j6KAsVSvLvucwpAA1FAir7Wug/5FXLzWd9cnC22bSND9iFwwrWN1TmyTOOlMwO8oCcwyz8Znn1VNAN+GUogwEhRuwlqEVwF1q9VzoMoRhXOzMUVjYh8KLZh7hDVnDxOeGTyRnCoHdxoWzwVqh73lniXMGoaJ47o6l6x3uqrr8/mvBwuLLUmrRS8Hr4lGNoLq7zoc2Pn/lWG80XYAVJ9UOWsVNSzBMIEzTPOjmISVOV1haRgYTf0KhNa1khdRJZMYKe2YC1b1/SIioj6TdtqgQtORHaklxBAxL4S6eVmBAJ4VoeordgZk/3OvRCgY5Bg/d4/uh4yZpPbh2uMHNaMlYk2p5qUdtskNJ0Fqp5ZXYjNM+TwCm9cDUSIYIj2lEphVS99lyKi5awCarBlwi4NtLERjyrFSQTA28eNaGLJNbxjq9G2+nMGoosRnrgPO3O7Mu8HV3OYoMrG7nO3+GsoQc+VSbKaWINL6e3EaiCLw2PyVTH+duL27uf3+5evnp9caiZ1CVzzunXu9/fSdBt6ohM9/Sej7Pz9tn4pi7FsWp6TgmskKyQrOELZqVE/1GHiAomYwDGmGsF2zitiwpHddgZPw3myMW1oOEEh0lsrpaXqWsom5H17Rpt5B0kx+nLBQagIFapFlyCwASNKv14Q/pGt40FoQB03V91POvtnj46tP42gl24ekpH7qQXZICJU90WFYE6Knds+5WGiiY/gSFUVq8PyK4rnP5n1SCEj6GH+iOsUL6avdEXR1myBg3mctVmRhdfRc8X+T2f4NAMGtObCa07gU/ZBnU3kCScBZEN9bVnJINIrQeF/qSYadKzwSPEz4O0mhyaoKsusCdvejT3fF62GBChR8vrUTHT+h9kSShwp6tHM76L44oGFo3rOnjdpPYQ5O/NiN7fzdMZb/ozpgdc46uvetaVvMM4QFaC+SiTvU5yrQCz1SVZWkgUq/vf/wB2cWmm",
+   "forbidden": [
+    "scipy.cluster",
+    "sklearn",
+    "eqcorrscan",
+    "sgtl_tutorial"
+   ],
+   "hints": {
+    "1": "Glossary: template_bank, cross_template_deduplication, held_out_evaluation, injection_recovery, selection_bias. Part 7 separates duplicate removal from statistical declustering, and a retrospective rehearsal from blind validation.",
+    "2": "zb64:eNpFkLFuwzAMRH/lPiDI1qUe2yV79oK2aJuoTRoUHTV/XzpJ0UWAiLt3R14UzbzUd1TzAGGw7Y7+jpCVO/Q8ieZ0cts3UCBmxiheA7tSrTIpF6wUwwzSku5l4SGeE65oEnMCmmix9lVhYxISM8pP+kiH2bxDvlb5wa7hphMnf+W1Zz+hd6Zv0SkbJfDV7BF2+ezgHJQBEvV/XgdzPoFv7HcUqSGalYLXbaHgtD1UR5pTg1vL2rvGGdeZFfuryfUtWy4Z+Sf+MA2ng2RoLnGEgfYiQf3CGFIn5Qh4/g9bCmbTY5vNLSyv06EY1AKiN9ZjS6q75y029tF8zZPw+Rer95Iy",
+    "3": "zb64:eNpdkDFyhTAMRHtOoQPwyzR/CBUNfS4gbIE1AckjG35y+9hAUsTlWtp92k7Nk5Hv4fkOHULmjR5JLZMHp/EbdIYcCDbMLlDqm1kNCF2AbuYv8g8UF4q0mO6xfzZQXmcUjRJJxswHXdaBl7KfITk1aqunFB9buYo19dZwjQEnyuxgHPrLjw72JO528pwyiytWF+Y4JEDxJ6bs20RWoQ1fYPpKtwXGSFKv/E93Z99Y49DCX1qz1P8J3WddOy9MwHJuwNlb35QW1lJLHdilTIgvRB9vv321sJEttctCyB5zlYyyaYrkzvwD1/rBKhBNszpd+x/Vq4v5"
+   },
+   "kind": "synthetic",
+   "module": "M22",
+   "target": "func",
+   "tier": "core",
+   "title": "Merge a template bank and write its validation protocol"
   },
   "M30-T1": {
    "categories": "zb64:eNp1VcFu2zAM/RUiwNAES7K2wC4Bdht2HIp1wLBLB8aWYyGypEqyXW/Yv+9RctKm226xxEe+90gqvxZVy/ag6o22vk+LHS2+uz5Q09sqaWdpvqbUKupcrQwl3htFOtHIkQ56UJaWTFaNVDnTd5ZcyF8Dm17F1Za+uXAkpPKGtSUOgaeILEcAm+A6pFoLBhGMFH7aLta0aDgmFdPG8KTC37Qa1ibS2CoB5RjivRtU5hkRWoFipJwl4JBtvimRrnkRtqWo7VKv6AN5GqjrY6KYeKK9Mm6kGwJnNagwzWBBQgFVwcWo4hppAKxQwFkz0cFR7yk5AN/RUoJnJRS9go/cOXtAEhdnNnAo63Wh4+z/F5X6ILIa4zgVjU8/jp3ocVaR7bu9Cmtii2x0s/koJ34qxp61cYf8yh5Se5mB5w7kotalTeUs1KHFZ5OT7hQCg6LKCM3lqFMLF27ozYr2fSLAaD57Tx0s6FxM0N5wKB196e4nHOaOG8WX/WEjONhfqxEB2UlGdTvNUydiPJIPoANcJwV2dFTKU8tm0DCyt0kbmoS2qDcwJZ64YSBA9oY6ySP6s2bfclRnrXfZxvsXmuPI3qt6RzmQru6uqI+FwGnAB59Rc8D91cVdzFWKxE2tfGpfGdtgdfjsQcrgvUvJZZ46xTIXW/p6OWllviTac0iXQ/yfFdg9tyM5XyCoWIJrN1oZ1Mzx5E5MgfWhTRsU/jfvOYCMxiy+6raky1+JZUux+q0KpzlHz0Cu1k2DMzvvQzzv015J68CuLBt6Z2vGj+W9VcZciSvjqkx9KfGSBwZbhlIuHntdHWXfPKcWBugZIDVgHPZCXoQxL+DzyKDueULGgBXdlOdLPLh32KXnAcnX8iowXsCpODrXl/Wc+9LHng1Fo31EJ6GD5bY8Z/NDup9gCdg1OsS0E1QozZNakvJCZ63hqoXH8TGk5dPDLb0trXu4XeFywBbVkjKDxNqs5acKbnOC/mPDi5glnt/P/Hn1XO31JK1PDuGZvM6jOXMVCw8O2c7Q3u9emX2du1b6ir3Gv4fQ2tJHl10r5E/cT2S3i99/ACLITQ4=",

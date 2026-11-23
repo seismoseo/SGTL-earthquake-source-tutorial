@@ -4,6 +4,27 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v1.1.0 — 2026-11-23 · two research tracks and required template matching
+
+- Keep the Suncheon project and add a separate, required Sangju study centered on the public 17 November 2026
+  ML 3.6 earthquake report. Each track has its own frozen plan, data choices, validation and report. Sangju tests
+  depth and continuing activity against comparable regions without importing preliminary lab results.
+- M22 is now required after M30: its tasks are core and use normal submission. The added task merges candidates
+  across templates and records a validation protocol. Both projects require held-out, injection/recovery and
+  false-alarm tests before interpreting detections and rates.
+- Research templates include separate Sangju inventories, template-bank/search-window records and a draft STP
+  request manifest. `sgtl data list`, `fetch` and `verify` accept `--manifest PATH` for independently frozen
+  requests, as does `sgtl pq stage`; changed requests require a new dataset name. Request lists are validated
+  before use and disk estimates scale with the requested duration. Teaching datasets keep their definitions.
+- The public Sangju context explicitly distinguishes the 2019 teaching data and the catalog snapshot ending
+  6 November 2026 from the new research target. Plan for a phased two-track project, initially weeks 9–16.
+
+After updating, run `bin/sgtl new project` to add missing templates; existing project files are kept. Read
+[the project guide](docs/project.md) and [the Sangju guide](docs/sangju_project.md). Existing M22 working copies
+are also kept: save your work and review `bin/sgtl diff M22` with your mentor before adopting the added task.
+Record amendments to any signed plan before applying the new matching requirements. No additional teaching
+waveform download is needed for M22 beyond `sangju2019_hours`.
+
 ## v1.0.0 — 2026-11-23 · complete course and research-project handoff
 
 The first complete release contains all 20 modules, from M00 through M60, and the research-project templates.

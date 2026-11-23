@@ -1,0 +1,45 @@
+# Public context only. The intern chooses and freezes the research selection independently.
+schema_version: 1
+project: sangju
+status: research_planning
+title: Sangju seismicity and seismogenic depth
+anchor_event:
+  reference_id: kma-report-20261117231017
+  identifier_note: Report timestamp identifier, not a KMA catalog event number.
+  origin_utc: '2026-11-17T14:10:17Z'
+  origin_kst: '2026-11-17T23:10:17+09:00'
+  latitude: 36.516
+  longitude: 127.959
+  ml: 3.6
+  reported_depth_km: 20
+  interpretation: Public KMA reported values; depth is a starting comparison, not ground truth.
+  source_url: https://www.weather.go.kr/w/XML/INTENSITY/report_20261117231017.pdf
+  source_page: 1
+  source_published: '2026-11-18'
+  verified_on: '2026-11-23'
+  attribution: Korea Meteorological Administration (KMA), earthquake analysis report, 18 November 2026.
+  license: Korea Open Government License Type 1 (attribution); see the linked KMA press notice.
+  license_source_url: https://www.kma.go.kr/kma/news/press_01.jsp?mode=view&num=1194772
+teaching_catalog:
+  path: data/catalogs/kma_catalog.csv
+  last_origin_utc: '2026-11-06T13:07:46Z'
+  includes_anchor_event: false
+  limitation: >-
+    Frozen teaching snapshot; it does not cover the interval from its last event to the anchor
+    or subsequent activity. Refresh and archive a public catalog independently before interpreting rates.
+teaching_waveforms:
+  datasets: [sangju2019, sangju2019_hours]
+  limitation: >-
+    These are 2019 teaching windows and do not supply the 2026 event, a complete regional sample,
+    or the observing exposure needed to measure persistent seismicity.
+research_selection:
+  status: to_be_preregistered
+  region: null
+  time_range: null
+  reference_regions: null
+  depth_cut: null
+  template_bank: null
+  calibration_and_evaluation_windows: null
+  no_preliminary_lab_products: true
+  hypotheses: [sustained_or_bursty_or_unresolved_seismicity, deeper_or_comparable_or_unresolved_depth_distribution]
+guide: docs/sangju_project.md

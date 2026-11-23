@@ -25,7 +25,7 @@ English: [how_this_tutorial_works.md](how_this_tutorial_works.md)
 ## 모듈을 시작하기 전에
 
 모듈 번호순이 아니라 [교육 과정](curriculum.md)의 순서를 따르세요. M00 → M01 → M02 → M04, 그다음
-M05 → M03 → M10 순서입니다. 3주차에는 M20 → M21 → M30을 끝낸 뒤 선택 과제인 M22를 합니다. 다음
+M05 → M03 → M10 순서입니다. 3–4주차에는 M20 → M21 → M30 → M22 순서로 진행합니다. M22는 두 연구 트랙에 필요한 필수 모듈입니다. 다음
 노트북의 머리말에서 선수 모듈, 읽을 자료와 필요한 자료를 먼저 확인하세요.
 
 첫날에는 환경만 설치합니다. 다음 명령은 `~/sgtl/tutorial`에서 **서버 터미널**에 입력합니다. 표의 설치·내려받기
@@ -35,20 +35,23 @@ M05 → M03 → M10 순서입니다. 3주차에는 M20 → M21 → M30을 끝낸
 |---|---|---|
 | M03 실제 자료 | `bin/sgtl-install tools metadata`; M03 1부대로 개인 STP 클라이언트와 자격 증명을 `~/.sgtl/`에 둔 뒤 `bin/sgtl data fetch sangju2019` | `bin/sgtl pq check`, `bin/sgtl data verify sangju2019` |
 | M21 | `bin/sgtl-install seisbench` (PhaseNet 모델 두 개) | `bin/sgtl doctor`의 가중치 항목 |
-| 선택 과제 M22 | `bin/sgtl data fetch sangju2019_hours` | `bin/sgtl data verify sangju2019_hours` |
+| M22 | `bin/sgtl data fetch sangju2019_hours` | `bin/sgtl data verify sangju2019_hours` |
 | M52 | `bin/sgtl-install pyfk` (별도 작업 환경) | 노트북의 PyFK 환경 점검 |
 | M53 | `bin/sgtl-install mt`; M52와 M51을 먼저 마침 | 노트북의 가져오기와 선수 결과 파일 점검 |
 | M54 | `bin/sgtl-install coulomb`; 첫 실행에는 공개 경주 메커니즘을 받을 인터넷 연결 | 노트북의 도구 점검, 이후에는 저장된 메커니즘 파일 사용 |
 | M60 | `bin/sgtl data fetch gokseong2018`; `bin/sgtl new project`는 템플릿을 즉시 복사함 | `bin/sgtl data verify gokseong2018`, `project/README.md` 확인 |
-| 연구 계획 승인 뒤 | `bin/sgtl data fetch suncheon_area`; 크기를 확인한 뒤 `--apply --large`로 반복 | `bin/sgtl data verify suncheon_area` |
+| 순천 연구 계획 승인 뒤 | `bin/sgtl data fetch suncheon_area`; 크기를 확인한 뒤 `--apply --large`로 반복 | `bin/sgtl data verify suncheon_area` |
+| 독립적인 상주 연구 | `st.data.project_definition("sangju")`를 확인하고 직접 선정한 자료 요청을 고정한 뒤 [상주 안내](sangju_project.md)를 따름 | `project/sangju/`의 별도 계획, 비교 지역, 요청 지문과 검증 기록 |
 
 `doctor`, `pq check`, `data verify`는 읽기 전용이므로 `--apply`가 필요 없습니다. 내려받기에서 STOP이 나오면 먼저
 표시된 선행 조건을 해결하세요. 없는 자료나 이전 결과를 임의로 만들어 다음 셀로 넘어가지 마세요.
 
 뒤 모듈은 앞 모듈의 파일을 다시 씁니다. M20의 `work/picks/M20_manual_picks.csv`, M21과 M32의
 `sangju_m21` 클러스터와 실행 기록, M31의 `work/M31_location/results/M31_hypoinverse_runs.csv`,
-M51의 `work/M51_first_motions/results/M51_skhash_first/mechanisms.csv`를 유지하세요. M60의 자료 목록은
-`project/inventory/`에 남고, 직접 쓴 주장 표·서명된 계획·판단 기준·실험 기록은 연구 과제로 이어집니다.
+M51의 `work/M51_first_motions/results/M51_skhash_first/mechanisms.csv`를 유지하세요. M60의 순천 자료 목록은
+`project/inventory/`에 남습니다. 순천은 기존 `project/`의 주장 표·계획·기준·기록을 유지하고, 독립적인 상주 연구는
+`project/sangju/`의 별도 계획과 자료 요청·판단 기준·기록·보고서로 진행합니다. 두 트랙 모두 필수이며 템플릿 매칭과
+독립 검증을 포함합니다.
 
 이전 함수를 붙여 넣으라는 셀에는 **내가 점검을 통과한 함수**와 그 함수가 쓰는 가져오기·상수·도우미를 복사한 뒤
 실행합니다. 다른 노트북의 변수는 새 커널에 전달되지 않습니다. 커널을 다시 시작해도 실행되도록 그 셀을 남겨 두세요.
@@ -114,8 +117,8 @@ bin/sgtl submit M04 --include-optional    # 심화·연구 과제도 선택함. 
 
 `--apply`를 붙이면 내 작업 노트북 `work/M04_.../M04_....ipynb`의 사본을 셀 순서대로 **papermill**(브라우저 없이
 노트북을 실행하는 프로그램)로 실행합니다. 기본값은 핵심 과제이며, 실행 사본에서 선택 과제 블록을 건너뛰므로 미완성
-심화 과제가 핵심 과제 제출을 막지 않습니다. 심화·연구 과제도 실행하려면 `--include-optional`을 붙입니다. M22에는
-핵심 과제가 없으므로 이 옵션이 필요합니다. 선택된 점검은 이번 실행에서 모두 PASS여야 합니다. 예전 PASS나 건너뛴
+심화 과제가 핵심 과제 제출을 막지 않습니다. 심화·연구 과제도 실행하려면 `--include-optional`을 붙입니다.
+선택된 점검은 이번 실행에서 모두 PASS여야 합니다. 예전 PASS나 건너뛴
 핵심 점검으로는 제출할 수 없습니다. 내 계정에서
 코어 하나, 강의 커널과 같은 스레드 제한, 낮은 우선순위로 실행하며 120분이 지나면 멈춥니다(`--timeout 분`으로 바꿀 수
 있음). 내 노트북 파일은 바뀌지 않습니다. 실행 결과는 `work/submissions/M04/<UTC 시각>/`에 실행된 사본, 실행 기록,
@@ -134,7 +137,9 @@ GitHub가 직접 비공개(private)라고 알려 주는 GitHub 저장소가 아�
 
 ## 관문(gate)과 B 경로
 
-매주 끝에 **관문**이 있습니다(G0-G6, 8주차의 연구 계획 확정, 마지막 구두 심사). 다음을 모두 만족하면 통과입니다.
+교육 모듈의 매주 끝에 **관문**이 있습니다(G0-G6, 8주차의 순천 계획 확정). 단계별 연구 일정에서는 두 트랙의
+서명된 계획·자료 요청, 검출 및 민감도 검증 기록, 최종 보고서 두 편과 공동 발표·구두 심사를 검토합니다
+([교육 과정](curriculum.md)). 다음을 모두 만족하면 통과입니다.
 
 - 그 주의 **core** 점검이 모두 통과함.
 - 멘토의 평가 기준표에서 **8점 중 6점 이상**이고 0점 항목이 없음. 네 항목을 각각 0-2점으로 매깁니다: 정확성(점검과

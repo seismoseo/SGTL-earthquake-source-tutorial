@@ -1,0 +1,52 @@
+# Fill every null with your own criterion before evaluating research results.
+# A numerical threshold needs a value, a unit and its decision meaning.
+# Obtain mentor sign-off, set frozen, then record this file's SHA-256 in ANALYSIS_PLAN.md and LABBOOK.md.
+# Changes after the freeze require a dated plan amendment naming results already seen.
+project: sangju_independent
+author: null
+frozen: null
+independent_inputs:
+  catalog_version_and_cutoff: null
+  selection_rule: null
+  reference_region_rule: null
+  prohibited_preliminary_products_check: null
+quality:
+  magnitude_and_network_epoch_matching: null
+  station_geometry: null
+  phase_counts_and_pick_uncertainty: null
+  direct_phase_and_crossover_rule: null
+  depth_resolution: null
+depth_hypothesis:
+  statement: null
+  population_and_reference: null
+  metric_and_unit: null
+  uncertainty_method: null
+  threshold_and_unit: null
+  support_reject_unresolved_rule: null
+  required_sensitivity_tests: null
+persistence_hypothesis:
+  statement: null
+  observation_period: null
+  usable_time_rule: null
+  completeness_rule_by_epoch: null
+  burst_rule: null
+  metric_and_unit: null
+  uncertainty_method: null
+  threshold_and_unit: null
+  background_bursts_mixture_unresolved_rule: null
+template_matching:
+  bank_and_family_selection_rule: null
+  station_channel_band_window_rules: null
+  construction_calibration_validation_partition: null
+  threshold_calibration: null
+  duplicate_merging: null
+  independent_candidate_validation: null
+  held_out_recovery_requirement: null
+  injection_recovery_requirement: null
+  false_alarm_requirement: null
+  bank_bias_sensitivity_requirement: null
+reproducibility:
+  input_and_request_fingerprints: null
+  unchanged_rerun_rule: null
+  planned_processing_changes: null
+  comparison_with_suncheon: null

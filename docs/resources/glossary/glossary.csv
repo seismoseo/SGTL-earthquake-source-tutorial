@@ -470,7 +470,7 @@ claims_table,claims table,주장 정리표,"A table that lists each claim of a p
 testable_claim,testable claim,검증 가능한 주장,"A statement that a stated measurement could prove wrong; 'the events are deep' becomes testable only when it says how deep and which result would refute it.",M60,0
 hypothesis,hypothesis,가설,"A statement about nature that a planned test can support or reject.",M60,0
 analysis_plan,analysis plan,분석 계획서,"A document, written and frozen before any result is seen, that states the questions, hypotheses, tests and decision rules of a study.",M60,0
-prior_exposure,prior exposure,사전 노출,"What an analyst has already seen of the data or of published results before writing a plan, and which could shape the choice of tests.",M60,1
+prior_exposure,prior exposure,사전 노출,"What an analyst has already seen of the data or of published results before writing a plan, and which could shape the choice of tests.",M22 M60,1
 pass_criteria,pass criteria,판단 기준,"The numbers, written down before the results, that decide whether a test supports or rejects a hypothesis.",M60,1
 plan_amendment,plan amendment,계획 수정 기록,"A dated change to a frozen analysis plan that says what changed, why, and whether results had been seen before the change.",M60,1
 lab_book,lab book,연구 노트,"A dated record of what was run, with which settings, and what came out; entries are added, never deleted.",M60,0
@@ -489,3 +489,8 @@ distance_scaling,distance scaling,거리 보정,"Multiplying each trace by a pow
 amplitude_consistency,amplitude consistency check,진폭 일관성 점검,"A test before a fit that compares station amplitudes corrected for distance with their common level, and leaves out a station far off it (a wrong gain, a unit error).",M53,1
 resolution_verdict,resolution verdict,분해능 판정,"A decision, by rules fixed before a run, whether a result is resolved, provisional or not resolved, from numbers such as n_eff, the spread of acceptable solutions and an independent comparison.",M53,1
 sign_off,mentor sign-off,지도교수 승인 서명,"A dated line in an analysis plan in which the mentor, by name, states that the plan and its criteria were read before the freeze; a plan without it is not frozen.",M60,1
+template_bank,template bank,템플릿 모음,"A versioned collection of waveform templates and their source events, channels, picks and processing settings used together in a detection search.",M22 M60,1
+cross_template_deduplication,cross-template de-duplication,템플릿 간 중복 검출 병합,"Combining repeated reports of one candidate from several templates while retaining the individual matches and their template identities; this is different from statistical declustering.",M22 M60,1
+held_out_evaluation,held-out evaluation,독립 보류 자료 평가,"Measuring a frozen method on data kept separate from template selection and parameter tuning; data already inspected are not a blind test.",M22 M60,1
+injection_recovery,injection and recovery,신호 주입 및 회수,"Adding known signals to background records and measuring which are detected under a frozen method; recovery depends on the injected signals and noise conditions.",M22 M60,1
+selection_bias,selection bias,선택 편향,"A systematic difference caused by how examples or observations are selected, such as a template bank favoring events with similar waveforms and station coverage.",M22 M60,1

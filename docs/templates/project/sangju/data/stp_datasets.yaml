@@ -1,0 +1,35 @@
+# Your independently selected known-event requests. No research selection is supplied here.
+# Complete the signed selection/data plan before changing status to active.
+# Use a custom dataset name that differs from every shipped name; changing a frozen request needs a new name.
+# Preserve a published event ID when available. Otherwise use an explicit namespace such as report:SOURCE_KEY;
+# do not construct a numeric identifier and call it a KMA event ID.
+schema_version: 1
+status: draft
+datasets: {}
+
+# Same shape as the teaching STP manifest; replace every placeholder before activating.
+# datasets:
+#   YOUR_UNIQUE_DATASET_NAME:
+#     title: YOUR_REQUEST_DESCRIPTION
+#     sequence: null
+#     use: project
+#     large: CHOOSE_TRUE_OR_FALSE_FROM_THE_REVIEWED_SIZE
+#     networks: [YOUR_NETWORK_CODES]
+#     station_radius_km: YOUR_RADIUS_IN_KM
+#     window_s: [YOUR_START_SECONDS_RELATIVE_TO_ORIGIN, YOUR_END_SECONDS_RELATIVE_TO_ORIGIN]
+#     bands: [YOUR_BAND_CODES]
+#     expected:
+#       stations: YOUR_EXPECTED_STATION_COUNT
+#       basis: YOUR_INDEPENDENT_ESTIMATE_OR_PILOT
+#       files_per_event:
+#         YOUR_BAND_CODE: [YOUR_MINIMUM_FILE_COUNT, YOUR_MAXIMUM_FILE_COUNT]
+#     events:
+#       - event_id: YOUR_PUBLISHED_ID_OR_EXPLICIT_REPORT_NAMESPACE
+#         origin_utc: YOUR_SOURCE_ORIGIN_WITH_Z_SUFFIX
+#         latitude: YOUR_SOURCE_LATITUDE
+#         longitude: YOUR_SOURCE_LONGITUDE
+#         depth_km: YOUR_SOURCE_REPORTED_DEPTH
+#         ml: YOUR_SOURCE_REPORTED_LOCAL_MAGNITUDE
+#
+# This known-event schema is not a declaration of continuous months of exposure.
+# Freeze and pilot the continuous STP time-window request protocol separately in DATA_PLAN.md.

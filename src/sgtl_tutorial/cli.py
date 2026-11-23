@@ -482,17 +482,20 @@ def _add_data_parser(sub) -> argparse.ArgumentParser:
                                    "~/sgtl/data/<dataset>/ (or $SGTL_DATA/<dataset>/). Your STP account is read from "
                                    "~/.sgtl/credentials.env and the STP program from ~/.sgtl/stp-client.pl.")
     ds = p.add_subparsers(dest="data_cmd")
-    ds.add_parser("list", help="every dataset, its size, and what you already have")
+    listing = ds.add_parser("list", help="every dataset, its size, and what you already have")
+    listing.add_argument("--manifest", type=Path, help="private frozen research request YAML instead of teaching datasets")
     q = ds.add_parser("fetch", help="the download plan of a dataset; --apply downloads it",
                       description="Without --apply: print the plan (stations, STP requests, size) and change nothing. "
                                   "With --apply: download the events you do not have yet, through PocketQuake.")
     q.add_argument("name", help="dataset name, e.g. sangju2019 (see: sgtl data list)")
     q.add_argument("--apply", action="store_true", help="really download (without it: only the plan)")
     q.add_argument("--large", action="store_true", help="confirm fetching a large dataset (several GB)")
+    q.add_argument("--manifest", type=Path, help="private frozen research request YAML instead of teaching datasets")
     q = ds.add_parser("verify", help="check a downloaded dataset (counts, damaged files, fingerprints)")
     q.add_argument("name", help="dataset name")
     q.add_argument("--write", action="store_true",
                    help="record the SHA-256 fingerprints of the files you have now in MANIFEST.sha256")
+    q.add_argument("--manifest", type=Path, help="the same private request YAML used to fetch this research dataset")
     return p
 
 
@@ -506,6 +509,7 @@ def _add_pq_parser(sub) -> argparse.ArgumentParser:
     q.add_argument("dataset", help="a fetched dataset, e.g. sangju2019")
     q.add_argument("--slug", required=True, help="your name for the cluster: lower-case letters, digits, _")
     q.add_argument("--region", help="name used in PocketQuake's file names (default: the slug, capitalized)")
+    q.add_argument("--manifest", type=Path, help="private frozen request YAML used to fetch the dataset")
     q.add_argument("--apply", action="store_true", help="really write the cluster into your clone")
     stages = " ".join(_pq_stages())
     q = ps.add_parser("run", help="run PocketQuake stages of a cluster (dry run unless --apply)",
@@ -537,11 +541,11 @@ def _data_command(args: argparse.Namespace, parser: argparse.ArgumentParser) -> 
     from . import datafetch
 
     if args.data_cmd == "list":
-        return datafetch.list_datasets()
+        return datafetch.list_datasets(manifest=args.manifest)
     if args.data_cmd == "fetch":
-        return datafetch.fetch(args.name, apply=args.apply, large=args.large)
+        return datafetch.fetch(args.name, apply=args.apply, large=args.large, manifest=args.manifest)
     if args.data_cmd == "verify":
-        return datafetch.verify(args.name, write=args.write)
+        return datafetch.verify(args.name, write=args.write, manifest=args.manifest)
     parser.print_help()
     return 0
 
@@ -552,7 +556,7 @@ def _pq_command(args: argparse.Namespace, parser: argparse.ArgumentParser) -> in
     if args.pq_cmd == "check":
         return pq.check()
     if args.pq_cmd == "stage":
-        return pq.stage(args.dataset, args.slug, region=args.region, apply=args.apply)
+        return pq.stage(args.dataset, args.slug, region=args.region, apply=args.apply, manifest=args.manifest)
     if args.pq_cmd == "run":
         return pq.run(args.slug, args.stage_from, args.through, cores=args.cores, mem_gb=args.mem_gb,
                       apply=args.apply)
@@ -619,7 +623,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             return _data_command(args, data_parser)
         if args.cmd == "pq":
             return _pq_command(args, pq_parser)
-    except RuntimeError as exc:  # e.g. repository not found
+    except (RuntimeError, ValueError, OSError) as exc:  # e.g. repository or request manifest not found
         print(f"sgtl: {exc}", file=sys.stderr)
         return 2
     parser.print_help()

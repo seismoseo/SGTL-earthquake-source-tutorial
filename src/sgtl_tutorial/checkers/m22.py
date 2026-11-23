@@ -21,12 +21,16 @@ Where the truth comes from (DESIGN.md section 1, rule 1):
   detection list; nothing printed.
 * M22-T6: construction: made-up picks of known events whose back-projected times lie within the window by design,
   stray picks placed far from every event and from each other.
+* M22-T7: construction: banks with known groups, winners, ties and support IDs. Then the student's own merger
+  on their T5 CSV, exact source-file hashes, guarded rehearsal windows, exposure and protocol fields. The checker
+  does not supply a real detection list or certify the scientific adequacy of a written plan.
 
 Failure categories are keys of ``checks/specs/M22.yaml``; the engine prints their fixed messages.
 """
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import math
 import numbers
@@ -39,7 +43,7 @@ import numpy as np
 
 from . import Outcome, outcome_from_cases
 
-__all__ = ["check_T1", "check_T2", "check_T3", "check_T4", "check_T5", "check_T6"]
+__all__ = ["check_T1", "check_T2", "check_T3", "check_T4", "check_T5", "check_T6", "check_T7"]
 
 DATASET_DEFAULT = "sangju2019_hours"
 EVENT_FOLDER = "20190721020418"            # STP's folder of the three hours (the ML 3.9's UTC origin time)
@@ -1116,3 +1120,225 @@ def check_T6(target: Any, ctx: Any) -> Outcome:
     for _ in range(trials):
         run("wrong-values", *_t6_case(rng))
     return outcome_from_cases(ok, category=_first(cats, T6_PRIORITY), example=example)
+
+
+# ---------------------------------------------------------------------- M22-T7 one candidate per bank match
+T7_PRIORITY = ("format", "changed-input", "time-order", "chaining", "window-edge", "best-score", "ties",
+               "provenance", "wrong-values")
+T7_WRITTEN = ("threshold_freeze", "control_and_exposure", "injection_recovery", "selection_bias",
+              "prior_exposure", "suncheon_transfer", "sangju2026_transfer")
+T7_PROTOCOL_KEYS = {"dataset", "exercise_status", "bank_version", "template_ids", "score_definition",
+                    "merge_window_s", "calibration_window_s", "evaluation_window_s", "guard_s",
+                    "calibration_live_hours", "evaluation_live_hours", "matching_json_sha256",
+                    "matches_csv_sha256", *T7_WRITTEN}
+T7_CANDIDATE_COLUMNS = ("time_s", "time_utc", "score", "representative", "templates", "n_matches")
+
+
+def _t7_probes() -> list:
+    return [
+        ("wrong-values", [], 1.0, []),
+        ("time-order", [("C", 4.0, 8.0), ("A", 0.0, 8.0), ("B", 2.0, 8.0)], 0.5,
+         [(0.0, 8.0, "A", ("A",), 1), (2.0, 8.0, "B", ("B",), 1), (4.0, 8.0, "C", ("C",), 1)]),
+        ("chaining", [("A", 0.0, 8.0), ("B", 0.75, 9.0), ("C", 1.5, 10.0)], 1.0,
+         [(0.75, 9.0, "B", ("A", "B"), 2), (1.5, 10.0, "C", ("C",), 1)]),
+        ("window-edge", [("A", 0.0, 8.0), ("B", 1.0, 9.0)], 1.0,
+         [(1.0, 9.0, "B", ("A", "B"), 2)]),
+        ("best-score", [("A", 0.0, 8.0), ("B", 0.25, 11.0), ("C", 0.5, 9.0)], 1.0,
+         [(0.25, 11.0, "B", ("A", "B", "C"), 3)]),
+        ("ties", [("Z", 0.5, 9.0), ("B", 0.0, 9.0), ("A", 0.0, 9.0)], 1.0,
+         [(0.0, 9.0, "A", ("A", "B", "Z"), 3)]),
+        ("provenance", [("B", 0.0, 8.0), ("A", 0.25, 9.0), ("B", 0.5, 10.0)], 1.0,
+         [(0.5, 10.0, "B", ("A", "B"), 3)]),
+        ("window-edge", [("B", 2.0, 8.0), ("A", 2.0, 9.0)], 0.0,
+         [(2.0, 9.0, "A", ("A", "B"), 2)]),
+    ]
+
+
+def _t7_case(rng: np.random.Generator) -> tuple:
+    """Known, separated groups; the winner is selected before generating each group's scores."""
+    width = float(rng.choice([0.25, 0.5, 1.0, 2.0]))
+    matches, expected = [], []
+    for group in range(int(rng.integers(1, 7))):
+        size = int(rng.integers(1, 7))
+        anchor = group * (4.0 * width + 1.0)
+        offsets = np.r_[0.0, rng.uniform(0.05, 0.75, size - 1) * width]
+        winner = int(rng.integers(size))
+        scores = rng.uniform(1.0, 8.0, size)
+        scores[winner] = 12.0
+        labels = [str(rng.choice(["A", "B", "C", "D"])) for _ in range(size)]
+        matches.extend((labels[i], float(anchor + offsets[i]), float(scores[i])) for i in range(size))
+        expected.append((float(anchor + offsets[winner]), 12.0, labels[winner], tuple(sorted(set(labels))), size))
+    rng.shuffle(matches)
+    return "wrong-values", matches, width, expected
+
+
+def _t7_unpack(value: Any) -> Optional[list]:
+    if not isinstance(value, list):
+        return None
+    clean = []
+    for row in value:
+        if not isinstance(row, tuple) or len(row) != 5:
+            return None
+        when, score, representative, sources, count = row
+        if _t5_number(when) is None or _t5_number(score) is None or not isinstance(representative, str) or \
+                not isinstance(sources, tuple) or not all(isinstance(s, str) for s in sources) or \
+                tuple(sorted(set(sources))) != sources or not sources or \
+                isinstance(count, (bool, np.bool_)) or not isinstance(count, numbers.Integral) or count < 1:
+            return None
+        clean.append((float(when), float(score), representative, sources, int(count)))
+    return clean
+
+
+def _t7_judge(value: Any, expected: list, kind: str, tolerance: float) -> Optional[str]:
+    actual = _t7_unpack(value)
+    if actual is None:
+        return "format"
+    if any(b[0] < a[0] for a, b in zip(actual, actual[1:])):
+        return "time-order"
+    if len(actual) != len(expected):
+        return kind if kind in {"chaining", "window-edge"} else "wrong-values"
+    for got, want in zip(actual, expected):
+        if got[3:] != want[3:]:
+            return "provenance"
+        if abs(got[1] - want[1]) > tolerance:
+            return "best-score"
+        if abs(got[0] - want[0]) > tolerance or got[2] != want[2]:
+            return "ties" if kind == "ties" else "best-score"
+    return None
+
+
+def _t7_protocol_windows(plan: dict, info: dict, start: Any, duration: float, delta: float) -> Optional[str]:
+    from obspy import UTCDateTime
+
+    try:
+        guard = _t5_number(plan["guard_s"])
+        lag = max(abs(float(ch["lag_samples"])) * delta for entry in info["templates"] for ch in entry["channels"])
+        minimum = lag + max(float(info["p_len_s"]), float(info["s_len_s"])) + float(info["taper_s"])
+        if guard is None or guard < minimum:
+            return "windows"
+        windows = []
+        for field, exposure in (("calibration_window_s", "calibration_live_hours"),
+                                ("evaluation_window_s", "evaluation_live_hours")):
+            interval = plan[field]
+            if not isinstance(interval, list) or len(interval) != 2 or any(_t5_number(v) is None for v in interval):
+                return "windows"
+            left, right = map(float, interval)
+            if not guard <= left < right <= duration - guard:
+                return "windows"
+            for entry in info["templates"]:
+                origin = UTCDateTime(entry["origin_utc"]) - start
+                if left < origin + guard and right > origin - guard:
+                    return "windows"
+            hours = _t5_number(plan[exposure])
+            if hours is None or abs(hours - (right - left) / 3600.0) > 1e-9:
+                return "exposure"
+            windows.append((left, right))
+        earlier, later = sorted(windows)
+        if earlier[1] + 2.0 * guard > later[0]:
+            return "windows"
+    except (KeyError, TypeError, ValueError, OverflowError):
+        return "report"
+    return None
+
+
+def _t7_artifacts(target: Any, ctx: Any, tolerance: float) -> Optional[str]:
+    from obspy import UTCDateTime, read
+
+    report = ctx.get("report")
+    if report is None:
+        return "no-report"
+    if not isinstance(report, dict) or set(report) != {"matching_json", "candidates_csv", "validation_json"}:
+        return "report"
+    try:
+        matching_path, candidate_path, protocol_path = (Path(report[name]) for name in
+                                                       ("matching_json", "candidates_csv", "validation_json"))
+        info = json.loads(matching_path.read_text(encoding="utf-8"))
+        plan = json.loads(protocol_path.read_text(encoding="utf-8"))
+        if not isinstance(info, dict) or not isinstance(plan, dict) or set(plan) != T7_PROTOCOL_KEYS:
+            return "report"
+        entries = {entry["event_id"]: entry for entry in info["templates"]}
+        dataset = str(ctx.get("dataset", DATASET_DEFAULT))
+        if info["dataset"] != dataset or plan["dataset"] != dataset or not entries:
+            return "report"
+        if plan["exercise_status"] != "retrospective_teaching_plan" or \
+                plan["score_definition"] != "mads_above_median" or plan["template_ids"] != sorted(entries) or \
+                not isinstance(plan["bank_version"], str) or not plan["bank_version"].strip():
+            return "plan"
+        for key in T7_WRITTEN:
+            text = plan[key]
+            if not isinstance(text, str) or "[write here" in text.lower() or \
+                    sum(sum(character.isalpha() for character in word) >= 2 for word in text.split()) < \
+                    int(ctx.criteria.get("min_plan_words", 12)):
+                return "plan"
+        window = _t5_number(plan["merge_window_s"])
+        if window is None or window < 0.0:
+            return "report"
+        raw_path = Path(info["detections_csv"])
+        for key, path in (("matching_json_sha256", matching_path), ("matches_csv_sha256", raw_path)):
+            if plan[key] != hashlib.sha256(path.read_bytes()).hexdigest():
+                return "stale"
+        folder = Path(ctx.data_root) / dataset / "stp_download" / "SAC" / EVENT_FOLDER
+        headers = sorted(folder.glob("*/*.sac"))
+        if not headers:
+            return "report"
+        stats = [read(str(path), headonly=True)[0].stats for path in headers]
+        start = min(head.starttime for head in stats)
+        delta = float(stats[0].delta)
+        duration = float(max(head.endtime for head in stats) - start)
+        problem = _t7_protocol_windows(plan, info, start, duration, delta)
+        if problem is not None:
+            return problem
+        with raw_path.open(encoding="utf-8", newline="") as handle:
+            table = csv.DictReader(handle)
+            if tuple(table.fieldnames or ()) != T5_COLUMNS:
+                return "report"
+            matches = []
+            for row in table:
+                entry = entries[row["template"]]
+                mad = _t5_number(entry["mad"])
+                if mad is None or mad <= 0.0:
+                    return "report"
+                score = (float(row["network_cc"]) - float(entry["median"])) / mad
+                matches.append((row["template"], float(UTCDateTime(row["time_utc"]) - start), score))
+        expected, error = _call(target, matches, float(window))
+        if error is not None or _t7_unpack(expected) is None:
+            return "candidate-file"
+        with candidate_path.open(encoding="utf-8", newline="") as handle:
+            table = csv.DictReader(handle)
+            if tuple(table.fieldnames or ()) != T7_CANDIDATE_COLUMNS:
+                return "candidate-file"
+            actual = []
+            for row in table:
+                when, score = float(row["time_s"]), float(row["score"])
+                if abs(float(UTCDateTime(row["time_utc"]) - start) - when) > 1e-6:
+                    return "candidate-file"
+                actual.append((when, score, row["representative"], tuple(json.loads(row["templates"])),
+                               int(row["n_matches"])))
+        if _t7_judge(actual, expected, "wrong-values", tolerance) is not None:
+            return "candidate-file"
+    except (OSError, KeyError, TypeError, ValueError, IndexError, OverflowError):
+        return "report"
+    return None
+
+
+def check_T7(target: Any, ctx: Any) -> Outcome:
+    tolerance = float(ctx.criteria.get("abs_tol", 1e-9))
+    cases = _t7_probes() + [_t7_case(ctx.rng) for _ in range(int(ctx.criteria.get("trials", 100)))]
+    passed, categories, example = [], [], None
+    for kind, matches, window, expected in cases:
+        original = list(matches)
+        result, error = _call(target, matches, window)
+        category = "format" if error is not None else _t7_judge(result, expected, kind, tolerance)
+        if matches != original:
+            category = "changed-input"
+        passed.append(category is None)
+        categories.append(category)
+        if category and example is None:
+            example = {"inputs": {"matches": original, "window_s": window}, "got": repr(result)[:300],
+                       "error": "compared with known groups, winners and provenance on made-up matches"}
+    if not all(passed):
+        return outcome_from_cases(passed, category=_first(categories, T7_PRIORITY), example=example)
+    category = _t7_artifacts(target, ctx, tolerance)
+    return outcome_from_cases(passed + [category is None], category=category, real_data=True,
+                              note="The candidate file is checked against your own verified merger; the protocol "
+                                   "is checked for consistency, not scientific adequacy. Review it with your mentor.")

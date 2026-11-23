@@ -32,11 +32,11 @@ nav:
           - M05 · Statistical seismology: notebooks/M05_statistical_seismology/M05_statistical_seismology.ipynb
           - M03 · Getting seismic data: notebooks/M03_getting_data/M03_getting_data.ipynb
           - M10 · Seismograms: notebooks/M10_seismograms/M10_seismograms.ipynb
-      - Week 3:
+      - Weeks 3–4:
           - M20 · Picking arrivals: notebooks/M20_picking/M20_picking.ipynb
           - M21 · Deep-learning pickers: notebooks/M21_dl_pickers/M21_dl_pickers.ipynb
           - M30 · Travel times: notebooks/M30_travel_times/M30_travel_times.ipynb
-          - M22 · Detection (optional): notebooks/M22_detection/M22_detection.ipynb
+          - M22 · Detection and template matching: notebooks/M22_detection/M22_detection.ipynb
       - Weeks 4–5:
           - M31 · Earthquake location: notebooks/M31_location/M31_location.ipynb
           - M32 · HYPOINVERSE: notebooks/M32_hypoinverse/M32_hypoinverse.ipynb
@@ -50,7 +50,9 @@ nav:
           - M54 · Coulomb stress: notebooks/M54_coulomb/M54_coulomb.ipynb
       - Week 8:
           - M60 · Full run and project plan: notebooks/M60_full_run/M60_full_run.ipynb
-  - Your project: project.md
+  - Research tracks:
+      - Both required tracks: project.md
+      - Independent Sangju: sangju_project.md
   - Working through the course:
       - How the course works: how_this_tutorial_works.md
       - 한국어 진행 안내: how_this_tutorial_works_ko.md

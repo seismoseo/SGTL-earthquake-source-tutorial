@@ -48,7 +48,7 @@ JupyterLab link.
 | `NOT STARTED` | Your function still raises `NotImplementedError`. |
 | FAIL with category `forbidden-import` | Your function uses a library this task forbids. Write the method yourself. |
 | FAIL with another category | Read the fixed message, test your function on a case you can work out by hand, then ask for the next hint level. |
-| Submission says no core tasks were selected | M22 is optional throughout. Use `bin/sgtl submit M22 --include-optional` to inspect its plan, then add `--apply` when it is ready. |
+| Submission says no core tasks were selected | Check that your work copy matches the current release and module id; `bin/sgtl diff MXX` shows template changes. Ask your mentor how to preserve your work while moving it to the current template. Do not edit check cells. |
 | Submission stops because a selected check did not pass | Read this run's log and check outputs. Earlier PASS records do not replace the current run; save the notebook after fixing the selected task and submit again. |
 
 ## Git

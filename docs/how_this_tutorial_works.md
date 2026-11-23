@@ -25,7 +25,7 @@ handbook for seismologists; EX 11.1 is its exercise 11.1 (see [reading_list.md](
 ## Before each module
 
 Follow the [curriculum](curriculum.md), rather than sorting module numbers. Start with M00 → M01 → M02 → M04,
-then M05 → M03 → M10. In week 3, finish M20 → M21 → M30 before the optional M22. Read the next notebook's header
+then M05 → M03 → M10. In weeks 3–4, continue M20 → M21 → M30 → M22; M22 is required preparation for both research tracks. Read the next notebook's header
 before starting its first task: it names the modules, readings and data you need.
 
 The first-day installer installs the environment only. Run the commands below in a **server terminal**, from
@@ -36,12 +36,13 @@ are ready. Installation and downloads can take several minutes; do one at a time
 |---|---|---|
 | M03 real-data work | `bin/sgtl-install tools metadata`; then put your personal STP client and credentials in `~/.sgtl/` exactly as M03 Part 1 shows; `bin/sgtl data fetch sangju2019` | `bin/sgtl pq check` and `bin/sgtl data verify sangju2019` |
 | M21 | `bin/sgtl-install seisbench` (two pretrained PhaseNet models); keep the tools installed for M03 | `bin/sgtl doctor` reports the PhaseNet weights |
-| Optional M22 | `bin/sgtl data fetch sangju2019_hours` | `bin/sgtl data verify sangju2019_hours` |
+| M22 | `bin/sgtl data fetch sangju2019_hours` | `bin/sgtl data verify sangju2019_hours` |
 | M52 | `bin/sgtl-install pyfk` (its separate worker environment) | the notebook's PyFK environment check |
 | M53 | `bin/sgtl-install mt`; finish M52 and M51 first | the notebook's imports and prerequisite-file checks |
 | M54 | `bin/sgtl-install coulomb`; internet access for the public Gyeongju mechanisms on the first run | the notebook's tool checks; later reruns use its saved mechanism file |
 | M60 | `bin/sgtl data fetch gokseong2018`; `bin/sgtl new project` copies templates immediately | `bin/sgtl data verify gokseong2018`; `project/README.md` exists |
-| Project, after the plan is approved | `bin/sgtl data fetch suncheon_area`; inspect the size before repeating with `--apply --large` | `bin/sgtl data verify suncheon_area` |
+| Suncheon project, after the plan is approved | `bin/sgtl data fetch suncheon_area`; inspect the size before repeating with `--apply --large` | `bin/sgtl data verify suncheon_area` |
+| Independent Sangju project | inspect `st.data.project_definition("sangju")`; freeze your own selection/request and follow the [Sangju guide](sangju_project.md) | separate plan, matched reference regions, request fingerprints and validation evidence under `project/sangju/` |
 
 `bin/sgtl doctor`, `bin/sgtl pq check` and `bin/sgtl data verify ...` only inspect your installation or files;
 they do not need `--apply`. A data fetch that reports STOP needs the stated prerequisite fixed first. Do not
@@ -55,7 +56,7 @@ Keep the names and folder structure that `sgtl new` creates. Later modules reuse
 | M21, then M32 | your PocketQuake cluster `sangju_m21`, its picks, locations and run log | M41 and M51 |
 | M31, task 6 | `work/M31_location/results/M31_hypoinverse_runs.csv` | M32 and M50 |
 | M51, task 5 | `work/M51_first_motions/results/M51_skhash_first/mechanisms.csv` | M53 |
-| M60 | `project/inventory/`, your own claims table, signed plan, criteria and lab book | the research project and final report |
+| M60 | `project/inventory/`, your own Suncheon claims table, signed plan, criteria and lab book; separate `project/sangju/` templates | both required research tracks and their reports |
 
 A notebook that asks you to paste an earlier function means **your own checked function**, with its required
 imports, constants and helpers. Copy its definition into the marked cell and run that cell in the new notebook;
@@ -125,7 +126,7 @@ bin/sgtl submit M04 --include-optional    # also select stretch/research work; a
 With `--apply` the command runs a copy of your work notebook `work/M04_.../M04_....ipynb` in cell order with
 **papermill** (a program that runs a notebook without a browser). It selects core work by default and skips optional
 task blocks in the execution copy, so unfinished stretch work does not stop a core submission. Use
-`--include-optional` to execute stretch and research work too; M22 has no core tasks and requires this flag.
+`--include-optional` to execute stretch and research work too.
 The selected checks must all record PASS during this run; an old PASS or a skipped core check is not enough.
 It runs in your account on one core with the same thread limits as the course kernel, at low priority, and
 stops after 120 minutes (`--timeout MIN` changes that). Your notebook file is not changed: the run writes an
@@ -146,8 +147,9 @@ form of the address (make your private copy first, [git_workflow.md](git_workflo
 
 ## Gates and the B-path
 
-At the end of each week there is a **gate** (G0 to G6, then the frozen project plan in week 8 and the final
-defense). You pass a gate when:
+At the end of each taught week there is a **gate** (G0 to G6, then the Suncheon plan in week 8). The phased
+project schedule adds review points for both signed plans/data requests, detection and sensitivity evidence, and
+the final two-track portfolio and defense ([curriculum](curriculum.md)). You pass a gate when:
 
 - all **core** checks of that week pass;
 - the mentor's rubric gives at least **6 of 8** points with no item at 0. The four items, 0-2 points each:

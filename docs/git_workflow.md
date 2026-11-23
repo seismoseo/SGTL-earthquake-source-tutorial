@@ -66,7 +66,7 @@ A **pull request** (PR) asks someone to review a branch before it is merged.
 2. Work and commit on that branch. The first push: `git push -u origin m04`; after that, `git push`.
 3. When all core checks pass and Explain cells and the AI log are written, save the notebook. Run
    `bin/sgtl submit M04` (dry run), then `bin/sgtl submit M04 --apply`. It executes core work on a clean kernel;
-   use `--include-optional` as well to include stretch/research work (required for M22). Every selected check must
+   use `--include-optional` as well to include stretch/research work. Every selected check must
    pass in that run. It commits the record on a **new** branch `submit/M04-<UTC time>` and opens a PR for your mentor
    ([how_this_tutorial_works.md](how_this_tutorial_works.md)). Your working branch is still `m04`.
 4. Read the comments in the PR link it prints. Edit your work notebook, save and commit your revisions on `m04`,
