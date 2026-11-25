@@ -25,7 +25,7 @@ handbook for seismologists; EX 11.1 is its exercise 11.1 (see [reading_list.md](
 ## Before each module
 
 Follow the [curriculum](curriculum.md), rather than sorting module numbers. Start with M00 → M01 → M02 → M04,
-then M05 → M03 → M10. In weeks 3–4, continue M20 → M21 → M30 → M22; M22 is required preparation for both research tracks. Read the next notebook's header
+then M05 → M03 → M10. In weeks 3–4, continue M20 → M21 → M30 → M22; M22 is required preparation for both projects. Read the next notebook's header
 before starting its first task: it names the modules, readings and data you need.
 
 The first-day installer installs the environment only. Run the commands below in a **server terminal**, from
@@ -56,7 +56,7 @@ Keep the names and folder structure that `sgtl new` creates. Later modules reuse
 | M21, then M32 | your PocketQuake cluster `sangju_m21`, its picks, locations and run log | M41 and M51 |
 | M31, task 6 | `work/M31_location/results/M31_hypoinverse_runs.csv` | M32 and M50 |
 | M51, task 5 | `work/M51_first_motions/results/M51_skhash_first/mechanisms.csv` | M53 |
-| M60 | `project/inventory/`, your own Suncheon claims table, signed plan, criteria and lab book; separate `project/sangju/` templates | both required research tracks and their reports |
+| M60 | `project/inventory/`, your own Suncheon claims table, signed plan, criteria and lab book; separate `project/sangju/` templates | both required projects and their reports |
 
 A notebook that asks you to paste an earlier function means **your own checked function**, with its required
 imports, constants and helpers. Copy its definition into the marked cell and run that cell in the new notebook;
@@ -149,7 +149,7 @@ form of the address (make your private copy first, [git_workflow.md](git_workflo
 
 At the end of each taught week there is a **gate** (G0 to G6, then the Suncheon plan in week 8). The phased
 project schedule adds review points for both signed plans/data requests, detection and sensitivity evidence, and
-the final two-track portfolio and defense ([curriculum](curriculum.md)). You pass a gate when:
+the two project reports and joint defense ([curriculum](curriculum.md)). You pass a gate when:
 
 - all **core** checks of that week pass;
 - the mentor's rubric gives at least **6 of 8** points with no item at 0. The four items, 0-2 points each:

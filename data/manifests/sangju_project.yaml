@@ -1,8 +1,8 @@
-# Public context only. The intern chooses and freezes the research selection independently.
+# Public starting information. Choose and freeze the research selection before evaluating test outcomes.
 schema_version: 1
 project: sangju
 status: research_planning
-title: Sangju seismicity and seismogenic depth
+title: Sangju project — earthquake depths and activity
 anchor_event:
   reference_id: kma-report-20261117231017
   identifier_note: Report timestamp identifier, not a KMA catalog event number.
@@ -26,7 +26,7 @@ teaching_catalog:
   includes_anchor_event: false
   limitation: >-
     Frozen teaching snapshot; it does not cover the interval from its last event to the anchor
-    or subsequent activity. Refresh and archive a public catalog independently before interpreting rates.
+    or subsequent activity. Obtain and archive an updated public catalog before interpreting rates.
 teaching_waveforms:
   datasets: [sangju2019, sangju2019_hours]
   limitation: >-

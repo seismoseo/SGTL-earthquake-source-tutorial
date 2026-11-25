@@ -1,7 +1,7 @@
 # Start here
 
 Welcome to the SGTL earthquake source tutorial. You will learn Python and seismology by working through a sequence
-of notebooks, then use those methods in your own earthquake research project. You do not need to understand the
+of notebooks, then use those methods in your own earthquake research projects. You do not need to understand the
 repository's software folders to begin.
 
 ## Your first day
@@ -25,14 +25,14 @@ server. Each `bin/sgtl new MXX` command copies a lesson into your `work/` folder
 | Weeks 3–5 | Arrival picks, travel times, location and relative relocation | [M20](notebooks/M20_picking/M20_picking.ipynb) |
 | Weeks 6–7 | Fault motion, synthetic records, moment tensors and stress | [M50](notebooks/M50_focal_sphere/M50_focal_sphere.ipynb) |
 | Week 8 | A full analysis on a new sequence and a signed research plan | [M60](notebooks/M60_full_run/M60_full_run.ipynb) |
-| Weeks 9–16 | Two required tracks: Suncheon and independent Sangju, with validated template matching | [Project overview](project.md), [Sangju guide](sangju_project.md) |
+| Weeks 9–16 | Suncheon and Sangju projects, with validated template matching | [Project overview](project.md), [Suncheon](suncheon_project.md), [Sangju](sangju_project.md) |
 
 Plan for about 35–40 hours a week; you and your mentor adjust the pace from your progress. The
 [lesson guide](notebooks/README.md) gives the exact order. Before each module, check its
 [software, data and earlier-result requirements](how_this_tutorial_works.md#before-each-module). Stretch tasks and
 optional explorers can wait until core work is complete.
 
-M22 and template matching in both research tracks are required; agree on phased data volumes and extend the
+M22 and template matching in both projects are required; agree on phased data volumes and extend the
 project schedule when needed.
 
 ## What you do in a lesson

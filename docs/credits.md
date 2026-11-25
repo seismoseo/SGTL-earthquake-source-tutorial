@@ -17,6 +17,11 @@ SeismoStats (ETH Zurich, Swiss Seismological Service), Elastic_stresses_py and c
 
 ## Licenses and data attribution
 
+The project locator shows the public Suncheon course selection center and the KMA-reported November 2026
+Sangju epicenter. Its coastline is from GSHHG (Wessel and Smith), distributed under the
+[GNU Lesser General Public License](https://www.soest.hawaii.edu/pwessel/gshhg/), and rendered with GMT.
+It contains no waveform data or inferred research results.
+
 - **Code**: MIT License ([LICENSE](https://github.com/seismoseo/SGTL-earthquake-source-tutorial/blob/main/LICENSE)).
 - **Text and figures**: CC BY 4.0 ([LICENSE-CONTENT.md](https://github.com/seismoseo/SGTL-earthquake-source-tutorial/blob/main/LICENSE-CONTENT.md)).
 - **Data are not covered** by either license and keep their sources' terms. The KMA catalog subsets in
@@ -29,7 +34,7 @@ SeismoStats (ETH Zurich, Swiss Seismological Service), Elastic_stresses_py and c
 
 ## Cite this course
 
-Seo, M. (2026). *SGTL earthquake source tutorial* (version 1.1.0). Seismology, Geophysics, Tectonophysics Laboratory, Seoul National University.
+Seo, M. (2026). *SGTL earthquake source tutorial* (version 1.2.0). Seismology, Geophysics, Tectonophysics Laboratory, Seoul National University.
 
 Use [CITATION.cff](https://github.com/seismoseo/SGTL-earthquake-source-tutorial/blob/main/CITATION.cff) or GitHub’s
 “Cite this repository” button. Contributors are listed in

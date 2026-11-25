@@ -6,9 +6,10 @@
 - Frozen on: [write here: YYYY-MM-DD]
 - Frozen bank/request/partition fingerprints: [write here]
 
-This required extension keeps the existing Suncheon `ANALYSIS_PLAN.md`, `criteria.yaml` and M60 audit format intact.
-Reference it from your analysis plan. If that plan was already frozen, record an amendment before evaluating new
-matching results, with what you have already seen. Record this extension's final SHA-256 fingerprint in LABBOOK.md.
+Complete this plan alongside the Suncheon `ANALYSIS_PLAN.md` and `criteria.yaml`, and refer to it from the analysis
+plan. Keep those files' questions and criteria structure for the M60 check. If the analysis plan was already frozen,
+add an amendment before evaluating new matching results, with what you have already seen. Record this file's final
+SHA-256 fingerprint in LABBOOK.md.
 
 ## 1. Selection and observing time
 
@@ -58,7 +59,7 @@ Write numerical acceptance rules before viewing the validation outcomes.
 
 [write here]
 
-> What can you compare with the independently designed Sangju detector, given their different records, banks and
+> What can you compare with the Sangju detector, given their different records, banks and
 > station coverage? Which scripts/run records will reproduce the comparison?
 
 [write here]

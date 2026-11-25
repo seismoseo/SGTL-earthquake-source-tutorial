@@ -1,4 +1,4 @@
-# Independent Sangju analysis plan
+# Sangju analysis plan
 
 - Author: [write here]
 - Started: {{date}}
@@ -11,15 +11,16 @@ Answer every question in your own words. Keep the questions and replace each `[w
 dates and file fingerprints after completing the criteria and data plan, then commit the signed files together.
 After the freeze, record changes as dated amendments; preserve what was decided before the results were visible.
 
-## 1. Prior exposure and independent inputs
+## 1. Prior exposure and source records
 
 > Which public reports, catalog plots, teaching examples, papers and conversations have you already encountered?
 > Which results or expectations might they suggest, and how will you record that influence?
 
 [write here]
 
-> Which independently obtained inputs and versions will you use? How will you keep preliminary lab catalogs,
-> picks, relocations, depths, mechanisms, figures and processed waveforms out of the selection and analysis?
+> Which source records and versions will you obtain? How will you derive the research picks, locations, detections
+> and figures from those records, preserve their provenance and keep prior interpretations from determining the
+> event selection or tests?
 
 [write here]
 
@@ -128,7 +129,7 @@ After the freeze, record changes as dated amendments; preserve what was decided 
 ## 9. Risks and phased schedule
 
 > Which unavailable records, processing limits or time constraints could stop the plan? How will you reduce data
-> volume or extend the schedule while preserving both required tracks and independent validation?
+> volume or extend the schedule while preserving both required projects and independent validation?
 
 [write here]
 

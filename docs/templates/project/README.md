@@ -1,19 +1,23 @@
-# Your research portfolio: Suncheon and independent Sangju
+# Your research projects: Suncheon and Sangju
 
 `sgtl new project` copied these files from `docs/templates/project/` of the tutorial into `project/` once. They are
 yours now: the tutorial never overwrites them, and the pre-commit hook lets you commit anything inside `project/`.
 Each template only asks questions; the answers, the numbers and the decisions are yours.
 
-Both research tracks are required. The existing files in this folder remain the Suncheon track and retain the
-M60 audit format. The separate `sangju/` folder holds the independent Sangju plan, data request, criteria, lab book
-and report; start with `sangju/README.md`. Run `sgtl new project` again after an update to add missing templates
-without replacing existing Suncheon work.
+Both projects are required. Read `docs/suncheon_project.md` and `docs/sangju_project.md` in the tutorial for the
+observations, scientific questions and methods behind each study. Suncheon asks what small earthquakes reveal about
+depth groups and fault geometry. Sangju asks how regional depths compare with matched reference regions and whether
+activity continues between bursts after observing limits are accounted for. Neither project has a supplied answer.
 
-Template matching and independent validation are required in both tracks. Complete `TEMPLATE_MATCHING_PLAN.md`
+The files directly in this folder are for Suncheon; keep their question and criteria structure for the M60 check.
+The `sangju/` folder holds the Sangju plan, data request, criteria, lab book and report; start with `sangju/README.md`.
+Run `sgtl new project` again after an update to add missing templates without replacing existing work.
+
+Template matching and independent validation are required in both projects. Complete `TEMPLATE_MATCHING_PLAN.md`
 for Suncheon and the matching sections of the Sangju plan. If a Suncheon plan was already frozen, add a dated
 amendment before examining new matching results. Keep two reports and adapt the talk outline to compare them.
 The starting schedule allows project work through about week 16; agree on feasible data volumes and review dates
-with your mentor while preserving both tracks and their validation.
+with your mentor while preserving both projects and their validation.
 
 ## Suncheon files
 
@@ -25,15 +29,15 @@ with your mentor while preserving both tracks and their validation.
 | `LABBOOK.md` | a dated diary: what you ran, with which settings, what came out, what surprised you | every working day |
 | `TEMPLATE_MATCHING_PLAN.md` | the frozen Suncheon bank, calibration/validation records, recovery/false-alarm rules and candidate merging | before evaluating matching results |
 | `REPORT.md` | the Suncheon written report, with a Korean summary at the top | after validation; target weeks 15-16 |
-| `TALK_OUTLINE.md` | adapt the outline into a joint 15-minute talk on both tracks | target week 16 |
+| `TALK_OUTLINE.md` | adapt the outline into a joint 15-minute talk on both projects | target week 16 |
 
 Module M60 writes your data inventory into `inventory/` (task 5).
 
 Rules that do not change during the project (they are the lab's, and the tutorial's):
 
-- Preserve an independence record. Use your own checked methods, primary-source selections and personally obtained
-  records. Keep preliminary lab catalogs, picks, locations, depths, mechanisms, figures and processed waveforms
-  outside the Sangju research selection and inputs; record public and teaching exposure in its plan.
+- Record what you have already seen in public sources, teaching examples and conversations. Select records by the
+  signed rules and make your own picks, locations and detections from documented source inputs. Keep provenance
+  and code for every derived product, and keep previous interpretations separate from measurements you verify.
 - Freeze `criteria.yaml` before you look at results, after your mentor has read the plan and written the sign-off
   line (name and day) into `ANALYSIS_PLAN.md`. A later change is allowed, but only as a dated amendment in
   `ANALYSIS_PLAN.md` that says what changed, why, and whether you had seen results before the change.

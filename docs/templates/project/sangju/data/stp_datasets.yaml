@@ -1,4 +1,4 @@
-# Your independently selected known-event requests. No research selection is supplied here.
+# Your known-event requests, filled after the research selection is signed.
 # Complete the signed selection/data plan before changing status to active.
 # Use a custom dataset name that differs from every shipped name; changing a frozen request needs a new name.
 # Preserve a published event ID when available. Otherwise use an explicit namespace such as report:SOURCE_KEY;

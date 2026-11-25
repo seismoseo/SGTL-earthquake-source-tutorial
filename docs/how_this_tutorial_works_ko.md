@@ -25,7 +25,7 @@ English: [how_this_tutorial_works.md](how_this_tutorial_works.md)
 ## 모듈을 시작하기 전에
 
 모듈 번호순이 아니라 [교육 과정](curriculum.md)의 순서를 따르세요. M00 → M01 → M02 → M04, 그다음
-M05 → M03 → M10 순서입니다. 3–4주차에는 M20 → M21 → M30 → M22 순서로 진행합니다. M22는 두 연구 트랙에 필요한 필수 모듈입니다. 다음
+M05 → M03 → M10 순서입니다. 3–4주차에는 M20 → M21 → M30 → M22 순서로 진행합니다. M22는 두 연구 프로젝트에 필요한 필수 모듈입니다. 다음
 노트북의 머리말에서 선수 모듈, 읽을 자료와 필요한 자료를 먼저 확인하세요.
 
 첫날에는 환경만 설치합니다. 다음 명령은 `~/sgtl/tutorial`에서 **서버 터미널**에 입력합니다. 표의 설치·내려받기
@@ -41,7 +41,7 @@ M05 → M03 → M10 순서입니다. 3–4주차에는 M20 → M21 → M30 → M
 | M54 | `bin/sgtl-install coulomb`; 첫 실행에는 공개 경주 메커니즘을 받을 인터넷 연결 | 노트북의 도구 점검, 이후에는 저장된 메커니즘 파일 사용 |
 | M60 | `bin/sgtl data fetch gokseong2018`; `bin/sgtl new project`는 템플릿을 즉시 복사함 | `bin/sgtl data verify gokseong2018`, `project/README.md` 확인 |
 | 순천 연구 계획 승인 뒤 | `bin/sgtl data fetch suncheon_area`; 크기를 확인한 뒤 `--apply --large`로 반복 | `bin/sgtl data verify suncheon_area` |
-| 독립적인 상주 연구 | `st.data.project_definition("sangju")`를 확인하고 직접 선정한 자료 요청을 고정한 뒤 [상주 안내](sangju_project.md)를 따름 | `project/sangju/`의 별도 계획, 비교 지역, 요청 지문과 검증 기록 |
+| 상주 연구 | `st.data.project_definition("sangju")`를 확인하고 직접 선정한 자료 요청을 고정한 뒤 [상주 안내](sangju_project.md)를 따름 | `project/sangju/`의 별도 계획, 비교 지역, 요청 지문과 검증 기록 |
 
 `doctor`, `pq check`, `data verify`는 읽기 전용이므로 `--apply`가 필요 없습니다. 내려받기에서 STOP이 나오면 먼저
 표시된 선행 조건을 해결하세요. 없는 자료나 이전 결과를 임의로 만들어 다음 셀로 넘어가지 마세요.
@@ -49,8 +49,8 @@ M05 → M03 → M10 순서입니다. 3–4주차에는 M20 → M21 → M30 → M
 뒤 모듈은 앞 모듈의 파일을 다시 씁니다. M20의 `work/picks/M20_manual_picks.csv`, M21과 M32의
 `sangju_m21` 클러스터와 실행 기록, M31의 `work/M31_location/results/M31_hypoinverse_runs.csv`,
 M51의 `work/M51_first_motions/results/M51_skhash_first/mechanisms.csv`를 유지하세요. M60의 순천 자료 목록은
-`project/inventory/`에 남습니다. 순천은 기존 `project/`의 주장 표·계획·기준·기록을 유지하고, 독립적인 상주 연구는
-`project/sangju/`의 별도 계획과 자료 요청·판단 기준·기록·보고서로 진행합니다. 두 트랙 모두 필수이며 템플릿 매칭과
+`project/inventory/`에 남습니다. 순천은 기존 `project/`의 주장 표·계획·기준·기록을 유지하고, 상주 연구는
+`project/sangju/`의 별도 계획과 자료 요청·판단 기준·기록·보고서로 진행합니다. 두 프로젝트 모두 필수이며 템플릿 매칭과
 독립 검증을 포함합니다.
 
 이전 함수를 붙여 넣으라는 셀에는 **내가 점검을 통과한 함수**와 그 함수가 쓰는 가져오기·상수·도우미를 복사한 뒤
@@ -137,7 +137,7 @@ GitHub가 직접 비공개(private)라고 알려 주는 GitHub 저장소가 아�
 
 ## 관문(gate)과 B 경로
 
-교육 모듈의 매주 끝에 **관문**이 있습니다(G0-G6, 8주차의 순천 계획 확정). 단계별 연구 일정에서는 두 트랙의
+교육 모듈의 매주 끝에 **관문**이 있습니다(G0-G6, 8주차의 순천 계획 확정). 단계별 연구 일정에서는 두 프로젝트의
 서명된 계획·자료 요청, 검출 및 민감도 검증 기록, 최종 보고서 두 편과 공동 발표·구두 심사를 검토합니다
 ([교육 과정](curriculum.md)). 다음을 모두 만족하면 통과입니다.
 

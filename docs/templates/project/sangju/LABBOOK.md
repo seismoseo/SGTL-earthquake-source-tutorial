@@ -1,4 +1,4 @@
-# Independent Sangju lab book
+# Sangju lab book
 
 Append one dated entry per working day. Preserve failures and exclusions as well as successful results. Record
 public-report/teaching exposure before the plan, signed-file fingerprints at the freeze, and every later amendment.

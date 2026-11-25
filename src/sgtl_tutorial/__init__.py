@@ -18,7 +18,7 @@ from __future__ import annotations
 import importlib
 from typing import Any
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 from .checks import CheckContext, CheckResult, Outcome, check, hint, predict, progress, reroll  # noqa: E402
 from .session import Session, init, server_rules  # noqa: E402

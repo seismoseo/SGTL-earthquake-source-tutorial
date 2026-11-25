@@ -2,7 +2,7 @@
 
 Start at the top and follow this order. Module numbers are labels; for example, M04 comes before M03. In weeks 3–4,
 M22 follows M30 because its event associator needs your travel-time function. Its seven core tasks provide the
-required template-matching and validation preparation for both research tracks.
+required template-matching and validation preparation for both projects.
 
 To work on a lesson, run `bin/sgtl new MXX` from `~/sgtl/tutorial` in a server terminal. Open the notebook copied to
 `work/MXX_name/` in JupyterLab, choose **SGTL (Python 3.12)**, then read and run it in order. The links below let you
@@ -30,10 +30,10 @@ read the original lesson. For a first visit, use the [setup guide](../setup.md) 
 | 7 | [M53 · Moment tensor inversion](M53_mt_inversion/M53_mt_inversion.ipynb) | M51/M52 functions, manual picks and SKHASH results; MTUQ |
 | 7 | [M54 · Coulomb stress change](M54_coulomb/M54_coulomb.ipynb) | M04, M50 and M52; Elastic_stresses_py |
 | 8 | [M60 · Full run and project plan](M60_full_run/M60_full_run.ipynb) | earlier methods; `gokseong2018`; your project templates |
-| 9–16 | [Suncheon](../project.md) and [independent Sangju](../sangju_project.md), both required | separate signed plans/data requests, validated template matching and two reports |
+| 9–16 | [Suncheon](../suncheon_project.md) and [Sangju](../sangju_project.md), both required | separate signed plans/data requests, validated template matching and two reports |
 
 [Preparation commands and exact result-file paths](../how_this_tutorial_works.md#before-each-module) explain each
-handoff. Read each notebook's header for its full prerequisites and reading. When a file is missing, return to the
+earlier result. Read each notebook's header for its full prerequisites and reading. When a file is missing, return to the
 named module and finish that output; the notebooks do not share kernel variables.
 
 Before moving on, save your notebook, complete its core checks and explanations, update the AI log, and

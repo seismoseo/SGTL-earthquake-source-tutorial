@@ -38,7 +38,20 @@ JupyterLab link.
 | PyGMT error about the GMT library or version | You are not using the SGTL kernel. Switch kernel; `bin/sgtl doctor` reports the GMT version. |
 | Warning that Helvetica is missing | Harmless: the house style falls back to a similar font. |
 | `NameError` after opening a later module | Run the parameters and setup cells first. If the message names an earlier function, copy your checked definition, its constants and helpers into the marked paste cell and run it; another notebook's kernel does not share variables. |
-| A file from an earlier module is missing | Check the [module handoff table](how_this_tutorial_works.md#before-each-module), finish the named earlier task and save its output. If you chose a different output name, update the next module's parameters cell. |
+| A file from an earlier module is missing | Check the [table of earlier results](how_this_tutorial_works.md#before-each-module), finish the named earlier task and save its output. If you chose a different output name, update the next module's parameters cell. |
+
+## Code runs, but no figure appears
+
+In a notebook code cell, run:
+
+```python
+%matplotlib inline
+```
+
+Then rerun the cell that creates the plot. `fig.savefig(...)` writes an image file; displaying a plot in the
+notebook is a separate action. Use `plt.show()` before `plt.close(fig)` when you close a figure in the same cell.
+For a PyGMT figure, use `fig.show()`. Check that the cell completed without an error before looking for its image.
+An explorer's controls need a running Jupyter kernel; a saved notebook on GitHub shows only recorded output.
 
 ## Checks
 

@@ -4,9 +4,21 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v1.2.0 — 2026-11-26 · scientific figures and project context
+
+- Executed instructor notebooks now retain static scientific figures in their cells. The reference runner uses
+  the inline backend, and archives distinguish scientific figures from optional explorer snapshots. Readable
+  numerical tables retain their layout; figure and table coverage is recorded by cell.
+- Added visual explanations and interpretation questions for catalog geometry, picker thresholds, mechanism
+  ambiguity, moment-tensor uncertainty, Coulomb stress components and sensitivity, and the full analysis.
+- Reworked the Suncheon and Sangju introductions around the observations, scientific motivation, open questions,
+  methods and expected evidence. Project names use normal course language throughout.
+- The full instructor course is re-executed for this release, with versioned notebooks and checksummed evidence.
+  Public student notebooks remain blank working templates; instructor outputs remain private.
+
 ## v1.1.0 — 2026-11-23 · two research tracks and required template matching
 
-- Keep the Suncheon project and add a separate, required Sangju study centered on the public 17 November 2026
+- Keep the Suncheon project and add a required Sangju study centered on the public 17 November 2026
   ML 3.6 earthquake report. Each track has its own frozen plan, data choices, validation and report. Sangju tests
   depth and continuing activity against comparable regions without importing preliminary lab results.
 - M22 is now required after M30: its tasks are core and use normal submission. The added task merges candidates

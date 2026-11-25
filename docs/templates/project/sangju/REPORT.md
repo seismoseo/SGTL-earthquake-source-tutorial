@@ -4,7 +4,7 @@
 
 ## 요약
 
-[write here: Korean summary of the questions, independent data, main measurements with uncertainty and unresolved limits]
+[write here: Korean summary of the questions, source records, main measurements with uncertainty and unresolved limits]
 
 ## Summary
 
@@ -13,8 +13,8 @@
 ## 1. Questions, prior exposure and frozen decisions
 
 - State the depth and persistence hypotheses, criteria and alternatives. Cite the signed plan/data-plan dates,
-  fingerprints and amendments. Record public-report and teaching exposure, and show how independent research inputs
-  and selection were kept separate from preliminary lab products.
+  fingerprints and amendments. Record public-report and teaching exposure, and show how source records, your own
+  derived measurements and fixed selection rules support an analysis that another person can reproduce.
 
 ## 2. Data and comparable reference regions
 
@@ -44,10 +44,10 @@
 - For each hypothesis give the measured metric, uncertainty, threshold and decision, with the notebook or script
   that prints each number. Identify planned changes that reverse a result and ambiguities that remain.
 
-## 7. Comparison with the required Suncheon track
+## 7. Comparison with the Suncheon project
 
-- Compare the measurements and detector limits of both tracks. Which design or data-quality differences permit
-  the comparison, and which limit it? Describe what is learned when the tracks agree or differ without assigning
+- Compare the measurements and detector limits of both projects. Which design or data-quality differences permit
+  the comparison, and which limit it? Describe what is learned when the projects agree or differ without assigning
   an expected answer to either one.
 
 ## 8. Reproduction and next observations

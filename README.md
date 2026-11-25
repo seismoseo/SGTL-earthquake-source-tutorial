@@ -2,7 +2,7 @@
 
 Learn to work with earthquake catalogs and seismic records, then locate earthquakes and study their sources.
 This course is for a new intern: each notebook explains the idea, gives you a small method to write, and checks
-your work before you use real Korean data. **Version 1.1.0 · 20 lessons · about 8 weeks, followed by two required research tracks.**
+your work before you use real Korean data. **Version 1.2.0 · 20 lessons · about 8 weeks, followed by the Suncheon and Sangju research projects.**
 
 ## Start here
 
@@ -42,7 +42,7 @@ Follow the order in this table; module numbers are labels. [Full lesson guide](d
 | 7 | [M53 · Moment tensor inversion](docs/notebooks/M53_mt_inversion/M53_mt_inversion.ipynb) | fit source models and judge what the records resolve |
 | 7 | [M54 · Coulomb stress](docs/notebooks/M54_coulomb/M54_coulomb.ipynb) | test stress changes and their limits |
 | 8 | [M60 · Full run and project plan](docs/notebooks/M60_full_run/M60_full_run.ipynb) | analyze a new sequence and prepare your research plan |
-| 9–16 | [Suncheon](docs/project.md) and [independent Sangju](docs/sangju_project.md) · both required | test depths, geometry, activity and detector limits; write two reports and a joint comparison |
+| 9–16 | [Suncheon](docs/suncheon_project.md) and [Sangju](docs/sangju_project.md) · both required | test depths, geometry, activity and detector limits; write two reports and a joint comparison |
 
 ## When you need help
 
