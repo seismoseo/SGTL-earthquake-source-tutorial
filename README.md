@@ -2,7 +2,7 @@
 
 Learn to work with earthquake catalogs and seismic records, then locate earthquakes and study their sources.
 This course is for a new intern: each notebook explains the idea, gives you a small method to write, and checks
-your work before you use real Korean data. **Version 1.2.0 · 20 lessons · about 8 weeks, followed by the Suncheon and Sangju research projects.**
+your work before you use real Korean data. **Version 1.3.0 · 20 lessons · about 8 weeks, followed by the Suncheon and Sangju research projects.**
 
 ## Start here
 
@@ -28,6 +28,7 @@ Follow the order in this table; module numbers are labels. [Full lesson guide](d
 | 1 | [M04 · Earthquake catalogs](docs/notebooks/M04_earthquake_catalogs/M04_earthquake_catalogs.ipynb) | compare catalogs and understand their limits |
 | 2 | [M05 · Statistical seismology](docs/notebooks/M05_statistical_seismology/M05_statistical_seismology.ipynb) | measure earthquake rates and magnitude distributions |
 | 2 | [M03 · Getting seismic data](docs/notebooks/M03_getting_data/M03_getting_data.ipynb) | download records and understand instrument responses |
+| 2–3 | [SeisComP GUI workshop](docs/seiscomp_gui.md) | explore seismograms and event maps; save manual picks for M20 |
 | 2 | [M10 · Seismograms](docs/notebooks/M10_seismograms/M10_seismograms.ipynb) | filter, inspect and measure a seismic record |
 | 3 | [M20 · Picking arrivals](docs/notebooks/M20_picking/M20_picking.ipynb) | mark when P and S waves arrive |
 | 3 | [M21 · Deep-learning pickers](docs/notebooks/M21_dl_pickers/M21_dl_pickers.ipynb) | compare automatic picks with your own |

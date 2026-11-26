@@ -4,6 +4,19 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v1.3.0 — 2026-11-26 · SeisComP visual exploration and manual picks
+
+- Added an illustrated SeisComP workshop after M03, alongside M10/M20: a synthetic rehearsal, offline waveform
+  inspection, event/station geometry, P/S picks, uncertainty and polarity. The SAC program is not a prerequisite.
+- Added a verified native GUI installer for Rocky/RHEL 8 x86_64, separate from the Python environment, with
+  an explicit route for a mentor-provided GUI installation on other platforms. X11 forwarding is explained.
+- `sgtl gui` prepares local SAC/MiniSEED and StationXML/SCML sessions without copying reference picks, starts
+  offline viewers, and imports reviewed manual picks into the existing M20 CSV with provenance and validation.
+- Both research guides include visual review of records, depths and template-matching candidates. The default
+  GUI location model does not replace the course's checked crustal calculations.
+- Added a separately executed instructor GUI-workflow supplement and versioned evidence. The 20 scientific
+  lessons retain their clearly labeled v1.2.0 execution receipts; their earlier evidence is not relabeled.
+
 ## v1.2.0 — 2026-11-26 · scientific figures and project context
 
 - Executed instructor notebooks now retain static scientific figures in their cells. The reference runner uses

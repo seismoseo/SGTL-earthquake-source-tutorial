@@ -151,6 +151,10 @@ Then read on in the notebook.
 
 ## The SGTL kernel
 
+For desktop exploration of seismograms in weeks 2–3, continue with the
+[SeisComP GUI workshop](seiscomp_gui.md). It adds a separate native GUI installation and X11 forwarding
+from your laptop. Your Jupyter browser connection alone does not forward desktop windows.
+
 The **kernel** is the program that runs your notebook cells. The SGTL kernel uses the course environment, so
 everyone has the same versions of Python and the packages. Do not install packages into it (`pip install`);
 ask your mentor if something is missing. If the kernel is missing from the list, run `bin/sgtl doctor`.

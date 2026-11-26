@@ -70,6 +70,7 @@ your mentor. Never commit PDFs to your repository.
 - The ObsPy developers (n.d.). ObsPy tutorial. <https://docs.obspy.org/tutorial/> *(partly verified)* `obspy_tutorial`
 - Richter (1935). An instrumental earthquake magnitude scale. [doi:10.1785/BSSA0250010001](https://doi.org/10.1785/BSSA0250010001) `richter1935`
 - Scherbaum (2001). Of Poles and Zeros: Fundamentals of Digital Seismology (2nd ed.). [doi:10.1007/978-1-4020-6861-4](https://doi.org/10.1007/978-1-4020-6861-4) `scherbaum2001`
+- GFZ and gempa (2026). SeisComP application manuals. <https://docs.gempa.de/seiscomp/current/> `seiscomp74`
 - Sheen, Kang & Rhie (2018). A local magnitude scale for South Korea. [doi:10.1785/0120180112](https://doi.org/10.1785/0120180112) `sheen2018`
 
 ## M04 · Earthquake catalogs: read, clean, look
@@ -149,6 +150,7 @@ your mentor. Never commit PDFs to your repository.
 - Krischer et al. (2018). seismo-live: an educational online library of Jupyter notebooks for seismology. [doi:10.1785/0220180167](https://doi.org/10.1785/0220180167) `krischer2018`
 - The ObsPy developers (n.d.). ObsPy tutorial. <https://docs.obspy.org/tutorial/> *(partly verified)* `obspy_tutorial`
 - Scherbaum (2001). Of Poles and Zeros: Fundamentals of Digital Seismology (2nd ed.). [doi:10.1007/978-1-4020-6861-4](https://doi.org/10.1007/978-1-4020-6861-4) `scherbaum2001`
+- GFZ and gempa (2026). SeisComP application manuals. <https://docs.gempa.de/seiscomp/current/> `seiscomp74`
 - Shearer (2019). Introduction to Seismology (3rd ed.). [doi:10.1017/9781316877111](https://doi.org/10.1017/9781316877111) `shearer2019`
 - Sheen, Kang & Rhie (2018). A local magnitude scale for South Korea. [doi:10.1785/0120180112](https://doi.org/10.1785/0120180112) `sheen2018`
 - Virtanen et al. (2020). SciPy 1.0: fundamental algorithms for scientific computing in Python. [doi:10.1038/s41592-019-0686-2](https://doi.org/10.1038/s41592-019-0686-2) `virtanen2020`
@@ -166,6 +168,7 @@ your mentor. Never commit PDFs to your repository.
 - Maeda (1985). A method for reading and checking phase time in auto-processing system of seismic wave data. [doi:10.4294/zisin1948.38.3_365](https://doi.org/10.4294/zisin1948.38.3_365) `maeda1985`
 - Scherbaum & Bouin (1997). FIR filter effects and nucleation phases. [doi:10.1111/j.1365-246X.1997.tb01860.x](https://doi.org/10.1111/j.1365-246X.1997.tb01860.x) `scherbaum1997`
 - Scherbaum (2001). Of Poles and Zeros: Fundamentals of Digital Seismology (2nd ed.). [doi:10.1007/978-1-4020-6861-4](https://doi.org/10.1007/978-1-4020-6861-4) `scherbaum2001`
+- GFZ and gempa (2026). SeisComP application manuals. <https://docs.gempa.de/seiscomp/current/> `seiscomp74`
 - Shearer (2019). Introduction to Seismology (3rd ed.). [doi:10.1017/9781316877111](https://doi.org/10.1017/9781316877111) `shearer2019`
 - Trnkoczy (2012). Understanding and parameter setting of STA/LTA trigger algorithm (NMSOP-2 IS 8.1). [doi:10.2312/GFZ.NMSOP-2_IS_8.1](https://doi.org/10.2312/GFZ.NMSOP-2_IS_8.1) `trnkoczy2012`
 - Withers et al. (1998). A comparison of select trigger algorithms for automated global seismic phase and event detection. [doi:10.1785/BSSA0880010095](https://doi.org/10.1785/BSSA0880010095) `withers1998`
@@ -239,6 +242,7 @@ your mentor. Never commit PDFs to your repository.
 - Lomax, Virieux, Volant & Berge-Thierry (2000). Probabilistic earthquake location in 3D and layered models. [doi:10.1007/978-94-015-9536-0_5](https://doi.org/10.1007/978-94-015-9536-0_5) `lomax2000`
 - Lomax, Michelini & Curtis (2009). Earthquake location, direct, global-search methods. [doi:10.1007/978-0-387-30440-3_150](https://doi.org/10.1007/978-0-387-30440-3_150) `lomax2009`
 - Marquardt (1963). An algorithm for least-squares estimation of nonlinear parameters. [doi:10.1137/0111030](https://doi.org/10.1137/0111030) `marquardt1963`
+- GFZ and gempa (2026). SeisComP application manuals. <https://docs.gempa.de/seiscomp/current/> `seiscomp74`
 - Shearer (2019). Introduction to Seismology (3rd ed.). [doi:10.1017/9781316877111](https://doi.org/10.1017/9781316877111) `shearer2019`
 - Smith, Azizzadenesheli & Ross (2021). EikoNet: solving the eikonal equation with deep neural networks. [doi:10.1109/TGRS.2020.3039165](https://doi.org/10.1109/TGRS.2020.3039165) `smith2021`
 - Smith, Ross, Azizzadenesheli & Muir (2022). HypoSVI: hypocentre inversion with Stein variational inference and physics informed neural networks. [doi:10.1093/gji/ggab309](https://doi.org/10.1093/gji/ggab309) `smith2022`
@@ -531,6 +535,7 @@ your mentor. Never commit PDFs to your repository.
 - `scherbaum1997` Scherbaum & Bouin (1997). FIR filter effects and nucleation phases. *Geophysical Journal International 130(3):661-668*. [doi:10.1111/j.1365-246X.1997.tb01860.x](https://doi.org/10.1111/j.1365-246X.1997.tb01860.x). Status: V (verified). Checked in Crossref on 2026-11-19 (authors, title, journal, volume, issue, pages, year). How acausal (zero-phase) filters put energy ahead of an onset.
 - `scherbaum2001` Scherbaum (2001). Of Poles and Zeros: Fundamentals of Digital Seismology (2nd ed.). *Springer (Modern Approaches in Geophysics)*. [doi:10.1007/978-1-4020-6861-4](https://doi.org/10.1007/978-1-4020-6861-4). Status: V (verified). Checked in Crossref on 2026-11-16 (author, title, series, publisher and year 2001); Crossref gives the main title only, the subtitle is the book's own.
 - `schorlemmer2011` Schorlemmer, Euchner, Kästli & Saul (2011). QuakeML: status of the XML-based seismological data exchange format. *Annals of Geophysics 54(1)*. [doi:10.4401/ag-4874](https://doi.org/10.4401/ag-4874). Status: V (verified).
+- `seiscomp74` GFZ and gempa (2026). SeisComP application manuals. *Official software documentation*. <https://docs.gempa.de/seiscomp/current/>. Status: V (verified). Official application manuals and SeisComP/common and SeisComP/main source at tag 7.4.0 checked 2026-11-26; offline scrttv, scolv and fdsnxml2inv verified with the official CentOS8 binary. Year identifies the documentation version accessed, not the first SeisComP release.
 - `sentance2019` Sentance, Waite & Kallia (2019). Teaching computer programming with PRIMM: a sociocultural perspective. *Computer Science Education 29(2-3):136-176*. [doi:10.1080/08993408.2019.1608781](https://doi.org/10.1080/08993408.2019.1608781). Status: V (verified). Predict-Run-Investigate-Modify-Make.
 - `serc_focal_primer` SERC (Carleton College), NAGT workshop material (n.d.). Focal mechanism primer. *Science Education Resource Center*. <https://serc.carleton.edu/files/NAGTWorkshops/structure04/Focal_mechanism_primer.pdf>. Status: P (partly verified). URL checked (HTTP 200) on 2026-11-15; author and year not checked.
 - `shearer2019` Shearer (2019). Introduction to Seismology (3rd ed.). *Cambridge University Press*. [doi:10.1017/9781316877111](https://doi.org/10.1017/9781316877111). Status: V (verified). Chapter numbers in module headers were not checked against the printed book.

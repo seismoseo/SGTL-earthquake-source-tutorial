@@ -7,3 +7,6 @@ __pycache__/
 .DS_Store
 /site/
 /.cache/
+# SeisComP sessions contain local waveform copies and runtime logs. Keep only the
+# reviewed picks CSV and provenance receipt in work/picks/ under version control.
+/work/seiscomp/

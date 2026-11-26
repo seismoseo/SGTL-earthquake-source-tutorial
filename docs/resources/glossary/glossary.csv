@@ -494,3 +494,7 @@ cross_template_deduplication,cross-template de-duplication,템플릿 간 중복 
 held_out_evaluation,held-out evaluation,독립 보류 자료 평가,"Measuring a frozen method on data kept separate from template selection and parameter tuning; data already inspected are not a blind test.",M22 M60,1
 injection_recovery,injection and recovery,신호 주입 및 회수,"Adding known signals to background records and measuring which are detected under a frozen method; recovery depends on the injected signals and noise conditions.",M22 M60,1
 selection_bias,selection bias,선택 편향,"A systematic difference caused by how examples or observations are selected, such as a template bank favoring events with similar waveforms and station coverage.",M22 M60,1
+gui,graphical user interface (GUI),그래픽 사용자 인터페이스,A program interface with windows and mouse controls; here SeisComP displays waveforms and event context.,M03 M10 M20 M31,0
+seiscomp,SeisComP,SeisComP,A seismological software package; the tutorial uses its offline scrttv waveform viewer and scolv event picker.,M03 M10 M20 M31,0
+scml,SeisComP XML (SCML),SeisComP XML 형식,The XML file format used by SeisComP for inventories and event measurements; origin depth is in kilometres unlike QuakeML metres.,M03 M20 M31,0
+x11_forwarding,X11 forwarding,X11 전달,An SSH feature that lets a desktop application running on the server display a window on your laptop.,M03 M10 M20,0

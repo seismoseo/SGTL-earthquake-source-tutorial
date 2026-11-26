@@ -22,6 +22,7 @@ Components (default: env):
              Miniforge (the conda package manager) first if no conda or mamba is found.
   tools      HYPOINVERSE, HypoDD, PocketQuake, EQNet + PhaseNet+ weights, SKHASH
   seisbench  SeisBench PhaseNet weights (stead, original; pinned versions) for module M21
+  seiscomp   SeisComP offline waveform GUI and event picker (Rocky/RHEL 8 x86_64)
   pyfk       the PyFK synthetic-seismogram environment "sgtl-pyfk"
   mt         MTUQ moment-tensor inversion
   coulomb    Elastic_stresses_py Coulomb stress
@@ -155,7 +156,7 @@ placeholder_component() {
 }
 
 # ---------------------------------------------------------------------------------------------
-KNOWN_COMPONENTS=(env tools seisbench pyfk mt coulomb metadata data)
+KNOWN_COMPONENTS=(env tools seisbench seiscomp pyfk mt coulomb metadata data)
 
 component_file() { printf '%s/%s.sh' "$COMPONENT_DIR" "$1"; }
 

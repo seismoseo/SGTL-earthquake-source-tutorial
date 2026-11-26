@@ -2184,3 +2184,14 @@
   status: "V"
   used_in: [M60, project]
   note: Checked in Crossref on 2026-11-20 (authors, title, journal, volume, issue, pages, year).
+
+- key: seiscomp74
+  authors: GFZ and gempa
+  year: 2026
+  title: SeisComP application manuals
+  venue: Official software documentation
+  doi: null
+  url: https://docs.gempa.de/seiscomp/current/
+  status: "V"
+  used_in: [M03, M10, M20, M31]
+  note: Official application manuals and SeisComP/common and SeisComP/main source at tag 7.4.0 checked 2026-11-26; offline scrttv, scolv and fdsnxml2inv verified with the official CentOS8 binary. Year identifies the documentation version accessed, not the first SeisComP release.

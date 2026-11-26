@@ -168,6 +168,14 @@ scientific threshold, and record the pilot as prior exposure.
 
 ## 4. Test depths and their uncertainty
 
+Before locating your selected events, inspect their recordings and station geometry with the
+[SeisComP GUI workflow](seiscomp_gui.md). Save your own manual P/S picks, uncertainty intervals and clear
+first-motion polarities, together with the reviewed XML and import receipt. Compare the records behind a
+deep candidate with those of a shallower event and with detection controls: are close stations, clear S
+arrivals and usable components available in both cases? Use the same criteria for the comparison regions.
+The GUI's starting depth is catalog context or a stated assumption; your depth result comes from the
+model, phase and uncertainty tests below.
+
 Begin with direct P and S within about 100 km, restricted further by their crossover distances for the candidate
 depths and models; exclude Moho Pn and Sn. Record any crustal-head-wave treatment in production-tool comparisons.
 Use the depth scan, synthetic recovery and uncertainty methods from M30–M32 and M41. Your preregistered tests should

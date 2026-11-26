@@ -62,6 +62,13 @@ a boundary inside the crust; identify and document its treatment when comparing 
 
 ## Your work and final products
 
+Use the [SeisComP GUI workflow](seiscomp_gui.md) to inspect the recordings behind a location or a
+template-matching candidate. Start from your frozen event selection, create one local session per event,
+and save reviewed P/S picks with uncertainties and their XML/CSV provenance. Inspect accepted candidates,
+rejected transients and quiet controls with the same filter and time scale. These observations help you
+explain whether apparent depth groups or activity changes could come from data quality. Estimate their
+uncertainty quantitatively in your notebooks; a GUI map or its default locator depth does not establish a group.
+
 Begin with [the project setup and schedule](project.md). M60 builds an inventory and helps you prepare the Suncheon
 plan; you then choose the research selection and tests, obtain mentor sign-off, and freeze the criteria before
 evaluating results. Use the existing `project/ANALYSIS_PLAN.md`, `criteria.yaml`, `claims.csv` and `LABBOOK.md`.

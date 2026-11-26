@@ -567,6 +567,56 @@ def _pq_command(args: argparse.Namespace, parser: argparse.ArgumentParser) -> in
     return 0
 
 
+def _add_gui_parser(sub):
+    p = sub.add_parser("gui", help="SeisComP offline waveform viewer and event picker (dry run unless --apply)")
+    actions = p.add_subparsers(dest="gui_cmd")
+    actions.add_parser("doctor", help="check native SeisComP tools and the current X11 display")
+    q = actions.add_parser("demo", help="prepare a synthetic rehearsal without STP records")
+    q.add_argument("--out", type=Path, default=Path("work/seiscomp/demo"))
+    q.add_argument("--apply", action="store_true")
+    q = actions.add_parser("prepare", help="prepare local copies of your SAC records and station metadata")
+    q.add_argument("dataset", nargs="?", default="sangju2019")
+    q.add_argument("--event", default="20190721020418", help="UTC event folder YYYYMMDDHHMMSS")
+    q.add_argument("--band", default="HH")
+    q.add_argument("--out", type=Path, required=True, help="new session directory under work/")
+    q.add_argument("--waveforms", type=Path, help="project mode: folder of one event's original SAC files")
+    q.add_argument("--stationxml", type=Path, help="folder of NET.STA.xml metadata files")
+    q.add_argument("--origin", help="project mode: context origin, explicit UTC Z suffix")
+    q.add_argument("--latitude", type=float)
+    q.add_argument("--longitude", type=float)
+    q.add_argument("--depth-km", type=float)
+    q.add_argument("--apply", action="store_true")
+    q = actions.add_parser("open", help="open a prepared offline session, close its window to return")
+    q.add_argument("session", type=Path)
+    q.add_argument("--app", choices=["waveforms", "event"], default="waveforms")
+    q.add_argument("--apply", action="store_true")
+    q = actions.add_parser("import-picks", help="validate your saved SCML picks and export the M20 CSV format")
+    q.add_argument("session", type=Path)
+    q.add_argument("--xml", type=Path, required=True)
+    q.add_argument("--origin-id", help="reviewed origin ID; required when XML contains several revisions")
+    q.add_argument("--out", type=Path, required=True, help="new CSV file; never overwrites an existing file")
+    q.add_argument("--apply", action="store_true")
+    return p
+
+
+def _gui_command(args, parser):
+    from . import seiscomp
+    if args.gui_cmd == "doctor":
+        return seiscomp.doctor()
+    if args.gui_cmd == "demo":
+        return seiscomp.demo(out=args.out, apply=args.apply)
+    if args.gui_cmd == "prepare":
+        return seiscomp.prepare(args.dataset, event=args.event, band=args.band, out=args.out, apply=args.apply,
+                                waveforms=args.waveforms, stationxml=args.stationxml, origin=args.origin,
+                                latitude=args.latitude, longitude=args.longitude, depth_km=args.depth_km)
+    if args.gui_cmd == "open":
+        return seiscomp.launch(args.session, app=args.app, apply=args.apply)
+    if args.gui_cmd == "import-picks":
+        return seiscomp.import_picks(args.session, xml=args.xml, out=args.out, origin_id=args.origin_id, apply=args.apply)
+    parser.print_help()
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(prog="sgtl", description="SGTL earthquake source tutorial helper.")
     parser.add_argument("--version", action="version", version=f"sgtl-tutorial {__version__}")
@@ -598,6 +648,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                    "6 characters; or SGTL_ORAL_SALT in the mentor's shell); only its fingerprint is logged")
     data_parser = _add_data_parser(sub)
     pq_parser = _add_pq_parser(sub)
+    gui_parser = _add_gui_parser(sub)
     args = parser.parse_args(argv)
     try:
         if args.cmd == "doctor":
@@ -623,6 +674,8 @@ def main(argv: Optional[List[str]] = None) -> int:
             return _data_command(args, data_parser)
         if args.cmd == "pq":
             return _pq_command(args, pq_parser)
+        if args.cmd == "gui":
+            return _gui_command(args, gui_parser)
     except (RuntimeError, ValueError, OSError) as exc:  # e.g. repository or request manifest not found
         print(f"sgtl: {exc}", file=sys.stderr)
         return 2

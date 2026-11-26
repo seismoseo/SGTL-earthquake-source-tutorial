@@ -35,6 +35,7 @@ are ready. Installation and downloads can take several minutes; do one at a time
 | Before | Extra preparation | How to check |
 |---|---|---|
 | M03 real-data work | `bin/sgtl-install tools metadata`; then put your personal STP client and credentials in `~/.sgtl/` exactly as M03 Part 1 shows; `bin/sgtl data fetch sangju2019` | `bin/sgtl pq check` and `bin/sgtl data verify sangju2019` |
+| M03/M10 visual inspection and M20 manual picking | `bin/sgtl-install seiscomp`; follow the [SeisComP GUI workshop](seiscomp_gui.md), including laptop X11 forwarding and the synthetic rehearsal | `bin/sgtl gui doctor`; open a waveform window; save/reopen a synthetic pick |
 | M21 | `bin/sgtl-install seisbench` (two pretrained PhaseNet models); keep the tools installed for M03 | `bin/sgtl doctor` reports the PhaseNet weights |
 | M22 | `bin/sgtl data fetch sangju2019_hours` | `bin/sgtl data verify sangju2019_hours` |
 | M52 | `bin/sgtl-install pyfk` (its separate worker environment) | the notebook's PyFK environment check |
@@ -42,7 +43,7 @@ are ready. Installation and downloads can take several minutes; do one at a time
 | M54 | `bin/sgtl-install coulomb`; internet access for the public Gyeongju mechanisms on the first run | the notebook's tool checks; later reruns use its saved mechanism file |
 | M60 | `bin/sgtl data fetch gokseong2018`; `bin/sgtl new project` copies templates immediately | `bin/sgtl data verify gokseong2018`; `project/README.md` exists |
 | Suncheon project, after the plan is approved | `bin/sgtl data fetch suncheon_area`; inspect the size before repeating with `--apply --large` | `bin/sgtl data verify suncheon_area` |
-| Independent Sangju project | inspect `st.data.project_definition("sangju")`; freeze your own selection/request and follow the [Sangju guide](sangju_project.md) | separate plan, matched reference regions, request fingerprints and validation evidence under `project/sangju/` |
+| Sangju project | inspect `st.data.project_definition("sangju")`; freeze your own selection/request and follow the [Sangju guide](sangju_project.md) | separate plan, matched reference regions, request fingerprints and validation evidence under `project/sangju/` |
 
 `bin/sgtl doctor`, `bin/sgtl pq check` and `bin/sgtl data verify ...` only inspect your installation or files;
 they do not need `--apply`. A data fetch that reports STOP needs the stated prerequisite fixed first. Do not
@@ -53,6 +54,7 @@ Keep the names and folder structure that `sgtl new` creates. Later modules reuse
 | Produced by | Keep available | Used later |
 |---|---|---|
 | M20, task 5 | your saved `work/picks/M20_manual_picks.csv` | M21, M22, M30, M31, M50 and M53 |
+| SeisComP workshop and M20 | local sessions under `work/seiscomp/`, reviewed XML and the CSV provenance receipt | repeatable visual review; manual picks use the same M20 CSV above |
 | M21, then M32 | your PocketQuake cluster `sangju_m21`, its picks, locations and run log | M41 and M51 |
 | M31, task 6 | `work/M31_location/results/M31_hypoinverse_runs.csv` | M32 and M50 |
 | M51, task 5 | `work/M51_first_motions/results/M51_skhash_first/mechanisms.csv` | M53 |

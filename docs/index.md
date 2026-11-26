@@ -37,6 +37,11 @@ project schedule when needed.
 
 ## What you do in a lesson
 
+After your first download in M03, follow the illustrated [SeisComP GUI workshop](seiscomp_gui.md).
+You will explore recordings and event–station geometry in desktop windows, then save your own arrival
+measurements for M20 and the later notebooks. Start with its synthetic rehearsal. You do not need to learn
+the SAC program to inspect the course's SAC files.
+
 For each task, **predict → write your code → run the check → explain what happened**. Keep your predictions and
 explanations in your own words. Use the first built-in hint when you are stuck, then test a small example you can
 work out by hand. Your mentor reviews your saved notebook and record; [submission instructions](how_this_tutorial_works.md#submitting-a-module-sgtl-submit)

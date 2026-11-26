@@ -31,6 +31,7 @@ nav:
       - Week 2:
           - M05 · Statistical seismology: notebooks/M05_statistical_seismology/M05_statistical_seismology.ipynb
           - M03 · Getting seismic data: notebooks/M03_getting_data/M03_getting_data.ipynb
+          - SeisComP · Explore records and pick arrivals: seiscomp_gui.md
           - M10 · Seismograms: notebooks/M10_seismograms/M10_seismograms.ipynb
       - Weeks 3–4:
           - M20 · Picking arrivals: notebooks/M20_picking/M20_picking.ipynb

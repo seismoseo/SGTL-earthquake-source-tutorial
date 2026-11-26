@@ -14,6 +14,7 @@ Geoscience and Mineral Resources (KIGAM) for the KG network data and bulletin me
 The U.S. Geological Survey (ComCat) and the International Seismological Centre for public catalogs. The authors
 of PocketQuake, ObsPy, PyGMT/GMT, SeisBench, EQNet/PhaseNet+, HYPOINVERSE, HypoDD, SKHASH, MTUQ, PyFK,
 SeismoStats (ETH Zurich, Swiss Seismological Service), Elastic_stresses_py and cutde.
+GFZ and gempa for SeisComP, including its offline waveform viewer and event picker.
 
 ## Licenses and data attribution
 
@@ -21,6 +22,10 @@ The project locator shows the public Suncheon course selection center and the KM
 Sangju epicenter. Its coastline is from GSHHG (Wessel and Smith), distributed under the
 [GNU Lesser General Public License](https://www.soest.hawaii.edu/pwessel/gshhg/), and rendered with GMT.
 It contains no waveform data or inferred research results.
+
+SeisComP is installed separately under its [AGPL license](https://www.seiscomp.de/license/).
+The GUI workshop screenshots show generated synthetic signals and invented stations, not STP records.
+Its small offline coastline retains the [GSHHG attribution and license](resources/seiscomp/ATTRIBUTION.md).
 
 - **Code**: MIT License ([LICENSE](https://github.com/seismoseo/SGTL-earthquake-source-tutorial/blob/main/LICENSE)).
 - **Text and figures**: CC BY 4.0 ([LICENSE-CONTENT.md](https://github.com/seismoseo/SGTL-earthquake-source-tutorial/blob/main/LICENSE-CONTENT.md)).
@@ -34,7 +39,7 @@ It contains no waveform data or inferred research results.
 
 ## Cite this course
 
-Seo, M. (2026). *SGTL earthquake source tutorial* (version 1.2.0). Seismology, Geophysics, Tectonophysics Laboratory, Seoul National University.
+Seo, M. (2026). *SGTL earthquake source tutorial* (version 1.3.0). Seismology, Geophysics, Tectonophysics Laboratory, Seoul National University.
 
 Use [CITATION.cff](https://github.com/seismoseo/SGTL-earthquake-source-tutorial/blob/main/CITATION.cff) or GitHub’s
 “Cite this repository” button. Contributors are listed in
