@@ -1,6 +1,6 @@
 key,english,korean,definition,modules,review_flag
 shell,shell,셸,A program that reads the commands you type and runs them; on the lab server it is bash.,M00,0
-terminal,terminal,터미널,The window on your laptop where you type commands to a shell.,M00,0
+terminal,terminal,터미널,"A window where you type commands to a shell, on your laptop or on the server (in JupyterLab: File → New → Terminal).",M00,0
 ssh,SSH (secure shell),보안 셸,A secure way to log in to another computer over the network and run commands there.,M00,0
 ssh_tunnel,SSH tunnel,SSH 터널,A forwarded port that lets the browser on your laptop reach a program on the server (here JupyterLab) through your SSH connection.,M00,0
 server,server,서버,A shared computer that many people log in to and run programs on at the same time.,M00,0

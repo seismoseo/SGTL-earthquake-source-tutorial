@@ -4,6 +4,17 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v1.5.0 — 2026-11-27 · shorter week-1 notebooks
+
+- The week-1 notebooks are short now: M00, M01, M02 and M04. As in v1.4.0, each part starts with a few sentences
+  and a cell to run, each task gives one example, and each Explain asks one question.
+- The notebooks of weeks 6-8 (M50 to M60) become short in a later version.
+- `bin/sgtl-install` retries a dropped download by itself: when creating the course environment fails once, it tries
+  again with the packages it already has.
+- The tasks, the checks and the pass criteria did not change. A task that passed still passes.
+- A module that you copied earlier with `bin/sgtl new` stays as it is; v1.4.0 below says how to get the short
+  version of a module that you have not started yet.
+
 ## v1.4.1 — 2026-11-27 · no AI-tool settings in the repository
 
 - The repository no longer contains settings files for AI tools, and the command `bin/sgtl setup-ai` is gone.

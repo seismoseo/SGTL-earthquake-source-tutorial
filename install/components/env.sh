@@ -117,6 +117,19 @@ env_install_miniforge() {
 
 env_create() {
   local prefix="$1" env_file="$2"
+  # A large download from conda-forge sometimes drops (clean-room rehearsal of 2026-11-27): let conda retry each
+  # download more often, and try the whole step once more before giving up. This is the create path, so the prefix
+  # did not exist before: whatever the failed attempt left there is removed first.
+  export CONDA_REMOTE_MAX_RETRIES="${CONDA_REMOTE_MAX_RETRIES:-6}" CONDA_REMOTE_BACKOFF_FACTOR="${CONDA_REMOTE_BACKOFF_FACTOR:-2}"
+  env_create_once "$prefix" "$env_file" && return 0
+  [[ $APPLY -eq 1 ]] || return 1
+  say "Creating the environment failed once (usually a dropped download); trying again with the packages kept so far."
+  if [[ -d "$prefix" ]]; then run rm -rf -- "$prefix"; fi
+  env_create_once "$prefix" "$env_file"
+}
+
+env_create_once() {
+  local prefix="$1" env_file="$2"
   if [[ "$CONDA_KIND" == micromamba ]]; then
     run "${NICE[@]}" "$CONDA" create -p "$prefix" -f "$env_file"
   else
@@ -126,6 +139,7 @@ env_create() {
 
 env_update() {
   local prefix="$1" env_file="$2"
+  export CONDA_REMOTE_MAX_RETRIES="${CONDA_REMOTE_MAX_RETRIES:-6}" CONDA_REMOTE_BACKOFF_FACTOR="${CONDA_REMOTE_BACKOFF_FACTOR:-2}"
   if [[ "$CONDA_KIND" == micromamba ]]; then
     run "${NICE[@]}" "$CONDA" install -p "$prefix" -f "$env_file"
   else

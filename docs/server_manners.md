@@ -38,8 +38,8 @@ quota -s                      # your disk quota (if quotas are set)
 du -sh ~/sgtl/*               # how much space each of your course folders uses
 ```
 
-In a notebook, `st.server_rules()` reports the thread caps, memory cap and CPU state of your kernel (module M00
-explains each line).
+In a notebook, `st.server_rules()` reports the thread caps, memory cap and CPU state of your kernel (module M00,
+task 3, reads three of them).
 
 If the load average is far above the number of cores, or available memory is low, wait before starting anything
 heavy. If something of yours runs away, stop it: `kill <pid>` (from `ps` or `top`), or in JupyterLab restart the

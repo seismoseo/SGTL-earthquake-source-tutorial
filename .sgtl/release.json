@@ -23,7 +23,7 @@
   "M54",
   "M60"
  ],
- "source_commit": "20812c624a04dc6717169e9537bd1e37099a28a6",
+ "source_commit": "d3b4199d6f9066f2901f38f46f8dd42482b27c87",
  "source_dirty": false,
- "version": "1.4.1"
+ "version": "1.5.0"
 }

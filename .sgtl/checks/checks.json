@@ -24,7 +24,7 @@
  "schema": "sgtl-checks/1",
  "tasks": {
   "M00-T1": {
-   "categories": "zb64:eNp9k8tu4zAMRX+FMAZwArjuPrsCE2A2xQBBf0C2mFiILWr0aBoUnW8fkko69aabPAjq6vDy6r05Uhyctegf3BIo5mYHzcvkEmSTzsDfZqCSIaKxzp/g1cwFE9DxCHlCyBgX583cQSItxDIjn9qBJfCUoSSEdymmD5gwYg8v14BwmUxeCUCIzme0fdNBM9GCwtHKj1YgROpKJYJU4EizxQjkVSJhfMXYw6F4wHEi+PHr9/MenAfzX37VC8ZbGClctXaZiJmDyZNefsZrqiYgWDdm8Ig2Ab6ZMc9yIiKCNPHMAecZLbQ8ZWw7uPGKehsxUKuCzP7AFoai3j5VC9VZZlgW6SZGgjSxGn/yEkZ2fJPKOIFJwmcW18FfadPZtp0a8mliPXl3UI2Q8l19Ne3sPF+ea3dSQEFVu5X5brduh8Kn2cebpurUHhyIzjDgTP7EgaEeRsu+Z4kCo91ObuQc8a0Xlyc47J9+Pu/7xXYwOP+ocAtZScjjVv9Fxg8XK9dxXgQwlaFqrSnN/Qbnk7NYAyKA1R6X05cBOHjrgXjrvNbvcHZwIiihcvNkfb/iMyfjvPJljrSgHTCXKLGT3HRVy5wR0PAm2UAl0vzcnhEvPUd5VpuMb1ki+6ewrWmrspIqnVjj9XUvM5241xt+C7e9mHGk4nM1ngnTekk1FDVJ372M6hyX1MvZBDasbz7+AQ24aos=",
+   "categories": "zb64:eNp9k91u2zAMhV+FMAY4AVz3PncFFmA3xYCgLyBbTCzEFjX9NA2K7tlHUklXX2w3iUFQRx8Pj96bI8XBWYv+wS2BYm520LxMLkE26Qz8bwYqGSIa6/wJXs1cMAEdj5AnhIxxcd7MHSTSQiwz8qkdWAJPGUpCeJdi+oAJI/bwcg0Il8nklQCE6HxG2zcdNBMtKBytfLQCIVJXKhGkAkeaLUYgrxIJ4yvGHg7FA44TwbcfP5/34DyYv/KrXjDewkjhqrXLRMwcTJ708jNeUzUBwboxg0e0CfDNjHmWExERpIlnDjjPaKHlKWPbwY1X1NuIgVoVZPYHtjAU9fapWqjOMsOySDcxEqSJ1fiXlzCy45tUxglMEj6zuA5+S5vOtu3UkE8T68m7g2qElO/qq2ln5/nyXLuTAgqq2q3Md7t1OxQ+zT7eNFWn9uBAdIYBZ/InDgz1MFr2PUsUGO12ciPniG+9uDzBYf/0/XnfL7aDwflHhbM0psetfkZmDxcrd3FYhC6VoQqtEc1d3vnkLNZ0CF31xuX0hZ5Tt56GV847/SfLDk4EJVRinqnvV3DmZJxXuMxhFq4D5hIlcJKYTpsXc0ZAwztk6xRHk3N7QLzuHOVBbTK+ZQnrr8KGpq3KSp50XA3W143MdOJeb/gV3DZixpGKz9VyJkzr9dQ41Az9701U27ikRs4msFt98/EHzV9n6w==",
    "forbidden": [
     "getpass",
     "pwd",
@@ -35,7 +35,7 @@
    ],
    "hints": {
     "1": "Glossary: shell, terminal, server. Every program has a current folder (its working directory): pwd prints it and cd changes it. Read The Unix Shell (swc_shell), episode 2, 'Navigating Files and Directories'.",
-    "2": "zb64:eNotjs1uAjEMhF9lDhxAWu0D9FZRUFW1RUK8gNkYJWoSp/lhu2+Ps+Vk2eOZb06JIwiVc3CRPCSiWkbhfOeM7UdLi2qfdH3B0Xke8M3zgMvzfTfi3CJmKxTc0J0RPFnB5v30dRhx6YdAPxrYMmORBtLp/iFVEm7ijYLk1sWMSdLSl1VuVbLTTltfUKzMBefD65vmBjPgqiEUDYKY5rl0R+bdespaKc1mxL6nMU0WKbtY2cC72PFVVoJxUwWpl/9qL/XbpHIZH2bmX6E=",
+    "2": "zb64:eNotjsFuAjEMRH9lDhxAWu0H9FZRUFW1RUL8QEiMEjUbp07Cdv8eZ8vJsmf8Zk6ZEgwqyRSSieCE6gmF5E6C7UfLi2qf5vqCY4g04JvmAZenfTfi3BJmz2YKQ/9MIOsZm/fT12HEpR8m86PAJoSFG4zO8B9SOePG0WkQ37oosJyXvqxyqyxBO21jQfE8F5wPr2/KndyAq0JMcnBsS7cL7dZdtE+e3Yh9R5GxHllCquQQQ+rZlVe8C7bC6C/91d7ot3GlMj4ANbVeUQ==",
     "3": "zb64:eNrLTVWwVahWLy1OLVK3UrApyUhVyMnMS1Uoz8hPzM1UKCjKzCtJTbHTUVDPyM9NRVGSmpyRr6Di4e/riqysKLUgH0VZQXkKTF4hM08BJF6SX6CQlp+TklpkVwsAzVorZA=="
    },
    "kind": "oracle",
@@ -45,7 +45,7 @@
    "title": "Who am I here?"
   },
   "M00-T2": {
-   "categories": "zb64:eNqVVEFu2zAQ/MpCJweQArlAesix/UIvPQmUtBIJUdyApGyrQf7eXVJ2nNpF2ptI7szODJd6LZRbjxo9Fs9Q/KTFQ0eLi0ADfKn3XwEP6GIAEyASgTajfixKKDqyy+zCFSitwZoQoScM4CjCrGKnIWoEjapHz8cOhVq2BmMxcaUWlek/VUDDkAAD+db0PbrKzC/kowB/aJGowiSFCoJGawFP6DsTsIRAqadfLHLBM0tMApeA8Cqb4Q2MC6bHLG1xXTTkUrcs/SLONWIi62EzDOW+WrkEdMvcsk2WvhW5j1YnXN8z6013lZVWB2TBqot2TaBgTiD157y+k4uej2G3SSjPqZcsKqfUSGIl535qZivbs21GbJ44APMLm6l9yDJC/Jewoc1Ktk2HymdlUXmG5AW6/qxw5YLEn+TdJHZnLD7Li41Us70wZV+iTmik0io/Io/cQdkFz3AuyclkDlslj7eON19HE7Vgnh5rMTWTx+tpk+Qu2C3Ge17k6Hq2YRfJoleuQ9jD9O3hwlYtzsRww2mJJnlBE97nY3eKW/JjBSGAXbtGmYIZR7V9svzJWEorwe7ruoa0yt2j9hg02f5/w5DHb+mYSdaX90CUC0cWtF2JSkOddFB+6Ww0X074Y9TFljDJ44kfBzyqlu2O5oAhNZS5+tsd3vtFvP0GQdaivA==",
+   "categories": "zb64:eNqVVMFu2zAM/RXCpxSwC2dAd+hx37BLT4Zs05ZgWSwkOYlX9N9HSk6aNRm63SKZ7/G9JzJvhXLrUaPH4hmKF1o8dLS4CDTAt3r/HfCALgYwASIRaDPqx6KEoiO7zC5cgdIZrAkResIAjiLMKnYaokbQqHr0/NmhUMvVYCwmrtSiMv2XCmgYEmAg35q+R1eZ+ZV8FOBPLRJVmKRQQdBoLeAJfWcClhAo9fSLRS54ZolJ4BIQ3uQyvINxwfSYpS2ui4Zc6palX8S5RkxkPWyGodxXK5eAbplbtsnStyL3p9UJ14/MetNdZaXVAVmw6qJdEyiYE0j9Oa+euhC9cSPsNg3lOfaSVeWYGoms5OBPzWzlerbNiM0TJ2B+YTO1D1lHiP+SNrRZynbpUPksLSrPkHxA158lrlyQ+JO8m8juzMVXgbGRarYXpuxL1AmNVFrlR+SZOyi74BnOJTmZzGGr5PHW8ebraKIWzNNjLaZm8ng9bpLcBbvFeM+LfLoebthFsuiV6xD2MP14uLBVizMx3HBaoklWaML7fOxOcUveVhAC2LVrlCmYcVTbT5Y/GUvpJNh9XdeQTrl71B6DJtv/bxiy/ZaOmWR9/QhEuXBkQduTqDTVSQflVWej+XHCp1kXW8Ik2xM/TfhoDhhSLxmpvz3fvb+H999t8aGy",
    "forbidden": [
     "pandas",
     "numpy",
@@ -109,7 +109,7 @@
    "title": "First commit and AI log"
   },
   "M01-T1": {
-   "categories": "zb64:eNp1U02P0zAQ/StPudBKIdoIAWJXnBBXtOLjwHGaTBqrjm1sZ6sK8d+ZsbthWcHFbeyZN+/D/tmEyINJxrvmFs13v0aMJmVyAydQZERznDMmHxG8cTlhoggKFDMOa8Y5end8euydvWDhzDHVsg5fZxaoYfBJCxfsUpg5moEsLJ3hJ8iRcZz2sD7J3I0TshTynf5gpgfBlLIKcmIOCSZ3TYsm0mjIpU2CW5eDErDen2DNiSGNIDfqJJwFE0fzwA4jHyNz6vBpXe4vL9JfdZFp1NEmwrggYkn26qQWyUuNE0oZLOtFuo5WuJmYMnYudNfK/UZwTf+x2E8TDgKggLovdtOQxdJB7UD26Dt8039iQ/GOUQExRb+U7Q/e5ShdLT7jPd68ett3NzgtLZwX3rJIFz5KHPO1tdBKMwXeWE2rG7K6vqyiIZPYJkYGYRYjXRJ2mrIlcejq775YpU7iQMNJsudNGoIMDGRii2JpBdGwiwpaZNHpVVmd80ggFQMlikp/oTzrVx3nPO4veRaakm4oMlZn8r/M/RN/vZDtY94QJVuSOuJkrK819boOrHbaa6gmqYZrw53YY7MJcs1N1txUzzUOqXqCpNTK+3j5QHblwvCLHD6Pf83JjDXd7C1HPRIanAr8rKLLtbqtBhcJIKsPT3v4x0p6W4QlHQQMfd93/bvXJX5t3gwvTxT5bIZ6/xNuuubXbw/daJ0=",
+   "categories": "zb64:eNp1U11rGzEQ/CuDX2rD9YgpbWlCHwINtJSWkI+HPIX1ee0T1kmqpLMxpf+9u5JzTb9edB9azc7Mjr7PQuTOJOPd7ByzBz9GrE3K5DpOoMiIZttnbHxE8MblhA1FUKCYsRozDtG77fNt7+wRA2eOqZa1uOtZoLrOJy0cME+h52g6srB0gN9AtozjtID1SfpOnJClkC/0gZ72gillFWTHHBJMbmcNZpHWhlyaJLhxWCkB6/0O1uwYchDk1toJB8HE1uzZYc3byJxafB2H6+OL9FtdZFpraxNhXBCxJP9qpwbJS40TShks61FOba1wMzFlzF1oT5WLieCY/mOx32ywEgAF1P9iN3VZLO3UDmSPZYt7fRMbineMCqje/e3NaKnBDd7jzau3y/YMO7H86vLm7uPjzeWHT/e3j5+/LBo4L4JkEThcyZz6E2bhm3oKPNHdjK7LOo5hFHGZxE9xOAjlGOmYMNfxWxLrTsYviodqMVbU7SQUPGlGkIaBTGxQvK4gT0oSDbJo9yq59nkikIqzIrTSHyj3+lXbOY/rY+6Fpow9FBmjM/lfrv/KRU1q8xQEiJJpxNpiZ6yvNTXHHbscJbh12iaphtOBC7HHZhMk/ybrQFXPaU5S9QxJqZWL83JPduTC8FY2/8zFmJNZ17FnbznqltDgVOB7FV3ydl4NLhJAVm+knuFvI2mMhCWtBAzL5bJdvnstgWiKY5Ph5e4iH0xXL0bCWTv78ROgAXBe",
    "forbidden": [
     "pyproj",
     "geopy",
@@ -123,8 +123,8 @@
     "sgtl_tutorial.data"
    ],
    "hints": {
-    "1": "Glossary: great_circle_distance, vectorization. The Given formula turns two latitudes and two longitudes into a central angle (the angle between the two points seen from the Earth's center); distance = radius x angle. NumPy's trigonometric functions work in radians: see the angle demo in Part 2, and Harris et al. (2020) on NumPy arrays.",
-    "2": "zb64:eNpdkMFOw0AMRH9ljiBVVSskkMgHID6AE+KwzXoTK1s79e62yt/jJCc4Wh7PzPOn4KEWyzt6lTtZRcgZSZshyJCpIJleEWkw8qEqLEQOUvDgOkLadV461DARxpATNKGOhBwq1xYJkVMiI+nJ/eJfjcrwX9Th0jhHhD12lX3wncQb2bXl0GEimn3NUtgvv08HnH/wZNoksgzog2BuZQQ7icexc1z0Tjg/e81mst06xmrdk1QLeSfdgYL1hWXrWm5WO3hq5TkvuCx4fXk7H09HfBXayZGa9JXV36GSlwOKuoOFpaxfnTZLbWuTrDoffwEgjoFI",
+    "1": "Glossary: great_circle_distance, vectorization. The haversine formula above the task turns two latitudes and two longitudes into a central angle (the angle between the two points seen from the Earth's center); distance = radius x angle. NumPy's trigonometric functions work in radians: see the angle demo in Part 2, and Harris et al. (2020) on NumPy arrays.",
+    "2": "zb64:eNpdkE1Ow0AMha/yliBVUSskkMgJOAArxMLJeJJRp3bwzLTK7XGSFSwtvb/PH4KHWijvGFXubBWUM6I2A8mUuSCa3hB4MvajKoxCIil4pDpD2m1Ze1S6MmbKERpRZ0ammmoLjJBiZGMZ2fPCX43K9F/UY2gpB9BRu8lm8lklCfsqu7VMPa7Mi0uSlOTur/MJl288mTYJSSaMJFhamZGcxv3JWQa9My7PPrWZ7F5H2eJHlmqUD9oDimz0vn1v+bHaw1trWvKKYcXry9ulO3f4LHzQIzYZa1J/iUpeTyjqCUZr2T573SO1bUuy6tL9AnxhgxQ=",
     "3": "zb64:eNpVjs0OgjAQhO8+xRzbSKL0aGofwqtRs9AqG6Egrfr6FgF/NtlkJ9lvZnRX8Sk3GfRwKANstoCOlUN8tqgpcrxbFzKwR0+WyQez0BXV55NNSALeM1Bi9mjY38PomBuJFdRM1NQUlsxMaFG3Xk3/6czlX85I0pyBn6zA/qjETw+JJco2iE/qR6gk/t6nEnJx4YdDQeX1a51W7wwiNy5AgfoyoSLc+ig04eq6mAoGtg77dYb8YKR8Ael5Xi0="
    },
    "kind": "oracle",
@@ -137,7 +137,7 @@
    "categories": "zb64:eNptU8Fu2zAM/ZWHXJoATlanybBkGIZhObTYAgxLeuipYCzZ1mqLhSQncYf++yil6YCtvtiiyEe+x+ffA+XDYInBHXcOwbTag5wGW406hrgs5QBCqQ9QFOSebdNPsDIKPXfovEaoNS6+eEPvNpq75iIB4UlAPuNW7qXaHLXCYnzG9DrAWB80KQxvt1/xCd82W4yxQD36iB/kAuYoOM6zo+IBgaWL8ZNBhkHJrqU09U8dOmcR9DFgSPDBjQQd+khFaHrkMyhTmeAz3MmzXq9W19fr9WaT4WBCjSftGI+klLEVyCpYhn+kQkuBIl9Hsk6maNhKRNpG5PaxEbbTy/z95SKf5vnVdD67SHNZHvvalH/1vFmd1Iz6RHpJFhlHN+UEWwnerNB2PmB3yolCxJwl/pEkwTtuGt5r9x+8M1UdcKi1TShxSyIF9T4dPUnTXScJjoVmSqs4Mk7CLtKePQrH3gvh1iib8IZCN9WHuAxRldCyFdUkTug1udEE32WPlDombrz7pYsAxamyoEZbRZLuRO1WUorXpQteUZOt4hwxNxlj10NiKrH1prJvGDP/8DJvIz2XyYGyv+itU3ySRDOSXL+0ESkzeH5T0iTJeE9Np31sthHDvcp60stE8x+olykpRGDLkbI3yQdnRzvkp69kAFmu6/Hgw33g+y4U90YNo2EyLDLk0wzTywxX8p7PRmfSSzGGVMvvo1CZ/VsWe/4D7Wwv/Q==",
    "forbidden": [],
    "hints": {
-    "1": "Glossary: kst, utc. KST is always UTC + 9 h, so UTC = KST - 9 h. A datetime.datetime object does calendar arithmetic for you (days, months, leap years) when you subtract a datetime.timedelta. See the tools demo in Part 3.",
+    "1": "Glossary: kst, utc. KST is always UTC + 9 h, so UTC = KST - 9 h. A datetime.datetime object does calendar arithmetic for you (days, months, leap years) when you subtract a datetime.timedelta. See the datetime demo in Part 3.",
     "2": "zb64:eNpNjrFuwzAMRH/ltrSA0e7J1LHomPwAHVExAVkMSCp2+vWVnaUbgXv3jt8Vi1ryI8YmJUErI1FwyMzIpjNiYris+DlfUNs8svkJ3sYwugYIG5m4BEEzqvT+pM0cb4QsK3dlzs4xoPKDbdcdvlzo88zaymHv47fvvp+wmATviLG30vWO4DWwSEzwsLzRA5pLvSH3HSS5SXi/X+onk4FqQiz6P9u2n9COWH+LSxpezqpwvpNRqPnHHxFwYRw=",
     "3": "zb64:eNpNzbEOwjAQA9Cdr/CSjS+oCjMLExNj2pjmBHeRmgvl80mZsOTtWR6bz9CiND8DwwkYU3S6KKExEY+1KDwTVT6wphPX2qWKtdpxxE4TXx5RHjAxIpfWzWGRNzHF+Yk9Q+/4f7at4k7DJp5/B3NJrAh3BEVICBeEK8LtCCuexRZM9I190bF+ATCZPJo="
    },
@@ -203,7 +203,7 @@
    "title": "A one-hour mystery in old records"
   },
   "M02-T1": {
-   "categories": "zb64:eNptU01v1DAQ/StPe2GL0lBW4lKOFUdQJXrhguTEk8Ra2xNsp6ul6n9nxklZinpYaf315n3laWf8SF0yu1vsfvCSEMwYXVksZVhG5AJPxqIz/RGFUSaCdSZQoZR1dUYvKwyJQ4v7pYAjgQec/wNzcXs98ZIJafGEm/bm8AnvkX+lstc/9HN/+Hp1BRMteg6zSYSTK9OrsQqNXEwqZOvcRo8jRsVPvIzTOnxTVgnlQjNMgUFxgVrccQgckb2b863s9hwFMarYQSSojATBipZshReOi7JJLI4MnEYuhWKj1wyyGyMGwZrJtrsGO7nQOWspXrswcyrq7sPkxDCTj5BfriLEkROnY52nM1x8FFep0s/khwZ59ay65YTpFok6+KSb+VkeZWfXNxiW2BfHsZLwPF53JtNb0aoU470ENaA7rwJrjKYvnBqhCLdlKDAmSQYBk/RAb54SxxEK3eLhdaLJuCzwhP0XWaZ3GXEJHaUr1Wow84lSVcXRr2OjKUsy/jKmQZxbWTUQ91mbUz5vWx9vajPWxaGeY9s7/DNALSlS2urCI6ki9/tiw4tJqOhq5yQIQp7E/TOOTuCkwC7OEouLleUdx5LEm9vaplUTwpILRvdI69dxOWkqJQPvcpH/+LaE+7N4nsx5Lcws52Lxd0pOKLyB8zcqzDLopflNzczoN9ar90uKW29WqtWCV8MGqSWbkjG4JEOUlma13nkxIjfVBUUKRj62wFbCUxFSgg/k5YG4pTWPo79orEo88ywvhVO3OG/zprrdPf8BQtmG3A==",
+   "categories": "zb64:eNptU8tu1DAU/ZWj2dCiNJSR2JQlYgmqRDdskDzxTWKN7Rv86Gio+HfudVKGoi5GGr/OPa887Yyf6JDM7g6771wTgpmiK9VShmVELvBkLA5mOKIwykywzgQqlLKuzhhkhTFx6HFfCzgSeMT5PzAXt9cz10xI1RNu+9v9B7xF/pnKlf6hH1f7L9fXMNFi4LCYRDi5Mr8Yq9DIxaRCts3t9DhiUvzEdZrX4ZuyRigXWmAKDIoL1OMTh8AR2bsl38nuwFEQo4odRYLKSBCsaMk2eOFYlU1icWTkNHEpFDu9ZpDdFDEK1kK233XYyYWDs5bijQsLp6LuPsxODDP5CPnlJkIcOXE6tnk6w8VHcZUa/Ux+7JBXz5pbTphukaiDT7qZf8uj7Oz6BmONQ3EcGwnP083BZHotWpVivJegRhzOq8AWoxkKp04owm0ZCoxJkkHALD3Qm6fEcYJC93h4mWgyLgs84eqzLNObjFjDgdK1ajVY+ESpqeLo17HRlJqMv4zpEJdeVh3EfdbmlI/b1vvb1ox1sW/n2Pb2/wxQS4qUtrnwSKrI/brY8GwSGrraOQuCkCdx/4yjEzgpsIuLxOLi2j0eckkuTnetTqsohJoLJvdI6+dxOekaJwPvcpH/+FrD/VlMT+a8NmaRc/H4GyUnHF7B+ZsVFhn0XP2uhWb0IxvU/JriVpyVa/PgxbBResmmZIwuyRClpWGtd56dyF2zQZGCka8tsJX0VIS04B15eSB2ac/j5C8amxLPvMhL4XSoztu8qe53v/8ACRiHaw==",
    "forbidden": [
     "sgtl_tutorial"
    ],
@@ -219,7 +219,7 @@
    "title": "Magnitude from marker size"
   },
   "M02-T2": {
-   "categories": "zb64:eNp9UrFu20AM/RXCUwJIQtqxq9GpW+0OmYKzjrIOlkiDR9lRiv57SdouMnURKIKP7917/L3peSGtm2+w2fGMsGKSaYVbF5IgXIXp2MHWO4AXlNW/VjP12EAh0BHh134bWOABiiFZyrHQ26J9t2lgUyjje6vrGZ3pJ+oiBAnOiXKqsEMpWOE6ckWIURh5yjU2+9ao5orTxcYMUEjxiFKbEAGY+hFslYsp1AumWuhoGjIKPBErVBXr2HxOig4TeGngSwNfG+i67jlEzqU6rv1A4TZoXexr8F+LjryosTye797cEfBk+8Z0QSAGWuYDynMH38OrMGUQnk1DEn2Lf2VAyrd6XqotO5+tboLGfAn73coXMwXJ1uroPKPPEWazI2msDuE8DO1hbZnC3Vde5O5aZoeCLAT4nnq1ZP8nJdgPxuUtd7mflozZwh+xP0UaQxGXSzn+plRvMppoTegeuE1hUb3JHNI0ebOWjIGSREcM4VpmbD8+674f3pzUIu3TZELS4zWW7g+2cGGnfjeSYW/4Dva2c8ukYi+06zhVGCyPx0Va2pVB0wn/ndPNhM8n+ucvZUQQUA==",
+   "categories": "zb64:eNp9Uj1v20AM/SuEpwSQhDRj16BTt9odMgVnHWUdLJEGj7KjBP3vJWm7yNRF4FH3Pu6Rn5ueF9K6+Q6bLc8IKyaZVrh2IQnCRZgOHbx4B/CMsvrXaqYeGygEOiL83r0EFniAYkiWcij0tmjfbRrYFMr43up6Qlf6hboIQYJTopwqbFEKVriMXBHiKow85RrMzhrVXHE62zUDFFI8oNQmTACmfgSjcjOFesFUCx3MQ0aBB2KFqmIdu5+TosMEnhr41sBzA13XPYbJuVTHtR8o3Iasm30N/UvRkRc1lfvzPZsbAh6Mb0xnBGKgZd6jPHbwI7KKUAbh2Twk0bc4KwNSvtbzUo3sdLK6CRnLJeL3KJ8sFCSj1dF1Rr9HmC2OpEEdxnkY2v3aMkW6r7zILbXMDgVZCPA99WqT/Z+VUN+blrc85X5aMmYb/oj9MaYxFHG7lOM0pXq10URrQs/AY4qI6tXmkKbJm7VkDJQkOmAY1zJj+/HV923x5qQ20j5NZiTdX2PT/ck2XNiq741k2Bm+g51xaqpH24xjhcFmcd9Gm3Rl+3fEf6t0DeDrev75Cx9CDsU=",
    "forbidden": [],
    "hints": {
     "1": "Concept: a pandas Series is one column of values with labels, called its index; here the labels are years. Datetime columns have a .dt accessor that gives parts of each time (look up \"pandas dt accessor\"). Reading: McKinney (2010).",
@@ -236,7 +236,7 @@
    "categories": "zb64:eNpNVEFu2zAQ/MrAJxuwhR56StFD0qaXJkHRFugxoKW1xIYiVZKKrRT9e2dJpejFNqXdmdnZoX9vOpPN5gqbh5AhzxIX/fQZZprExASTYXPCaHpv89xJg4/RnBG88Fl8kohtiEhZxh0mnmr32eYBhPo1G4ccKoRrNnsooRzMxSZl/T4ILtATuiAJniqG4DpoVWrwxaSEzKIQbW/945xbtMHNo1dIcSeYhMu+9FVmP49HoW6K6qS1I/kXHaRwn6IZRXk/i0wwzuEU5ojyGM56Kginwmcu/L3VX0OYk3DAxQk6jl70jLt3FFzl2k5KSw6TslLokAtYoXTmKK7MehPoScH1Ih3qi6vSeqknJLMknAd6XjXQljQEUhrfwXq+su2AbKn2hRvYl+dauqwAnoNUw/4trO7CoDWTzXTjHtuUm8mF3NzfPd5d39zeobfPa9s67TIeg9uVATjjwRxOtp9jse6r5Dn6lSMrjrNHfCrvEY4/pc3VOLaom/yizgveY3K5SfNRW9J2t6tbezWbNcjz5HTVeAire4krFd/KoTWpsF/XQfc0IddaJ73QBRYyu7ZGiFa9dkI7G3yo09sX9ni3oAqMiVENscNWjSzmcbFe7wHO0WZKo+eBRNVe4q42loD9B3pbrs4PYlXdkzhGoK+Ss1yKpqWErTpFmxNuyGHTgNdyrmbmgplphpzFe7Q6FxfdR1mUchQed83qd1LUPHBq6lNIXI8SbWs8bn3vCH1VkFYgiQpklr3CSCxKi48q8xuDVnNcnKVWGOrUaPgatCe9NPU/otYwp2OghW/foB1MNG3Wm+eC75vNn79cDYEC",
    "forbidden": [],
    "hints": {
-    "1": "Concept: one Figure holds one or more Axes, and you draw on an Axes (section 1 of this notebook). Matplotlib understands datetime columns, so origin_utc can go straight in as x. Reading: Hunter (2007) and the Software Carpentry episode on plotting.",
+    "1": "Concept: one Figure holds one or more Axes, and you draw on an Axes (Part 1 of this notebook). Matplotlib understands datetime columns, so origin_utc can go straight in as x. Reading: Hunter (2007) and the Software Carpentry episode on plotting.",
     "2": "zb64:eNpdkFFuwyAQRK8yn4lk5QD1JXoFbNawMoYKlhLn9F1Im0j9QRp29GZ2P4OJ4IiWsi0fOMxOSJGwsauZ0Fj80OZOZYbNpsGoK++UcTHRTuANZ6oIvNOkM/FKK0LHFVvKoG/KZ3+jwAhYClJmpx7hQ7HRKs1FlmppRjALBUUQ7prI5Znf9cvdCUM8Ri396ePzn92nWuhNRjmPJYUJS1JDL6h9KK6E1RTN7eZnigQa6zTS7R1r7xn+L+X3KItZ9xGVqiggBI4OX0Fuxad2ud5+APx5eOk=",
     "3": "zb64:eNpFjlESgjAMRK+ynzijHgAZL+EJUog0Q0mdtljw9Lao42eyL5t3s/RgZEkWxpFOEY36hLCoknF8aHGXEaQDaEV3QueV62oJ36s608rxigu6IVDGTGHiEEEJjQ8yiiLJzPFYklElLQPHw46vcGTYtci2wPVJttLbHcerNO/U9qOS5X8F4jYb73YiSXL8yavO5hdkLoKjPFkrYWu3oX6q6uc3FMRTag=="
    },
@@ -357,7 +357,7 @@
    "title": "A window without an earthquake"
   },
   "M04-T1": {
-   "categories": "zb64:eNqVVU2P2zYQ/SsDX2oDWsFOuwG6QA9F0msObXoogiCgpbFEgCJVkrLqFv3vfTOk7fXeuljI1nA4896bD/+zOVr/FI0fePNCmz/CEqljnzkm6gP5kCkunk4xTJRHJnhTOOnXNBnnOGWazOBtXnqmHN46ORMH8YElZZ6T2PuppV/OHC/qiP8j55XZ07TA88hyMXJDxqVAPM35QsFzom0XFp9pv8OR74FN7x/5EvAmyfIKf9+ndtOQ8lptn8cbr8hpcYCSKNphzHQKEVjoJ9q3BzoumdYY/KDmIBA0vIZA7n27f27g+W7X0u+J5SILh1Wwvty0AsJeZABg6rmz0IhmZzomRF2jzazZrK9SnRbfZRu8Qu6WaXEm2zM/9TayHgh6/80Hj8Mb9Ebh+m9iU1HSvUKFBGSAyKYb6WzcwiL7g7t4Ar98Bck8mqxsRVd8KDMakaqo0BAqofe/7L8KClU7ZJAzVXtNAxjoCZysJval9vHeHuktSes7J/bCUdA5NmdECWDHAh65v8Pr6ivYB07aLqUn/h8d2uIc9TDHcOZrxyKPCyscuB9498iY/1zQjOrpl+kIJ+j5htfJBZOfEMhbPwij38LEr5wgh++5184QDDkESdjSz5VOyiHi3CQ6tM8/6h9suJS0JQ/t+1J2XE6FIk4jhPrLdNldCAYDTVy2s+MyZ7T1cwtgITbSclvQQqTRItUQzaRUk1xExqZkaNt2RzPS2HzvUhxL2qr+fd6P7NBs6Tr3nk3UhfAAoqgT4mSyyPIr5yWiNJSX6pLHyMjx9JFMjOYig142UEPXzm9KLXa33WOgrWM/5LFRRYuE87VdV5tHWRCfzCdNPxp3ktrcdoFU4LrnEqgGr6YiyFb0hqyTAAT3Zyr6P0MRbDHTCwy8YxV8Ls0DESPXgFrjmwZ1471UHd9rGqzUOrEaHfJJ9LLWLHq4BJJBg10JeB7KzNwb6jWXkv++1uYAUnB/3X+PG+4asK5WnRDd6Nc56oyn0bwJgXqvWMBt6SbFa1K+zLyFYUcdUtTh/5tjQB1GKw0TZKhvGeuqqE1TICXbsxLV16ficpuiurSEY3GX2abVXMocQCdZvtIHtT+WhIGl5OyMlfE5XsqCqBWtPh+CzxGjQ0fsBjB5odPUb78c2r2Mgj4O8vj+644Gqwyue/gd7PgxwLP8Eunu+qGp9kO7+fc/ohp9rQ==",
+   "categories": "zb64:eNqVVU2P2zYQ/SsDX2oDWsFOuwG6QA8F0msObXoogiCgpbFEhCJVkrLqFv3vfTOk7fXeuljI1nA4896bD/+zOVr/FI0fePNCmz/CEqljnzkm6gP5kCkunk4xTJRHJnhTOOnXNBnnOGWazOBtXnqmHN46ORMH8YElZZ6T2PuppV/OHC/qiP8j55XZ07TA88hyMXJDxqVAPM35QsFzom0XFp9pv8OR74FN7x/5EvAmyfIKf9+ndtOQ8lptn8cbr8hpcYCSKNphzHQKEVjoJ9q3BzoumdYY/KDmIBA0vIZA7n27f27g+W7X0u+J5SILh1Wwvty0AsJeZABg6rmz0IhmZzomRF2jzazZrK9SnRbfZRu8Qu6WaXEm2zM/9TayHgh6/9UHj8Mb9Ebh+q9iU1HSvUKFBGSAyKYb6WzcwiL7g7t4Ar98Bck8mqxsRVd8KDMakaqo0BAqofc/778IClU7ZJAzVXtNAxjoCZysJval9vHeHuktSes7J/bCUdA5NmdECWDHAh65v8Pr6ivYB07aLqUn/h8d2uIc9TDHcOZrxyKPCyscuB9498iY/1zQjOrpl+kIJ+j5htfJBZOfEMhbPwij38LEr5wgh++5184QDDkESdjSz5VOyiHi3CQ6tM8/6h9suJS0JQ/t+1J2XE6FIk4jhPrLdNldCAYDTVy2s+MyZ7T1cwtgITbSclvQQqTRItUQzaRUk1xExqZkaNt2RzPS2HzvUhxL2qr+fd6P7NBs6Tr3nk3UhfAAoqgT4mSyyPIr5yWiNJSX6pLHyMjx9IFMjOYig142UEPXzm9KLXa33WOgrWM/5LFRRYuE87VdV5tHWRAfzUdNPxp3ktrcdoFU4LrnEqgGr6YiyFb0hqyTAAT3Zyr6P0MRbDHTCwy8YxV8Ks0DESPXgFrjmwZ1471UHd9rGqzUOrEaHfJJ9LLWLHq4BJJBg10JeB7KzNwb6jWXkv++1uYAUnB/3X+PG+4asK5WnRDd6Nc56oyn0bwJgXqvWMBt6SbFa1K+zLyFYUcdUtTh/5tjQB1GKw0TZKhvGeuqqE1TICXbsxLV16ficpuiurSEY3GX2abVXMocQCdZvtIHtT+WhIGl5OyMlfEpXsqCqBWtPtmkb3TEXgCLFzpN/fbzod3LGOjjII/vv+xosIr+uoPfwY4fAjzLr5DurR+aaj+0m3//A4OTfCI=",
    "forbidden": [
     "seismostats",
     "sgtl_tutorial"
@@ -377,7 +377,7 @@
    "categories": "zb64:eNpNU02T0zAM/SuaXujONp1e6cCFXfbECZYDXHZUW2k861gZW2kIDP8dyQndnuJYit6HXv5sXIfpTL4JaRhlc4TNDx4ztGNyEjjBWgbpCARPkWDmEQYsRS9Dgm3LGegX9oOWgkDhLFYRKw4RHYE2oPd6ieA4jn2628MXwguBbwFL7S37zQ42Ibk4lnChhpIvRubzhZIUA3ASZ1BCRsSqwG09TyF5ngAzQR9KCem8h08s3dJ0osjpDMI3vUeQAzTgcS4vJ1L+BB8+KstwDullFGdv2nG/dGArlCu7TDLm1Mg8kFH7Wl9V1IDJq4xHFHzK2BuMwhteoUjO7Mg8VcImOPmrHN++K6snBbaJRaf1WF53+oyhSLUOvlEOVO4qB7NXJa57gpbHtOxG2XcCVO3awWkUu52rLTZ3XctpvtXZZu6BMEcdL+ZRRNFTBZLQU/ObE10jsRodTEhrkzq9VSzlOFvdsVfFwsOgQGzG2AywGXt4CtkgzDA5VPCQFFBrcEVqcKpb5F5FWHy+Pz8c/4+pnv40sPvD++PhYDwcpwuZrt1tF49mow20Hk8u6lRvw/bw3JFGmvvhDagso99sqfKnrLFpbG1X/csy7Z/oOGq0asvquLFFmHBW19HiDMsyr9qgdKFd97nG1AK6h4eO3Ovy1W0gM6HrSPOLWrXIvGVRl57VKA/bk8Vcka22021ipVcAY+SJvCbm7z+KNloF",
    "forbidden": [],
    "hints": {
-    "1": "Glossary: utc, kst, time_zero. pandas.to_datetime turns text, a Timestamp or a datetime into a time; with utc=True it declares zone-less times UTC and converts the others. pandas.Timedelta(days=...) is a length of time. M01 Part 3 shows aware and naive times.",
+    "1": "Glossary: utc, kst, time_zero. pandas.to_datetime turns text, a Timestamp or a datetime into a time; with utc=True it declares zone-less times UTC and converts the others. pandas.Timedelta(days=...) is a length of time. M01's part on dates and time zones shows aware and naive times.",
     "2": "zb64:eNpdjr1uwzAMhF/lxhb9gdfGY6fu7RzQEh0LicSCpCMkTx/ZDoq2G4939+E+CqpotB0yHRmeMuPKKpDCoErKyJK5OFLB1+c7HghP3duu67ZsMgQpZ1bn+AzCtfVeTmy2AiKHU0PEpfnYw+bBlYIj0sX2A4/S8MuNdsEnhjmpg0oExbjFaHTWvykusceR+XtVKtVQJzGGaDqksp89LMPI2wNb/x98de4DfogmzW4qY7j8QvVQ9lnLZtXkk8yOMFFpgQPi+HoDHRZzEQ==",
     "3": "zb64:eNpNjkEOgkAMRfee4h+AhWszzsYr6JoUKDgRZkxbJHh6ByRKkyZt+v7/dW+W5LHW6Qw4O5aj1SBFigyaSBhDGjgaQsTtevEHp0Zi/q/5egwhjgrX0KxlxW3KwmXOPMdmi9jzz/6HU2ssG92FF6Oi+rHQuZ2kSTEFu2PNhTsjSehCXB/NW7YvoEmMG1Tz7liASfrAamiDqPkPhDNM8Q=="
    },
@@ -406,7 +406,7 @@
    "forbidden": [],
    "hints": {
     "1": "Glossary: magnitude_of_completeness, maximum_curvature, network_epoch. Part 6 states the rule of thumb (Wiemer & Wyss 2000; Woessner & Wiemer 2005). In each panel the blue circles are the counts per bin and the gray squares the cumulative counts.",
-    "2": "zb64:eNotj0FywyAMRa/yl+1MxtPpsj5BjkFADppgyQVROzl9Zcc7QJ//nq6CVWtqP2ABhZixBKFywcSSYJlwK50QucZCfg+GxtaQ+Z6pGT72yKx+oj8SH3iNiv9i+RxRKSTs8Tncha0n8uHRuiFs3EaElPA1fI9YK9sJkD7fqGLSekRp0ZgHXCfYqqdJQ1F9gH57KOV52FzwUp13/srmaxQbtsLHQ4DQikjF9/LSpbLYUR21785P7Y6bk/tar9JOtKu82f/zmGdp",
+    "2": "zb64:eNotjkFuwzAMBL+yxxYIjKLH+AV5hiLRERGZdCWqTn4fWvCNBHeHcxPsWlO7ggUUYsYWhMoFC0uCZcK9dELkGgv5HgyNrSHzI1MzfB2RVX2ifxI/OEbFWyzfMyqFhCO+hoew9UR+HNQXwovbjJASfqbfGXtlOx9IX+9UsWgdUdo05gm3BbbradJQVJ+gvx5KeQ+bC7bKYqMStR8ub+2OWZN7WK/STqS/GMzDNUBoR6RSpg8Khl4s",
     "3": "zb64:eNrLTY5PqoxPrUxVsFWoVje0NLfQNTIwMFe3UrApSE3MVshPUyjJSCxRKEjMS81R0FYw0DOy01FQB6oBKTQ0BSksyUhVKE7MTVUoKs1JhcgamoFkzXHJgvQamWHK1gIAKdcnzQ=="
    },
    "kind": "tool_reference",

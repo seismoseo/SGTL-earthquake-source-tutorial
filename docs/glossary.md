@@ -467,7 +467,7 @@ mentor or open a friction report.
 | template | 템플릿 (기준 파형) | A short piece of a known earthquake's record on one channel, compared with a long record to find events that look like it. | `template_waveform` | M22 |
 | template bank | 템플릿 모음 † | A versioned collection of waveform templates and their source events, channels, picks and processing settings used together in a detection search. | `template_bank` | M22, M60 |
 | template matching | 템플릿 매칭 | Scanning continuous data with the waveforms of a known earthquake to find similar, often smaller, events. | `template_matching` | M22 |
-| terminal | 터미널 | The window on your laptop where you type commands to a shell. | `terminal` | M00 |
+| terminal | 터미널 | A window where you type commands to a shell, on your laptop or on the server (in JupyterLab: File → New → Terminal). | `terminal` | M00 |
 | testable claim | 검증 가능한 주장 | A statement that a stated measurement could prove wrong; 'the events are deep' becomes testable only when it says how deep and which result would refute it. | `testable_claim` | M60 |
 | thread | 스레드 | One stream of work inside a running program; more threads use more CPU cores at the same time. | `thread` | M00, M10, M21 |
 | thread pool | 스레드 풀 | A set of threads that a library starts once and reuses for parallel work; on the shared server each pool is capped at one thread. | `thread_pool` | M00 |
