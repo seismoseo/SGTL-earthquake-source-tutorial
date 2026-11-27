@@ -25,10 +25,9 @@ AI 도구(Claude, ChatGPT, Copilot, Codex 등)는 **답을 주는 도구가 아�
 - 비밀번호, 토큰, JupyterLab 링크, STP나 GitHub 설정, 자료 파일, 다른 사람 디렉터리의 내용을 AI 대화창에 붙여 넣는 것.
 - AI 에이전트가 공용 서버에서 무겁거나 오래 걸리는 작업을 시작하게 두는 것([server_manners.md](server_manners.md)).
 
-저장소에는 AI 도구용 교사 규칙이 들어 있습니다: `AGENTS.md`, `CLAUDE.md`, 그리고 Claude Code 출력 스타일
-`sgtl-tutor`(`.claude/` 폴더). 이 폴더 안에서 AI 도구가 교사처럼 행동하게 해 줍니다. `bin/sgtl setup-ai`(드라이 런,
-실제 적용은 `--apply`)는 이 규칙을 `~/.claude/`에 복사해 다른 폴더에서도 적용되게 합니다. 규칙이 도움은 되지만
-소프트웨어로 강제할 수는 없습니다. 정책을 지키는 것은 본인의 몫입니다.
+이 규칙은 AI 도구에 직접 알려 주세요. 예를 들어 대화를 이렇게 시작합니다: "I am a student in a course. Explain errors,
+ideas and library functions, but do not write, complete or fix my task functions, predictions or Explain answers."
+이 정책을 강제하는 소프트웨어는 없습니다. 정책을 지키는 것은 본인의 몫입니다.
 
 ## AI 기록(AI log)
 

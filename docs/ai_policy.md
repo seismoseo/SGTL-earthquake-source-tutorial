@@ -27,10 +27,9 @@ not, how to log AI help, and why.
   from other people's directories.
 - Letting an AI agent start heavy or long jobs on the shared server ([server_manners.md](server_manners.md)).
 
-The repository ships tutor rules for AI tools: `AGENTS.md`, `CLAUDE.md` and a Claude Code output style called
-`sgtl-tutor` (`.claude/`). They make the tools behave like a tutor inside this folder. `bin/sgtl setup-ai` (dry run;
-add `--apply`) copies the rules into your `~/.claude/` so they also apply elsewhere. These rules help, but they cannot
-be enforced by software; following the policy is your job.
+Tell your AI tool these rules yourself. For example, start a chat with: "I am a student in a course. Explain errors,
+ideas and library functions, but do not write, complete or fix my task functions, predictions or Explain answers."
+No software enforces this policy; following it is your job.
 
 ## The AI log
 

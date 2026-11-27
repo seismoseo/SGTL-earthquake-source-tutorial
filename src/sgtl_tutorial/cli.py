@@ -7,7 +7,6 @@ Subcommands:
 * ``sgtl new project``     copy the research-project templates into ``project/`` (never overwrites; module M60)
 * ``sgtl status``          your progress table
 * ``sgtl diff M01``        has the module template changed since you copied it?
-* ``sgtl setup-ai``        show which tutor-rule files would be copied to ``~/.claude/``
   (``--apply`` copies them; existing files are never overwritten)
 * ``sgtl data list``       the STP waveform datasets, their sizes, and what you already have
 * ``sgtl data fetch NAME`` the download plan (``--apply`` downloads with your STP account)
@@ -450,31 +449,6 @@ def status() -> int:
     return 0
 
 
-def setup_ai(apply: bool = False) -> int:
-    repo = _paths.repo_root()
-    src = repo / ".claude"
-    dest = Path.home() / ".claude"
-    if not src.is_dir():
-        print("This repository has no .claude folder; nothing to set up.")
-        return 1
-    for f in sorted(p for p in src.rglob("*") if p.is_file()):
-        rel = f.relative_to(src)
-        target = dest / rel
-        if rel.name.startswith("settings") and rel.suffix == ".json":
-            print(f"skip        .claude/{rel.as_posix()}  (settings files are never copied)")
-        elif target.exists():
-            print(f"keep        ~/.claude/{rel.as_posix()}  (already exists; not overwritten)")
-        elif apply:
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(f, target)
-            print(f"copied      .claude/{rel.as_posix()} -> ~/.claude/{rel.as_posix()}")
-        else:
-            print(f"would copy  .claude/{rel.as_posix()} -> ~/.claude/{rel.as_posix()}")
-    if not apply:
-        print("Dry run: nothing was copied. Run 'sgtl setup-ai --apply' to copy these files.")
-    return 0
-
-
 # ----------------------------------------------------------------------------- data / pq
 def _add_data_parser(sub) -> argparse.ArgumentParser:
     p = sub.add_parser("data", help="STP waveform datasets: list, fetch (dry run unless --apply), verify",
@@ -628,8 +602,6 @@ def main(argv: Optional[List[str]] = None) -> int:
     sub.add_parser("status", help="show your progress table")
     p = sub.add_parser("diff", help="has the module template changed since you copied it?")
     p.add_argument("module")
-    p = sub.add_parser("setup-ai", help="copy tutor rules into ~/.claude/ (dry run unless --apply)")
-    p.add_argument("--apply", action="store_true", help="really copy (existing files are kept)")
     p = sub.add_parser("submit", help="run your work notebook of a module and send it for review "
                                       "(dry run unless --apply)")
     p.add_argument("module", help="module id, e.g. M04")
@@ -659,8 +631,6 @@ def main(argv: Optional[List[str]] = None) -> int:
             return status()
         if args.cmd == "diff":
             return diff(args.module)
-        if args.cmd == "setup-ai":
-            return setup_ai(apply=args.apply)
         if args.cmd == "submit":
             from .submit import submit
 

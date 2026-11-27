@@ -3,7 +3,7 @@
 # environment's Python (~/sgtl/envs/sgtl/bin/python, or $SGTL_HOME/envs/sgtl) if it is installed,
 # otherwise with python3 from your PATH (enough for "bin/sgtl doctor" before installing).
 #
-#   bin/sgtl --help       list the commands (doctor, new, status, diff, setup-ai, ...)
+#   bin/sgtl --help       list the commands (doctor, new, status, diff, submit, ...)
 #   bin/sgtl doctor       check the installation
 #   bin/sgtl new M01      make your own copy of a module notebook in work/
 #

@@ -8,7 +8,7 @@ If you used no AI for this module, keep only the line below and delete the examp
 
 No AI help used in this module: yes / no
 
-## YYYY-MM-DD · MXX-Tn · tool (for example Claude Code with sgtl-tutor, ChatGPT)
+## YYYY-MM-DD · MXX-Tn · tool (for example Claude, ChatGPT)
 
 - **What I asked** (paste the prompt, or summarize it if it was long):
 - **What the AI answered** (one or two sentences):

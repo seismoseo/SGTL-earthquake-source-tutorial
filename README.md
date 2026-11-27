@@ -2,7 +2,7 @@
 
 Learn to work with earthquake catalogs and seismic records, then locate earthquakes and study their sources. The
 course is for a new intern. Each notebook shows an idea, gives you a small method to write and checks your work
-before you use real Korean data. **Version 1.4.0 · 20 lessons · about 8 weeks, then the Suncheon and Sangju research
+before you use real Korean data. **Version 1.4.1 · 20 lessons · about 8 weeks, then the Suncheon and Sangju research
 projects.**
 
 ## Start here

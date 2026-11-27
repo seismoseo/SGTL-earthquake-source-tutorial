@@ -4,6 +4,12 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v1.4.1 — 2026-11-27 · no AI-tool settings in the repository
+
+- The repository no longer contains settings files for AI tools, and the command `bin/sgtl setup-ai` is gone.
+  The rules for using AI are in [docs/ai_policy.md](docs/ai_policy.md): tell your AI tool those rules yourself.
+- No change to the modules, tasks, checks or pass criteria.
+
 ## v1.4.0 — 2026-11-27 · shorter notebooks and course pages
 
 - Ten notebooks are much shorter and easier to follow: M03, M05, M10, M20, M21, M22, M30, M31, M32 and M41. Each
@@ -423,14 +429,13 @@ rewrites the Jupyter kernel with one new setting.
 - Modules M00 (start here: server, terminal, git, install), M01 (Python for earthquake catalogs) and
   M02 (figures and maps), delivered unexecuted. Later modules arrive in later releases.
 - The `sgtl_tutorial` helper package: predictions, checks, hints, progress, server-safe defaults and house style.
-- `bin/sgtl` (`doctor`, `new`, `status`, `diff`, `setup-ai`), `bin/sgtl-install` (course environment),
+- `bin/sgtl` (`doctor`, `new`, `status`, `diff`), `bin/sgtl-install` (course environment),
   `bin/sgtl-lab` (JupyterLab on the shared server), `bin/make-private-copy` and `bin/update-from-upstream`.
   The tools that install software, start or stop JupyterLab, change your git setup or copy files into your home
   folder are dry runs unless you add `--apply`; `bin/sgtl new` acts at once, because it only copies a module into
   `work/` and never overwrites a file.
 - Student documents in `docs/`: setup (English and Korean), how the tutorial works, AI-use policy, git workflow,
   server manners, data policy, troubleshooting, curriculum, reading list and glossary.
-- AI-tutor rules: `AGENTS.md`, `CLAUDE.md` and the Claude Code output style `sgtl-tutor`.
 - Glossary of technical terms with Korean equivalents (`glossary/glossary.csv`) and a verified reference list
   (`references/references.yaml`).
 - Licenses: MIT for code, CC BY 4.0 for text and figures; KMA catalog subsets under KOGL Type 1.
