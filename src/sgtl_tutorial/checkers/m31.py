@@ -236,7 +236,7 @@ def _t1_judge(case: dict, got: Any, tol: float) -> Tuple[bool, Optional[str], Op
     """(passed, category, what went wrong in words)."""
     nx, ny, nz = case["xs"].size, case["ys"].size, case["zs"].size
     if not isinstance(got, dict) or any(key not in got for key in T1_KEYS):
-        return False, "format", "not a dict with the keys of the Contract"
+        return False, "format", "not a dict with the keys listed in the docstring"
     try:
         rms = np.asarray(got["rms"], dtype=float)
         t0c = np.asarray(got["t0"], dtype=float)
@@ -429,7 +429,7 @@ def _t2_judge(case: dict, got: Any, crit: dict) -> Tuple[bool, Optional[str], Op
     n = len(obs)
     parts = _t2_parts(got, n)
     if parts is None:
-        return False, "format", "not a dict with the keys and shapes of the Contract"
+        return False, "format", "not a dict with the keys and shapes listed in the docstring"
     if parts["G"].shape != (n, 4):
         return False, "jacobian", f"G has shape {parts['G'].shape}, expected {(n, 4)}"
     m = parts["m"]

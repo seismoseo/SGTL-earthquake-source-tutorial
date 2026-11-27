@@ -39,7 +39,7 @@ Its small offline coastline retains the [GSHHG attribution and license](resource
 
 ## Cite this course
 
-Seo, M. (2026). *SGTL earthquake source tutorial* (version 1.3.0). Seismology, Geophysics, Tectonophysics Laboratory, Seoul National University.
+Seo, M. (2026). *SGTL earthquake source tutorial* (version 1.4.0). Seismology, Geophysics, Tectonophysics Laboratory, Seoul National University.
 
 Use [CITATION.cff](https://github.com/seismoseo/SGTL-earthquake-source-tutorial/blob/main/CITATION.cff) or GitHub’s
 “Cite this repository” button. Contributors are listed in

@@ -314,7 +314,7 @@ phasenet,PhaseNet,PhaseNet,"A deep-learning picker (Zhu and Beroza, 2019) that t
 stead,STEAD (Stanford Earthquake Dataset),STEAD (스탠퍼드 지진 자료 집합),"About a million labeled three-component records of earthquakes and noise from many regions, used to train many deep-learning pickers.",M21,0
 sliding_window,sliding window,이동 창,"A piece of record of fixed length that is moved along the record in steps, so a program that sees only 30 s at a time can cover a long record.",M21,1
 amplitude_normalization,amplitude normalization,진폭 정규화,"Scaling each piece of record before a network sees it, for example by its largest value or its standard deviation, so that large and small earthquakes give numbers of the same size.",M21,0
-blinding,blinding (edge samples),가장자리 표본 제외 (blinding),"Throwing away a network's output near both ends of each piece of record, where it saw too little record around a sample; it makes probability curves start later and end earlier than the record.",M21,1
+blinding,blinding (edge samples),가장자리 표본 제외,"Throwing away a network's output near both ends of each piece of record, where it saw too little record around a sample; it makes probability curves start later and end earlier than the record.",M21,1
 seisbench_annotation,annotations (SeisBench),주석 결과 (SeisBench annotation),"SeisBench's name for the output of a model run on a record: an ObsPy Stream with one probability curve per phase (P, S and noise) for every station.",M21,1
 pick_probability,pick probability,피킹 확률,The output of a deep-learning picker: for every sample a number from 0 to 1 that says how likely it is that a P (or S) wave arrives at that moment.,M21,0
 pick_threshold,pick threshold,피킹 임계값,"The smallest pick probability that may become a pick; a lower threshold gives more picks, and more false ones.",M21,0
@@ -343,15 +343,15 @@ taup,TauP,TauP,"A widely used program (also inside ObsPy as obspy.taup) that com
 earth_flattening,Earth-flattening transformation,지구 평탄화 변환,"A change of depths and speeds that makes travel times in flat layers equal to those in a spherical Earth, and back.",M30,1
 first_arrival,first arrival,최초 도달파 (초동),"The wave that reaches a station first, whichever path it took: the direct wave near the source, a head wave beyond a crossover distance; the onset a picker marks.",M30,1
 json_lines,JSON Lines,JSON 줄 형식,"A text file with one JSON object per line, so that a program can add a record by appending one line.",M32,1
-summary_file,summary file (HYPOINVERSE),요약 파일 (HYPOINVERSE),"HYPOINVERSE's output with one line per earthquake: origin time, hypocenter, number of readings, gap, RMS residual and errors.",M32,1
-archive_file,archive file (HYPOINVERSE),아카이브 파일 (HYPOINVERSE),"HYPOINVERSE's output with, for each earthquake, a header line and one line per station holding the residuals and the weights it used.",M32,1
+summary_file,summary file (HYPOINVERSE),요약 파일,"HYPOINVERSE's output with one line per earthquake: origin time, hypocenter, number of readings, gap, RMS residual and errors.",M32,1
+archive_file,archive file (HYPOINVERSE),아카이브 파일,"HYPOINVERSE's output with, for each earthquake, a header line and one line per station holding the residuals and the weights it used.",M32,1
 fixed_width_format,fixed-width format,고정 폭 형식,"A text format in which every value sits in fixed character columns instead of being separated by commas or blanks.",M32,0
 implied_decimal_point,implied decimal point,생략된 소수점,"A decimal point that is not written in a number but fixed by the format: in the format F4.2 the text 1234 means 12.34.",M32,1
 pick_weight_code,weight code,가중치 코드,"A number from 0 (full weight) to 4 (no weight) attached to a pick that tells a locator how much to trust it.",M32,1
 distance_weighting,distance weighting,거리 가중,"Giving readings at distant stations less weight in a location, down to none beyond a chosen distance.",M32,0
 residual_weighting,residual weighting,잔차 가중,"Giving readings with large travel-time residuals less weight, down to none, so that a wrong pick cannot pull a location.",M32,0
 trial_depth,trial depth,시작 깊이,"The depth at which an iterative locator starts its search for each earthquake.",M32,1
-location_errors,location errors (ERH and ERZ),위치 오차 (ERH와 ERZ),"HYPOINVERSE's horizontal (ERH) and vertical (ERZ) location errors in km, taken from the error ellipsoid of the final solution.",M32,1
+location_errors,location errors (ERH and ERZ),위치 오차,"HYPOINVERSE's horizontal (ERH) and vertical (ERZ) location errors in km, taken from the error ellipsoid of the final solution.",M32,1
 location_quality,location quality,진원 결정 품질 등급,"A letter from A (best) to D that sums up how well a location fits and how well the stations surround it; the numbers behind it say more.",M32,1
 nearest_station_distance,distance to the nearest station (DMIN),최근접 관측소 거리 (DMIN),"The epicentral distance of the closest station with a reading; a depth is best fixed when a station lies closer than about the depth itself.",M32,1
 station_delay,station delay (station correction),관측소 보정값,"A constant time added to the predicted travel time at one station, standing for what the velocity model leaves out near that station.",M32,1

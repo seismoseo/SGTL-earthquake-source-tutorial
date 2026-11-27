@@ -27,7 +27,7 @@ mentor or open a friction report.
 | analysis plan | 분석 계획서 | A document, written and frozen before any result is seen, that states the questions, hypotheses, tests and decision rules of a study. | `analysis_plan` | M60 |
 | analytic signal | 해석 신호 | A record paired with a copy of itself in which every frequency is shifted by a quarter of a cycle; the size of the pair is the envelope. | `analytic_signal` | M03 |
 | annotations (SeisBench) | 주석 결과 (SeisBench annotation) † | SeisBench's name for the output of a model run on a record: an ObsPy Stream with one probability curve per phase (P, S and noise) for every station. | `seisbench_annotation` | M21 |
-| archive file (HYPOINVERSE) | 아카이브 파일 (HYPOINVERSE) † | HYPOINVERSE's output with, for each earthquake, a header line and one line per station holding the residuals and the weights it used. | `archive_file` | M32 |
+| archive file (HYPOINVERSE) | 아카이브 파일 † | HYPOINVERSE's output with, for each earthquake, a header line and one line per station holding the residuals and the weights it used. | `archive_file` | M32 |
 | arrival time | 도달 시각 | The time a seismic phase reaches a station. | `arrival_time` | M20, M30 |
 | association window | 연관 시간 창 † | How far apart the back-projected origin times of picks may lie and still belong to one event. | `association_window` | M22 |
 | autoregressive model | 자기회귀 모형 | A rule that predicts each sample of a record from the few samples just before it. | `autoregressive_model` | M10 |
@@ -47,7 +47,7 @@ mentor or open a friction report.
 | bias of an estimator | 추정량의 편향 | A systematic error: averaged over many repeats, the estimate differs from the true value. | `estimator_bias` | M05 |
 | bisection | 이분법 | Finding where a quantity crosses a target value by halving an interval that contains the crossing, again and again. | `bisection` | M30 |
 | BLAS | 기본 선형대수 서브프로그램 † | Basic Linear Algebra Subprograms: the fast library behind NumPy's matrix and vector arithmetic; it can start many threads unless it is told to use one. | `blas` | M00, M10 |
-| blinding (edge samples) | 가장자리 표본 제외 (blinding) † | Throwing away a network's output near both ends of each piece of record, where it saw too little record around a sample; it makes probability curves start later and end earlier than the record. | `blinding` | M21 |
+| blinding (edge samples) | 가장자리 표본 제외 † | Throwing away a network's output near both ends of each piece of record, where it saw too little record around a sample; it makes probability curves start later and end earlier than the record. | `blinding` | M21 |
 | body wave | 실체파 | A seismic wave that travels through the inside of the Earth: P or S. | `body_wave` | M10, M30 |
 | body-wave magnitude (mb) | 실체파 규모 | A magnitude from the amplitude of the first P waves (period near one second) recorded far away; it stops growing for large earthquakes, near 6. | `body_wave_magnitude` | M04 |
 | boolean array | 불리언 배열 | An array of True and False values, one per element or row, that says where a condition holds. | `boolean_array` | M01 |
@@ -241,7 +241,7 @@ mentor or open a friction report.
 | local magnitude (ML) | 국지 규모 | A magnitude from the largest amplitudes on nearby seismometers, corrected for distance; the KMA catalog reports ML. | `local_magnitude` | M00, M01, M02, M03, M04, M05, M10 |
 | local maximum (peak) | 극댓값 | A sample of a curve that is higher than both of its neighbours. | `local_maximum` | M21 |
 | location code | 위치 코드 † | The part of a SEED id that tells apart two sensors of the same kind at one station; it is often empty. | `location_code` | M03 |
-| location errors (ERH and ERZ) | 위치 오차 (ERH와 ERZ) † | HYPOINVERSE's horizontal (ERH) and vertical (ERZ) location errors in km, taken from the error ellipsoid of the final solution. | `location_errors` | M32 |
+| location errors (ERH and ERZ) | 위치 오차 † | HYPOINVERSE's horizontal (ERH) and vertical (ERZ) location errors in km, taken from the error ellipsoid of the final solution. | `location_errors` | M32 |
 | location quality | 진원 결정 품질 등급 † | A letter from A (best) to D that sums up how well a location fits and how well the stations surround it; the numbers behind it say more. | `location_quality` | M32 |
 | location uncertainty | 위치 불확실성 | How far an earthquake's true position may lie from its catalog position, in km, including the rounding of the catalog. | `location_uncertainty` | M54 |
 | lower-hemisphere projection | 하반구 투영 | Drawing the rays that leave the source downward, as seen from above, on a flat circle. | `lower_hemisphere_projection` | M50 |
@@ -456,7 +456,7 @@ mentor or open a friction report.
 | strike-slip fault | 주향이동단층 | A fault on which the two sides slide horizontally past each other (rake near 0 or 180 degrees). | `strike_slip_fault` | M50 |
 | sub-sample precision | 표본 간격보다 세밀한 정밀도 † | Measuring a time more finely than the sampling interval, for example to a millisecond from records sampled every 10 ms, by interpolating between samples. | `sub_sample_precision` | M41 |
 | subprocess | 하위 프로세스(서브프로세스) † | A new program started by a running program; it gets only the environment variables that it is handed. | `subprocess` | M10 |
-| summary file (HYPOINVERSE) | 요약 파일 (HYPOINVERSE) † | HYPOINVERSE's output with one line per earthquake: origin time, hypocenter, number of readings, gap, RMS residual and errors. | `summary_file` | M32 |
+| summary file (HYPOINVERSE) | 요약 파일 † | HYPOINVERSE's output with one line per earthquake: origin time, hypocenter, number of readings, gap, RMS residual and errors. | `summary_file` | M32 |
 | surface wave | 표면파 | A seismic wave that travels along the Earth's surface; it is slower than body waves and often largest at long distances. | `surface_wave` | M10, M53 |
 | SV and SH waves | SV파와 SH파 | The two parts of an S wave's motion: SV moves in the vertical plane that holds the ray, SH moves horizontally, across that plane. | `sv_sh_waves` | M52 |
 | synthetic seismogram | 합성 지진 기록, 합성 파형 | A seismogram computed from a source and an Earth model instead of recorded. | `synthetic_seismogram` | M52, M53 |

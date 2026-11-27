@@ -1,5 +1,5 @@
 {
- "date": "2026-11-26",
+ "date": "2026-11-27",
  "flavor": "student",
  "modules": [
   "M00",
@@ -23,7 +23,7 @@
   "M54",
   "M60"
  ],
- "source_commit": "77a4083d697b8f7f5d12ce1e26142562315d9bbf",
+ "source_commit": "99a4e677fa7275b42879f5a36584830698eb4a20",
  "source_dirty": false,
- "version": "1.3.0"
+ "version": "1.4.0"
 }

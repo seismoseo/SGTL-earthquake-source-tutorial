@@ -2,112 +2,97 @@
 
 English: [how_this_tutorial_works.md](how_this_tutorial_works.md)
 
-## 모듈
+과정은 M00부터 M60까지 이어지는 **모듈**로 이루어지며, 모듈 하나가 Jupyter 노트북 하나입니다. `bin/sgtl new MXX`는
+모듈을 `work/MXX_slug/`에 한 번 복사하고, 작업은 이 복사본에서만 합니다. `docs/notebooks/`의 원본은 튜토리얼
+소유이며 업데이트 때 바뀝니다. 순서와 미리 준비할 것은 [수업 안내](notebooks/README.md)에 있습니다.
 
-과정은 여러 **모듈**(M00, M01, ... M60, [curriculum.md](curriculum.md) 참고)로 이루어져 있고, 모듈 하나가 Jupyter
-노트북 하나입니다. `bin/sgtl new MXX`를 실행하면 노트북이 `work/MXX_slug/`에 한 번 복사되며, 작업은 이 복사본에서만
-합니다. `docs/notebooks/`에 있는 원본은 튜토리얼 소유이며 업데이트 때 바뀝니다.
+노트북은 머리말(걸리는 시간, 먼저 끝낼 모듈, 새 용어)로 시작하고, 먼저 실행할 셀이 둘 있습니다. **parameters**
+셀은 바꿔도 되는 값을 두는 유일한 곳이고, **setup** 셀의 `S = st.init("MXX")`는 서버를 공정하게 나눠 쓰도록
+스레드와 메모리를 제한합니다. 그다음 각 부(Part)는 짧은 글과 코드 셀 하나로 개념을 보여 줍니다. 실행하고 결과를
+보세요.
 
-모든 노트북은 같은 방식으로 시작합니다. 머리말에는 목표, 예상 시간, 먼저 읽을 자료가 있습니다. 그다음은
+## 과제는 다섯 단계
 
-1. **parameters** 셀: 바꿔도 되는 값(파일 이름, 주파수, 시드 등)은 이 셀에만 둡니다.
-2. **setup** 셀: `import sgtl_tutorial as st`와 `S = st.init("MXX")`. 서버를 공정하게 나눠 쓰도록 스레드와 메모리를
-   제한하고, 그림 양식을 설정하고, 환경 보고를 짧게 출력합니다.
+모든 과제(`MXX-Tn`)는 같은 셀로 이루어집니다. 아래는 M05의 과제입니다.
 
-대부분의 방법은 세 단계로 배웁니다. **(1)** 정답을 아는 합성 자료로 핵심 함수를 직접 작성합니다. **(2)** 실제 한국
-자료에 적용하고 독립적인 기준(기상청, 한국지질자원연구원, USGS, 또는 직접 만든 도구 결과)과 비교합니다. **(3)** 실제
-연구용 도구를 돌립니다. 먼저 아무것도 바꾸지 않고 다시 돌려 실행마다 생기는 차이를 보고, 그다음 변수 하나만 바꿔
-차이를 설명합니다. 몇몇 단계는 **손으로 먼저** 합니다. M30 전에 NMSOP-2 EX 11.1(진앙 결정 연습)을, M50 전에 인쇄한
-스테레오넷으로 EX 3.2와 EX 3.3(단층면해 연습)을 풉니다. NMSOP-2는 무료로 공개된 지진 관측 실무 지침서
-『New Manual of Seismological Observatory Practice』 제2판(Bormann, 2012)이고, EX 11.1은 그 안의 연습 문제 11.1입니다
-([reading_list.md](reading_list.md) 참고).
+```text
+### M05-T3 · Completeness from the peak of the histogram · core · about 60 min
 
-## 모듈을 시작하기 전에
+Write `mc_maxc(mags, dm, correction=0.2)`: the center of the bin with the most events, plus `correction`.
+- Bins have width `dm` and are centered on the listed values (multiples of `dm`).
+- If several bins share the largest count, take the smallest magnitude.
+- `np.unique(..., return_counts=True)` counts how often each value occurs.
 
-모듈 번호순이 아니라 [교육 과정](curriculum.md)의 순서를 따르세요. M00 → M01 → M02 → M04, 그다음
-M05 → M03 → M10 순서입니다. 3–4주차에는 M20 → M21 → M30 → M22 순서로 진행합니다. M22는 두 연구 프로젝트에 필요한 필수 모듈입니다. 다음
-노트북의 머리말에서 선수 모듈, 읽을 자료와 필요한 자료를 먼저 확인하세요.
+Example: 1.0, 1.1, 1.1, 1.2 with `dm` = 0.1 give 1.1 + 0.2 = 1.3.
 
-첫날에는 환경만 설치합니다. 다음 명령은 `~/sgtl/tutorial`에서 **서버 터미널**에 입력합니다. 표의 설치·내려받기
-명령은 드라이 런이므로 계획을 읽은 뒤 준비되면 `--apply`를 붙여 반복하세요. 한 번에 하나씩 진행합니다.
+Not allowed: SeismoStats or `sgtl_tutorial` inside your function.
+```
 
-| 시작 전 | 추가 준비 | 확인 방법 |
-|---|---|---|
-| M03 실제 자료 | `bin/sgtl-install tools metadata`; M03 1부대로 개인 STP 클라이언트와 자격 증명을 `~/.sgtl/`에 둔 뒤 `bin/sgtl data fetch sangju2019` | `bin/sgtl pq check`, `bin/sgtl data verify sangju2019` |
-| M21 | `bin/sgtl-install seisbench` (PhaseNet 모델 두 개) | `bin/sgtl doctor`의 가중치 항목 |
-| M22 | `bin/sgtl data fetch sangju2019_hours` | `bin/sgtl data verify sangju2019_hours` |
-| M52 | `bin/sgtl-install pyfk` (별도 작업 환경) | 노트북의 PyFK 환경 점검 |
-| M53 | `bin/sgtl-install mt`; M52와 M51을 먼저 마침 | 노트북의 가져오기와 선수 결과 파일 점검 |
-| M54 | `bin/sgtl-install coulomb`; 첫 실행에는 공개 경주 메커니즘을 받을 인터넷 연결 | 노트북의 도구 점검, 이후에는 저장된 메커니즘 파일 사용 |
-| M60 | `bin/sgtl data fetch gokseong2018`; `bin/sgtl new project`는 템플릿을 즉시 복사함 | `bin/sgtl data verify gokseong2018`, `project/README.md` 확인 |
-| 순천 연구 계획 승인 뒤 | `bin/sgtl data fetch suncheon_area`; 크기를 확인한 뒤 `--apply --large`로 반복 | `bin/sgtl data verify suncheon_area` |
-| 상주 연구 | `st.data.project_definition("sangju")`를 확인하고 직접 선정한 자료 요청을 고정한 뒤 [상주 안내](sangju_project.md)를 따름 | `project/sangju/`의 별도 계획, 비교 지역, 요청 지문과 검증 기록 |
+```python
+# Before you code: for a catalog whose detection fades slowly over a whole magnitude unit, will MAXC + 0.2 be
+# above or below the magnitude where detection is really complete?
+st.predict("M05-T3", """
 
-`doctor`, `pq check`, `data verify`는 읽기 전용이므로 `--apply`가 필요 없습니다. 내려받기에서 STOP이 나오면 먼저
-표시된 선행 조건을 해결하세요. 없는 자료나 이전 결과를 임의로 만들어 다음 셀로 넘어가지 마세요.
+""")
+```
 
-뒤 모듈은 앞 모듈의 파일을 다시 씁니다. M20의 `work/picks/M20_manual_picks.csv`, M21과 M32의
-`sangju_m21` 클러스터와 실행 기록, M31의 `work/M31_location/results/M31_hypoinverse_runs.csv`,
-M51의 `work/M51_first_motions/results/M51_skhash_first/mechanisms.csv`를 유지하세요. M60의 순천 자료 목록은
-`project/inventory/`에 남습니다. 순천은 기존 `project/`의 주장 표·계획·기준·기록을 유지하고, 상주 연구는
-`project/sangju/`의 별도 계획과 자료 요청·판단 기준·기록·보고서로 진행합니다. 두 프로젝트 모두 필수이며 템플릿 매칭과
-독립 검증을 포함합니다.
+```python
+def mc_maxc(mags, dm, correction=0.2):
+    """Maximum-curvature magnitude of completeness (Wiemer and Wyss 2000) plus a correction.
 
-이전 함수를 붙여 넣으라는 셀에는 **내가 점검을 통과한 함수**와 그 함수가 쓰는 가져오기·상수·도우미를 복사한 뒤
-실행합니다. 다른 노트북의 변수는 새 커널에 전달되지 않습니다. 커널을 다시 시작해도 실행되도록 그 셀을 남겨 두세요.
-내 파일 경로나 클러스터 이름이 기본값과 다르면 parameters 셀의 값만 바꿉니다. 원본 템플릿과 점검 셀은 바꾸지 않습니다.
+    mags       : numpy array of rounded magnitudes
+    dm         : float, bin width
+    correction : float, added to the peak bin (0.2 after Woessner and Wiemer 2005)
+    returns    : float, magnitude of completeness
+    """
+    # YOUR CODE HERE
+    raise NotImplementedError("M05-T3: write your code here")
+```
 
-## 과제 단계(tier)
+```python
+st.check("M05-T3", func=mc_maxc)
+```
 
-- **core(필수)**: 반드시 해야 합니다. 관문(gate)은 core 과제만 봅니다.
-- **stretch(심화)**: core를 마친 뒤 같은 개념을 더 깊이 다룹니다.
-- **research(연구)**: 정답이 하나가 아닌 열린 질문입니다. 자동 점검이 없는 것도 있습니다.
+```text
+**Explain:** In the demo below, where is MAXC + 0.2 compared with 99 % detection, and what does that do to $\hat b$?
+```
 
-## 과제 진행 순서: 예측, 코드, 점검, 설명
+1. **읽기.** 과제 설명과 함수의 설명문(docstring)을 읽습니다. 설명문에 입력, 출력, 단위가 적혀 있습니다.
+2. **예측.** `Before you code` 질문의 답을 `st.predict`의 따옴표 안에 적고 셀을 실행합니다. 예측이 틀려도
+   괜찮습니다. 예측과 결과의 차이에서 배웁니다. 예측을 저장해야 점검이 실행됩니다.
+3. **코드 작성.** `# YOUR CODE HERE` 아래의 `raise` 줄 자리에 코드를 씁니다. 함수 이름, 인수, 설명문은 그대로
+   둡니다. 과제 함수 안에서는 강의 패키지(`st`, `sgtl_tutorial`)를 쓰지 않습니다. 점검이 이를 거부하며, 과제가
+   허용하지 않는다고 밝힌 라이브러리도 마찬가지입니다.
+4. **점검.** `st.check` 셀을 실행합니다. 이 셀은 절대 고치지 않습니다. 답을 아는 사례로 함수를 시험해 PASS를,
+   또는 이유와 함께 FAIL을 출력합니다. FAIL이 나오면 `st.hint("MXX-Tn", 1)`로 실마리를 봅니다. 2단계 힌트는 점검에
+   한 번, 3단계는 두 번 실패한 뒤에 열립니다. 힌트를 써도 불이익은 없습니다. `st.reroll("MXX-Tn")`은 새 연습
+   자료를 뽑습니다.
+5. **설명.** Explain 질문 하나에 내 말로 1-3문장으로 답합니다. 숫자는 노트북이 출력한 값만 씁니다.
 
-과제(`MXX-Tn`)마다 같은 다섯 셀이 있습니다.
+PASS는 이 사례들에서 내 함수가 기준과 일치한다는 뜻일 뿐, 방법을 이해했다는 증명은 아닙니다. 이해는 설명 답과
+매주 구두 점검으로 확인합니다. 관문(gate), 멘토의 평가 기준표, 구두 점검은 [교육 과정](curriculum.md#gates)에, 다른
+점검 메시지는 [문제 해결](troubleshooting.md#checks)에 있습니다.
 
-1. **과제 설명**: 목표, 주어진 자료, **계약**(입력, 출력, 단위, 규약), 완료 조건.
-2. **예측**: 코드를 짜기 전에 `st.predict("MXX-Tn", """ ... """)` 안에 예상(숫자, 모양, 부호, 경향과 그 이유)을
-   적습니다. 예측이 틀려도 괜찮습니다. 예측과 결과의 차이에서 배웁니다. 예측을 저장하지 않으면 점검이 실행되지
-   않습니다.
-3. **내 코드**: `# YOUR CODE HERE` 자리에 함수를 완성합니다. 함수 정의와 설명문(docstring)은 그대로 둡니다.
-4. **점검**: `st.check(...)`를 실행합니다. 이 셀은 절대 고치지 않습니다.
-5. **설명**: 질문에 3-5문장으로 답합니다. 숫자는 노트북이 출력한 값만 인용합니다.
+## 커널 재시작, Run All, 선택 셀
 
-**함정 찾기(debug-the-trap)** 과제에서는 실제 연구자들이 겪은 실수(예: 시간대 오류)가 들어 있는 셀이 주어집니다.
-실수를 찾고, 그 영향을 예측하고, 설명합니다.
+커널을 다시 시작하면(Kernel → Restart Kernel) 모든 변수가 지워집니다. parameters 셀과 setup 셀을 실행한 뒤 끝낸
+셀을 순서대로 다시 실행하세요. **Kernel → Restart Kernel and Run All Cells**는 선택 셀까지 실행하므로, 선택 과제도
+준비되었을 때 씁니다. 노트북끼리는 변수를 나누지 않습니다. 이전 함수를 붙여 넣으라는 셀에는 점검을 통과한 내
+함수를 그 함수가 쓰는 가져오기·상수·도우미와 함께 붙여 넣고 실행합니다.
 
-## 힌트
+과제는 **core**(필수, 관문은 이것만 봄), **stretch**(core 다음에 더 깊이), **research**(열린 질문, 점검이 없는 것도
+있음)로 나뉩니다. 탐색 도구(explorer)와 *optional* 표시가 있는 셀은 필수가 아닙니다.
 
-`st.hint("MXX-Tn", 1)`은 개념 안내(용어와 읽을 자료)를 줍니다. 2단계(풀이 계획을 말로 설명)는 점검에 한 번 실패한 뒤,
-3단계(빈칸이 있는 코드의 모양, 실행되지 않음)는 두 번 실패한 뒤에 열립니다. 힌트 사용은 기록되지만, 힌트를 쓰는 것은
-자연스러운 일이며 불이익이 없습니다.
+## AI 기록
 
-## 점검이 알려 주는 것과 알려 주지 않는 것
+AI에게 오류, 공식, 개념의 설명을 들을 수는 있지만, 과제 함수, 예측, 설명 답을 AI가 대신 써서는 안 됩니다
+([AI 사용 규칙](ai_policy_ko.md)). AI를 쓸 때마다 `work/ai_log/MXX.md`에 적습니다. 예측, 점검, 힌트, 다시 뽑기는
+`work/.sgtl/progress.jsonl`에 기록되고, `st.progress()`가 이를 표로 보여 줍니다. 멘토는 두 기록을 모두 읽습니다.
 
-점검은 정답을 이미 아는 시험 사례로 함수를 실행합니다. 정답은 **구성상 알려진 값**(내 난수 시드로 만든 합성 자료),
-**다른 라이브러리**나 다른 공식, 또는 **직접 만든 도구 결과**에서 옵니다. 출력은 PASS 또는 FAIL, 통과한 사례 수,
-허용 오차, 시드, 그리고 실패했을 때 정해진 메시지가 붙은 **실패 유형**(예: "거리가 킬로미터가 아니라 도나 미터처럼
-보입니다")입니다. 합성 사례에서는 입력값과 내 값, 오차 크기를 보여 줍니다.
+## 저장과 제출
 
-정답 코드는 절대 보여 주지 않으며, 실제 자료의 기대값도 출력하지 않습니다. 어떤 과제는 함수 안에서 지름길이 되는
-라이브러리 사용을 금지합니다(이때 점검은 `forbidden-import` 유형으로 실패합니다). `NOT STARTED`는 함수가 아직
-`NotImplementedError`를 내고 있다는 뜻입니다. `st.reroll("MXX-Tn")`은 새 합성 사례를 뽑습니다(기록됩니다).
-
-PASS는 이 사례들에서 내 함수가 기준과 일치한다는 뜻입니다. 방법을 이해했다는 증명은 아니며, 모든 실수를 잡아내지도
-못합니다. 그래서 설명 셀과 구두 점검이 있습니다.
-
-## 내 기록
-
-예측, 점검, 힌트, 다시 뽑기는 모두 시각과 함께 `work/.sgtl/progress.jsonl`에 쌓입니다. `st.progress()`는 과제 현황을
-표로 보여 줍니다. 멘토는 이 기록을 보고 함께 일정을 조정합니다. AI 도움은 `work/ai_log/`에 기록합니다
-([ai_policy_ko.md](ai_policy_ko.md)).
-
-## 모듈 제출: `sgtl submit`
-
-모듈이 준비되면(핵심 과제의 점검을 모두 통과하고, 설명 셀과 AI 기록을 다 썼으면) JupyterLab에서 노트북을 저장하고
-다음을 실행합니다.
+Ctrl+S(Mac은 Cmd+S)로 저장하고 날마다 커밋합니다([Git 작업 방식](git_workflow.md)). 핵심 과제의 점검을 모두
+통과하고 설명 답과 AI 기록을 다 썼으면 서버 터미널에서 실행합니다.
 
 ```bash
 bin/sgtl submit M04            # 시험 실행: 내 사본을 점검하고 계획만 보여 줌. 아무것도 실행하지 않음
@@ -115,57 +100,14 @@ bin/sgtl submit M04 --apply    # 핵심 과제를 실행하고 기록한 뒤 멘
 bin/sgtl submit M04 --include-optional    # 심화·연구 과제도 선택함. 계획을 읽은 뒤 --apply 추가
 ```
 
-`--apply`를 붙이면 내 작업 노트북 `work/M04_.../M04_....ipynb`의 사본을 셀 순서대로 **papermill**(브라우저 없이
-노트북을 실행하는 프로그램)로 실행합니다. 기본값은 핵심 과제이며, 실행 사본에서 선택 과제 블록을 건너뛰므로 미완성
-심화 과제가 핵심 과제 제출을 막지 않습니다. 심화·연구 과제도 실행하려면 `--include-optional`을 붙입니다.
-선택된 점검은 이번 실행에서 모두 PASS여야 합니다. 예전 PASS나 건너뛴
-핵심 점검으로는 제출할 수 없습니다. 내 계정에서
-코어 하나, 강의 커널과 같은 스레드 제한, 낮은 우선순위로 실행하며 120분이 지나면 멈춥니다(`--timeout 분`으로 바꿀 수
-있음). 내 노트북 파일은 바뀌지 않습니다. 실행 결과는 `work/submissions/M04/<UTC 시각>/`에 실행된 사본, 실행 기록,
-`submission.json`으로 저장됩니다. `submission.json`에는 무엇이 언제 실행되었는지와 내 노트북, 실행된 사본, 실행이
-만든 파일(`sgtl pq`가 `work/.sgtl/runs.jsonl`에 기록한 결과물 포함)의 **SHA-256 지문**(파일이 1바이트만 바뀌어도
-달라지는 64자 코드)이 들어 있습니다.
+`--apply`는 내 노트북의 사본을 **papermill**(브라우저 없이 노트북을 실행하는 프로그램)로 처음부터 실행합니다.
+코어 하나로 최대 120분 동안 실행합니다(`--timeout 분`으로 바꿀 수 있음). 끝내지 않은 선택 과제가 있어도 핵심
+과제 제출은 막히지 않습니다. 선택된 점검은 이번 실행에서 모두 PASS여야 하며, 예전 PASS는 인정되지 않습니다. 내
+노트북 파일은 바뀌지 않습니다. 실행된 사본, 실행 기록, `submission.json`은 `work/submissions/M04/<UTC 시각>/`에
+저장됩니다. `submission.json`에는 파일의 **SHA-256 지문**(파일이 1바이트만 바뀌어도 달라지는 코드)이 들어
+있습니다. 이 파일들은 내 비공개 사본의 새 브랜치 `submit/M04-<UTC 시각>`에 커밋되고, 풀 리퀘스트로 멘토에게
+검토를 요청합니다. 셀이 오류로 멈추거나 점검에 실패하거나 시간 제한에 걸리면
+아무것도 커밋하지 않습니다. 실행 기록을 읽고 노트북을 고친 뒤 다시 제출하세요.
 
-선택된 작업이 실행되고 점검을 통과하면 이 파일들과 내 노트북, AI 기록, 기록 파일을 새 브랜치 `submit/M04-<UTC 시각>`의 커밋 하나로
-묶어 내 비공개 사본에 올리고, 풀 리퀘스트로 멘토에게 검토를 요청합니다. 지금 쓰는 브랜치와 폴더의 파일은 그대로
-둡니다. 선택한 셀이 오류로 멈추거나 점검에 실패하거나 시간 제한에 걸리면 아무것도 커밋하거나 올리지 않습니다. 실행 기록을 읽고
-노트북을 고친 뒤 다시 제출하세요. 제출 중에도 점검이 다시 실행되어 평소처럼 기록되지만, 멘토는 이것을 내 시도
-횟수와 따로 셉니다. `sgtl submit`은 비공개 사본에만 올립니다. 무엇이든 실행하기 전에 `origin`이 올리는 주소를 모두 읽고, 그 하나하나가
-GitHub가 직접 비공개(private)라고 알려 주는 GitHub 저장소가 아니면 멈춥니다(`gh`로 묻기 때문에 `gh auth status`에
-로그인되어 있어야 함). 주소 가운데 하나라도 공개 강의 저장소이면, 주소를 어떤 형태로 썼든 멈춥니다(먼저 비공개 사본을
-만드세요, [git_workflow.md](git_workflow.md)).
-
-## 관문(gate)과 B 경로
-
-교육 모듈의 매주 끝에 **관문**이 있습니다(G0-G6, 8주차의 순천 계획 확정). 단계별 연구 일정에서는 두 프로젝트의
-서명된 계획·자료 요청, 검출 및 민감도 검증 기록, 최종 보고서 두 편과 공동 발표·구두 심사를 검토합니다
-([교육 과정](curriculum.md)). 다음을 모두 만족하면 통과입니다.
-
-- 그 주의 **core** 점검이 모두 통과함.
-- 멘토의 평가 기준표에서 **8점 중 6점 이상**이고 0점 항목이 없음. 네 항목을 각각 0-2점으로 매깁니다: 정확성(점검과
-  그림), 추론(직접 쓴 예측과 설명), 작업 품질(읽기 쉬운 코드, 정돈된 노트북, 꾸준한 커밋), 정직성(빠짐없는 AI 기록,
-  인용, 안 된 것도 솔직히 적기).
-- AI 기록이 정직하고 빠짐없음.
-
-통과하지 못하면 **B 경로**로 갑니다. 합성 점검에 새 시드를 쓰고, 멘토의 추가 지도를 받은 뒤, 며칠 뒤 다시 도전합니다.
-벌칙이 아니라 따라잡는 보통의 방법입니다. 3주차와 5주차가 끝나면 실제로 걸린 시간에 맞춰 계획을 조정하며, stretch
-항목부터 뺍니다.
-
-## 매주 구두 점검: "이 셀을 설명해 보세요"
-
-일주일에 한 번 멘토가 내 작업에서 셀을 고르면 메모 없이 15분 정도 설명합니다. 각 줄이 무엇을 하는지, 왜
-필요한지, 입력이 바뀌면 무엇이 달라지는지를 말합니다. 누구의 도움을 받았든 내 코드를 설명할 수 있다면 제대로
-배우고 있는 것입니다. 설명할 수 있는 코드만 쓰세요.
-
-만나는 자리에서 나나 멘토가 다음을 실행합니다.
-
-```bash
-bin/sgtl oral M04 --salt 낱말      # 모든 모듈에서 고르려면 bin/sgtl oral --salt 낱말
-```
-
-`낱말`은 멘토가 그 자리에서 새로 말하는 낱말입니다(6자 이상. 멘토가 자기 셸에 `SGTL_ORAL_SALT`를 대신 정해 둘 수도
-있음). 낱말이 없으면 아무것도 고르지 않으므로, 만나기 전에는 누구도 어느 셀이 나올지 알 수 없습니다. 점검을 통과한
-과제의 코드 셀 세 개를 날짜, 내 이름, 낱말로 정해지는 무작위로 고릅니다(셋이 같으면 같은 셀이 나옴). 기록에는 낱말의
-지문만 남습니다. 셀마다 줄 번호와 함께 질문 두 개를 보여 줍니다. 한 줄이 무엇을 하는지,
-그리고 한 가지가 달라지면 무엇이 바뀌는지입니다. 이 명령은 내 노트북을 읽기만 하고 실행하지 않습니다. 고른 결과는
-`work/.sgtl/oral.jsonl`에 더해지니 작업과 함께 커밋하세요.
+`sgtl submit`은 비공개 GitHub 사본에만 올리고 공개 강의 저장소에는 절대 올리지 않습니다. `gh auth status`에
+로그인되어 있어야 합니다([비공개 사본](git_workflow.md)).

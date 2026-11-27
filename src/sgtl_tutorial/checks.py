@@ -639,7 +639,7 @@ def _run_checker(task_id: str, checker: Callable, target: Any, context: "CheckCo
             ], out, counted=True)
         return finish(ERROR, notes + [
             f"ERROR · the checker could not use your result ({_fmt(err, 200)}). Nothing was counted.",
-            "Next step: check that your function returns what the Contract asks for (type, shape, units). "
+            "Next step: check that your function returns what its docstring describes (type, shape, units). "
             "If it does, tell your mentor.",
         ])
 
@@ -661,7 +661,7 @@ def _run_checker(task_id: str, checker: Callable, target: Any, context: "CheckCo
             lines.append(outcome.message)
         if details.get("note"):
             lines.append(str(details["note"]))
-        lines.append("Next step: answer the Explain prompt below (3-5 sentences), then go on.")
+        lines.append("Next step: answer the Explain question below in 1-3 sentences, then go on.")
         return finish(PASS, lines, outcome, counted=True)
 
     cat = outcome.category or "wrong"

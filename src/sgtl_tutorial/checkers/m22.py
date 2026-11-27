@@ -406,7 +406,7 @@ def check_T2(target: Any, ctx: Any) -> Outcome:
     ok.append(bool(good))
     if not good:
         cats.append(_t2_judge(got, template, data, tol) or "wrong-values")
-        note(template, data, got, f"the example of the Contract gives {expected}")
+        note(template, data, got, f"the example of the task gives {expected}")
     for category, template, data in _t2_probes(rng):
         got, err = _call(target, template.copy(), data.copy())
         if err is not None:

@@ -4,6 +4,24 @@ All notable changes to the SGTL earthquake source tutorial. Versions follow `vMA
 To get a new version into your private copy, run `bin/update-from-upstream` (dry run), then
 `bin/update-from-upstream --apply` (see [docs/git_workflow.md](docs/git_workflow.md)).
 
+## v1.4.0 — 2026-11-27 · shorter notebooks and course pages
+
+- Ten notebooks are much shorter and easier to follow: M03, M05, M10, M20, M21, M22, M30, M31, M32 and M41. Each
+  part starts with a few sentences and a cell to run. Each task says what to write and gives one example; the
+  details are in its code cell (the docstring or the comments). Each Explain asks one question. The other
+  notebooks follow later.
+- The course pages are shorter too: setup, how the course works, the curriculum, the lesson guide, the Git
+  workflow, troubleshooting, the SeisComP workshop and the project guides.
+- A notebook's header now names the hand exercise to do first, with a link: NMSOP-2 EX 11.1 before M30, and
+  EX 3.2 and EX 3.3 before M50.
+- The tasks, the checks and the pass criteria did not change. A task that passed still passes.
+- A module that you copied earlier with `bin/sgtl new` stays as it is: sgtl never overwrites your work.
+  `bin/sgtl diff MXX` tells you whether module MXX changed since you copied it, and how to compare the two.
+- To get the short version of a module that you have not started yet, rename your old copy, then run
+  `bin/sgtl new` again. For example: `mv work/M31_location/M31_location.ipynb work/M31_location/old_M31_location.ipynb`,
+  then `bin/sgtl new M31`.
+- You do not need to run `bin/sgtl-install` again.
+
 ## v1.3.0 — 2026-11-26 · SeisComP visual exploration and manual picks
 
 - Added an illustrated SeisComP workshop after M03, alongside M10/M20: a synthetic rehearsal, offline waveform

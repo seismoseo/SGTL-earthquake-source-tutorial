@@ -1,92 +1,64 @@
 # Curriculum
 
-About 35-40 hours per week, including about 2 hours of reading. All times are estimates; the plan is adjusted after
-week 1 from your recorded progress, and again after the gates of weeks 3 and 5. If the pace is slow, optional explorers and stretch items are reduced first.
-M22 and both projects remain required; reduce data volume or extend the phased schedule with your mentor. Required reading for each module is listed in its header;
-the full list is in [reading_list.md](reading_list.md). Gates are explained in
-[how_this_tutorial_works.md](how_this_tutorial_works.md).
+Plan for about 35-40 hours a week, including about 2 hours of reading ([reading list](reading_list.md)). All times
+are estimates: your mentor adjusts the plan after week 1, and again after the gates of weeks 3 and 5. If the pace is
+slow, optional explorers and stretch tasks go first; M22 and both projects stay required.
 
-**Explorers** (E1-E14) are optional interactive widgets for building intuition: you move a slider and watch a
-filter, a trigger, a misfit landscape or a beachball change. An explorer never does a task for you: it draws what
-your own functions return. E9 (in M05) draws the frequency-magnitude distribution from your counting, b-value and
-Mc functions; E1 (in M10) is a filter bench that shows your amplitude spectra; E2 (in M20) is the picker with which
-you pick P and S by hand and save your picks; E3 (in M20) shows your STA/LTA ratio and triggers under sliders; E4
-(in M30) draws your direct-wave and head-wave travel times while you change the layers and the source depth; E11
-(in M22) shows your detection threshold and detections next to the peaks on the null records; E5 (in M31) draws the
-misfit of your own grid search in map view and in a depth section, with stations left out as you choose; E6 (in
-M41) shows the lag that your cross-correlation finds between a wavelet and a shifted copy under a filter band and
-noise; E7 (in M41) puts a made-up cluster under pick errors and station delays and compares absolute positions with
-the relative positions from your own double-difference functions; E13 (in M50) lets you fit a fault plane to first
-motions by hand on your own equal-area net, with your agreement, P and T axes and auxiliary plane; E8 (in M51) shades
-a beachball under strike, dip and rake sliders with your own predicted polarities and shows your misfit; E12 (in M52)
-draws your P, SV and SH radiation patterns on your own equal-area net for the mechanism under the sliders; E14 (in
-M53) runs a small moment-tensor grid search on made-up records under one station's wrong gain and the misfit norm,
-with each station's share of the misfit from your own budget; E10 (in M54) maps your own shear, normal and Coulomb
-stress changes around a slipping rectangle for the source and receiver under the sliders.
+| Week | Module | What you learn | Hours (+ optional) |
+|---|---|---|---|
+| 1 | M00 Start here | the server, terminal, JupyterLab, git and your private copy | 8 |
+| 1 | M01 Python for earthquake catalogs | tested Python functions, pandas tables, UTC and KST | 10 (+1) |
+| 1 | M02 Figures and maps | clear figures in the house style and PyGMT maps | 6 (+1.5) |
+| 1 | M04 Earthquake catalogs | magnitude counts, sequences, catalog matching, completeness | 8 (+1.5) |
+| 2 | M05 Statistical seismology | b-value, completeness and aftershock decay | 9 (+2) |
+| 2 | M03 Getting seismic data | station codes, UTC windows, STP downloads, instrument responses | 5.7 (+1) |
+| 2 | M10 Seismograms | SAC times, filters, spectra, response removal, record sections | 9.7 (+1.7) |
+| 3 | M20 Picking arrivals | STA/LTA triggers, onset times and picks by hand | 9.7 |
+| 3 | M21 Deep-learning pickers | PhaseNet picks and PocketQuake's picking stage | 7.8 |
+| 3 | M30 Travel times in a layered crust | direct and head waves, Wadati diagrams, velocity models | 9 (+1) |
+| 3-4 | M22 Detection and template matching | coincidence detection, template matching and its validation | 12 |
+| 4 | M31 Earthquake location | grid search, Geiger's method and location uncertainty | 10.5 (+1) |
+| 4 | M32 HYPOINVERSE via PocketQuake | a production locator, its files and its residuals | 7 |
+| 5 | M41 Relative relocation | differential times, cross-correlation and double difference | 9.7 |
+| 6 | M50 The focal sphere | fault vectors, P and T axes and the equal-area net | 9 |
+| 6 | M51 Mechanisms from first motions | polarity misfit, grid search, Kagan angle and SKHASH | 10 |
+| 6 | M52 Synthetic seismograms | moment tensors, radiation patterns and PyFK synthetics | 10 |
+| 7 | M53 Moment tensor inversion | least squares, misfit norms, time shifts and MTUQ | 11 |
+| 7 | M54 Coulomb stress change | stress on a receiver fault and what aftershocks can test | 10 |
+| 8 | M60 Full run and project plan | the full chain on a new sequence and your Suncheon plan | 10 |
+| 9-16 | [Research projects](project.md) | Suncheon and Sangju, both with validated template matching | see the project schedule |
 
-After the first M03 download, complete the [SeisComP GUI workshop](seiscomp_gui.md): a synthetic rehearsal, waveform inspection, an event/station map, and manual P/S picks with uncertainties. Use it alongside M10 and M20; the saved picks feed the existing notebook checks and both projects. No SAC-program experience is required.
-
-## Part 0 and 1: tools, catalogs and statistics (weeks 1-2)
-
-| Week | Module | You will be able to | Data | Tools |
-|---|---|---|---|---|
-| 1 | **M00** Start here | use the shared server politely; open the SSH tunnel and JupyterLab; commit and push to your private copy; install the course software | none | bash, git, gh, tmux, JupyterLab |
-| 1 | **M01** Python for earthquake catalogs | load and filter a catalog with pandas; write small, tested functions; compute great-circle distances | KMA catalog subset (in the repository) | Python, pandas, NumPy |
-| 1 | **M02** Figures and maps | make clear figures in the house style; draw PyGMT maps with a scale bar and magnitude-scaled symbols | KMA catalog subset | Matplotlib, PyGMT |
-| 1 | **M04** Earthquake catalogs | tell who makes a catalog (KMA, KIGAM, ISC, USGS ComCat), how magnitude types differ and how CSV and QuakeML store events; know the KMA list's precision and quirks; count events per magnitude bin; select a sequence in a UTC window around a time zero; pair the events of two catalogs one-to-one; judge completeness by network epoch; measure an oddity near one magnitude; stretch: Ridgecrest 2019 next to Gyeongju 2016 | KMA subset (Gyeongju 2016, Pohang 2017); USGS ComCat (public; optional download, cached) | pandas, Matplotlib, PyGMT, ObsPy (FDSN client, QuakeML) |
-| 2 | **M05** Statistical seismology | simulate Gutenberg-Richter magnitudes; estimate the b-value by maximum likelihood with the bin-width correction, and its uncertainty; estimate the magnitude of completeness by maximum curvature; compute b-positive from magnitude differences; fit the Omori-Utsu aftershock decay by maximum likelihood; report all of them for the 2016 Gyeongju aftershocks; stretch: decluster the national catalog | synthetic catalogs with known answers; Gyeongju 2016 and the national KMA subset | NumPy, SciPy, Matplotlib; SeismoStats as the reference; explorer E9 (frequency-magnitude distribution, Mc and b); research tier: nearest-neighbor clustering, ETAS |
-| 2 | **M03** Getting seismic data | read network, station and channel codes, and explain why STP lists more stations than today's station list; write a record's time window in UTC from an origin time in any time zone; keep your STP account private, fetch a dataset with a dry run first and check what arrived; find the response epoch valid at an event time, compute the overall sensitivity from the stage gains, remove the response and check the amplitude against magnitude and distance; find out why a record window holds no earthquake, and fix it | six Sangju earthquakes, 2018-2022 (fetched by you from STP); KMA catalog; StationMetadata | `sgtl data` (STP through PocketQuake), SeisComP scrttv/scolv, ObsPy, StationMetadata, PyGMT |
-| 2 | **M10** Seismograms | turn SAC header times into UTC; filter with a zero-phase band-pass and compute an amplitude spectrum with the right axis and amplitudes; remove the instrument response and test it on two instruments at one station; rotate to radial and transverse; estimate distances from S-P times and draw a record section; measure how many CPU cores a process keeps busy under three ways of limiting its threads, and explain the difference | the Sangju ML 3.9 earthquake of 21 July 2019 (your M03 download); StationMetadata | ObsPy, SciPy, Matplotlib, threadpoolctl; explorer E1 (filter bench) |
-
-## Part 2: picking, detection, travel times and location (weeks 3-5)
-
-In weeks 3–4, follow M20 → M21 → M30 → M22: its associator uses your M30 travel-time function. M22 has seven
-core tasks (about 12 hours), including template matching, duplicate merging and a validation/transfer plan. It
-prepares you for the matching work required in both projects.
-The location baseline uses direct P and S within about 100 km and excludes the Moho head waves Pn and Sn.
-M31 and M32 also examine how a first-arrival solver can select a head wave along a boundary inside the crust.
-Use the phase-specific crossover distances to identify those stations and distinguish such production-tool
-comparisons from the direct-wave baseline; a 100 km distance limit alone does not identify the phase.
-
-| Week | Module | You will be able to | Data | Tools |
-|---|---|---|---|---|
-| 3 | **M20** Picking arrivals | write an STA/LTA ratio and a two-threshold trigger and match ObsPy on made-up records; time an onset with the Akaike information criterion; measure, on made-up onsets of known time, how far zero-phase and causal band-pass filters move automatic picks; pick P and S by hand at six or more stations within 100 km, with an uncertainty for every pick and the first-motion polarity of every clear P; compare your automatic picks with your own manual picks over a grid of settings and justify the one you choose; rerun ObsPy's Baer-Kradolfer picker unchanged, then with one setting changed | the Sangju ML 3.9 earthquake of 21 July 2019 (your M03 download); StationMetadata | NumPy, ObsPy (as the reference); SeisComP scolv (manual picker); explorers E2 (notebook alternative), E3 (STA/LTA tuner) |
-| 3 | **M21** Deep-learning pickers | turn a pick-probability curve into picks with a threshold and a minimum gap; run two pretrained PhaseNet models with SeisBench and measure how their P and S picks differ from your own M20 picks; run PocketQuake's picking stage twice unchanged and once with another probability threshold, and explain what changed in its pick files; turn PocketQuake's picks and their first-motion polarities into a table of first motions for focal mechanisms | Sangju 2019 (your M03 download); your M20 picks | SeisBench with the PhaseNet weights of `bin/sgtl-install seisbench`; PocketQuake with EQNet / PhaseNet+ (`sgtl pq`, one core) |
-| 3 | **M30** Travel times in a layered crust | compute direct-wave travel times in a flat layered crust by shooting on the ray parameter, and test them against a half-space, a brute-force search and TauP; compute head-wave times, critical and crossover distances, and use those distances to identify direct-wave station limits (Moho Pn and Sn are excluded from location); estimate the origin time and Vp/Vs from your own picks with a Wadati diagram and compare them with the KMA catalog; compare two published velocity models by the travel-time residuals of your picks; run TauP unchanged, then with one changed parameter | kim1983 and kim2011 velocity models; Sangju 2019 and your M20 picks; KMA catalog | NumPy, ObsPy TauP (as the reference); explorer E4 (travel-time curves); hand exercise NMSOP-2 EX 11.1 first (exercise 11.1 of the *New Manual of Seismological Observatory Practice*, 2nd edition) |
-| 3–4 | **M22** Detection and template matching (required) | write a network-coincidence detector and test it against ObsPy; write a normalized cross-correlation, a detection threshold from the median absolute deviation and a relative magnitude from amplitude ratios, each tested on made-up records with known answers; scan three hours of records with templates cut from your own picks, compare the candidates with the KMA catalog and measure a candidate-rate diagnostic on reversed-record controls; run a pretrained PhaseNet (an unchanged rerun, then one changed setting) and group its picks into events with an associator you write; merge candidate detections across templates and specify held-out, injection and null tests for transfer to both projects | made-up records (`sgtl_tutorial.synth_detect`); three hours around the Sangju ML 3.9 earthquake (`sangju2019_hours`, your STP download); your M20 picks; KMA catalog | NumPy, ObsPy (`coincidence_trigger` as the reference), SeisBench PhaseNet (one core); your M21 and M30 functions; explorer E11 (detection threshold); going further: PyOcto |
-| 4 | **M31** Earthquake location | locate a made-up earthquake by grid search and by Geiger's method (damped least squares with the Jacobian of the travel times) and test both against the known hypocenter; compute the covariance matrix, standard errors and the correlation of depth and origin time, and confirm them with a Monte Carlo test; locate the 2019 Sangju mainshock from your own picks with the first arrivals of kim1983 from your M30 functions (stations within about 100 km; never Pn or Sn) and compare it with the KMA catalog; measure with a depth scan how well the depth of the 2018 Sangju earthquake is known with and without its nearest station; write phase lines for HYPOINVERSE and run it with the commands of PocketQuake's location stage, unchanged twice, then with one changed setting | made-up earthquakes; Sangju 2018 and 2019 (your M03 download) and your M20 picks; KMA catalog; kim1983 | NumPy, SciPy, your M30 functions, HYPOINVERSE 1.40; explorer E5 (misfit landscape) |
-| 4 | **M32** HYPOINVERSE via PocketQuake | run PocketQuake's location stage through `sgtl pq` (a dry run first) and show from the SHA-256 fingerprints of the run log which files a run wrote; read HYPOINVERSE's archive file by its fixed columns and reproduce the number of weighted readings and the RMS of its summary file; match its locations with the KMA catalog and with your M31 location; rerun it unchanged, then with velocity model kim2011, and explain the change; find stations that are consistently early or late and explain what a station delay can and cannot hold | the PocketQuake cluster of your M21 picks (Sangju 2018-2022); your M31 results; KMA catalog; kim1983 and kim2011 | PocketQuake (`sgtl pq`), HYPOINVERSE 1.40, pandas |
-| 5 | **M41** Relative relocation | build catalog differential times and reproduce HypoDD's `dt.ct`; measure the lag between two waveforms by cross-correlation to a fraction of a sample and compare your differential times with PocketQuake's; set up the double-difference system G m = d, solve it with damping and a zero mean shift and iterate to convergence; relocate the Sangju earthquakes with your own functions (each phase only at the stations inside its crossover distance for the deepest earthquake above the boundary at 15 km) and with HypoDD through PocketQuake and compare both with your HYPOINVERSE locations; rerun HypoDD unchanged, bootstrap it with two seeds, and show from the run log which run wrote a result file | made-up clusters; the Sangju records and your M32 cluster; kim1983 | NumPy, ObsPy (cross-correlation as the reference), your M30 functions, PocketQuake (`sgtl pq`, 3 cores) with ph2dt and HypoDD; explorers E6 (lag and cycle skipping), E7 (DD toy) |
-
-## Part 3: the source (weeks 6-7)
-
-| Week | Module | You will be able to | Data | Tools |
-|---|---|---|---|---|
-| 6 | **M50** The focal sphere | turn strike, dip and rake into the fault normal and the slip vector (north-east-down, and how the up-south-east order of the Global CMT catalog and ObsPy differs); compute the auxiliary plane and the P and T axes and test them against ObsPy and Pyrocko; plot rays on a lower-hemisphere equal-area net, upward rays at the opposite point; compute takeoff angles with your own M30 ray tracing, head-wave first arrivals included, and plot your Sangju first motions against KIGAM's published mechanism; draw the mechanism with ObsPy unchanged, then with the other nodal plane, and explain why first motions alone cannot tell the fault plane | synthetic; Sangju 2019 and your M20 first motions; KIGAM bulletin mechanism; kim1983; hand exercises NMSOP-2 EX 3.2 and EX 3.3 on the printed net `docs/figures/equal_area_net.pdf` | NumPy, ObsPy and Pyrocko (as references), your M30 functions; explorer E13 (focal-sphere fitter) |
-| 6 | **M51** Mechanisms from first motions | predict first-motion polarities of a double couple and score a mechanism by its weighted polarity misfit; find the best and the acceptable mechanisms by a grid search over strike, dip and rake, tested on made-up polarities with some readings flipped; measure the Kagan angle between two mechanisms and group acceptable mechanisms into families; run SKHASH through PocketQuake on the Sangju earthquakes and compare it with your grid search on the same polarities and with KIGAM's mainshock mechanism; rerun SKHASH unchanged, then with polarities only, and measure what the S/P amplitude ratios that PocketQuake hands to SKHASH contain | made-up polarities; Sangju 2018-2022 (your M21 PocketQuake cluster and M32 locations); KIGAM bulletin mechanism | NumPy, Pyrocko (as the reference), SKHASH via PocketQuake (`sgtl pq`, one core); explorer E8 (beachball) |
-| 6 | **M52** Synthetic seismograms | build the moment tensor of a double couple in north-east-down and up-south-east coordinates and convert between M0 and Mw; compute the far-field P, SV and SH radiation pattern and test it on cases whose answer is known; write a whole-space far-field point-source synthetic and compare it with PyFK at several distances to see where the near field matters; find out from PyFK's code and a measurement of your own what PyFK expects as its source and what kind of motion it returns, and test a colleague's call against what you find; compare layered-model synthetics of the 2019 Sangju earthquake with response-corrected, band-passed records (shape, time shift and amplitude ratio), express the amplitude ratio as a change of moment magnitude, rerun them unchanged, then with kim2011 | synthetic; Sangju 2019 (your M03 download); KIGAM bulletin mechanism; StationMetadata; kim1983 and kim2011 | NumPy, ObsPy and Pyrocko (as references), PyFK in its own small environment (`bin/sgtl-install pyfk`), your M41 cross-correlation; explorer E12 (radiation patterns) |
-| 7 | **M53** Moment tensor inversion | write a weighted least-squares moment-tensor inversion with data gaps and a deviatoric constraint and show over many noise draws that its covariance describes its errors; measure with the L2, L1 and hybrid norms and the participation ratio which traces write the answer; find the best bounded time shift and explain why the bound stays below half a period; turn a tensor into lune coordinates and double-couple planes and compare mechanisms with the Kagan angle; check PyFK amplitudes against the Sangju records, invert them by least squares, then run MTUQ with windows from your own picks, rerun it unchanged, change the norm, compare with KIGAM, SKHASH and your least squares, and decide by stated rules whether the mechanism is resolved | synthetic; Sangju 2019 (your M03 download, M20 picks, M51 SKHASH run); KIGAM bulletin mechanism; StationMetadata; kim1983 | NumPy, PyFK (its own environment), MTUQ (`bin/sgtl-install mt`), your M51 Kagan angle and M52 moment tensor; explorer E14 (misfit norms) |
-| 7 | **M54** Coulomb stress change | resolve a stress tensor onto a receiver fault exactly as Elastic_stresses_py defines it; describe one rectangular fault in two programs with different reference points and argument orders and show that they give the same stress; estimate fault size and slip from the moment and a stress drop, next to an empirical scaling relation, and compare the Coulomb change at aftershock distances with tidal stresses; run Elastic_stresses_py for the 2016 Gyeongju foreshock and mainshock, rerun it unchanged, change the friction, and test the share of aftershocks in positive areas against a rotation null; say with numbers whether the method can be used for the small Suncheon earthquakes | synthetic; Sangju 2019; Gyeongju 2016 (USGS and ISC mechanisms, KMA aftershocks); Suncheon catalog | NumPy, pyrocko, Elastic_stresses_py (`bin/sgtl-install coulomb`), your M50 fault vectors and M52 moment-magnitude function; explorer E10 (Coulomb stress change) |
-
-## Part 4: putting it together and research projects (weeks 8–16)
-
-Both the Suncheon and Sangju projects are required. Each has a separate signed plan, criteria, data record, lab book
-and report, and each includes validated template matching. Use documented primary-source
-records and make your own research picks, locations and detections with the methods you have checked.
-See [the project overview](project.md), [Suncheon guide](suncheon_project.md) and [Sangju guide](sangju_project.md). The schedule below is a starting
-point: phase the requests and extend review dates when needed while retaining both projects and independent validation.
-
-| Week | Step | What happens |
-|---|---|---|
-| 8 | **M60** Full run and project plan | Run the full chain on the new Gokseong dataset through `sgtl pq`, audit its inputs, report uncertainties and compare reruns. Build the Suncheon inventory, read and verify the published claims, and sign/freeze the Suncheon plan with its M60 audit. `sgtl new project` also supplies the Sangju planning templates. |
-| 9–10 | Two plans and data requests | Preserve the Suncheon plan and complete its template-matching extension. Select Sangju events, reference regions and observing windows from primary sources; record prior exposure, sign the separate Sangju plan and freeze its criteria, request, bank and calibration/validation partitions before evaluating outcomes. |
-| 11–12 | Depths in both projects | Obtain the frozen records and make your own picks and locations. Test depth uncertainty, station geometry, missing phases, velocity models, starting conditions and the depth–origin-time tradeoff; use comparable reference regions for the Sangju depth question. |
-| 13–14 | Geometry, mechanisms and validated detection | Relocate and assess geometry/mechanisms where resolvable. Apply template matching in both projects with records held out from tuning, signal injections, noise-only tests, cross-template merging and bank-bias checks. Test Sangju background activity versus bursts using usable observing time and completeness, with the same rules in reference regions. |
-| 15–16 | Two reports, comparison and defense | Reproduce both analyses, report uncertainties and unresolved cases, compare their measurements and detection limits, and give a joint 15-minute talk and oral defense. |
-| After the required reviews | Beyond | Optional extensions: additional regions/windows, stress interactions or a manuscript; keep the two completed research projects and their validation records. |
+The [SeisComP GUI workshop](seiscomp_gui.md) goes with M03, M10 and M20. The [lesson guide](notebooks/README.md)
+says what to prepare for each module.
 
 ## Gates
 
-| End of week | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9–10 | 13–14 | 16 |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| Gate | G0 | G1 | G2 (plan check) | G3 | G4 (plan check) | G5 | G6 | Suncheon plan frozen | both research plans/data requests signed | detection and sensitivity evidence reviewed | final portfolio |
+- Weeks 1-7: gates G0 to G6; G2 and G4 also check your plan.
+- Week 8: the Suncheon plan is frozen.
+- Weeks 9-10: both research plans and data requests are signed.
+- Weeks 13-14: your detection and sensitivity evidence is reviewed.
+- Week 16: the final portfolio.
+
+You pass a gate when all **core** checks of that week pass, your AI log is honest and complete, and your mentor's
+rubric gives at least **6 of 8** points, with no item at 0. Each item scores 0-2:
+
+- correctness: checks and figures;
+- reasoning: your own predictions and explanations;
+- craft: readable code, a tidy notebook, regular commits;
+- honesty: a complete AI log, citations, saying what did not work.
+
+If you do not pass, you take the **B-path**: new seeds for the synthetic checks, extra help from your mentor and a
+second try a few days later. It is not a penalty; it is the normal way to catch up.
+
+## The weekly oral check
+
+Once a week you explain cells of your own work without notes, for about 15 minutes: what each line does, why it is
+there, and what would change if an input changed. At the meeting, you or your mentor run:
+
+```bash
+bin/sgtl oral M04 --salt WORD      # or bin/sgtl oral --salt WORD for all modules
+```
+
+`WORD` is a new word your mentor says at the meeting (at least 6 characters; or the mentor sets `SGTL_ORAL_SALT` in
+their own shell), so nobody knows the cells in advance. The command picks three code cells of tasks you have passed
+and prints each with two questions. Commit the record it adds to `work/.sgtl/oral.jsonl`.
